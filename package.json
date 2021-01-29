@@ -1,0 +1,25 @@
+{
+
+  "name": "discorBot",
+
+  "description": "bot",
+
+  "version": "0.0.1",
+
+  "main": "musicBot.js",
+
+  "scripts": {
+
+    "start": "node musicBot.js"
+
+  },
+
+  "dependencies": {
+
+    "discord.js": "11.1.0",
+    "ytdl-core" : "4.4.5",
+    "request": "2.81.0"
+
+  }
+
+}
