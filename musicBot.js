@@ -18,6 +18,7 @@ client.on('message', message => {
 			const dispatcher = connection.play(stream);
 			dispatcher.on('finish', () => message.member.voice.channel.leave());		
 		});
+		return;
 	}
 	var args=message.content.split(' ');
 	if(args[0]===p+'play'){
@@ -26,6 +27,7 @@ client.on('message', message => {
 			const dispatcher = connection.play(stream);
 			dispatcher.on('finish', () => message.member.voice.channel.leave());
 		});
+		return;
 	}
 });
 
