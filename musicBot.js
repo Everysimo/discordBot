@@ -14,7 +14,7 @@ client.login(process.env.tokenBotDiscord);
 client.on('message', message => {
 	if (message.content===p+'play') {
 		message.member.voice.channel.join().then(connection=>{
-			const stream = ytdl('https://www.youtube.com/watch?v=3ekFx8OXxtM',{filter:'audioonly'});
+			const stream = ytdl('https://www.youtube.com/watch?v=3ekFx8OXxtM',{filter:'videoandaudio'});
 			const dispatcher = connection.play(stream);
 			dispatcher.on('finish', () => message.member.voice.channel.leave());		
 		});
