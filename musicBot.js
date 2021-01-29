@@ -29,5 +29,8 @@ client.on('message', message => {
 		});
 		message.channel.send(args[1]);
 	}
+	if(message.contet===p+'join'){
+		message.member.voice.channel.join();
+	}
 });
 
