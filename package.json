@@ -17,8 +17,6 @@
   "dependencies": {
 
     "discord.js": "11.1.0",
-    "ytdl-core" : "4.4.5",
-    "request": "2.81.0"
 
   }
 
