@@ -9,7 +9,7 @@ client.once('ready', () => {
 
 var p=config.prefisso;
 
-client.login(config.token);
+client.login(process.env.tokenBotDiscord);
 
 client.on('message', message => {
 	if (message.content===p+'play') {
