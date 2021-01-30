@@ -1,20 +1,13 @@
 {
-
   "name": "discorbot",
-
   "description": "bot",
-
   "version": "0.0.1",
-
   "main": "musicBot.js",
-
   "scripts": {
-    "start": "node musicBot.js"
+  "start": "node musicBot.js"
   },
-
   "dependencies": {
     "discord.js": "^12.5.1",
     "ytdl-core": "^4.4.5"
   }
-
 }

@@ -1,3 +1,5 @@
 {
-  "prefisso": "!"
+  "prefisso": "!",
+  "reactionYes": "👍",
+  "reactionNot": "👎"
 }
