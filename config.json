@@ -1,5 +1,13 @@
 {
-  "prefisso": "!",
+  "prefissoNonMusica": "!",
+  "prefissoMusica":"$",
+  "lingua":"./ita.json",
   "reactionYes": "👍",
-  "reactionNot": "👎"
+  "reactionNot": "👎",
+  "slotNumber" : 3,
+  "slotItem":[
+      "🍏",
+      "🍓",
+      "🍊"
+  ]
 }
