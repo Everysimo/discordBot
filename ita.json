@@ -1,12 +1,12 @@
 {
     "commandNotFound":"comando non trovato",
     "voiceChannelNotFound":"non sei in nessuna chat vocale",
-    "voiceChannelNotPermission":"non ho i permessi in quel cannale vocale",
+    "voiceChannelNotPermission":"non ho i permessi in quel canale vocale",
     "songAddQueue":"è stata aggiunta alla coda",
     "errorJoinVoiceChannel":"errore nell'entrare nella chat vocale",
     "startPlay":"inizia canzone:",
     "notSong":"nessuna canzone in coda",
     "win":"hai vinto",
     "lose":"hai perso",
-    "notSelect":"nessuna selezione valita"
+    "notSelect":"nessuna selezione valida"
 }
