@@ -188,10 +188,13 @@ async function join(message){
 		}
 	}
 }
-function volumeUp(message){
-	const q = message.content.split[1];
-
-	volume = volume + q;
+function volumeUp(message,serverQueue){
+	const q = message.content.split(" ")[1];
+	if (!message.member.voice.channel)
+		return message.reply(lingua.voiceChannelNotFound);
+	if (!serverQueue)
+		return message.reply(lingua.notSong);
+	serverQueue.volume += q;
 
 	message.send("volume alzato di "+q);
 }
