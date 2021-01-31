@@ -173,8 +173,9 @@ function moneta(message){
 	message.channel.send(risultato);
 }
 
-function join(message){
-	if (!message.member.voice.channel){
+async function join(message){
+	const voiceChannel = message.member.voice.channel
+	if (!voiceChannel){
 		return message.reply(lingua.voiceChannelNotFound);
 	}
 	else{
@@ -183,7 +184,7 @@ function join(message){
     		return message.reply(lingua.voiceChannelNotPermission);
 		}
 		else{
-			channel.join();
+			await voiceChannel.join();
 		}
 	}
 }
