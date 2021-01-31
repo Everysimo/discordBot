@@ -178,7 +178,7 @@ function volumeUp(message){
 
 	volume = volume + q;
 
-	return message.reply("volume alzato di "+q)
+	return message.reply("volume alzato di "+q);
 }
 
 //mappa che collega il commando a una funzione
@@ -186,7 +186,7 @@ let comandiMusicali =new Map();
 comandiMusicali.set("play",play);
 comandiMusicali.set("skip",skip);
 comandiMusicali.set("stop",stop);
-comandiMusicali.set("volumeUp",volumeUp);
+comandiMusicali.set("volumeup",volumeUp);
 let comandi =new Map();
 comandi.set("slot",slot);
 comandi.set("moneta",moneta);
