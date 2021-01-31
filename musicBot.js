@@ -173,6 +173,20 @@ function moneta(message){
 	message.channel.send(risultato);
 }
 
+function join(message){
+	if (!message.member.voice.channel){
+		return message.reply(lingua.voiceChannelNotFound);
+	}
+	else{
+		const permissions = voiceChannel.permissionsFor(message.client.user);	//verifica permessi utente che richiama il messggio
+  		if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
+    		return message.reply(lingua.voiceChannelNotPermission);
+		}
+		else{
+			await voiceChannel.join();
+		}
+	}
+}
 function volumeUp(message){
 	const q = message.content.split[1];
 
@@ -190,6 +204,7 @@ comandiMusicali.set("volumeup",volumeUp);
 let comandi =new Map();
 comandi.set("slot",slot);
 comandi.set("moneta",moneta);
+comandi.set("join",join)
 
 //coda di riproduzione
 const queue = new Map();
