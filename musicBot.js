@@ -178,7 +178,7 @@ function volumeUp(message){
 
 	volume = volume + q;
 
-	return message.reply("volume alzato di "+q);
+	message.send("volume alzato di "+q);
 }
 
 //mappa che collega il commando a una funzione
