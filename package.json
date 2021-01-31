@@ -9,7 +9,6 @@
   "dependencies": {
     "discord.js": "^12.5.1",
     "ffmpeg-static": "^4.2.7",
-    "node.js": "0.0.1-security",
     "ytdl-core": "^4.4.5"
   }
 }
