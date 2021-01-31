@@ -183,7 +183,7 @@ function join(message){
     		return message.reply(lingua.voiceChannelNotPermission);
 		}
 		else{
-			await voiceChannel.join();
+			message.member.voice.channel.join();
 		}
 	}
 }
