@@ -120,6 +120,51 @@ function slot(message){
 	}
 	message.channel.send(risultato);
 }
+function moneta(message){
+	const m=message.content.split(" ")[1];
+	var testa;
+	var win;
+	const risultato = new Discord.MessageEmbed()
+	risultato.setTitle('Moneta');
+	switch (Math.floor(Math.random() * 2)) {
+		case 0:
+			testa=true;
+			risultato.setImage("https://upload.wikimedia.org/wikipedia/it/d/de/1_%E2%82%AC_Italia.jpg");
+			break;
+		case 1:
+			testa=false;
+			risultato.setImage("https://upload.wikimedia.org/wikipedia/it/0/06/1_%E2%82%AC_2007.jpg");
+			break;
+	}
+	if(m==="testa"){
+		if (testa) {
+			win=true;
+		}else{
+			win=false;
+		}
+	}else if(m==="croce"){
+		if (testa) {
+			win=false;
+		}else{
+			win=true;
+		}
+	}else{
+		message.reply(lingua.notSelect);
+		return;
+	}
+	if (win) {
+		risultato.addFields(
+			{ name: lingua.win, value: 'x coin' },
+		);
+		risultato.setColor("#00ff37");
+	}else{
+		risultato.addFields(
+			{ name: lingua.lose, value: 'x coin' },
+		);
+		risultato.setColor("#f50505");
+	}
+	message.channel.send(risultato);
+}
 
 
 //mappa che collega il commando a una funzione
@@ -130,6 +175,7 @@ commandiMusicali.set("stop",stop);
 let commandi =new Map();
 commandi.set("ping",ping);
 commandi.set("slot",slot);
+comandi.set("moneta",moneta);
 
 //coda di riproduzione
 const queue = new Map();
