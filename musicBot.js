@@ -17,21 +17,24 @@ client.login(process.env.tokenBotDiscord);
 
 //funzioni per commandi
 async function play(message, serverQueue){
-	const args = message.content.split(" ");
-	const voiceChannel = message.member.voice.channel;
-  	if (!voiceChannel){
+	const args = message.content.split(" ");			//input argomento 
+	const voiceChannel = message.member.voice.channel;	//connessione al canale vocale
+  	if (!voiceChannel){									//se l'utente non è in un canale genera eccezione
 		return message.reply(lingua.voiceChannelNotFound);
 	}
-	const permissions = voiceChannel.permissionsFor(message.client.user);
+
+	const permissions = voiceChannel.permissionsFor(message.client.user);	//verifica permessi utente che richiama il messggio
   	if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
     	return message.reply(lingua.voiceChannelNotPermission);
 	}
-	const songInfo = await ytdl.getInfo(args[1]);
+
+	const songInfo = await ytdl.getInfo(args[1]);			//ottiene informazioni della canzone passata come argomento
 	const song = {
     	title: songInfo.videoDetails.title,
     	url: songInfo.videoDetails.video_url,
 	};
-	if (!serverQueue) {
+
+	if (!serverQueue) {					//se la coda delle canzoni è vuota
 		const queueContruct = {
 			textChannel: message.channel,
 			voiceChannel: voiceChannel,
@@ -51,11 +54,14 @@ async function play(message, serverQueue){
 			queue.delete(message.guild.id);
 			return message.reply(lingua.errorJoinVoiceChannel);
 		}
-	}else {
+	}
+	else{	//se la coda delle canzoni non è vuota aggiunge la canzone alla coda
+
 		serverQueue.songs.push(song);
 		return message.reply(song.title +" "+ lingua.songAddQueue)
 	}
 }
+
 function start(guild, song) {
 	const serverQueue = queue.get(guild.id);
 	if (!song) {
@@ -70,6 +76,7 @@ function start(guild, song) {
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
 	serverQueue.textChannel.send(lingua.startPlay+" "+song.title);
 }
+
 function skip(message, serverQueue) {
 	if (!message.member.voice.channel)
 		return message.reply(lingua.voiceChannelNotFound);
@@ -77,6 +84,7 @@ function skip(message, serverQueue) {
 		return message.reply(lingua.notSong);
 	serverQueue.connection.dispatcher.end();
 }
+
 function stop(message, serverQueue) {
 	if (!message.member.voice.channel)
 	  	return message.reply(lingua.voiceChannelNotFound);
@@ -85,6 +93,7 @@ function stop(message, serverQueue) {
 	serverQueue.songs = [];
 	serverQueue.connection.dispatcher.end();
 }
+
 function slot(message){
 	var slotList=new Array();
 	for (let index = 0; index < config.slotNumber; index++) {
@@ -117,6 +126,7 @@ function slot(message){
 	}
 	message.channel.send(risultato);
 }
+
 function moneta(message){
 	const m=message.content.split(" ")[1];
 	var testa;
@@ -163,11 +173,18 @@ function moneta(message){
 	message.channel.send(risultato);
 }
 
+function volumeUp(message){
+	const q = message.content.split[1];
+
+	volume = volume + q;
+}
+
 //mappa che collega il commando a una funzione
 let comandiMusicali =new Map();
 comandiMusicali.set("play",play);
 comandiMusicali.set("skip",skip);
 comandiMusicali.set("stop",stop);
+comandiMusicali.set("volumeUp",volumeUp);
 let comandi =new Map();
 comandi.set("slot",slot);
 comandi.set("moneta",moneta);
