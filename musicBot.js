@@ -85,9 +85,6 @@ function stop(message, serverQueue) {
 	serverQueue.songs = [];
 	serverQueue.connection.dispatcher.end();
 }
-function ping(message){
-	message.reply("pong");
-}
 function slot(message){
 	var slotList=new Array();
 	for (let index = 0; index < config.slotNumber; index++) {
@@ -166,15 +163,13 @@ function moneta(message){
 	message.channel.send(risultato);
 }
 
-
 //mappa che collega il commando a una funzione
-let commandiMusicali =new Map();
-commandiMusicali.set("play",play);
-commandiMusicali.set("skip",skip);
-commandiMusicali.set("stop",stop);
-let commandi =new Map();
-commandi.set("ping",ping);
-commandi.set("slot",slot);
+let comandiMusicali =new Map();
+comandiMusicali.set("play",play);
+comandiMusicali.set("skip",skip);
+comandiMusicali.set("stop",stop);
+let comandi =new Map();
+comandi.set("slot",slot);
 comandi.set("moneta",moneta);
 
 //coda di riproduzione
@@ -185,16 +180,16 @@ client.on("message", message => {
 		return;
 	}else if (message.content.startsWith(pnm)) {
 		const com=message.content.split(" ")[0].substr(1);
-		if (commandi.has(com)) {
-			commandi.get(com)(message);
+		if (comandi.has(com)) {
+			comandi.get(com)(message);
 		}else{
-			message.reply(lingua.comandNotFound);
+			message.reply(lingua.commandNotFound);
 		}
 	}else if (message.content.startsWith(pm)){
 		const serverQueue = queue.get(message.guild.id);
 		const com=message.content.split(" ")[0].substr(1);
-		if (commandiMusicali.has(com)) {
-			commandiMusicali.get(com)(message,serverQueue);
+		if (comandiMusicali.has(com)) {
+			comandiMusicali.get(com)(message,serverQueue);
 		}else{
 			message.reply(lingua.comandNotFound);
 		}

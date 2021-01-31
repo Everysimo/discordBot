@@ -1,5 +1,5 @@
 {
-    "comandNotFound":"commando non trovato",
+    "commandNotFound":"comando non trovato",
     "voiceChannelNotFound":"non sei in nessuna chat vocale",
     "voiceChannelNotPermission":"non ho i permessi in quel cannale vocale",
     "songAddQueue":"è stata aggiunta alla coda",
@@ -7,5 +7,6 @@
     "startPlay":"inizia canzone:",
     "notSong":"nessuna canzone in coda",
     "win":"hai vinto",
-    "lose":"hai perso"
+    "lose":"hai perso",
+    "notSelect":"nessuna selezione valita"
 }
