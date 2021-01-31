@@ -196,7 +196,7 @@ function volumeUp(message,serverQueue){
 		return message.reply(lingua.notSong);
 	serverQueue.volume += q;
 
-	message.send("volume alzato di "+q);
+	message.channel.send("volume alzato di "+q);
 }
 
 //mappa che collega il commando a una funzione
