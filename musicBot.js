@@ -206,7 +206,7 @@ function volumeUp(message,serverQueue){
 		return message.reply(lingua.voiceChannelNotFound);
 	if (!serverQueue)
 		return message.reply(lingua.notSong);
-	serverQueue.volume += q;
+	dispatcher.setVolumeLogarithmic(100);
 
 	message.channel.send("volume alzato di "+q);
 }
