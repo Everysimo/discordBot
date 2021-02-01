@@ -4,15 +4,19 @@ const config = require('./config.json');
 const ytdl = require('ytdl-core');
 const lingua =require(config.lingua);
 
+//quando il nuovo cliente è pronto esegue log
 client.once('ready', () => {
 	console.log('Ready!');
 });
 
+//prefisso comandi non musica !
 var pnm=config.prefissoNonMusica;
+//prefisso comandi musica $
 var pm=config.prefissoMusica;
 var ry=config.reactionYes;
 var rn=config.reactionNot;
 
+//login nel server tramite token
 client.login(process.env.tokenBotDiscord);
 
 //funzioni per commandi
@@ -46,9 +50,9 @@ async function play(message, serverQueue){
 		queue.set(message.guild.id, queueContruct);
 		queueContruct.songs.push(song);
 		try {
-			var connection = await voiceChannel.join();
-			queueContruct.connection = connection;
-			start(message.guild, queueContruct.songs[0]);
+			var connection = await voiceChannel.join();	//connessione al canale vocale dell'utente che invia il messagio
+			queueContruct.connection = connection;			
+			start(message.guild, queueContruct.songs[0]);	//starata la prima canzone in coda
 		} catch (err) {
 			console.log(err);
 			queue.delete(message.guild.id);
@@ -62,6 +66,7 @@ async function play(message, serverQueue){
 	}
 }
 
+//starta la canzona
 function start(guild, song) {
 	const serverQueue = queue.get(guild.id);
 	if (!song) {
@@ -77,6 +82,7 @@ function start(guild, song) {
 	serverQueue.textChannel.send(lingua.startPlay+" "+song.title);
 }
 
+//skippa la canzone
 function skip(message, serverQueue) {
 	if (!message.member.voice.channel)
 		return message.reply(lingua.voiceChannelNotFound);
@@ -85,6 +91,7 @@ function skip(message, serverQueue) {
 	serverQueue.connection.dispatcher.end();
 }
 
+//stoppa la riproduzione di canzoni
 function stop(message, serverQueue) {
 	if (!message.member.voice.channel)
 	  	return message.reply(lingua.voiceChannelNotFound);
@@ -94,6 +101,7 @@ function stop(message, serverQueue) {
 	serverQueue.connection.dispatcher.end();
 }
 
+//genera una slot 
 function slot(message){
 	var slotList=new Array();
 	for (let index = 0; index < config.slotNumber; index++) {
@@ -127,6 +135,7 @@ function slot(message){
 	message.channel.send(risultato);
 }
 
+//TO-DO rinominare "coinflip"
 function moneta(message){
 	const m=message.content.split(" ")[1];
 	var testa;
@@ -173,8 +182,9 @@ function moneta(message){
 	message.channel.send(risultato);
 }
 
+//il bot join nel canale vocale del mittente del messaggio
 async function join(message){
-	const voiceChannel = message.member.voice.channel
+	const voiceChannel = message.member.voice.channel	//memorizza il canale vocale del mittente del messaggio
 	if (!voiceChannel){
 		return message.reply(lingua.voiceChannelNotFound);
 	}
@@ -188,6 +198,8 @@ async function join(message){
 		}
 	}
 }
+
+//aumentare volume di n della canzone in riproduzione
 function volumeUp(message,serverQueue){
 	const q = message.content.split(" ")[1];
 	if (!message.member.voice.channel)
@@ -213,6 +225,7 @@ comandi.set("join",join)
 //coda di riproduzione
 const queue = new Map();
 
+//gestore ricezione messaggi
 client.on("message", message => {
 	if (message.author.bot) {
 		return;
