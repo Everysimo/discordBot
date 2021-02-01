@@ -2,9 +2,6 @@
   "prefissoNonMusica": "!",
   "prefissoMusica":"$",
   "lingua":"./ita.json",
-  "reactionYes": "👍",
-  "reactionNot": "👎",
-  "slotNumber" : 3,
   "slotItem":[
       "🍏",
       "🍓",

@@ -10,11 +10,9 @@ client.once('ready', () => {
 });
 
 //prefisso comandi non musica !
-var pnm=config.prefissoNonMusica;
+const pnm=config.prefissoNonMusica;
 //prefisso comandi musica $
-var pm=config.prefissoMusica;
-var ry=config.reactionYes;
-var rn=config.reactionNot;
+const pm=config.prefissoMusica;
 
 //login nel server tramite token
 client.login(process.env.tokenBotDiscord);
@@ -103,11 +101,11 @@ function stop(message, serverQueue) {
 
 //genera una slot 
 function slot(message){
-	var slotList=new Array();
-	for (let index = 0; index < config.slotNumber; index++) {
-		slotList.push(Math.floor(Math.random() * config.slotNumber));
+	const slotList=new Array();
+	for (let index = 0; index < config.slotItem.length; index++) {
+		slotList.push(Math.floor(Math.random() * config.slotItem.length));
 	}
-	var elementoIniziale=slotList[0];
+	const elementoIniziale=slotList[0];
 	var vinto=true;
 	slotList.forEach(element => {
 		if (!(elementoIniziale===element)) {
@@ -115,7 +113,7 @@ function slot(message){
 		}
 	});
 	const risultato = new Discord.MessageEmbed()
-	risultato.setTitle('Slot Machine')
+	risultato.setTitle('Slot Machine');
 	for (let index = 0; index < slotList.length; index++) {
 		risultato.addFields(
 			{ name: 'Slot '+index, value: config.slotItem[slotList[index]] , inline: true },
@@ -125,12 +123,12 @@ function slot(message){
 		risultato.addFields(
 			{ name: lingua.win, value: 'x coin' },
 		);
-		risultato.setColor("#00ff37")
+		risultato.setColor("#00ff37");
 	}else{
 		risultato.addFields(
 			{ name: lingua.lose, value: 'x coin' },
 		);
-		risultato.setColor("#f50505")
+		risultato.setColor("#f50505");
 	}
 	message.channel.send(risultato);
 }
@@ -139,7 +137,7 @@ function coinflip(message){
 	const m=message.content.split(" ")[1];
 	var testa;
 	var win;
-	const risultato = new Discord.MessageEmbed()
+	const risultato = new Discord.MessageEmbed();
 	risultato.setTitle('coin flip');
 	switch (Math.floor(Math.random() * 2)) {
 		case 0:
