@@ -206,7 +206,7 @@ function volumeUp(message,serverQueue){
 		return message.reply(lingua.voiceChannelNotFound);
 	if (!serverQueue)
 		return message.reply(lingua.notSong);
-	dispatcher.setVolumeLogarithmic(100);
+	serverQueue.volume = 10;
 
 	message.channel.send("volume alzato di "+q);
 }
@@ -217,6 +217,8 @@ comandiMusicali.set("play",play);
 comandiMusicali.set("skip",skip);
 comandiMusicali.set("stop",stop);
 comandiMusicali.set("volumeup",volumeUp);
+
+//mappa comandi non musicali
 let comandi =new Map();
 comandi.set("slot",slot);
 comandi.set("moneta",moneta);
@@ -227,21 +229,38 @@ const queue = new Map();
 
 //gestore ricezione messaggi
 client.on("message", message => {
+	//se l'autore del messaggio è un bot ignora
 	if (message.author.bot) {
 		return;
-	}else if (message.content.startsWith(pnm)) {
+
+	}// se non è bot e il messaggio inizia con "!"
+	else if (message.content.startsWith(pnm)) {
+		//salva il contenuto del messaggio corrispondente al comando
 		const com=message.content.split(" ")[0].substr(1);
+
+		//se il comando è nella mappa dei comandi
 		if (comandi.has(com)) {
+			//esegue il comando specificato
 			comandi.get(com)(message);
-		}else{
+		}
+		//se il comando non è nella mappa dei messaggi
+		else{
 			message.reply(lingua.commandNotFound);
 		}
-	}else if (message.content.startsWith(pm)){
+	}
+	// se non è bot e il messaggio inizia con "$"
+	else if (message.content.startsWith(pm)){
+		//ottiene l'attuale coda delle canzoni
 		const serverQueue = queue.get(message.guild.id);
+		//salva il contenuto del messaggio corrispondente al comando
 		const com=message.content.split(" ")[0].substr(1);
+
+		//se il comando è nella mappa dei comandi musicali
 		if (comandiMusicali.has(com)) {
+			//esegue il comando specificato
 			comandiMusicali.get(com)(message,serverQueue);
 		}else{
+			//risponde che il comando non esiste
 			message.reply(lingua.comandNotFound);
 		}
 	}
