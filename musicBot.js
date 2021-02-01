@@ -214,7 +214,7 @@ function volumeUp(message,serverQueue){
 		return message.reply(lingua.notSong);
 		var volume=parseInt(q);
 	if (isNaN(volume)) {
-		serverQueue.volume = 10;
+		volume = 1;
 	}else{
 		serverQueue.volume=serverQueue.volume+volume;
 	}
@@ -231,7 +231,7 @@ function volumeDown(message,serverQueue){
 		return message.reply(lingua.notSong);
 	var volume=parseInt(q);
 	if (isNaN(volume)) {
-		serverQueue.volume = 1;
+		volume=1;
 	}else{
 		serverQueue.volume=serverQueue.volume-volume;
 	}
