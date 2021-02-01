@@ -236,6 +236,23 @@ function volumeDown(message,serverQueue){
 	message.channel.send("volume abbassato di "+volume);
 }
 
+//settare volume di n della canzone in riproduzione
+function setvolume(message,serverQueue){
+	const q = message.content.split(" ")[1];
+	if (!message.member.voice.channel)
+		return message.reply(lingua.voiceChannelNotFound);
+	if (!serverQueue)
+		return message.reply(lingua.notSong);
+	var volume=parseInt(q);
+	if (isNaN(volume)) {
+		volume = serverQueue.volume;
+	}else{
+		serverQueue.volume=volume;
+	}
+	serverQueue.connection.dispatcher.setVolume(serverQueue.volume / 100);
+	message.channel.send("volume abbassato di "+volume);
+}
+
 //mappa che collega il commando a una funzione
 let comandiMusicali =new Map();
 comandiMusicali.set("play",play);
@@ -243,6 +260,7 @@ comandiMusicali.set("skip",skip);
 comandiMusicali.set("stop",stop);
 comandiMusicali.set("volumeup",volumeUp);
 comandiMusicali.set("volumedown",volumeDown);
+comandiMusicali.set("setvolume",setvolume);
 
 //mappa comandi non musicali
 let comandi =new Map();
