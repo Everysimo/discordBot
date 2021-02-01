@@ -213,7 +213,7 @@ function volumeUp(message,serverQueue){
 	if (!serverQueue)
 		return message.reply(lingua.notSong);
 	serverQueue.volume = 10;
-
+	serverQueue.connection.dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
 	message.channel.send("volume alzato di "+q);
 }
 
@@ -225,7 +225,7 @@ function volumeDown(message,serverQueue){
 	if (!serverQueue)
 		return message.reply(lingua.notSong);
 	serverQueue.volume = 1;
-
+	serverQueue.connection.dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
 	message.channel.send("volume abbassato di "+q);
 }
 
