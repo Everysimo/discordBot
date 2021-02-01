@@ -250,7 +250,7 @@ function setvolume(message,serverQueue){
 		serverQueue.volume=volume;
 	}
 	serverQueue.connection.dispatcher.setVolume(serverQueue.volume / 100);
-	message.channel.send("volume abbassato di "+volume);
+	message.channel.send("volume settato a "+volume);
 }
 
 //mappa che collega il commando a una funzione
