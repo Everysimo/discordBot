@@ -184,7 +184,7 @@ function moneta(message){
 
 //il bot join nel canale vocale del mittente del messaggio
 async function join(message){
-	const voiceChannel = message.member.voice.channel	//memorizza il canale vocale del mittente del messaggio
+	const voiceChannel = message.member.voice.channel;	//memorizza il canale vocale del mittente del messaggio
 	if (!voiceChannel){
 		return message.reply(lingua.voiceChannelNotFound);
 	}
@@ -228,7 +228,7 @@ comandiMusicali.set("volumeup",volumeUp);
 let comandi =new Map();
 comandi.set("slot",slot);
 comandi.set("moneta",moneta);
-comandi.set("join",join)
+comandi.set("join",join);
 
 //coda di riproduzione
 const queue = new Map();
