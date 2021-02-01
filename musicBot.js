@@ -253,6 +253,25 @@ function setvolume(message,serverQueue){
 	message.channel.send("volume settato a "+volume);
 }
 
+function help(message){
+	const risultato = new Discord.MessageEmbed();
+	risultato.setTitle('DanyBot');
+	risultato.setDescription('Comandi');
+	risultato.addFields(
+		{ name: '!slot', value: 'prova a vincere dei coin alle slot macchine', inline:true},
+		{ name: '!coinflip value', value: 'prova a vincere dei coin con un lancio di moneta value:testa/croce', inline:true},
+		{ name: '!help', value: 'lista dei comandi', inline:true},
+		{ name: '$play', value: 'aggiungi una canzone alla coda di riproduzione è falla prartire se non c\'è nulla in coda',},
+		{ name: '$skip', value: 'skip di una canzone dalla coda', inline:true},
+		{ name: '$stop', value: 'interuzione della riproduzione ed eliminazione della coda di riproduzione', inline:true},
+		{ name: '$volumeup x', value: 'alza il volume di x', inline:true},
+		{ name: '$volumedown x', value: 'abbassa il volume di x', inline:true},
+		{ name: '$setvolume x', value: 'setta volume a x', inline:true},
+	);
+
+	message.channel.send(risultato);
+}
+
 //mappa che collega il commando a una funzione
 let comandiMusicali =new Map();
 comandiMusicali.set("play",play);
@@ -267,6 +286,7 @@ let comandi =new Map();
 comandi.set("slot",slot);
 comandi.set("coinflip",coinflip);
 comandi.set("join",join);
+comandi.set("help",help);
 
 //coda di riproduzione
 const queue = new Map();
