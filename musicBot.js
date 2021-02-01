@@ -214,11 +214,12 @@ function volumeUp(message,serverQueue){
 		return message.reply(lingua.notSong);
 		var volume=parseInt(q);
 	if (isNaN(volume)) {
-		serverQueue.volume = 1;
+		serverQueue.volume = 10;
+	}else{
+		serverQueue.volume=serverQueue.volume+volume;
 	}
-	serverQueue.volume=serverQueue.volume+volume;
 	serverQueue.connection.dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-	message.channel.send("volume alzato di "+q);
+	message.channel.send("volume alzato di "+volume);
 }
 
 //abbassare volume di n della canzone in riproduzione
@@ -231,10 +232,11 @@ function volumeDown(message,serverQueue){
 	var volume=parseInt(q);
 	if (isNaN(volume)) {
 		serverQueue.volume = 1;
+	}else{
+		serverQueue.volume=serverQueue.volume-volume;
 	}
-	serverQueue.volume=serverQueue.volume-volume;
 	serverQueue.connection.dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-	message.channel.send("volume abbassato di "+q);
+	message.channel.send("volume abbassato di "+volume);
 }
 
 //mappa che collega il commando a una funzione
