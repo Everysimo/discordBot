@@ -135,13 +135,12 @@ function slot(message){
 	message.channel.send(risultato);
 }
 
-//TO-DO rinominare "coinflip"
-function moneta(message){
+function coinflip(message){
 	const m=message.content.split(" ")[1];
 	var testa;
 	var win;
 	const risultato = new Discord.MessageEmbed()
-	risultato.setTitle('Moneta');
+	risultato.setTitle('coin flip');
 	switch (Math.floor(Math.random() * 2)) {
 		case 0:
 			testa=true;
@@ -231,7 +230,7 @@ function volumeDown(message,serverQueue){
 		return message.reply(lingua.notSong);
 	var volume=parseInt(q);
 	if (isNaN(volume)) {
-		volume=1;
+		volume = 1;
 	}else{
 		serverQueue.volume=serverQueue.volume-volume;
 	}
@@ -250,7 +249,7 @@ comandiMusicali.set("volumedown",volumeDown);
 //mappa comandi non musicali
 let comandi =new Map();
 comandi.set("slot",slot);
-comandi.set("moneta",moneta);
+comandi.set("coinflip",coinflip);
 comandi.set("join",join);
 
 //coda di riproduzione
