@@ -42,7 +42,7 @@ async function play(message, serverQueue){
 			voiceChannel: voiceChannel,
 			connection: null,
 			songs: [],
-			volume: 5,
+			volume: 50,
 			playing: true,
 		};
 		queue.set(message.guild.id, queueContruct);
@@ -76,7 +76,7 @@ function start(guild, song) {
         serverQueue.songs.shift();
         start(guild, serverQueue.songs[0]);
     }).on("error", error => console.error(error));
-	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
+	dispatcher.setVolume(serverQueue.volume / 100);
 	serverQueue.textChannel.send(lingua.startPlay+" "+song.title);
 }
 
@@ -215,7 +215,7 @@ function volumeUp(message,serverQueue){
 	}else{
 		serverQueue.volume=serverQueue.volume+volume;
 	}
-	serverQueue.connection.dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
+	serverQueue.connection.dispatcher.setVolume(serverQueue.volume / 100);
 	message.channel.send("volume alzato di "+volume);
 }
 
@@ -232,7 +232,7 @@ function volumeDown(message,serverQueue){
 	}else{
 		serverQueue.volume=serverQueue.volume-volume;
 	}
-	serverQueue.connection.dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
+	serverQueue.connection.dispatcher.setVolume(serverQueue.volume / 100);
 	message.channel.send("volume abbassato di "+volume);
 }
 
