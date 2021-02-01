@@ -194,7 +194,13 @@ async function join(message){
     		return message.reply(lingua.voiceChannelNotPermission);
 		}
 		else{
-			await voiceChannel.join();
+			try{
+				await voiceChannel.join();
+			}
+			catch(err){
+				console.log(err);
+				return message.reply(lingua.errorJoinVoiceChannel);
+			}
 		}
 	}
 }
