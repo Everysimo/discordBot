@@ -261,7 +261,7 @@ function help(message){
 		{ name: '!slot', value: 'prova a vincere dei coin alle slot macchine', inline:true},
 		{ name: '!coinflip value', value: 'prova a vincere dei coin con un lancio di moneta value:testa/croce', inline:true},
 		{ name: '!help', value: 'lista dei comandi', inline:true},
-		{ name: '$play', value: 'aggiungi una canzone alla coda di riproduzione è falla prartire se non c\'è nulla in coda',},
+		{ name: '$play', value: 'aggiungi una canzone alla coda di riproduzione è falla prartire se non c\'è nulla in coda',inline:true},
 		{ name: '$skip', value: 'skip di una canzone dalla coda', inline:true},
 		{ name: '$stop', value: 'interuzione della riproduzione ed eliminazione della coda di riproduzione', inline:true},
 		{ name: '$volumeup x', value: 'alza il volume di x', inline:true},
