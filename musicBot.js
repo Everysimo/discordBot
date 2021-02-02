@@ -355,13 +355,14 @@ client.on('guildMemberAdd', member=>{
 		const nickname=member.user.username;
 		const id=member.user.tag.split("#")[1];
 		const data=new Date(Date.now()).toISOString();
-		const query= `INSERT INTO utente (idutente, nickname, dataPrimoAccesso) VALUES ('${id}','${nickname}','${data}')`;
-		dataBase.query(sql, function (err, result) {
-			if (err) {
-				console.log(err);
-				throw err;
-			}
+		try{
+			const query= `INSERT INTO utente (idutente, nickname, dataPrimoAccesso) VALUES ('${id}','${nickname}','${data}')`;
+			dataBase.query(sql, function (err, result) {
 			console.log("1 record inserted");
 		});
+		}
+		catch(err){
+			console.log(err);
+		}
 	}
 });
