@@ -33,7 +33,7 @@ const dataBase = mysql.createConnection({
 dataBase.connect(function(err) {
 	if (err) {
 		console.log(err);
-		throw err;
+		throw new Error("Errore durante la connessione al database");
 	}
 	console.log("Database connesso!");
 });
