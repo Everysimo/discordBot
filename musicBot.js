@@ -18,7 +18,7 @@ const pm=config.prefissoMusica;
 //login nel server tramite token
 client.login(process.env.tokenBotDiscord);
 
-/*//connessione al database
+//connessione al database
 const dataBase = mysql.createConnection({
 	host: process.env.host,
 	user: process.env.user,
@@ -31,7 +31,7 @@ dataBase.connect(function(err) {
 		throw err;
 	}
 	console.log("Database connesso!");
-});*/
+});
 
 //funzioni per commandi
 async function play(message, serverQueue){
@@ -348,7 +348,7 @@ client.on("message", message => {
 	}
 });
 
-/*//entrata nuovo utente inserimento dell'utente nel dataBase 
+//entrata nuovo utente inserimento dell'utente nel dataBase 
 client.on('guildMemberAdd', member=>{
 	if(!member.user.bot){
 		const nickname=member.user.username;
@@ -363,4 +363,4 @@ client.on('guildMemberAdd', member=>{
 			console.log("1 record inserted");
 		});
 	}
-});*/
+});
