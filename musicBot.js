@@ -4,6 +4,10 @@ const config = require('./config.json');
 const ytdl = require('ytdl-core');
 const lingua =require(config.lingua);
 const mysql = require('mysql');
+const longj= require('longjohn');
+
+longj.async_trace_limit=-1;
+longj.empty_frame = 'ASYNC CALLBACK';
 
 //quando il nuovo cliente è pronto esegue log
 client.once('ready', () => {
