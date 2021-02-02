@@ -353,7 +353,7 @@ client.on("message", message => {
 });
 
 //entrata nuovo utente inserimento dell'utente nel dataBase 
-client.on('guildMemberAdd', member=>{
+/*client.on('guildMemberAdd', member=>{
 	if(!member.user.bot){
 		const nickname=member.user.username;
 		const id=member.user.tag.split("#")[1];
@@ -369,4 +369,4 @@ client.on('guildMemberAdd', member=>{
 			}
 		});
 	}
-});
+});*/
