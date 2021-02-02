@@ -273,6 +273,9 @@ function help(message){
 
 	message.channel.send(risultato);
 }
+function id(message){
+	return message.reply(message.author.tag);
+}
 
 //mappa che collega il commando a una funzione
 let comandiMusicali =new Map();
@@ -289,6 +292,7 @@ comandi.set("slot",slot);
 comandi.set("coinflip",coinflip);
 comandi.set("join",join);
 comandi.set("help",help);
+comandi.set("id",id);
 
 //coda di riproduzione
 const queue = new Map();
