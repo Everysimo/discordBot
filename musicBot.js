@@ -268,7 +268,7 @@ function help(message){
 		{ name: '$stop', value: 'interruzione della riproduzione ed eliminazione della coda di riproduzione', inline:true},
 		{ name: '$volumeup x', value: 'alza il volume di x(0-100)', inline:true},
 		{ name: '$volumedown x', value: 'abbassa il volume di x(0-100)', inline:true},
-		{ name: '$setvolume x', value: 'setta volume a x (0-100)', inline:true},
+		{ name: '$setvolume x', value: 'setta volume a x (0-100 )', inline:true},
 	);
 
 	message.channel.send(risultato);
