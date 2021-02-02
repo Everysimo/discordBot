@@ -3,6 +3,7 @@ const client = new Discord.Client();
 const config = require('./config.json');
 const ytdl = require('ytdl-core');
 const lingua =require(config.lingua);
+const mysql = require('mysql');
 
 //quando il nuovo cliente è pronto esegue log
 client.once('ready', () => {
@@ -16,6 +17,21 @@ const pm=config.prefissoMusica;
 
 //login nel server tramite token
 client.login(process.env.tokenBotDiscord);
+
+//connessione al database
+const dataBase = mysql.createConnection({
+	host: process.env.host,
+	user: process.env.user,
+	password: process.env.password,
+	database: process.env.database
+});
+dataBase.connect(function(err) {
+	if (err) {
+		console.log(err);
+		throw err;
+	}
+	console.log("Database connesso!");
+});
 
 //funzioni per commandi
 async function play(message, serverQueue){
@@ -329,5 +345,22 @@ client.on("message", message => {
 			//risponde che il comando non esiste
 			message.reply(lingua.comandNotFound);
 		}
+	}
+});
+
+//entrata nuovo utente inserimento dell'utente nel dataBase 
+client.on('guildMemberAdd', member=>{
+	if(!member.user.bot){
+		const nickname=member.user.username;
+		const id=member.user.tag.split("#")[1];
+		const data=new Date(Date.now()).toISOString();
+		const query= `INSERT INTO utente (idutente, nickname, dataPrimoAccesso) VALUES ('${id}','${nickname}','${data}')`;
+		dataBase.query(sql, function (err, result) {
+			if (err) {
+				console.log(err);
+				throw err;
+			}
+			console.log("1 record inserted");
+		});
 	}
 });
