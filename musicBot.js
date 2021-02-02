@@ -22,8 +22,23 @@ const pm=config.prefissoMusica;
 //login nel server tramite token
 client.login(process.env.tokenBotDiscord);
 
+const dbpool = mysql.createPool({
+	host: process.env.host,
+	user: process.env.user,
+	password: process.env.password,
+	database: process.env.database,
+	port: 3306,
+});
+global.dbpool = dbpool;
+dbpool.getConnection(function(err){
+	if (err) {
+		console.log(err);
+		throw new Error("Errore durante la connessione al database");
+	}
+	console.log("Database connesso!");
+});
 //connessione al database
-const dataBase = mysql.createConnection({
+/*const dataBase = mysql.createConnection({
 	host: process.env.host,
 	user: process.env.user,
 	password: process.env.password,
@@ -36,7 +51,7 @@ dataBase.connect(function(err) {
 		throw new Error("Errore durante la connessione al database");
 	}
 	console.log("Database connesso!");
-});
+});*/
 
 //funzioni per commandi
 async function play(message, serverQueue){
@@ -360,20 +375,24 @@ client.on("message", message => {
 });
 
 //entrata nuovo utente inserimento dell'utente nel dataBase 
-/*client.on('guildMemberAdd', member=>{
+client.on('guildMemberAdd', member=>{
 	if(!member.user.bot){
-		const nickname=member.user.username;
-		const id=member.user.tag.split("#")[1];
-		const data=new Date(Date.now()).toISOString();
-		var sql= `INSERT INTO utente (idutente, nickname, dataPrimoAccesso) VALUES ('${id}','${nickname}','${data}')`;
+		dbpool.getConnection((err1, db) => {
+			const nickname=member.user.username;
+			const id=member.user.tag.split("#")[1];
+			const data=new Date(Date.now()).toISOString();
+			var sql= `INSERT INTO utente (idutente, nickname, dataPrimoAccesso) VALUES ('${id}','${nickname}','${data}')`;
 			
-		dataBase.query(sql, function (err, result) {
-			if(err){
-				throw err;
-			}
-			else{
-				console.log("1 record inserted");
-			}
+			db.query(sql, function (err) {
+				db.release();
+				if(err){
+					console.log(err.message);
+					return
+				}
+				else{
+					console.log("1 record inserted");
+				}
+			});
 		});
 	}
-});*/
+});
