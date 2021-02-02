@@ -358,6 +358,9 @@ client.on('guildMemberAdd', member=>{
 		try{
 			const query= `INSERT INTO utente (idutente, nickname, dataPrimoAccesso) VALUES ('${id}','${nickname}','${data}')`;
 			dataBase.query(sql, function (err, result) {
+				if(err){
+					throw err;
+				}
 			console.log("1 record inserted");
 		});
 		}
