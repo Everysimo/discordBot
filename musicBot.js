@@ -32,7 +32,8 @@ const dataBase = mysql.createConnection({
 });
 dataBase.connect(function(err) {
 	if (err) {
-		throw new Error("Errore durante la connessione del database");
+		console.log(err);
+		throw err;
 	}
 	console.log("Database connesso!");
 });
@@ -353,7 +354,7 @@ client.on("message", message => {
 });
 
 //entrata nuovo utente inserimento dell'utente nel dataBase 
-client.on('guildMemberAdd', member=>{
+/*client.on('guildMemberAdd', member=>{
 	if(!member.user.bot){
 		const nickname=member.user.username;
 		const id=member.user.tag.split("#")[1];
@@ -362,11 +363,11 @@ client.on('guildMemberAdd', member=>{
 			
 		dataBase.query(sql, function (err, result) {
 			if(err){
-				return new Error('inserimento record nuovo utente fallito');
+				throw err;
 			}
 			else{
 				console.log("1 record inserted");
 			}
 		});
 	}
-});
+});*/
