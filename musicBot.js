@@ -25,9 +25,6 @@ const dataBase = mysql.createConnection({
 	password: process.env.password,
 	database: process.env.database,
 	port: 3306,
-	ssl: {
-        ca: "BaltimoreCyberTrustRoot.crt.pem",
-    }
 });
 dataBase.connect(function(err) {
 	if (err) {
