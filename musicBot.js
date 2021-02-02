@@ -51,7 +51,15 @@ async function play(message, serverQueue){
     	return message.reply(lingua.voiceChannelNotPermission);
 	}
 
-	const songInfo = await ytdl.getInfo(args[1]);			//ottiene informazioni della canzone passata come argomento
+	const songInfo;
+
+	try{
+		songInfo = await ytdl.getInfo(args[1]);			//ottiene informazioni della canzone passata come argomento
+	}
+	catch(err){
+		console.log(err);
+	}
+	
 	const song = {
     	title: songInfo.videoDetails.title,
     	url: songInfo.videoDetails.video_url,
