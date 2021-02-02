@@ -380,8 +380,8 @@ client.on('guildMemberAdd', member=>{
 		dbpool.getConnection((err1, db) => {
 			const nickname=member.user.username;
 			const id=member.user.tag.split("#")[1];
-			const data=new Date(Date.now()).toISOString();
-			var sql= `INSERT INTO utente (idutente, nickname, dataPrimoAccesso) VALUES ('${id}','${nickname}','${data}')`;
+			const sqlTimestamp = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+			var sql= `INSERT INTO utente (idutente, nickname, dataPrimoAccesso) VALUES ('${id}','${nickname}','${sqlTimestamp}')`;
 			
 			db.query(sql, function (err) {
 				db.release();
