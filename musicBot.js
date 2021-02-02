@@ -35,7 +35,6 @@ dbpool.getConnection(function(err){
 		console.log(err);
 		throw new Error("Errore durante la connessione al database");
 	}
-	db.release();
 	console.log("Database connesso!");
 });
 //connessione al database
