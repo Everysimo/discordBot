@@ -362,7 +362,7 @@ client.on('guildMemberAdd', member=>{
 			
 		dataBase.query(sql, function (err, result) {
 			if(err){
-				consol.log('inserimento record nuovo utente fallito',err);
+				return new Error('inserimento record nuovo utente fallito');
 			}
 			else{
 				console.log("1 record inserted");
