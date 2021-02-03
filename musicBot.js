@@ -128,11 +128,11 @@ function stop(message, serverQueue) {
 
 //genera una slot 
 function slot(message){
+	const id=message.member.user.tag.split("#")[1];
 	saldoGiocatore(id,function(saldo){
 		var importo=parseInt(message.content.split(" ")[1]);
 		if (!isNaN(importo)) {
 			if (verificaSaldo(importo,saldo)) {
-				const id=message.member.user.tag.split("#")[1];
 				const slotList=new Array();
 				for (let index = 0; index < config.slotItem.length; index++) {
 					slotList.push(Math.floor(Math.random() * config.slotItem.length));
