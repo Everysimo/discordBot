@@ -31,7 +31,7 @@ global.dbpool = dbpool;
 //ottenere connessione dall pool ed eseguire connessione
 dbpool.getConnection(function(err){
 	if (err) {
-		console.log(err);
+		console.log(err.stack);
 		throw new Error("Errore durante la connessione al database");
 	}
 	console.log("Database connesso!");
@@ -79,7 +79,7 @@ async function play(message, serverQueue){
 			queueContruct.connection = connection;			
 			start(message.guild, queueContruct.songs[0]);	//starata la prima canzone in coda
 		} catch (err) {
-			console.log(err);
+			console.log(err.stack);
 			queue.delete(message.guild.id);
 			return message.reply(lingua.errorJoinVoiceChannel);
 		}
@@ -102,7 +102,7 @@ function start(guild, song) {
 	var dispatcher = serverQueue.connection.play(ytdl(song.url)).on("finish", () => {
         serverQueue.songs.shift();
         start(guild, serverQueue.songs[0]);
-    }).on("error", error => console.error(error));
+    }).on("error", error => console.error(error.stack));
 	dispatcher.setVolume(serverQueue.volume / 100);
 	serverQueue.textChannel.send(lingua.startPlay+" "+song.title);
 }
@@ -223,7 +223,7 @@ async function join(message){
 				await voiceChannel.join();
 			}
 			catch(err){
-				console.log(err);
+				console.log(err.stack);
 				return message.reply(lingua.errorJoinVoiceChannel);
 			}
 		}
@@ -311,7 +311,7 @@ function signIn(message){
 			db.query(sql, function (err) {
 				db.release();
 				if(err){
-					console.log(err.message);
+					console.log(err.stack.message);
 					return
 				}
 				else{
