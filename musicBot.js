@@ -405,6 +405,7 @@ function roulette(message){
 					risultato.setColor("#f50505");
 				}
 				message.channel.send(risultato);
+				return
 				}
 
 				//giocata colore nero
@@ -424,7 +425,9 @@ function roulette(message){
 						risultato.setColor("#f50505");
 					}
 				message.channel.send(risultato);
+				return
 				}
+
 				//giocata pari
 				if(giocata === "pari" ||giocata === "p"){
 					if(resultNumeber%2==0 && resultNumeber !=0){
@@ -442,6 +445,7 @@ function roulette(message){
 						risultato.setColor("#f50505");
 					}
 				message.channel.send(risultato);
+				return
 				}
 
 				//giocata dispari
@@ -461,6 +465,7 @@ function roulette(message){
 						risultato.setColor("#f50505");
 					}
 				message.channel.send(risultato);
+				return
 				}
 
 				//conversione in intero della giocata
@@ -495,9 +500,11 @@ function roulette(message){
 					risultato.setColor("#f50505");
 					}
 					message.channel.send(risultato);
+					return
 				}
 				else{
 					message.reply("giocata non esisente");
+					return
 				}
 			}
 		}else{
