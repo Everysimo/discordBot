@@ -325,7 +325,7 @@ function help(message){
 	risultato.setTitle('DanyBot');
 	risultato.setDescription('Comandi');
 	risultato.addFields(
-		{ name: '!coinflip X value', value: 'prova a vincere dei coin con un lancio di moneta value: (testa,t) (croce,c)', inline:true},
+		{ name: '!coinflip X value', value: 'prova a vincere dei coin con un lancio di moneta X: (testa,t) (croce,c)', inline:true},
 		{ name: '!help', value: 'lista dei comandi', inline:true},
 		{ name: '!join', value: 'Il BOT entra nel tuo attuale canale vocale', inline:true},
 		{ name: '!roulette X value', value: 'Giro di roulette, x= rosso/r x3, nero/n x3, numero x36, 0 x 50', inline:true},
@@ -334,8 +334,7 @@ function help(message){
 		{ name: '!slot value', value: 'prova a vincere dei coin alle slot', inline:true},
 	);
 
-	risultatoComandiMusicali.setTitle('DanyBot');
-	risultatoComandiMusicali.setDescription('Comandi Musicali');
+	risultatoComandiMusicali.setTitle('Comandi Musicali');
 	risultatoComandiMusicali.addFields(
 		{ name: '$play', value: 'aggiungi una canzone alla coda di riproduzione e falla prartire se non c\'è nulla in coda',inline:true},
 		{ name: '$setvolume x', value: 'setta volume a x (0-100 )', inline:true},
