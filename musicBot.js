@@ -152,15 +152,15 @@ function slot(message){
 					);
 				}
 				if (vinto) {
-					aggiornaSaldo(saldo+(importo*10),id)
+					aggiornaSaldo(saldo+(importo*10),id);
 					risultato.addFields(
-						{ name: lingua.win, value: importo*10+'coin' },
+						{ name: lingua.win, value: importo*10+' coin' },
 					);
 					risultato.setColor("#00ff37");
 				}else{
-					aggiornaSaldo(saldo-importo,id)
+					aggiornaSaldo(saldo-importo,id);
 					risultato.addFields(
-						{ name: lingua.lose, value: importo+'coin' },
+						{ name: lingua.lose, value: importo+' coin' },
 					);
 					risultato.setColor("#f50505");
 				}
@@ -177,48 +177,63 @@ function slot(message){
 //lancio moneta testa o croce
 function coinflip(message){
 	const m=message.content.split(" ")[1];
-	var testa;
-	var win;
-	const risultato = new Discord.MessageEmbed();
-	risultato.setTitle('coin flip');
-	switch (Math.floor(Math.random() * 2)) {
-		case 0:
-			testa=true;
-			risultato.setImage("https://upload.wikimedia.org/wikipedia/it/d/de/1_%E2%82%AC_Italia.jpg");
-			break;
-		case 1:
-			testa=false;
-			risultato.setImage("https://upload.wikimedia.org/wikipedia/it/0/06/1_%E2%82%AC_2007.jpg");
-			break;
-	}
-	if(m==="testa"||m==="t"){
-		if (testa) {
-			win=true;
+	const id=message.member.user.id;
+	saldoGiocatore(id,function(saldo){
+		var importo=parseInt(message.content.split(" ")[2]);
+		if (!isNaN(importo) && importo > 0) {
+			if (verificaSaldo(importo,saldo)) {
+				var testa;
+				var win;
+				const risultato = new Discord.MessageEmbed();
+				risultato.setTitle('coin flip');
+				switch (Math.floor(Math.random() * 2)) {
+					case 0:
+						testa=true;
+						risultato.setImage("https://upload.wikimedia.org/wikipedia/it/d/de/1_%E2%82%AC_Italia.jpg");
+						break;
+					case 1:
+						testa=false;
+						risultato.setImage("https://upload.wikimedia.org/wikipedia/it/0/06/1_%E2%82%AC_2007.jpg");
+						break;
+				}
+				if(m==="testa"||m==="t"){
+					if (testa) {
+						win=true;
+					}else{
+						win=false;
+					}
+				}else if(m==="croce"||m==="c"){
+					if (testa) {
+						win=false;
+					}else{
+						win=true;
+					}
+				}else{
+					message.reply(lingua.notSelect);
+					return;
+				}
+				if (win) {
+					aggiornaSaldo(saldo+(importo*2),id);
+					risultato.addFields(
+						{ name: lingua.win, value: importo*2+' coin' },
+					);
+					risultato.setColor("#00ff37");
+				}else{
+					aggiornaSaldo(saldo-importo,id);
+					risultato.addFields(
+						{ name: lingua.lose, value: importo+' coin' },
+					);
+					risultato.setColor("#f50505");
+				}
+				message.channel.send(risultato);
+			}else{
+				message.reply("non hai abbastanza coin");
+			}
 		}else{
-			win=false;
+			message.reply("importo non valito");
 		}
-	}else if(m==="croce"||m==="c"){
-		if (testa) {
-			win=false;
-		}else{
-			win=true;
-		}
-	}else{
-		message.reply(lingua.notSelect);
-		return;
-	}
-	if (win) {
-		risultato.addFields(
-			{ name: lingua.win, value: 'x coin' },
-		);
-		risultato.setColor("#00ff37");
-	}else{
-		risultato.addFields(
-			{ name: lingua.lose, value: 'x coin' },
-		);
-		risultato.setColor("#f50505");
-	}
-	message.channel.send(risultato);
+	});
+
 }
 
 //il bot join nel canale vocale del mittente del messaggio
