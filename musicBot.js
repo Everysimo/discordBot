@@ -321,7 +321,7 @@ function signIn(message){
 		dbpool.getConnection((err, db) => {
 			const nickname=message.member.user.username;
 			const id=message.member.user.tag.split("#")[1];
-			const sqlTimestamp = new Date(Date.now).toISOString;
+			const sqlTimestamp = new Date(Date.now).toISOString();
 			var sql= `INSERT INTO utente (idutente, nickname, dataPrimoAccesso) VALUES ('${id}','${nickname}','${sqlTimestamp}')`;
 			
 			db.query(sql, function (err) {
