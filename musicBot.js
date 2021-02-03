@@ -316,7 +316,7 @@ function help(message){
 	message.channel.send(risultato);
 }
 
-function singIn(message){
+function signIn(message){
 	if(!message.member.user.bot){
 		dbpool.getConnection((err, db) => {
 			const nickname=message.member.user.username;
@@ -355,7 +355,7 @@ comandiMusicali.set("setvolume",setvolume);
 //mappa comandi non musicali
 let comandi =new Map();
 comandi.set("slot",slot);
-comandi.set("singin",singIn);
+comandi.set("signin",signIn);
 comandi.set("coinflip",coinflip);
 comandi.set("join",join);
 comandi.set("help",help);
