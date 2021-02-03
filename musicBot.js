@@ -61,7 +61,7 @@ async function play(message, serverQueue){
 	var song = {
     	title: songInfo.videoDetails.title,
 		url: songInfo.videoDetails.video_url,
-		isLive: songInfo.videoDetails.isLiveContent()
+		isLive: songInfo.videoDetails.isLiveContent
 	};
 
 	if (!serverQueue) {					//se la coda delle canzoni è vuota
