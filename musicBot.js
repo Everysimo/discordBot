@@ -330,7 +330,7 @@ function help(message){
 		{ name: '!join', value: 'Il BOT entra nel tuo attuale canale vocale', inline:true},
 		{ name: '!roulette X value', value: 'Giro di roulette, x= rosso/r x3, nero/n x3, numero x36, 0 x 50', inline:true},
 		{ name: '!saldo', value: 'Restituisce il tuo saldo corrente', inline:true},
-		{ name: '!singin', value: 'iscriviti al server per poter giocare', inline:true},
+		{ name: '!signin', value: 'iscriviti al server per poter giocare', inline:true},
 		{ name: '!slot value', value: 'prova a vincere dei coin alle slot', inline:true},
 	);
 
@@ -596,7 +596,7 @@ client.on('guildMemberAdd', member=>{
 	if(!member.user.bot){
 		dbpool.getConnection((err, db) => {
 			const nickname=member.user.username;
-			const id=member.user.tag.split("#")[1];
+			const id=member.user.id;
 			var sql= `INSERT INTO utente (idutente, nickname, dataPrimoAccesso) VALUES ('${id}','${nickname}',current_timestamp())`;
 			
 			db.query(sql, function (err) {
