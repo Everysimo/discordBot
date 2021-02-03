@@ -446,7 +446,7 @@ function saldoGiocatore(id) {
 				return
 			}
 			else{
-				result.saldo
+				return result.saldo;
 			}
 		});
 		
