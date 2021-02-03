@@ -336,7 +336,7 @@ function help(message){
 
 	risultatoComandiMusicali.setTitle('DanyBot');
 	risultatoComandiMusicali.setDescription('Comandi Musicali');
-	risultatoComandiMusicalil.addFields(
+	risultatoComandiMusicali.addFields(
 		{ name: '$play', value: 'aggiungi una canzone alla coda di riproduzione e falla prartire se non c\'è nulla in coda',inline:true},
 		{ name: '$setvolume x', value: 'setta volume a x (0-100 )', inline:true},
 		{ name: '$skip', value: 'skip di una canzone dalla coda', inline:true},
