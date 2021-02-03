@@ -60,7 +60,8 @@ async function play(message, serverQueue){
 	
 	var song = {
     	title: songInfo.videoDetails.title,
-    	url: songInfo.videoDetails.video_url,
+		url: songInfo.videoDetails.video_url,
+		isLive: songInfo.videoDetails.isLiveContent()
 	};
 
 	if (!serverQueue) {					//se la coda delle canzoni è vuota
@@ -99,10 +100,17 @@ function start(guild, song) {
 	  queue.delete(guild.id);
 	  return;
 	}
-	var dispatcher = serverQueue.connection.play(ytdl(song.url,{filter: "audioonly"})).on("finish", () => {
-        serverQueue.songs.shift();
-        start(guild, serverQueue.songs[0]);
-    }).on("error", error => console.error(error.stack));
+	if (song.isLive) {
+		var dispatcher = serverQueue.connection.play(ytdl(song.url)).on("finish", () => {
+			serverQueue.songs.shift();
+			start(guild, serverQueue.songs[0]);
+		}).on("error", error => console.error(error.stack));
+	}else{
+		var dispatcher = serverQueue.connection.play(ytdl(song.url,{filter: "audioonly"})).on("finish", () => {
+			serverQueue.songs.shift();
+			start(guild, serverQueue.songs[0]);
+		}).on("error", error => console.error(error.stack));
+	}
 	dispatcher.setVolume(serverQueue.volume / 100);
 	serverQueue.textChannel.send(lingua.startPlay+" "+song.title);
 }
