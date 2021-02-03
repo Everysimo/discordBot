@@ -99,7 +99,7 @@ function start(guild, song) {
 	  queue.delete(guild.id);
 	  return;
 	}
-	var dispatcher = serverQueue.connection.play(ytdl(song.url)).on("finish", () => {
+	var dispatcher = serverQueue.connection.play(ytdl(song.url,{filter: "audioonly"})).on("finish", () => {
         serverQueue.songs.shift();
         start(guild, serverQueue.songs[0]);
     }).on("error", error => console.error(error.stack));
@@ -311,7 +311,7 @@ function signIn(message){
 			db.query(sql, function (err) {
 				db.release();
 				if(err){
-					console.log(err.stack.message);
+					console.log(err.message);
 					return
 				}
 				else{
