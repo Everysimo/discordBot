@@ -342,6 +342,13 @@ function signIn(message){
 	}
 }
 
+function coin(message){
+	if(!message.member.user.bot){
+		const id=message.member.user.tag.split("#")[1];
+		message.reply("saldo: "+saldoGiocatore(id));
+	}
+}
+
 //mappa che collega il commando a una funzione
 let comandiMusicali =new Map();
 comandiMusicali.set("play",play);
@@ -358,6 +365,7 @@ comandi.set("signin",signIn);
 comandi.set("coinflip",coinflip);
 comandi.set("join",join);
 comandi.set("help",help);
+comandi.set("coin",coin);
 
 //coda di riproduzione
 const queue = new Map();
@@ -427,3 +435,25 @@ client.on('guildMemberAdd', member=>{
 		});
 	}
 });
+
+function saldoGiocatore(id) {
+	dbpool.getConnection((err, db) => {
+		var sql= `SELECT saldo FROM utente where idutente='${tag}'`;
+		
+		db.query(sql, function (err,result) {
+			db.release();
+			if(err){
+				console.log(err.message);
+				return
+			}
+			else{
+				result.saldo
+			}
+		});
+		
+		if(err){
+			console.log(err.message);
+			return
+		}
+	});
+}
