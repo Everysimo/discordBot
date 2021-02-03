@@ -456,14 +456,11 @@ function verificaSaldo(importo,saldo){
 function aggiornaSaldo(nuovoSaldo,id){ 
 	dbpool.getConnection((err, db) => {
 		var sql= `Update utente set saldo='${nuovoSaldo}' where idutente='${id}'`;
-		db.query(sql, function (err,result) {
+		db.query(sql, function (err) {
 			db.release();
 			if(err){
 				console.log("errore durante l'aggiornamento del saldo",err);
 				return
-			}
-			else{
-				return saldo(result[0].saldo);
 			}
 		});
 		if(err){
