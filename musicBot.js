@@ -434,7 +434,7 @@ function saldoGiocatore(id,saldo) {
 				return
 			}
 			else{
-				return saldo(results[0].saldo)
+				return saldo(result[0].saldo);
 			}
 		});
 		
