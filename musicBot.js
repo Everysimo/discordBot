@@ -152,9 +152,9 @@ function slot(message){
 					);
 				}
 				if (vinto) {
-					aggiornaSaldo(saldo+(importo*10),id);
+					aggiornaSaldo(saldo+(importo*9),id);
 					risultato.addFields(
-						{ name: lingua.win, value: importo*10+' coin' },
+						{ name: lingua.win, value: importo*9+' coin' },
 					);
 					risultato.setColor("#00ff37");
 				}else{
