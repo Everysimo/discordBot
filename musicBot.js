@@ -452,3 +452,23 @@ function verificaSaldo(importo,saldo){
 		return false;
 	}
 }
+
+function aggiornaSaldo(nuovoSaldo,id){ 
+	dbpool.getConnection((err, db) => {
+		var sql= `Update utente set saldo='${nuovoSaldo}' where idutente='${id}'`;
+		db.query(sql, function (err,result) {
+			db.release();
+			if(err){
+				console.log("errore durante l'aggiornamento del saldo",err);
+				return
+			}
+			else{
+				return saldo(result[0].saldo);
+			}
+		});
+		if(err){
+			console.log(err.message);
+			return
+		}
+	});
+}
