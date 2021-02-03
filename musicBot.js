@@ -324,15 +324,19 @@ function help(message){
 	risultato.setTitle('DanyBot');
 	risultato.setDescription('Comandi');
 	risultato.addFields(
-		{ name: '!slot', value: 'prova a vincere dei coin alle slot', inline:true},
-		{ name: '!coinflip value', value: 'prova a vincere dei coin con un lancio di moneta value: (testa,t) (croce,c)', inline:true},
+		{ name: '!coinflip X value', value: 'prova a vincere dei coin con un lancio di moneta value: (testa,t) (croce,c)', inline:true},
 		{ name: '!help', value: 'lista dei comandi', inline:true},
+		{ name: '!join', value: 'Il BOT entra nel tuo attuale canale vocale', inline:true},
+		{ name: '!roulette X value', value: 'Giro di roulette, x= rosso/r x3, nero/n x3, numero x36, 0 x 50', inline:true},
+		{ name: '!saldo', value: 'Restituisce il tuo saldo corrente', inline:true},
+		{ name: '!singin', value: 'iscriviti al server per poter giocare', inline:true},
+		{ name: '!slot value', value: 'prova a vincere dei coin alle slot', inline:true},
 		{ name: '$play', value: 'aggiungi una canzone alla coda di riproduzione e falla prartire se non c\'è nulla in coda',inline:true},
+		{ name: '$setvolume x', value: 'setta volume a x (0-100 )', inline:true},
 		{ name: '$skip', value: 'skip di una canzone dalla coda', inline:true},
 		{ name: '$stop', value: 'interruzione della riproduzione ed eliminazione della coda di riproduzione', inline:true},
-		{ name: '$volumeup x', value: 'alza il volume di x(0-100)', inline:true},
 		{ name: '$volumedown x', value: 'abbassa il volume di x(0-100)', inline:true},
-		{ name: '$setvolume x', value: 'setta volume a x (0-100 )', inline:true},
+		{ name: '$volumeup x', value: 'alza il volume di x(0-100)', inline:true},
 	);
 
 	message.channel.send(risultato);
@@ -364,7 +368,7 @@ function signIn(message){
 	}
 }
 
-function coin(message){
+function getSaldo(message){
 	if(!message.member.user.bot){
 		const id=message.member.user.id;
 		saldoGiocatore(id,function(saldo){
@@ -537,7 +541,7 @@ comandi.set("signin",signIn);
 comandi.set("coinflip",coinflip);
 comandi.set("join",join);
 comandi.set("help",help);
-comandi.set("coin",coin);
+comandi.set("saldo",getSaldo);
 comandi.set("roulette",roulette);
 
 //coda di riproduzione
