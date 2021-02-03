@@ -49,45 +49,45 @@ async function play(message, serverQueue){
   	if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
     	return message.reply(lingua.voiceChannelNotPermission);
 	}
-
+	var songInfo;
 
 	try{
-		const songInfo = await ytdl.getInfo(args[1]);			//ottiene informazioni della canzone passata come argomento
-
-		const song = {
-			title: songInfo.videoDetails.title,
-			url: songInfo.videoDetails.video_url,
-		};
-
-		if (!serverQueue) {					//se la coda delle canzoni è vuota
-			const queueContruct = {
-				textChannel: message.channel,
-				voiceChannel: voiceChannel,
-				connection: null,
-				songs: [],
-				volume: 50,
-				playing: true,
-			};
-			queue.set(message.guild.id, queueContruct);
-			queueContruct.songs.push(song);
-			try {
-				var connection = await voiceChannel.join();	//connessione al canale vocale dell'utente che invia il messagio
-				queueContruct.connection = connection;			
-				start(message.guild, queueContruct.songs[0]);	//starata la prima canzone in coda
-			} catch (err) {
-				console.log(err);
-				queue.delete(message.guild.id);
-				return message.reply(lingua.errorJoinVoiceChannel);
-			}
-		}
-		else{	//se la coda delle canzoni non è vuota aggiunge la canzone alla coda
-	
-			serverQueue.songs.push(song);
-			return message.reply(song.title +" "+ lingua.songAddQueue)
-		}
+		songInfo = await ytdl.getInfo(args[1]);			//ottiene informazioni della canzone passata come argomento
 	}
 	catch(err){
 		console.log(err);
+	}
+	
+	var song = {
+    	title: songInfo.videoDetails.title,
+    	url: songInfo.videoDetails.video_url,
+	};
+
+	if (!serverQueue) {					//se la coda delle canzoni è vuota
+		const queueContruct = {
+			textChannel: message.channel,
+			voiceChannel: voiceChannel,
+			connection: null,
+			songs: [],
+			volume: 50,
+			playing: true,
+		};
+		queue.set(message.guild.id, queueContruct);
+		queueContruct.songs.push(song);
+		try {
+			var connection = await voiceChannel.join();	//connessione al canale vocale dell'utente che invia il messagio
+			queueContruct.connection = connection;			
+			start(message.guild, queueContruct.songs[0]);	//starata la prima canzone in coda
+		} catch (err) {
+			console.log(err);
+			queue.delete(message.guild.id);
+			return message.reply(lingua.errorJoinVoiceChannel);
+		}
+	}
+	else{	//se la coda delle canzoni non è vuota aggiunge la canzone alla coda
+
+		serverQueue.songs.push(song);
+		return message.reply(song.title +" "+ lingua.songAddQueue)
 	}
 }
 
