@@ -75,7 +75,7 @@ async function play(message, serverQueue){
 		queue.set(message.guild.id, queueContruct);
 		queueContruct.songs.push(song);
 		try {
-			var connection = await voiceChannel.join();	//connessione al canale vocale dell'utente che invia il messagio
+			var connection = await voiceChannel.join();	//connessione al canale vocale dell'utente che invia il messaggio
 			queueContruct.connection = connection;			
 			start(message.guild, queueContruct.songs[0]);	//starata la prima canzone in coda
 		} catch (err) {
@@ -93,13 +93,13 @@ async function play(message, serverQueue){
 
 //starta la canzona
 function start(guild, song) {
-	const serverQueue = queue.get(guild.id);
+	var serverQueue = queue.get(guild.id);
 	if (!song) {
 	  serverQueue.voiceChannel.leave();
 	  queue.delete(guild.id);
 	  return;
 	}
-	const dispatcher = serverQueue.connection.play(ytdl(song.url)).on("finish", () => {
+	var dispatcher = serverQueue.connection.play(ytdl(song.url)).on("finish", () => {
         serverQueue.songs.shift();
         start(guild, serverQueue.songs[0]);
     }).on("error", error => console.error(error));
