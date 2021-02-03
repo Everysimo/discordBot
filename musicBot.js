@@ -316,6 +316,33 @@ function help(message){
 	message.channel.send(risultato);
 }
 
+function singIn(message){
+	if(!message.member.user.bot){
+		dbpool.getConnection((err, db) => {
+			const nickname=message.member.user.username;
+			const id=message.member.user.tag.split("#")[1];
+			const sqlTimestamp = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+			var sql= `INSERT INTO utente (idutente, nickname, dataPrimoAccesso) VALUES ('${id}','${nickname}','${sqlTimestamp}')`;
+			
+			db.query(sql, function (err) {
+				db.release();
+				if(err){
+					console.log(err.message);
+					return
+				}
+				else{
+					console.log("1 record inserted");
+				}
+			});
+			
+			if(err){
+				console.log(err.message);
+				return
+			}
+		});
+	}
+}
+
 //mappa che collega il commando a una funzione
 let comandiMusicali =new Map();
 comandiMusicali.set("play",play);
@@ -328,6 +355,7 @@ comandiMusicali.set("setvolume",setvolume);
 //mappa comandi non musicali
 let comandi =new Map();
 comandi.set("slot",slot);
+comandi.set("singin",singIn);
 comandi.set("coinflip",coinflip);
 comandi.set("join",join);
 comandi.set("help",help);
@@ -375,9 +403,9 @@ client.on("message", message => {
 });
 
 //entrata nuovo utente inserimento dell'utente nel dataBase 
-client.on('guildMemberAdd', member=>{
+/*client.on('guildMemberAdd', member=>{
 	if(!member.user.bot){
-		dbpool.getConnection((err1, db) => {
+		dbpool.getConnection((err, db) => {
 			const nickname=member.user.username;
 			const id=member.user.tag.split("#")[1];
 			const sqlTimestamp = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
@@ -395,4 +423,4 @@ client.on('guildMemberAdd', member=>{
 			});
 		});
 	}
-});
+});*/
