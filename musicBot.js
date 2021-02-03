@@ -562,7 +562,7 @@ client.on("message", message => {
 			comandiMusicali.get(com)(message,serverQueue);
 		}else{
 			//risponde che il comando non esiste
-			message.reply(lingua.comandNotFound);
+			message.reply(lingua.commandNotFound);
 		}
 	}
 });
