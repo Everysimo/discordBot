@@ -55,7 +55,7 @@ async function play(message, serverQueue){
 		songInfo = await ytdl.getInfo(args[1]);			//ottiene informazioni della canzone passata come argomento
 	}
 	catch(err){
-		console.log(err);
+		throw new Error("errore nel caricamento dell informazioni della canzone");
 	}
 	
 	var song = {
@@ -430,6 +430,7 @@ function saldoGiocatore(id,saldo) {
 			db.release();
 			if(err){
 				console.log("errore nel caricamento del tuo saldo",err);
+				return
 			}
 			else{
 				return saldo(result[0].saldo);
