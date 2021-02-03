@@ -373,7 +373,7 @@ function coin(message){
 	}
 }
 
-function ruolette(message){
+function roulette(message){
 	if(!message.member.user.bot){
 	const giocata=message.content.split(" ")[1];
 	const id=message.member.user.id;
@@ -524,7 +524,7 @@ comandi.set("coinflip",coinflip);
 comandi.set("join",join);
 comandi.set("help",help);
 comandi.set("coin",coin);
-comandi.set("roulette",ruolette);
+comandi.set("roulette",roulette);
 
 //coda di riproduzione
 const queue = new Map();
