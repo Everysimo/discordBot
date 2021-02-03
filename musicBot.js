@@ -443,3 +443,12 @@ function saldoGiocatore(id,saldo) {
 		}
 	});
 }
+
+function verificaSaldo(importo,saldo){
+	if(importo <= saldo){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
