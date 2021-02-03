@@ -353,7 +353,7 @@ function signIn(message){
 		dbpool.getConnection((err, db) => {
 			const nickname=message.member.user.username;
 			const id=message.member.user.id;
-			var sql= `INSERT INTO utente (idutente, nickname, dataPrimoAccesso) VALUES ('${id}','${nickname}',current_timestamp())`;
+			var sql= `INSERT INTO utente (idutente, nickname) VALUES ('${id}','${nickname}')`;
 			
 			db.query(sql, function (err) {
 				db.release();
