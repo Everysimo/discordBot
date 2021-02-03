@@ -373,6 +373,11 @@ function coin(message){
 	}
 }
 
+function ruolette(message){
+	if(!message.member.user.bot){
+	}
+}
+
 //mappa che collega il commando a una funzione
 let comandiMusicali =new Map();
 comandiMusicali.set("play",play);
