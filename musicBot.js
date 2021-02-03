@@ -402,13 +402,12 @@ client.on("message", message => {
 });
 
 //entrata nuovo utente inserimento dell'utente nel dataBase 
-/*client.on('guildMemberAdd', member=>{
+client.on('guildMemberAdd', member=>{
 	if(!member.user.bot){
 		dbpool.getConnection((err, db) => {
 			const nickname=member.user.username;
 			const id=member.user.tag.split("#")[1];
-			const sqlTimestamp = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
-			var sql= `INSERT INTO utente (idutente, nickname, dataPrimoAccesso) VALUES ('${id}','${nickname}','${sqlTimestamp}')`;
+			var sql= `INSERT INTO utente (idutente, nickname, dataPrimoAccesso) VALUES ('${id}','${nickname}',current_timestamp())`;
 			
 			db.query(sql, function (err) {
 				db.release();
@@ -420,6 +419,11 @@ client.on("message", message => {
 					console.log("1 record inserted");
 				}
 			});
+			
+			if(err){
+				console.log(err.message);
+				return
+			}
 		});
 	}
-});*/
+});
