@@ -362,7 +362,15 @@ function signIn(message){
 					return
 				}
 				else{
-					console.log("1 record inserted");
+					const messaggioConferma = new Discord.MessageEmbed();
+					messaggioConferma.setTitle("Benvenuto "+ nickname);
+					messaggioConferma.addFields(
+						{ name: 'Sei diventato ufficialmente una testa dell\'Hydra',
+						 value: 'Come Benvenuto ti regaliamo 1000 coin da poter spendere allo !shop o scommetterli, per maggiori info !comandi', inline:true},
+					)
+
+					console.log("Utente registrato correttamente");
+					message.channel.send(messaggioConferma);
 				}
 			});
 			
