@@ -329,9 +329,9 @@ function signIn(message){
 function coin(message){
 	if(!message.member.user.bot){
 		const id=message.member.user.tag.split("#")[1];
-		var saldo;
-		saldoGiocatore(id,saldo)
-		message.reply("saldo: "+saldo);
+		saldoGiocatore(id,function(saldo){
+			message.reply("saldo: "+saldo);
+		});
 	}
 }
 
@@ -432,7 +432,7 @@ function saldoGiocatore(id,saldo) {
 				return
 			}
 			else{
-				saldo=result[0].saldo;
+				return saldo(results[0].saldo)
 			}
 		});
 		
