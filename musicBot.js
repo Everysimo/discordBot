@@ -374,7 +374,7 @@ function signIn(message){
 				}
 			});
 
-			if(err.code==='ER_DUP_ENTRY'){
+			if(err==='ER_DUP_ENTRY'){
 				console.log("Utente già presente del database",err);
 				return
 			}
