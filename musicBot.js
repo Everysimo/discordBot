@@ -437,9 +437,9 @@ client.on('guildMemberAdd', member=>{
 });
 
 function saldoGiocatore(id) {
-	dbpool.getConnection((err, db) => {
+	return dbpool.getConnection((err, db) => {
 		var sql= `SELECT saldo FROM utente where idutente='${id}'`;	
-		db.query(sql, function (err,result) {
+		return db.query(sql, function (err,result) {
 			db.release();
 			if(err){
 				console.log(err.message);
@@ -455,5 +455,4 @@ function saldoGiocatore(id) {
 			return
 		}
 	});
-	console.log(result[0].saldo);
 }
