@@ -128,7 +128,7 @@ function stop(message, serverQueue) {
 
 //genera una slot 
 function slot(message){
-	const id=message.member.user.tag.split("#")[1];
+	const id=message.member.user.id;
 	saldoGiocatore(id,function(saldo){
 		var importo=parseInt(message.content.split(" ")[1]);
 		if (!isNaN(importo) && importo > 0) {
@@ -319,7 +319,7 @@ function signIn(message){
 	if(!message.member.user.bot){
 		dbpool.getConnection((err, db) => {
 			const nickname=message.member.user.username;
-			const id=message.member.user.tag.split("#")[1];
+			const id=message.member.user.id;
 			var sql= `INSERT INTO utente (idutente, nickname, dataPrimoAccesso) VALUES ('${id}','${nickname}',current_timestamp())`;
 			
 			db.query(sql, function (err) {
@@ -343,7 +343,7 @@ function signIn(message){
 
 function coin(message){
 	if(!message.member.user.bot){
-		const id=message.member.user.tag.split("#")[1];
+		const id=message.member.user.id;
 		saldoGiocatore(id,function(saldo){
 			message.reply("saldo: "+saldo);
 		});
@@ -376,7 +376,6 @@ client.on("message", message => {
 	//se l'autore del messaggio è un bot ignora
 	if (message.author.bot) {
 		return;
-
 	}// se non è bot e il messaggio inizia con "!"
 	else if (message.content.startsWith(pnm)) {
 		//salva il contenuto del messaggio corrispondente al comando
