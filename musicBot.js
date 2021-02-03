@@ -429,8 +429,7 @@ function saldoGiocatore(id,saldo) {
 		db.query(sql, function (err,result) {
 			db.release();
 			if(err){
-				console.log(err.message);
-				return
+				console.log("errore nel caricamento del tuo saldo",err);
 			}
 			else{
 				return saldo(result[0].saldo);
