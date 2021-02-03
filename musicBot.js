@@ -4,10 +4,6 @@ const config = require('./config.json');
 const ytdl = require('ytdl-core');
 const lingua =require(config.lingua);
 const mysql = require('mysql');
-const longj= require('longjohn');
-
-longj.async_trace_limit=-1;
-longj.empty_frame = 'ASYNC CALLBACK';
 
 //quando il nuovo cliente è pronto esegue log
 client.once('ready', () => {
@@ -22,6 +18,7 @@ const pm=config.prefissoMusica;
 //login nel server tramite token
 client.login(process.env.tokenBotDiscord);
 
+//creazione pool di connessione al DataBase
 const dbpool = mysql.createPool({
 	host: process.env.host,
 	user: process.env.user,
@@ -30,6 +27,8 @@ const dbpool = mysql.createPool({
 	port: 3306,
 });
 global.dbpool = dbpool;
+
+//ottenere connessione dall pool ed eseguire connessione
 dbpool.getConnection(function(err){
 	if (err) {
 		console.log(err);
@@ -37,21 +36,6 @@ dbpool.getConnection(function(err){
 	}
 	console.log("Database connesso!");
 });
-//connessione al database
-/*const dataBase = mysql.createConnection({
-	host: process.env.host,
-	user: process.env.user,
-	password: process.env.password,
-	database: process.env.database,
-	port: 3306,
-});
-dataBase.connect(function(err) {
-	if (err) {
-		console.log(err);
-		throw new Error("Errore durante la connessione al database");
-	}
-	console.log("Database connesso!");
-});*/
 
 //funzioni per commandi
 async function play(message, serverQueue){
