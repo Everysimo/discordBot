@@ -128,36 +128,50 @@ function stop(message, serverQueue) {
 
 //genera una slot 
 function slot(message){
-	const slotList=new Array();
-	for (let index = 0; index < config.slotItem.length; index++) {
-		slotList.push(Math.floor(Math.random() * config.slotItem.length));
-	}
-	const elementoIniziale=slotList[0];
-	var vinto=true;
-	slotList.forEach(element => {
-		if (!(elementoIniziale===element)) {
-			vinto=false;
+	saldoGiocatore(id,function(saldo){
+		var importo=parseInt(message.content.split(" ")[1]);
+		if (!isNaN(importo)) {
+			if (verificaSaldo(importo,saldo)) {
+				const id=message.member.user.tag.split("#")[1];
+				const slotList=new Array();
+				for (let index = 0; index < config.slotItem.length; index++) {
+					slotList.push(Math.floor(Math.random() * config.slotItem.length));
+				}
+				const elementoIniziale=slotList[0];
+				var vinto=true;
+				slotList.forEach(element => {
+					if (!(elementoIniziale===element)) {
+						vinto=false;
+					}
+				});
+				const risultato = new Discord.MessageEmbed()
+				risultato.setTitle('Slot Machine');
+				for (let index = 0; index < slotList.length; index++) {
+					risultato.addFields(
+						{ name: 'Slot '+index, value: config.slotItem[slotList[index]] , inline: true },
+					);
+				}
+				if (vinto) {
+					aggiornaSaldo(saldo+(importo*10),)
+					risultato.addFields(
+						{ name: lingua.win, value: importo*10+'coin' },
+					);
+					risultato.setColor("#00ff37");
+				}else{
+					aggiornaSaldo(saldo-importo,)
+					risultato.addFields(
+						{ name: lingua.lose, value: importo+'coin' },
+					);
+					risultato.setColor("#f50505");
+				}
+				message.channel.send(risultato);
+			}else{
+				message.reply("non hai abbastanza coin");
+			}
+		}else{
+			message.reply("importo non valito");
 		}
-	});
-	const risultato = new Discord.MessageEmbed()
-	risultato.setTitle('Slot Machine');
-	for (let index = 0; index < slotList.length; index++) {
-		risultato.addFields(
-			{ name: 'Slot '+index, value: config.slotItem[slotList[index]] , inline: true },
-		);
-	}
-	if (vinto) {
-		risultato.addFields(
-			{ name: lingua.win, value: 'x coin' },
-		);
-		risultato.setColor("#00ff37");
-	}else{
-		risultato.addFields(
-			{ name: lingua.lose, value: 'x coin' },
-		);
-		risultato.setColor("#f50505");
-	}
-	message.channel.send(risultato);
+	});	
 }
 
 //lancio moneta testa o croce
