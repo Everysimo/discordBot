@@ -345,7 +345,9 @@ function signIn(message){
 function coin(message){
 	if(!message.member.user.bot){
 		const id=message.member.user.tag.split("#")[1];
-		message.reply("saldo: "+saldoGiocatore(id));
+		var saldo;
+		saldoGiocatore(id,saldo)
+		message.reply("saldo: "+saldo);
 	}
 }
 
@@ -436,7 +438,7 @@ client.on('guildMemberAdd', member=>{
 	}
 });
 
-function saldoGiocatore(id) {
+function saldoGiocatore(id,saldo) {
 	dbpool.getConnection((err, db) => {
 		var sql= `SELECT saldo FROM utente where idutente='${id}'`;	
 		db.query(sql, function (err,result) {
@@ -446,7 +448,7 @@ function saldoGiocatore(id) {
 				return
 			}
 			else{
-				return result[0].saldo;
+				saldo=result[0].saldo;
 			}
 		});
 		
