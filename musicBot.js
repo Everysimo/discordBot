@@ -358,7 +358,7 @@ function signIn(message){
 			db.query(sql, function (err) {
 				db.release();
 				if(err.code.match('ER_DUP_ENTRY')){
-					console.log("Utente già presente del database",err);
+					console.log("Utente già presente del database");
 					return
 				}
 				else{
