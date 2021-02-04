@@ -78,7 +78,7 @@ async function play(message, serverQueue){
 		try {
 			var connection = await voiceChannel.join();	//connessione al canale vocale dell'utente che invia il messaggio
 			queueContruct.connection = connection;			
-			start(message.guild, queueContruct.songs[0],message.member.user.name);	//starata la prima canzone in coda
+			start(message.guild, queueContruct.songs[0],message.member.user.username);	//starata la prima canzone in coda
 		} catch (err) {
 			console.log(err.stack);
 			queue.delete(message.guild.id);
@@ -91,7 +91,7 @@ async function play(message, serverQueue){
 
 		const messaggioAggiuntaCoda = new Discord.MessageEmbed();
 		messaggioAggiuntaCoda.setTitle(lingua.songAddQueue);
-		messaggioAggiuntaCoda.setDescription("[@"+message.member.user.name+"]");
+		messaggioAggiuntaCoda.setDescription("[@"+message.member.user.username+"]");
 		messaggioAggiuntaCoda.addFields({
 		name: song.title,value:" "+song.url}
 		);
@@ -102,7 +102,7 @@ async function play(message, serverQueue){
 }
 
 //starta la canzona
-function start(guild, song, user) {
+function start(guild, song, username) {
 	var serverQueue = queue.get(guild.id);
 	if (!song) {
 	  serverQueue.voiceChannel.leave();
@@ -124,7 +124,7 @@ function start(guild, song, user) {
 
 	const messaggioRiproduzione = new Discord.MessageEmbed();
 	messaggioRiproduzione.setTitle(lingua.startPlay);
-	messaggioRiproduzione.setDescription("[@"+user+"]");
+	messaggioRiproduzione.setDescription("[@"+username+"]");
 	messaggioRiproduzione.addFields({
 		name: song.title,value:" "+song.url}
 		);
