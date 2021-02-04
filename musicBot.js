@@ -93,7 +93,7 @@ async function play(message, serverQueue){
 		messaggioAggiuntaCoda.setTitle(lingua.songAddQueue);
 		messaggioAggiuntaCoda.setDescription("[ @"+message.member.user.username+" ]");
 		messaggioAggiuntaCoda.addFields({
-		name: song.title,value:" "+song.url+ "[ @"+message.member.user.username+" ]"}
+		name: song.title,value:" "+song.url}
 		);
 
 		return message.reply(messaggioAggiuntaCoda);
