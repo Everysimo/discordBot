@@ -65,10 +65,11 @@ exports.createPlayListDB = function (id, nome){
 		var sql= `Insert Into playlist (nome,utente) Values ('${nome}','${id}')`;
 		db.query(sql, function (err) {
 			db.release();
-			if(err.code.match('ER_DUP_ENTRY')){
-				console.log("PlayList già esistente");
-			}
+			
 			if(err){
+				if(err.code.match('ER_DUP_ENTRY')){
+					console.log("PlayList già esistente");
+				}
 				console.log("errore durante l'inserimento di una nuova playlist");
 				return
 			}
