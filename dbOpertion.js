@@ -59,7 +59,7 @@ exports.aggiornaSaldo = function (nuovoSaldo,id){
 	});
 }
 
-exports.cretePlayListDB = function (id, nome){
+exports.createPlayListDB = function (id, nome){
 	dbpool.getConnection((err, db) => {
 		if(err){
 			console.log(err.message);

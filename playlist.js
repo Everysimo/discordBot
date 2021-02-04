@@ -8,7 +8,7 @@ exports.createPlaylist = function (message) {
         const nomePl=message.content.split(" ")[1];
         const id=message.member.user.id;
         try {
-            db.cretePlayListDB(id, nomePl);
+            db.createPlayListDB(id, nomePl);
         } catch (error) {
             message.reply("playlist gia presente")
         }

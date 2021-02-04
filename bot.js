@@ -142,7 +142,7 @@ comandi.set("rmsongpl",playlist.removeSongFromPL);
 comandi.set("slot",gameRoom.slot);
 comandi.set("signin",signIn);
 comandi.set("coinflip",gameRoom.coinflip);
-comandi.set("creaplaylist",playlist.createPlaylist);
+comandi.set("creapl",playlist.createPlaylist);
 comandi.set("join",join);
 comandi.set("help",help);
 comandi.set("saldo",getSaldo);
