@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const config = require('./config.json');
 const ytdl = require('ytdl-core');
-var lingua =require(config.lingua);
+const lingua =require(config.lingua);
 const mysql = require('mysql');
 
 //quando il nuovo cliente è pronto esegue log
@@ -92,7 +92,7 @@ async function play(message, serverQueue){
 		const messaggioAggiuntaCoda = new Discord.MessageEmbed();
 		messaggioAggiuntaCoda.setTitle(lingua.songAddQueue);
 		messaggioAggiuntaCoda.addFields({
-		nome: song.title,value:" "+song.url}
+		name: song.title,value:" "+song.url}
 		);
 
 		return message.reply(messaggioAggiuntaCoda);
@@ -124,7 +124,7 @@ function start(guild, song) {
 	const messaggioRiproduzione = new Discord.MessageEmbed();
 	messaggioRiproduzione.setTitle(lingua.startPlay);
 	messaggioRiproduzione.addFields({
-		nome: song.title,value:" "+song.url}
+		name: song.title,value:" "+song.url}
 		);
 
 	return serverQueue.textChannel.send(messaggioRiproduzione);
