@@ -138,7 +138,7 @@ comandiMusicali.set("setvolume",musica.setvolume);
 //mappa comandi non musicali
 let comandi =new Map();
 comandi.set("addsongpl",playlist.addSongToPL);
-comandi.set("rmsongpl",playlist.removeSongToPL);
+comandi.set("rmsongpl",playlist.removeSongFromPL);
 comandi.set("slot",gameRoom.slot);
 comandi.set("signin",signIn);
 comandi.set("coinflip",gameRoom.coinflip);
