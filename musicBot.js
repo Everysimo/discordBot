@@ -91,6 +91,7 @@ async function play(message, serverQueue){
 
 		const messaggioAggiuntaCoda = new Discord.MessageEmbed();
 		messaggioAggiuntaCoda.setTitle(lingua.songAddQueue);
+		messaggioAggiuntaCoda.setDescription("["+message.user.name+"]");
 		messaggioAggiuntaCoda.addFields({
 		name: song.title,value:" "+song.url}
 		);
@@ -123,6 +124,7 @@ function start(guild, song) {
 
 	const messaggioRiproduzione = new Discord.MessageEmbed();
 	messaggioRiproduzione.setTitle(lingua.startPlay);
+	messaggioRiproduzione.setDescription("["+guild.message.user.name+"]");
 	messaggioRiproduzione.addFields({
 		name: song.title,value:" "+song.url}
 		);
