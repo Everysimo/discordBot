@@ -114,7 +114,7 @@ exports.addSong = function (id, url, nomePlaylist){
 					db.query(sql, function (err) {
 						if(err){
 							if(err.code.match('ER_DUP_ENTRY')){
-								console.log("Canzone già presente nel database\n");
+								console.log("Canzone già presente nel database");
 								return
 							}
 							else{
@@ -125,7 +125,7 @@ exports.addSong = function (id, url, nomePlaylist){
 					});
 				}
 				else{
-					console.log("errore durante aggiunzione di una canzone\n");
+					console.log("errore durante aggiunzione di una canzone");
 					return
 				}
 				
