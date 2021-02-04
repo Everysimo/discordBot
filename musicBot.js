@@ -21,6 +21,7 @@ const pm=config.prefissoMusica;
 //login nel server tramite token
 client.login(process.env.tokenBotDiscord);
 
+<<<<<<< Updated upstream
 //funzioni per commandi
 async function play(message, serverQueue){
 	const args = message.content.split(" ");			//input argomento 
@@ -134,6 +135,116 @@ function stop(message, serverQueue) {
 		return message.reply(lingua.notSong);
 	serverQueue.songs = [];
 	serverQueue.connection.dispatcher.end();
+=======
+//genera una slot 
+function slot(message){
+	const id=message.member.user.id;
+	db.saldoGiocatore(id,function(saldo){
+		var importo=parseInt(message.content.split(" ")[1]);
+		if (!isNaN(importo) && importo > 0) {
+			if (verificaSaldo(importo,saldo)) {
+				const slotList=new Array();
+				for (let index = 0; index < config.slotItem.length; index++) {
+					slotList.push(Math.floor(Math.random() * config.slotItem.length));
+				}
+				const elementoIniziale=slotList[0];
+				var vinto=true;
+				slotList.forEach(element => {
+					if (!(elementoIniziale===element)) {
+						vinto=false;
+					}
+				});
+				const risultato = new Discord.MessageEmbed()
+				risultato.setTitle('Slot Machine');
+				for (let index = 0; index < slotList.length; index++) {
+					risultato.addFields(
+						{ name: 'Slot '+index, value: config.slotItem[slotList[index]] , inline: true },
+					);
+				}
+				if (vinto) {
+					db.aggiornaSaldo(saldo+(importo*9),id);
+					risultato.addFields(
+						{ name: lingua.win, value: importo*9+' coin' },
+					);
+					risultato.setColor("#00ff37");
+				}else{
+					db.aggiornaSaldo(saldo-importo,id);
+					risultato.addFields(
+						{ name: lingua.lose, value: importo+' coin' },
+					);
+					risultato.setColor("#f50505");
+				}
+				message.channel.send(risultato);
+			}else{
+				message.reply("non hai abbastanza coin");
+			}
+		}else{
+			message.reply("importo non valito");
+		}
+	});	
+}
+
+//lancio moneta testa o croce
+function coinflip(message){
+	const m=message.content.split(" ")[1];
+	const id=message.member.user.id;
+	db.saldoGiocatore(id,function(saldo){
+		var importo=parseInt(message.content.split(" ")[2]);
+		if (!isNaN(importo) && importo > 0) {
+			if (verificaSaldo(importo,saldo)) {
+				var testa;
+				var win;
+				const risultato = new Discord.MessageEmbed();
+				risultato.setTitle('coin flip');
+				switch (Math.floor(Math.random() * 2)) {
+					case 0:
+						testa=true;
+						risultato.setImage("https://upload.wikimedia.org/wikipedia/it/d/de/1_%E2%82%AC_Italia.jpg");
+						break;
+					case 1:
+						testa=false;
+						risultato.setImage("https://upload.wikimedia.org/wikipedia/it/0/06/1_%E2%82%AC_2007.jpg");
+						break;
+				}
+				if(m==="testa"||m==="t"){
+					if (testa) {
+						win=true;
+					}else{
+						win=false;
+					}
+				}else if(m==="croce"||m==="c"){
+					if (testa) {
+						win=false;
+					}else{
+						win=true;
+					}
+				}else{
+					message.reply(lingua.notSelect);
+					return;
+				}
+				if (win) {
+					db.aggiornaSaldo(saldo+(importo*2),id);
+					risultato.addFields(
+						{ name: lingua.win, value: importo*2+' coin' },
+					);
+					risultato.setColor("#00ff37");
+				}else{
+					db.aggiornaSaldo(saldo-importo,id);
+					risultato.addFields(
+						{ name: lingua.lose, value: importo+' coin' },
+					);
+					risultato.setColor("#f50505");
+				}
+				message.channel.send(risultato);
+			}else{
+				message.reply("non hai abbastanza coin");
+			}
+		}else{
+			message.reply("importo non valito");
+		}
+	});
+
+>>>>>>> Stashed changes
 }
 
 //il bot join nel canale vocale del mittente del messaggio
@@ -157,57 +268,6 @@ async function join(message){
 			}
 		}
 	}
-}
-
-//aumentare volume di n della canzone in riproduzione
-function volumeUp(message,serverQueue){
-	const q = message.content.split(" ")[1];
-	if (!message.member.voice.channel)
-		return message.reply(lingua.voiceChannelNotFound);
-	if (!serverQueue)
-		return message.reply(lingua.notSong);
-		var volume=parseInt(q);
-	if (isNaN(volume)) {
-		volume = 1;
-	}else{
-		serverQueue.volume=serverQueue.volume+volume;
-	}
-	serverQueue.connection.dispatcher.setVolume(serverQueue.volume / 100);
-	message.channel.send("volume alzato di "+volume);
-}
-
-//abbassare volume di n della canzone in riproduzione
-function volumeDown(message,serverQueue){
-	const q = message.content.split(" ")[1];
-	if (!message.member.voice.channel)
-		return message.reply(lingua.voiceChannelNotFound);
-	if (!serverQueue)
-		return message.reply(lingua.notSong);
-	var volume=parseInt(q);
-	if (isNaN(volume)) {
-		volume = 1;
-	}else{
-		serverQueue.volume=serverQueue.volume-volume;
-	}
-	serverQueue.connection.dispatcher.setVolume(serverQueue.volume / 100);
-	message.channel.send("volume abbassato di "+volume);
-}
-
-//settare volume di n della canzone in riproduzione
-function setvolume(message,serverQueue){
-	const q = message.content.split(" ")[1];
-	if (!message.member.voice.channel)
-		return message.reply(lingua.voiceChannelNotFound);
-	if (!serverQueue)
-		return message.reply(lingua.notSong);
-	var volume=parseInt(q);
-	if (isNaN(volume)) {
-		volume = serverQueue.volume;
-	}else{
-		serverQueue.volume=volume;
-	}
-	serverQueue.connection.dispatcher.setVolume(serverQueue.volume / 100);
-	message.channel.send("volume settato a "+volume);
 }
 
 //stampa la lista dei comandi disponibili
