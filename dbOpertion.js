@@ -65,7 +65,25 @@ exports.cretePlayListDB = function (id, nome){
 		db.query(sql, function (err) {
 			db.release();
 			if(err){
-				console.log("errore durante l'aggiornamento del saldo",err);
+				console.log("errore durante l'inserimento di una nuova playlist",err);
+				return
+			}
+		});if(err.code.match('ER_DUP_ENTRY')){
+			throw err;
+		}else if(err){
+			console.log(err.message);
+			return
+		}
+	});
+}
+
+exports.removeSongFromPlBD = function (id, url, nomePlaylist){
+	dbpool.getConnection((err, db) => {
+		var sql= `remove from contenuto where  ('${url}','${id}',${nomePlaylist}')`;
+		db.query(sql, function (err) {
+			db.release();
+			if(err){
+				console.log("errore durante l'aliminazione della canzone",err);
 				return
 			}
 		});
@@ -76,17 +94,47 @@ exports.cretePlayListDB = function (id, nome){
 	});
 }
 
-exports.removeSongFromPlBD = function (id,Url){
+exports.addSong = function (id, url, nomePlaylist){
 	dbpool.getConnection((err, db) => {
-		var sql= `remove from contenuto where  ('${nome}','${id}')`;
+		var sql= `Insert Into song Values ('${url}')`;
 		db.query(sql, function (err) {
 			db.release();
 			if(err){
-				console.log("errore durante l'aggiornamento del saldo",err);
+				console.log("errore durante aggiunzione di una canzone",err);
 				return
 			}
 		});
-		if(err){
+		if(err.code.match('ER_DUP_ENTRY')){
+			sql= `Insert Into contenuto Values ('${url}','${id}','${nomePlaylist}')`;
+			db.query(sql, function (err) {
+				db.release();
+				if(err){
+					console.log("errore durante aggiunzione di una canzone alla playlist",err);
+					return
+				}
+			});
+			if(err.code.match('ER_DUP_ENTRY')){
+				throw err;
+			}else if(err){
+				console.log(err.message);
+				return
+			}
+		}
+		else if(err){
+			console.log(err.message);
+			return
+		}
+		sql= `Insert Into contenuto Values ('${url}','${id}','${nomePlaylist}')`;
+		db.query(sql, function (err) {
+			db.release();
+			if(err){
+				console.log("errore durante aggiunzione di una canzone alla playlist",err);
+				return
+			}
+		});
+		if(err.code.match('ER_DUP_ENTRY')){
+			throw err;
+		}else if(err){
 			console.log(err.message);
 			return
 		}
