@@ -65,6 +65,7 @@ exports.play= async function (message, serverQueue){
 		messaggioAggiuntaCoda.addFields({
 		name: song.title,value:" "+song.url}
 		);
+		messaggioAggiuntaCoda.setAuthor(message.member.user.username , null, message.author.displayAvatarURL)
 		return message.reply(messaggioAggiuntaCoda);
 		//return message.reply(song.title +" "+ lingua.songAddQueue)
 	}
