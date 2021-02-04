@@ -418,20 +418,20 @@ function roulette(message){
 				const resultNumeber = Math.floor(Math.random() * 36);
 				if(numeriRossi.includes(resultNumeber)){
 					gioco.addFields(
-						{ name: "Numero fortunato: ", value: resultNumeber +"Rosso"},
+						{ name: "Numero fortunato: ", value: resultNumeber +" Rosso"},
 					);
 				}
 				if(numeriNeri.includes(resultNumeber)){
 					gioco.addFields(
-						{ name: "Numero fortunato: ", value: resultNumeber + "Nero" },
+						{ name: "Numero fortunato: ", value: resultNumeber + " Nero" },
 					);
 				}
 				if(resultNumeber===0){
 					gioco.addFields(
-						{ name: "Numero fortunato: ", value: resultNumeber + "Verde"},
+						{ name: "Numero fortunato: ", value: resultNumeber + " Verde"},
 					);
 				}
-				
+
 				message.channel.send(gioco);
 				
 				//giocata colore rosso
