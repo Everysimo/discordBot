@@ -70,7 +70,7 @@ exports.createPlayListDB = function (id, nome){
 		db.query(sql, function (err) {
 			db.release();
 			if(err.code.match('ER_DUP_ENTRY')){
-				throw err;
+				console.log("PlayList già esistente");
 			}
 			if(err){
 				console.log("errore durante l'inserimento di una nuova playlist");
