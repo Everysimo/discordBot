@@ -114,13 +114,10 @@ exports.addSong = function (id, url, nomePlaylist){
 						console.log("errore durante aggiunzione di una canzone alla playlist",err);
 						return
 					}
+					if(err.code.match('ER_DUP_ENTRY')){
+						throw err;
+					}
 				});
-				if(err.code.match('ER_DUP_ENTRY')){
-					throw err;
-				}else if(err){
-					console.log(err.message);
-					return
-				}
 			}
 		});
 		if(err){
