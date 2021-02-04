@@ -161,7 +161,7 @@ function slot(message){
 					);
 				}
 				if (vinto) {
-					db.db.aggiornaSaldo(saldo+(importo*9),id);
+					db.aggiornaSaldo(saldo+(importo*9),id);
 					risultato.addFields(
 						{ name: lingua.win, value: importo*9+' coin' },
 					);
