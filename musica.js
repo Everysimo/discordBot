@@ -30,7 +30,8 @@ exports.play= async function (message, serverQueue){
 	var song = {
     	title: songInfo.videoDetails.title,
 		url: songInfo.videoDetails.video_url,
-		isLive: songInfo.videoDetails.isLiveContent
+		isLive: songInfo.videoDetails.isLiveContent,
+		username: message.member.user.username,
 	};
 
 	if (!serverQueue) {					//se la coda delle canzoni è vuota
@@ -47,7 +48,7 @@ exports.play= async function (message, serverQueue){
 		try {
 			var connection = await voiceChannel.join();	//connessione al canale vocale dell'utente che invia il messaggio
 			queueContruct.connection = connection;			
-			start(message.guild, queueContruct.songs[0],message.member.user.username);	//starata la prima canzone in coda
+			start(message.guild, queueContruct.songs[0]);	//starata la prima canzone in coda
 		} catch (err) {
 			console.log(err.stack);
 			queue.delete(message.guild.id);
@@ -70,7 +71,7 @@ exports.play= async function (message, serverQueue){
 	}
 }
 //starta la canzona
-function start(guild, song, username) {
+function start(guild, song) {
 	var serverQueue = queue.get(guild.id);
 	if (!song) {
 	  serverQueue.voiceChannel.leave();
@@ -92,7 +93,7 @@ function start(guild, song, username) {
 
 	const messaggioRiproduzione = new Discord.MessageEmbed();
 	messaggioRiproduzione.setTitle(lingua.startPlay);
-	messaggioRiproduzione.setDescription("[ @"+username+" ]");
+	messaggioRiproduzione.setDescription("[ @"+song.username+" ]");
 	messaggioRiproduzione.addFields({
 		name: song.title,value:" "+song.url}
 		);
