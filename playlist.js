@@ -6,7 +6,9 @@ const db=require("./dbOpertion.js");
 exports.createPlaylist = function (message) {
     if(!message.member.user.bot){
         const nomePl=message.content.split(" ")[1];
-    	const id=message.member.user.id;
+        const id=message.member.user.id;
+        
+        db.cretePlayListDB(id, nomePl);
     }
 }
 

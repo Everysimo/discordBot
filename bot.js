@@ -5,6 +5,7 @@ const lingua =require(config.lingua);
 const db=require("./dbOpertion.js");
 const gameRoom=require("./gameRoom.js")
 const musica=require("./musica.js")
+const playlist=require("./playlist.js")
 db.dbConnect();
 
 //quando il nuovo cliente è pronto esegue log
@@ -139,6 +140,7 @@ let comandi =new Map();
 comandi.set("slot",gameRoom.slot);
 comandi.set("signin",signIn);
 comandi.set("coinflip",gameRoom.coinflip);
+comandi.set("creaplaylist",playlist.createPlaylist);
 comandi.set("join",join);
 comandi.set("help",help);
 comandi.set("saldo",getSaldo);

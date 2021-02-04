@@ -58,3 +58,20 @@ exports.aggiornaSaldo = function (nuovoSaldo,id){
 		}
 	});
 }
+
+exports.cretePlayListDB = function (id, nome){
+	dbpool.getConnection((err, db) => {
+		var sql= `Insert Into playlist (nome,utente) Values ('${nome}','${id}')`;
+		db.query(sql, function (err) {
+			db.release();
+			if(err){
+				console.log("errore durante l'aggiornamento del saldo",err);
+				return
+			}
+		});
+		if(err){
+			console.log(err.message);
+			return
+		}
+	});
+}
