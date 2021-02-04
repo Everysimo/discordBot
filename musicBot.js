@@ -144,9 +144,6 @@ comandi.set("help",help);
 comandi.set("saldo",getSaldo);
 comandi.set("roulette",gameRoom.roulette());
 
-//coda di riproduzione
-const queue = new Map();
-
 //gestore ricezione messaggi
 client.on("message", message => {
 	//se l'autore del messaggio è un bot ignora
