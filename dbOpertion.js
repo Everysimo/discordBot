@@ -102,22 +102,22 @@ exports.addSong = function (id, url, nomePlaylist){
 		var sql= `Insert Into song Values ('${url}')`;
 		db.query(sql, function (err) {
 			db.release();
-			if(err){
-				console.log("errore durante aggiunzione di una canzone",err);
-				return
-			}
 			if(err.code.match('ER_DUP_ENTRY')){
 				sql= `Insert Into contenuto Values ('${url}','${id}','${nomePlaylist}')`;
 				db.query(sql, function (err) {
 					db.release();
+					if(err.code.match('ER_DUP_ENTRY')){
+						throw err;
+					}
 					if(err){
 						console.log("errore durante aggiunzione di una canzone alla playlist",err);
 						return
 					}
-					if(err.code.match('ER_DUP_ENTRY')){
-						throw err;
-					}
 				});
+			}
+			if(err){
+				console.log("errore durante aggiunzione di una canzone",err);
+				return
 			}
 		});
 		if(err){
@@ -127,12 +127,12 @@ exports.addSong = function (id, url, nomePlaylist){
 		sql= `Insert Into contenuto Values ('${url}','${id}','${nomePlaylist}')`;
 		db.query(sql, function (err) {
 			db.release();
+			if(err.code.match('ER_DUP_ENTRY')){
+				throw err;
+			}
 			if(err){
 				console.log("errore durante aggiunzione di una canzone alla playlist",err);
 				return
-			}
-			if(err.code.match('ER_DUP_ENTRY')){
-				throw err;
 			}
 		});
 		if(err){
