@@ -88,7 +88,7 @@ exports.removeSongFromPlBD = function (id, url, nomePlaylist){
 			return
 		}
 
-		var sql= `remove from contenuto where song='${url}' and playlist_utente='${id}' and playlist_nome='${nomePlaylist}'`;
+		var sql= `delete from contenuto where song='${url}' and playlist_utente='${id}' and playlist_nome='${nomePlaylist}'`;
 		db.query(sql, function (err) {
 			db.release();
 			if(err){
