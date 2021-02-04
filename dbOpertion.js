@@ -27,7 +27,7 @@ exports.saldoGiocatore = function (id,saldo) {
 		db.query(sql, function (err,result) {
 			db.release();
 			if(err){
-				console.log("errore nel caricamento del tuo saldo",err);
+				console.log("errore nel caricamento del tuo saldo");
 				return
 			}
 			else{
@@ -52,7 +52,7 @@ exports.aggiornaSaldo = function (nuovoSaldo,id){
 		db.query(sql, function (err) {
 			db.release();
 			if(err){
-				console.log("errore durante l'aggiornamento del saldo",err);
+				console.log("errore durante l'aggiornamento del saldo");
 				return
 			}
 		});
@@ -73,7 +73,7 @@ exports.cretePlayListDB = function (id, nome){
 				throw err;
 			}
 			if(err){
-				console.log("errore durante l'inserimento di una nuova playlist",err);
+				console.log("errore durante l'inserimento di una nuova playlist");
 				return
 			}
 			
@@ -92,7 +92,7 @@ exports.removeSongFromPlBD = function (id, url, nomePlaylist){
 		db.query(sql, function (err) {
 			db.release();
 			if(err){
-				console.log("errore durante l'eliminazione della canzone",err);
+				console.log("errore durante l'eliminazione della canzone");
 				return
 			}
 		});
@@ -109,17 +109,16 @@ exports.addSong = function (id, url, nomePlaylist){
 
 		var sql= `Insert Into song Values ('${url}')`;
 		db.query(sql, function (err) {
-
 			if(err.code.match('ER_DUP_ENTRY')){
 				sql= `Insert Into contenuto Values ('${url}','${id}','${nomePlaylist}')`;
 				db.query(sql, function (err) {
 					db.release();
 					if(err.code.match('ER_DUP_ENTRY')){
-						console.log("Canzone già presente nella PlayList\n",err);
+						console.log("Canzone già presente nella PlayList\n");
 						return
 					}
 					if(err){
-						console.log("errore durante aggiunzione di una canzone alla playlist\n",err);
+						console.log("errore durante aggiunzione di una canzone alla playlist\n");
 						return
 					}
 				});
@@ -133,11 +132,11 @@ exports.addSong = function (id, url, nomePlaylist){
 		db.query(sql, function (err) {
 			db.release();
 			if(err.code.match('ER_DUP_ENTRY')){
-				console.log("Canzone già presente nella PlayList\n",err);
+				console.log("Canzone già presente nella PlayList");
 				return
 			}
 			if(err){
-				console.log("errore durante aggiunzione di una canzone alla playlist",err);
+				console.log("errore durante aggiunzione di una canzone alla playlist");
 				return
 			}
 		});
