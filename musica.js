@@ -31,7 +31,7 @@ exports.play= async function (message, serverQueue){
     	title: songInfo.videoDetails.title,
 		url: songInfo.videoDetails.video_url,
 		isLive: songInfo.videoDetails.isLiveContent,
-		username: message.member.user.username,
+		username: message.member.user.tag,
 	};
 
 	if (!serverQueue) {					//se la coda delle canzoni è vuota
@@ -61,7 +61,7 @@ exports.play= async function (message, serverQueue){
 
 		const messaggioAggiuntaCoda = new Discord.MessageEmbed();
 		messaggioAggiuntaCoda.setTitle(lingua.songAddQueue);
-		messaggioAggiuntaCoda.setDescription("[ @"+message.member.user.username+" ]");
+		messaggioAggiuntaCoda.setDescription("[ @"+message.member.user.tag+" ]");
 		messaggioAggiuntaCoda.addFields({
 		name: song.title,value:" "+song.url}
 		);
