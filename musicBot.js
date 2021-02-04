@@ -127,22 +127,22 @@ function getSaldo(message){
 
 //mappa che collega il commando a una funzione
 let comandiMusicali =new Map();
-comandiMusicali.set("play",musica.play());
-comandiMusicali.set("skip",musica.skip());
-comandiMusicali.set("stop",musica.stop());
-comandiMusicali.set("volumeup",musica.volumeUp());
-comandiMusicali.set("volumedown",musica.volumeDown());
-comandiMusicali.set("setvolume",musica.setvolume());
+comandiMusicali.set("play",musica.play);
+comandiMusicali.set("skip",musica.skip);
+comandiMusicali.set("stop",musica.stop);
+comandiMusicali.set("volumeup",musica.volumeUp);
+comandiMusicali.set("volumedown",musica.volumeDown);
+comandiMusicali.set("setvolume",musica.setvolume);
 
 //mappa comandi non musicali
 let comandi =new Map();
-comandi.set("slot",gameRoom.slot());
+comandi.set("slot",gameRoom.slot);
 comandi.set("signin",signIn);
-comandi.set("coinflip",gameRoom.coinflip());
+comandi.set("coinflip",gameRoom.coinflip);
 comandi.set("join",join);
 comandi.set("help",help);
 comandi.set("saldo",getSaldo);
-comandi.set("roulette",gameRoom.roulette());
+comandi.set("roulette",gameRoom.roulette);
 
 //coda di riproduzione
 const queue = new Map();
