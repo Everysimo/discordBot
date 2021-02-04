@@ -70,8 +70,10 @@ exports.createPlayListDB = function (id, nome){
 				if(err.code.match('ER_DUP_ENTRY')){
 					console.log("PlayList già esistente");
 				}
-				console.log("errore durante l'inserimento di una nuova playlist");
-				return
+				else{
+					console.log("errore durante l'inserimento di una nuova playlist");
+					return
+				}
 			}
 			
 		});
@@ -106,34 +108,42 @@ exports.addSong = function (id, url, nomePlaylist){
 
 		var sql= `Insert Into song Values ('${url}')`;
 		db.query(sql, function (err) {
-			if(err.code.match('ER_DUP_ENTRY')){
-				sql= `Insert Into contenuto Values ('${url}','${id}','${nomePlaylist}')`;
-				db.query(sql, function (err) {
-					if(err.code.match('ER_DUP_ENTRY')){
-						console.log("Canzone già presente nella PlayList\n");
-						return
-					}
-					if(err){
-						console.log("errore durante aggiunzione di una canzone alla playlist\n");
-						return
-					}
-				});
-			}
 			if(err){
-				console.log("errore durante aggiunzione di una canzone\n");
-				return
+				if(err.code.match('ER_DUP_ENTRY')){
+					sql= `Insert Into contenuto Values ('${url}','${id}','${nomePlaylist}')`;
+					db.query(sql, function (err) {
+						if(err){
+							if(err.code.match('ER_DUP_ENTRY')){
+								console.log("Canzone già presente nella PlayList\n");
+								return
+							}
+							else{
+								console.log("errore durante aggiunzione di una canzone alla playlist\n");
+								return
+							}
+						}
+					});
+				}
+				else{
+					console.log("errore durante aggiunzione di una canzone\n");
+					return
+				}
+				
 			}
 		});
 		sql= `Insert Into contenuto Values ('${url}','${id}','${nomePlaylist}')`;
 		db.query(sql, function (err) {
 			db.release();
-			if(err.code.match('ER_DUP_ENTRY')){
-				console.log("Canzone già presente nella PlayList");
-				return
-			}
+
 			if(err){
-				console.log("errore durante aggiunzione di una canzone alla playlist");
-				return
+				if(err.code.match('ER_DUP_ENTRY')){
+					console.log("Canzone già presente nella PlayList");
+					return
+				}
+				else{
+					console.log("errore durante aggiunzione di una canzone alla playlist");
+					return
+				}
 			}
 		});
 		if(err){
