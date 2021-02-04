@@ -5,7 +5,7 @@ const ytdl = require('ytdl-core');
 const lingua =require(config.lingua);
 const db=require("./dbOpertion");
 const gameRoom=require("./gameRoom")
-
+const musica=require("./musica")
 db.dbConnect();
 
 //quando il nuovo cliente è pronto esegue log
@@ -128,12 +128,12 @@ function getSaldo(message){
 
 //mappa che collega il commando a una funzione
 let comandiMusicali =new Map();
-comandiMusicali.set("play",play);
-comandiMusicali.set("skip",skip);
-comandiMusicali.set("stop",stop);
-comandiMusicali.set("volumeup",volumeUp);
-comandiMusicali.set("volumedown",volumeDown);
-comandiMusicali.set("setvolume",setvolume);
+comandiMusicali.set("play",musica.play());
+comandiMusicali.set("skip",musica.skip());
+comandiMusicali.set("stop",musica.stop());
+comandiMusicali.set("volumeup",musica.volumeUp());
+comandiMusicali.set("volumedown",musica.volumeDown());
+comandiMusicali.set("setvolume",musica.setvolume());
 
 //mappa comandi non musicali
 let comandi =new Map();
