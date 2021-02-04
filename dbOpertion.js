@@ -82,11 +82,11 @@ exports.cretePlayListDB = function (id, nome){
 
 exports.removeSongFromPlBD = function (id, url, nomePlaylist){
 	dbpool.getConnection((err, db) => {
-		var sql= `remove from contenuto where  ('${url}','${id}',${nomePlaylist}')`;
+		var sql= `remove from contenuto where  song='${url}' and playlist_utente='${id}' and playlist_nome=${nomePlaylist}`;
 		db.query(sql, function (err) {
 			db.release();
 			if(err){
-				console.log("errore durante l'aliminazione della canzone",err);
+				console.log("errore durante l'eliminazione della canzone",err);
 				return
 			}
 		});
