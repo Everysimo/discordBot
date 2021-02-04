@@ -357,8 +357,8 @@ function signIn(message){
 			
 			db.query(sql, function (err) {
 				db.release();
-				if(err){
-					console.log(err.message);
+				if(err.code.match('ER_DUP_ENTRY')){
+					console.log("Utente già presente del database",err);
 					return
 				}
 				else{
@@ -373,11 +373,6 @@ function signIn(message){
 					message.channel.send(messaggioConferma);
 				}
 			});
-
-			if(err.code.match('ER_DUP_ENTRY')){
-				console.log("Utente già presente del database",err);
-				return
-			}
 			
 			if(err){
 				console.log("Errore durante la connessione al DataBase",err);
