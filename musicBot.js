@@ -90,9 +90,9 @@ async function play(message, serverQueue){
 		serverQueue.songs.push(song);
 
 		const messaggioAggiuntaCoda = new Discord.MessageEmbed();
-		messaggioAggiuntaCoda.setTitle('Aggiunta alla coda');
+		messaggioAggiuntaCoda.setTitle(lingua.songAddQueue);
 		messaggioAggiuntaCoda.addFields({
-		nome: lingua.songAddQueue,value:" "+song.title}
+		nome: song.title,value:" "+song.url}
 		);
 
 		return message.reply(messaggioAggiuntaCoda);
@@ -122,9 +122,9 @@ function start(guild, song) {
 	dispatcher.setVolume(serverQueue.volume / 100);
 
 	const messaggioRiproduzione = new Discord.MessageEmbed();
-	messaggioRiproduzione.setTitle('In Riproduzione');
+	messaggioRiproduzione.setTitle(lingua.startPlay);
 	messaggioRiproduzione.addFields({
-		nome: lingua.startPlay,value:" "+song.title}
+		nome: song.title,value:" "+song.url}
 		);
 
 	return serverQueue.textChannel.send(messaggioRiproduzione);
