@@ -21,7 +21,7 @@ exports.addSongToPL = function (message) {
         const songUrl=message.content.split(" ")[2];
         const id=message.member.user.id;
         try {
-            db.addSong(id,nomePl,songUrl)
+            db.addSong(id,songUrl,nomePl)
         } catch (error) {
             message.reply("canzone gia presente nella playlist")
         }
@@ -33,7 +33,7 @@ exports.removeSongFromPL = function (message) {
         const nomePl=message.content.split(" ")[1];
         const songUrl=message.content.split(" ")[2];
         const id=message.member.user.id;
-        db.removeSongFromPlBD(id,nomePl,songUrl)
+        db.removeSongFromPlBD(id,songUrl,nomePl)
     }
 }
 
