@@ -78,7 +78,7 @@ async function play(message, serverQueue){
 		try {
 			var connection = await voiceChannel.join();	//connessione al canale vocale dell'utente che invia il messaggio
 			queueContruct.connection = connection;			
-			start(message.guild, queueContruct.songs[0]);	//starata la prima canzone in coda
+			start(message.guild, queueContruct.songs[0],message.user.name);	//starata la prima canzone in coda
 		} catch (err) {
 			console.log(err.stack);
 			queue.delete(message.guild.id);
@@ -102,7 +102,7 @@ async function play(message, serverQueue){
 }
 
 //starta la canzona
-function start(guild, song) {
+function start(guild, song, user) {
 	var serverQueue = queue.get(guild.id);
 	if (!song) {
 	  serverQueue.voiceChannel.leave();
@@ -124,7 +124,7 @@ function start(guild, song) {
 
 	const messaggioRiproduzione = new Discord.MessageEmbed();
 	messaggioRiproduzione.setTitle(lingua.startPlay);
-	messaggioRiproduzione.setDescription("[@"+guild.message.user.name+"]");
+	messaggioRiproduzione.setDescription("[@"+user+"]");
 	messaggioRiproduzione.addFields({
 		name: song.title,value:" "+song.url}
 		);
