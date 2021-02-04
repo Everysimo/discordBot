@@ -101,7 +101,7 @@ exports.addSong = function (id, url, nomePlaylist){
 	dbpool.getConnection((err, db) => {
 		var sql= `Insert Into song Values ('${url}')`;
 		db.query(sql, function (err) {
-			db.release();
+			
 			if(err.code.match('ER_DUP_ENTRY')){
 				sql= `Insert Into contenuto Values ('${url}','${id}','${nomePlaylist}')`;
 				db.query(sql, function (err) {
