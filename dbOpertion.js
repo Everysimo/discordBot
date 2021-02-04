@@ -44,6 +44,10 @@ exports.saldoGiocatore = function (id,saldo) {
 
 exports.aggiornaSaldo = function (nuovoSaldo,id){ 
 	dbpool.getConnection((err, db) => {
+		if(err){
+			console.log(err.message);
+			return
+		}
 		var sql= `Update utente set saldo='${nuovoSaldo}' where idutente='${id}'`;
 		db.query(sql, function (err) {
 			db.release();
@@ -52,15 +56,16 @@ exports.aggiornaSaldo = function (nuovoSaldo,id){
 				return
 			}
 		});
-		if(err){
-			console.log(err.message);
-			return
-		}
 	});
 }
 
 exports.cretePlayListDB = function (id, nome){
 	dbpool.getConnection((err, db) => {
+		if(err){
+			console.log(err.message);
+			return
+		}
+
 		var sql= `Insert Into playlist (nome,utente) Values ('${nome}','${id}')`;
 		db.query(sql, function (err) {
 			db.release();
@@ -73,15 +78,16 @@ exports.cretePlayListDB = function (id, nome){
 			}
 			
 		});
-		if(err){
-			console.log(err.message);
-			return
-		}
 	});
 }
 
 exports.removeSongFromPlBD = function (id, url, nomePlaylist){
 	dbpool.getConnection((err, db) => {
+		if(err){
+			console.log(err.message);
+			return
+		}
+
 		var sql= `remove from contenuto where  song='${url}' and playlist_utente='${id}' and playlist_nome=${nomePlaylist}`;
 		db.query(sql, function (err) {
 			db.release();
@@ -90,54 +96,50 @@ exports.removeSongFromPlBD = function (id, url, nomePlaylist){
 				return
 			}
 		});
-		if(err){
-			console.log(err.message);
-			return
-		}
 	});
 }
 
 exports.addSong = function (id, url, nomePlaylist){
 	dbpool.getConnection((err, db) => {
+
+		if(err){
+			console.log(err.message);
+			return
+		}
+
 		var sql= `Insert Into song Values ('${url}')`;
 		db.query(sql, function (err) {
-			
+
 			if(err.code.match('ER_DUP_ENTRY')){
 				sql= `Insert Into contenuto Values ('${url}','${id}','${nomePlaylist}')`;
 				db.query(sql, function (err) {
 					db.release();
 					if(err.code.match('ER_DUP_ENTRY')){
-						throw err;
+						console.log("Canzone già presente nella PlayList\n",err);
+						return
 					}
 					if(err){
-						console.log("errore durante aggiunzione di una canzone alla playlist",err);
+						console.log("errore durante aggiunzione di una canzone alla playlist\n",err);
 						return
 					}
 				});
 			}
 			if(err){
-				console.log("errore durante aggiunzione di una canzone",err);
+				console.log("errore durante aggiunzione di una canzone\n",err);
 				return
 			}
 		});
-		if(err){
-			console.log(err.message);
-			return
-		}
 		sql= `Insert Into contenuto Values ('${url}','${id}','${nomePlaylist}')`;
 		db.query(sql, function (err) {
 			db.release();
 			if(err.code.match('ER_DUP_ENTRY')){
-				throw err;
+				console.log("Canzone già presente nella PlayList\n",err);
+				return
 			}
 			if(err){
 				console.log("errore durante aggiunzione di una canzone alla playlist",err);
 				return
 			}
 		});
-		if(err){
-			console.log(err.message);
-			return
-		}
 	});
 }
