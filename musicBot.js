@@ -88,7 +88,15 @@ async function play(message, serverQueue){
 	else{	//se la coda delle canzoni non è vuota aggiunge la canzone alla coda
 
 		serverQueue.songs.push(song);
-		return message.reply(song.title +" "+ lingua.songAddQueue)
+
+		const messaggioAggiuntaCoda = new Discord.MessageEmbed();
+		messaggioAggiuntaCoda.setTitle('In Riproduzione');
+		messaggioAggiuntaCoda.addFields({
+		nome: lingua.startPlay,value:" "+song.title}
+		);
+
+		return message.reply(messaggioAggiuntaCoda);
+		//return message.reply(song.title +" "+ lingua.songAddQueue)
 	}
 }
 
@@ -112,7 +120,15 @@ function start(guild, song) {
 		}).on("error", error => console.error(error.stack));
 	}
 	dispatcher.setVolume(serverQueue.volume / 100);
-	serverQueue.textChannel.send(lingua.startPlay+" "+song.title);
+
+	const messaggioRiproduzione = new Discord.MessageEmbed();
+	messaggioRiproduzione.setTitle('In Riproduzione');
+	messaggioRiproduzione.addFields({
+		nome: lingua.startPlay,value:" "+song.title}
+		);
+
+	return serverQueue.textChannel.send(messaggioRiproduzione);
+	//serverQueue.textChannel.send(lingua.startPlay+" "+song.title);
 }
 
 //skippa la canzone
@@ -322,7 +338,7 @@ function setvolume(message,serverQueue){
 function help(message){
 	const risultato = new Discord.MessageEmbed();
 	const risultatoComandiMusicali = new Discord.MessageEmbed();
-	risultato.setTitle('DanyBot');
+	risultato.setTitle('HydraBot');
 	risultato.setDescription('Comandi');
 	risultato.addFields(
 		{ name: '!coinflip X value', value: 'prova a vincere dei coin con un lancio di moneta X: (testa,t) (croce,c)', inline:true},

@@ -14,7 +14,6 @@
     "discord.js": "^12.5.1",
     "ffmpeg-static": "^4.2.7",
     "ytdl-core": "^4.4.5",
-    "mysql":"^2.18.1",
-    "longjohn": "^0.2.12"
+    "mysql":"^2.18.1"
   }
 }
