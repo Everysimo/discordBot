@@ -4,7 +4,8 @@ const ytdl = require('ytdl-core');
 const lingua =require(config.lingua);
 
 //coda di riproduzione
-exports.queue = new Map();
+const queue = new Map();
+exports.queue = queue;
 
 exports.play= async function (message, serverQueue){
 	const args = message.content.split(" ");			//input argomento 
