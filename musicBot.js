@@ -3,7 +3,9 @@ const client = new Discord.Client();
 const config = require('./config.json');
 const ytdl = require('ytdl-core');
 const lingua =require(config.lingua);
-const mysql = require('mysql');
+const db=require("./dbOpertion");
+
+db.dbConnect();
 
 //quando il nuovo cliente è pronto esegue log
 client.once('ready', () => {
@@ -17,25 +19,6 @@ const pm=config.prefissoMusica;
 
 //login nel server tramite token
 client.login(process.env.tokenBotDiscord);
-
-//creazione pool di connessione al DataBase
-const dbpool = mysql.createPool({
-	host: process.env.host,
-	user: process.env.user,
-	password: process.env.password,
-	database: process.env.database,
-	port: 3306,
-});
-global.dbpool = dbpool;
-
-//ottenere connessione dall pool ed eseguire connessione
-dbpool.getConnection(function(err){
-	if (err) {
-		console.log(err.stack);
-		throw new Error("Errore durante la connessione al database");
-	}
-	console.log("Database connesso!");
-});
 
 //funzioni per commandi
 async function play(message, serverQueue){
@@ -155,7 +138,7 @@ function stop(message, serverQueue) {
 //genera una slot 
 function slot(message){
 	const id=message.member.user.id;
-	saldoGiocatore(id,function(saldo){
+	db.saldoGiocatore(id,function(saldo){
 		var importo=parseInt(message.content.split(" ")[1]);
 		if (!isNaN(importo) && importo > 0) {
 			if (verificaSaldo(importo,saldo)) {
@@ -178,13 +161,13 @@ function slot(message){
 					);
 				}
 				if (vinto) {
-					aggiornaSaldo(saldo+(importo*9),id);
+					db.db.aggiornaSaldo(saldo+(importo*9),id);
 					risultato.addFields(
 						{ name: lingua.win, value: importo*9+' coin' },
 					);
 					risultato.setColor("#00ff37");
 				}else{
-					aggiornaSaldo(saldo-importo,id);
+					db.aggiornaSaldo(saldo-importo,id);
 					risultato.addFields(
 						{ name: lingua.lose, value: importo+' coin' },
 					);
@@ -204,7 +187,7 @@ function slot(message){
 function coinflip(message){
 	const m=message.content.split(" ")[1];
 	const id=message.member.user.id;
-	saldoGiocatore(id,function(saldo){
+	db.saldoGiocatore(id,function(saldo){
 		var importo=parseInt(message.content.split(" ")[2]);
 		if (!isNaN(importo) && importo > 0) {
 			if (verificaSaldo(importo,saldo)) {
@@ -239,13 +222,13 @@ function coinflip(message){
 					return;
 				}
 				if (win) {
-					aggiornaSaldo(saldo+(importo*2),id);
+					db.aggiornaSaldo(saldo+(importo*2),id);
 					risultato.addFields(
 						{ name: lingua.win, value: importo*2+' coin' },
 					);
 					risultato.setColor("#00ff37");
 				}else{
-					aggiornaSaldo(saldo-importo,id);
+					db.aggiornaSaldo(saldo-importo,id);
 					risultato.addFields(
 						{ name: lingua.lose, value: importo+' coin' },
 					);
@@ -412,7 +395,7 @@ function signIn(message){
 function getSaldo(message){
 	if(!message.member.user.bot){
 		const id=message.member.user.id;
-		saldoGiocatore(id,function(saldo){
+		db.saldoGiocatore(id,function(saldo){
 			message.reply("saldo: "+saldo);
 		});
 	}
@@ -422,7 +405,7 @@ function roulette(message){
 	if(!message.member.user.bot){
 	const giocata=message.content.split(" ")[1];
 	const id=message.member.user.id;
-	saldoGiocatore(id,function(saldo){
+	db.saldoGiocatore(id,function(saldo){
 		var importo=parseInt(message.content.split(" ")[2]);
 		if (!isNaN(importo) && importo > 0) {
 			if (verificaSaldo(importo,saldo)) {
@@ -455,14 +438,14 @@ function roulette(message){
 				//giocata colore rosso
 				if(giocata === "rosso" ||giocata === "r"){
 					if(numeriRossi.includes(resultNumeber)){
-						aggiornaSaldo(saldo+(importo*3),id);
+						db.aggiornaSaldo(saldo+(importo*3),id);
 						risultato.addFields(
 							{ name: lingua.win, value: importo*3+' coin' },
 						);
 						risultato.setColor("#00ff37");
 					}
 					else{
-						aggiornaSaldo(saldo-importo,id);
+						db.aggiornaSaldo(saldo-importo,id);
 					risultato.addFields(
 						{ name: lingua.lose, value: importo+' coin' },
 					);
@@ -475,14 +458,14 @@ function roulette(message){
 				//giocata colore nero
 				if(giocata === "nero" ||giocata === "n"){
 					if(numeriNeri.includes(resultNumeber)){
-						aggiornaSaldo(saldo+(importo*3),id);
+						db.aggiornaSaldo(saldo+(importo*3),id);
 						risultato.addFields(
 							{ name: lingua.win, value: importo*3+' coin' },
 						);
 						risultato.setColor("#00ff37");
 					}
 						else{
-							aggiornaSaldo(saldo-importo,id);
+							db.aggiornaSaldo(saldo-importo,id);
 							risultato.addFields(
 							{ name: lingua.lose, value: importo+' coin' },
 						);
@@ -495,14 +478,14 @@ function roulette(message){
 				//giocata pari
 				if(giocata === "pari" ||giocata === "p"){
 					if(resultNumeber%2==0 && resultNumeber !=0){
-						aggiornaSaldo(saldo+(importo*3),id);
+						db.aggiornaSaldo(saldo+(importo*3),id);
 						risultato.addFields(
 							{ name: lingua.win, value: importo*3+' coin' },
 						);
 						risultato.setColor("#00ff37");
 					}
 						else{
-							aggiornaSaldo(saldo-importo,id);
+							db.aggiornaSaldo(saldo-importo,id);
 							risultato.addFields(
 							{ name: lingua.lose, value: importo+' coin' },
 						);
@@ -515,14 +498,14 @@ function roulette(message){
 				//giocata dispari
 				if(giocata === "dispari" ||giocata === "d"){
 					if(resultNumeber%2!=0 && resultNumeber !=0){
-						aggiornaSaldo(saldo+(importo*3),id);
+						db.aggiornaSaldo(saldo+(importo*3),id);
 						risultato.addFields(
 							{ name: lingua.win, value: importo*3+' coin' },
 						);
 						risultato.setColor("#00ff37");
 					}
 						else{
-							aggiornaSaldo(saldo-importo,id);
+							db.aggiornaSaldo(saldo-importo,id);
 							risultato.addFields(
 							{ name: lingua.lose, value: importo+' coin' },
 						);
@@ -540,7 +523,7 @@ function roulette(message){
 					if(intGiocata === resultNumeber){
 							//se 0 vincita X50
 							if(resultNumeber===0){
-								aggiornaSaldo(saldo+(importo*49),id);
+								db.aggiornaSaldo(saldo+(importo*49),id);
 								risultato.addFields(
 									{ name: lingua.win, value: importo*40+' coin' },
 								);
@@ -548,7 +531,7 @@ function roulette(message){
 							}
 							//ALTRO NUMERO X36
 							else{
-								aggiornaSaldo(saldo+(importo*35),id);
+								db.aggiornaSaldo(saldo+(importo*35),id);
 								risultato.addFields(
 								{ name: lingua.win, value: importo*35+' coin' },
 								);
@@ -557,7 +540,7 @@ function roulette(message){
 						}
 					//se NUMERO NO UGUALE PERDITA
 					else{
-						aggiornaSaldo(saldo-importo,id);
+						db.aggiornaSaldo(saldo-importo,id);
 						risultato.addFields(
 						{ name: lingua.lose, value: importo+' coin' },
 					);
@@ -638,27 +621,6 @@ client.on("message", message => {
 	}
 });
 
-function saldoGiocatore(id,saldo) {
-	dbpool.getConnection((err, db) => {
-		var sql= `SELECT saldo FROM utente where idutente='${id}'`;	
-		db.query(sql, function (err,result) {
-			db.release();
-			if(err){
-				console.log("errore nel caricamento del tuo saldo",err);
-				return
-			}
-			else{
-				return saldo(result[0].saldo);
-			}
-		});
-		
-		if(err){
-			console.log(err.message);
-			return
-		}
-	});
-}
-
 function verificaSaldo(importo,saldo){
 	if(importo <= saldo){
 		return true;
@@ -666,21 +628,4 @@ function verificaSaldo(importo,saldo){
 	else{
 		return false;
 	}
-}
-
-function aggiornaSaldo(nuovoSaldo,id){ 
-	dbpool.getConnection((err, db) => {
-		var sql= `Update utente set saldo='${nuovoSaldo}' where idutente='${id}'`;
-		db.query(sql, function (err) {
-			db.release();
-			if(err){
-				console.log("errore durante l'aggiornamento del saldo",err);
-				return
-			}
-		});
-		if(err){
-			console.log(err.message);
-			return
-		}
-	});
 }
