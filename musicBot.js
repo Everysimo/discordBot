@@ -90,9 +90,9 @@ async function play(message, serverQueue){
 		serverQueue.songs.push(song);
 
 		const messaggioAggiuntaCoda = new Discord.MessageEmbed();
-		messaggioAggiuntaCoda.setTitle('In Riproduzione');
+		messaggioAggiuntaCoda.setTitle('Aggiunta alla coda');
 		messaggioAggiuntaCoda.addFields({
-		nome: lingua.startPlay,value:" "+song.title}
+		nome: lingua.songAddQueue,value:" "+song.title}
 		);
 
 		return message.reply(messaggioAggiuntaCoda);
