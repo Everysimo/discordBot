@@ -2,9 +2,9 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const config = require('./config.json');
 const lingua =require(config.lingua);
-const db=require("./dbOpertion");
-const gameRoom=require("./gameRoom")
-const musica=require("./musica")
+const db=require("./dbOpertion.js");
+const gameRoom=require("./gameRoom.js")
+const musica=require("./musica.js")
 db.dbConnect();
 
 //quando il nuovo cliente è pronto esegue log
