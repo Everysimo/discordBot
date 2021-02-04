@@ -2,9 +2,9 @@
   "name": "discorbot",
   "description": "bot",
   "version": "0.0.1",
-  "main": "musicBot.js",
+  "main": "bot.js",
   "scripts": {
-    "start": "node musicBot.js"
+    "start": "node bot.js"
   },
   "engines": {
     "node": "14.15.4"
