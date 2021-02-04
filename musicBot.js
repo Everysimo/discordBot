@@ -4,6 +4,7 @@ const config = require('./config.json');
 const ytdl = require('ytdl-core');
 const lingua =require(config.lingua);
 const db=require("./dbOpertion");
+const gameRoom=require("./gameRoom")
 
 db.dbConnect();
 
