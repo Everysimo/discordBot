@@ -167,7 +167,7 @@ client.on("message", message => {
 	// se non è bot e il messaggio inizia con "$"
 	else if (message.content.startsWith(pm)){
 		//ottiene l'attuale coda delle canzoni
-		const serverQueue = queue.get(message.guild.id);
+		const serverQueue = musica.queue.get(message.guild.id);
 		//salva il contenuto del messaggio corrispondente al comando
 		const com=message.content.split(" ")[0].substr(1);
 
