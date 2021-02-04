@@ -638,40 +638,6 @@ client.on("message", message => {
 	}
 });
 
-//entrata nuovo utente inserimento dell'utente nel dataBase 
-client.on('guildMemberAdd', member=>{
-	if(!member.user.bot){
-		const messaggioBenvenuto = new Discord.MessageEmbed();
-		messaggioBenvenuto.setTitle("Benvenuto "+ member.nickname);
-		messaggioBenvenuto.addFields(
-			{ name: 'Info', value: 'nel canale comandi-bot fai !help per sapere cosa riesco ha fare', inline:true},
-		)
-		const channel = member.guild.channels.cache.find(ch => ch.name === 'benvenuti');
-		channel.send(messaggioBenvenuto);
-		dbpool.getConnection((err, db) => {
-			const nickname=member.user.username;
-			const id=member.user.id;
-			var sql= `INSERT INTO utente (idutente, nickname, dataPrimoAccesso) VALUES ('${id}','${nickname}',current_timestamp())`;
-			
-			db.query(sql, function (err) {
-				db.release();
-				if(err){
-					console.log(err.message);
-					return
-				}
-				else{
-					console.log("1 record inserted");
-				}
-			});
-			
-			if(err){
-				console.log(err.message);
-				return
-			}
-		});
-	}
-});
-
 function saldoGiocatore(id,saldo) {
 	dbpool.getConnection((err, db) => {
 		var sql= `SELECT saldo FROM utente where idutente='${id}'`;	
