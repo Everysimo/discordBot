@@ -416,10 +416,22 @@ function roulette(message){
 				gioco.setImage("https://i.imgur.com/YJu1Ced.gif");
 				//calcolo numero risultato
 				const resultNumeber = Math.floor(Math.random() * 36);
-
-				gioco.addFields(
-					{ name: "Numero fortunato: ", value: resultNumeber },
-				);
+				if(numeriRossi.includes(resultNumeber)){
+					gioco.addFields(
+						{ name: "Numero fortunato: ", value: resultNumeber +"Rosso"},
+					);
+				}
+				if(numeriNeri.includes(resultNumeber)){
+					gioco.addFields(
+						{ name: "Numero fortunato: ", value: resultNumeber + "Nero" },
+					);
+				}
+				if(resultNumeber===0){
+					gioco.addFields(
+						{ name: "Numero fortunato: ", value: resultNumeber + "Verde"},
+					);
+				}
+				
 				message.channel.send(gioco);
 				
 				//giocata colore rosso
