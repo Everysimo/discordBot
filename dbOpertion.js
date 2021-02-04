@@ -124,7 +124,7 @@ exports.addSong = function (id, url, nomePlaylist){
 				});
 			}
 			if(err){
-				console.log("errore durante aggiunzione di una canzone\n",err);
+				console.log("errore durante aggiunzione di una canzone\n");
 				return
 			}
 		});
