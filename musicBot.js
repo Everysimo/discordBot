@@ -641,6 +641,13 @@ client.on("message", message => {
 //entrata nuovo utente inserimento dell'utente nel dataBase 
 client.on('guildMemberAdd', member=>{
 	if(!member.user.bot){
+		const messaggioBenvenuto = new Discord.MessageEmbed();
+		messaggioBenvenuto.setTitle("Benvenuto "+ member.nickname);
+		messaggioBenvenuto.addFields(
+			{ name: 'Info', value: 'nel canale comandi-bot fai !help per sapere cosa riesco ha fare', inline:true},
+		)
+		const channel = member.guild.channels.cache.find(ch => ch.name === 'benvenuti');
+		channel.send(messaggioBenvenuto);
 		dbpool.getConnection((err, db) => {
 			const nickname=member.user.username;
 			const id=member.user.id;
