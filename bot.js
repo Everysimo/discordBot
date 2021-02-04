@@ -157,7 +157,6 @@ client.on("message", message => {
 	else if (message.content.startsWith(pnm)) {
 		//salva il contenuto del messaggio corrispondente al comando
 		const com=message.content.split(" ")[0].substr(1);
-
 		//se il comando è nella mappa dei comandi
 		if (comandi.has(com)) {
 			//esegue il comando specificato
