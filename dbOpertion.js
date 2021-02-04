@@ -112,7 +112,6 @@ exports.addSong = function (id, url, nomePlaylist){
 			if(err.code.match('ER_DUP_ENTRY')){
 				sql= `Insert Into contenuto Values ('${url}','${id}','${nomePlaylist}')`;
 				db.query(sql, function (err) {
-					db.release();
 					if(err.code.match('ER_DUP_ENTRY')){
 						console.log("Canzone già presente nella PlayList\n");
 						return
