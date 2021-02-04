@@ -1,3 +1,7 @@
+const Discord = require('discord.js');
+const config = require('./config.json');
+const lingua =require(config.lingua);
+
 //lancio moneta testa o croce
 exports.coinflip = function (message){
 	const m=message.content.split(" ")[1];
@@ -269,3 +273,11 @@ exports.roulette = function (message){
 	}
 }
 
+function verificaSaldo(importo,saldo){
+	if(importo <= saldo){
+		return true;
+	}
+	else{
+		return false;
+	}
+}

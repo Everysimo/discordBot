@@ -185,12 +185,3 @@ client.on("message", message => {
 		}
 	}
 });
-
-function verificaSaldo(importo,saldo){
-	if(importo <= saldo){
-		return true;
-	}
-	else{
-		return false;
-	}
-}
