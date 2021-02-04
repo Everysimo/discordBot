@@ -75,3 +75,20 @@ exports.cretePlayListDB = function (id, nome){
 		}
 	});
 }
+
+exports.removeSongFromPlBD = function (id,Url){
+	dbpool.getConnection((err, db) => {
+		var sql= `remove from contenuto where  ('${nome}','${id}')`;
+		db.query(sql, function (err) {
+			db.release();
+			if(err){
+				console.log("errore durante l'aggiornamento del saldo",err);
+				return
+			}
+		});
+		if(err){
+			console.log(err.message);
+			return
+		}
+	});
+}
