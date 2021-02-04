@@ -44,10 +44,6 @@ exports.saldoGiocatore = function (id,saldo) {
 
 exports.aggiornaSaldo = function (nuovoSaldo,id){ 
 	dbpool.getConnection((err, db) => {
-		if(err){
-			console.log(err.message);
-			return
-		}
 		var sql= `Update utente set saldo='${nuovoSaldo}' where idutente='${id}'`;
 		db.query(sql, function (err) {
 			db.release();
@@ -56,15 +52,15 @@ exports.aggiornaSaldo = function (nuovoSaldo,id){
 				return
 			}
 		});
+		if(err){
+			console.log(err.message);
+			return
+		}
 	});
 }
 
 exports.createPlayListDB = function (id, nome){
 	dbpool.getConnection((err, db) => {
-		if(err){
-			console.log(err.message);
-			return
-		}
 
 		var sql= `Insert Into playlist (nome,utente) Values ('${nome}','${id}')`;
 		db.query(sql, function (err) {
@@ -78,15 +74,16 @@ exports.createPlayListDB = function (id, nome){
 			}
 			
 		});
+
+		if(err){
+			console.log(err.message);
+			return
+		}
 	});
 }
 
 exports.removeSongFromPlBD = function (id, url, nomePlaylist){
 	dbpool.getConnection((err, db) => {
-		if(err){
-			console.log(err.message);
-			return
-		}
 
 		var sql= `delete from contenuto where song='${url}' and playlist_utente='${id}' and playlist_nome='${nomePlaylist}'`;
 		db.query(sql, function (err) {
@@ -96,16 +93,15 @@ exports.removeSongFromPlBD = function (id, url, nomePlaylist){
 				return
 			}
 		});
+		if(err){
+			console.log(err.message);
+			return
+		}
 	});
 }
 
 exports.addSong = function (id, url, nomePlaylist){
 	dbpool.getConnection((err, db) => {
-
-		if(err){
-			console.log(err.message);
-			return
-		}
 
 		var sql= `Insert Into song Values ('${url}')`;
 		db.query(sql, function (err) {
@@ -139,5 +135,9 @@ exports.addSong = function (id, url, nomePlaylist){
 				return
 			}
 		});
+		if(err){
+			console.log(err.message);
+			return
+		}
 	});
 }
