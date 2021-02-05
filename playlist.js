@@ -64,7 +64,6 @@ exports.playPL= function (message, serverQueue) {
     const id=message.member.user.id;
     db.leggiPL(id, nomePl,async function(risult){
         if (risult) {
-			const voiceChannel = message.member.voice.channel;
 			if (!serverQueue) {					//se la coda delle canzoni è vuota
 				const queueContruct = {
 					textChannel: message.channel,
@@ -103,7 +102,7 @@ exports.playPL= function (message, serverQueue) {
 			}
 		}
 		try {
-			var connection = await voiceChannel.join();	//connessione al canale vocale dell'utente che invia il messaggio
+			var connection = await message.member.voice.channel.join();	//connessione al canale vocale dell'utente che invia il messaggio
 			musica.queue.get(message.guild.id).connection = connection;			
 			this.start(message.guild, serverQueue.songs[0]);	//starata la prima canzone in coda
 		} catch (err) {
