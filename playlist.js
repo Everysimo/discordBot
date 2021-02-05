@@ -36,7 +36,7 @@ exports.printPL = function (message) {
     if(!message.member.user.bot){
         const nomePl=message.content.split(" ")[1];
     	const id=message.member.user.id;
-        db.leggiPL(id, nomePl,result= (risult)=>{
+        db.leggiPL(id, nomePl,function(risult){
             const stampa= new Discord.MessageEmbed();
             stampa.setTitle("Playlist: "+nomePl);          
             risult.forEach(element => {
