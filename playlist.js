@@ -94,10 +94,11 @@ exports.playPL= function (message, serverQueue) {
 					messaggioAggiuntaCoda.addFields({
 					name: song.title,value:" "+song.url}
 					);
-					return message.reply(messaggioAggiuntaCoda);
+					message.reply(messaggioAggiuntaCoda);
 					//return message.reply(song.title +" "+ lingua.songAddQueue)
 				}
 			}
+            return
         }
     });
 }
