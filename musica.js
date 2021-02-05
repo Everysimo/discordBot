@@ -8,7 +8,7 @@ const queue = new Map();
 exports.queue = queue;
 
 exports.play= async function (message){
-	var serverQueue = queue.get(guild.id);
+	var serverQueue = queue.get(message.guild.id);
 	const args = message.content.split(" ");			//input argomento 
 	const voiceChannel = message.member.voice.channel;	//connessione al canale vocale
   	if (!voiceChannel){									//se l'utente non è in un canale genera eccezione
@@ -104,7 +104,7 @@ start = function (guild, song) {
 
 //skippa la canzone
 exports.skip = function (message) {
-	var serverQueue = queue.get(guild.id);
+	var serverQueue = queue.get(message.guild.id);
 	if (!message.member.voice.channel)
 		return message.reply(lingua.voiceChannelNotFound);
 	if (!serverQueue)
@@ -114,7 +114,7 @@ exports.skip = function (message) {
 
 //stoppa la riproduzione di canzoni
 exports.stop = function (message) {
-	var serverQueue = queue.get(guild.id);
+	var serverQueue = queue.get(message.guild.id);
 	if (!message.member.voice.channel)
 	  	return message.reply(lingua.voiceChannelNotFound);
 	if (!serverQueue)
@@ -124,7 +124,7 @@ exports.stop = function (message) {
 }
 //aumentare volume di n della canzone in riproduzione
 exports.volumeUp = function (message){
-	var serverQueue = queue.get(guild.id);
+	var serverQueue = queue.get(message.guild.id);
 	const q = message.content.split(" ")[1];
 	if (!message.member.voice.channel)
 		return message.reply(lingua.voiceChannelNotFound);
@@ -142,7 +142,7 @@ exports.volumeUp = function (message){
 
 //abbassare volume di n della canzone in riproduzione
 exports.volumeDown = function (message){
-	var serverQueue = queue.get(guild.id);
+	var serverQueue = queue.get(message.guild.id);
 	const q = message.content.split(" ")[1];
 	if (!message.member.voice.channel)
 		return message.reply(lingua.voiceChannelNotFound);
@@ -159,7 +159,7 @@ exports.volumeDown = function (message){
 }
 //settare volume di n della canzone in riproduzione
 exports.setvolume = function (message){
-	var serverQueue = queue.get(guild.id);
+	var serverQueue = queue.get(message.guild.id);
 	const q = message.content.split(" ")[1];
 	if (!message.member.voice.channel)
 		return message.reply(lingua.voiceChannelNotFound);
