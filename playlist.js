@@ -32,28 +32,33 @@ exports.removeSongFromPL = function (message) {
     }
 }
 
-exports.printPL = async function (message) {
+exports.printPL = function (message) {
     if(!message.member.user.bot){
         const nomePl=message.content.split(" ")[1];
     	const id=message.member.user.id;
-        db.leggiPL(id, nomePl,result= async (risult)=>{
+        db.leggiPL(id, nomePl,result= (risult)=>{
             const stampa= new Discord.MessageEmbed();
             stampa.setTitle("Playlist: "+nomePl);          
             risult.forEach(element => {
-                try{
-                    songInfo = await ytdl.getInfo(element.url);			//ottiene informazioni della canzone passata come argomento
-                }
-                catch(err){
-                    throw new Error("errore nel caricamento dell informazioni della canzone");
-                }
-                var song = {
-                    title: songInfo.videoDetails.title,
-                    url: songInfo.videoDetails.video_url,
-                    isLive: songInfo.videoDetails.isLiveContent,
-                    username: message.member.user.username,
-                };
-                stampa.addField(song.title,song.url,true);
+                infoSong(message,stampa,element.url);
             });
+            message.channel.send(stampa);
         });
     }
+}
+
+async function infoSong(message,stampa,urlSong) {
+    try{
+        songInfo = await ytdl.getInfo(urlSong);			//ottiene informazioni della canzone passata come argomento
+    }
+    catch(err){
+        throw new Error("errore nel caricamento dell informazioni della canzone");
+    }
+    var song = {
+        title: songInfo.videoDetails.title,
+        url: songInfo.videoDetails.video_url,
+        isLive: songInfo.videoDetails.isLiveContent,
+        username: message.member.user.username,
+    };
+    stampa.addField(song.title,song.url,true);
 }
