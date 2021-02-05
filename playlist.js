@@ -64,8 +64,8 @@ exports.playPL= function (message, serverQueue) {
     const id=message.member.user.id;
     db.leggiPL(id, nomePl,function(risult){
         for (const element of risult) {
-            musica.playPlaylist(message,element.song,serverQueue);
             sleep(2000);
+            musica.playPlaylist(message,element.song,serverQueue);
         }
     });
 }
