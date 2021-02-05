@@ -92,7 +92,7 @@ exports.playPL= function (message, serverQueue) {
 					isLive: songInfo.videoDetails.isLiveContent,
 					username: message.member.user.username,
 				};
-				queueContruct.songs.push(song);
+				serverQueue.songs.push(song);
 				const messaggioAggiuntaCoda = new Discord.MessageEmbed();
 				messaggioAggiuntaCoda.setTitle(lingua.songAddQueue);
 				messaggioAggiuntaCoda.setDescription("[ @"+message.member.user.username+" ]");
@@ -104,7 +104,7 @@ exports.playPL= function (message, serverQueue) {
 		}
 		try {
 			var connection = await voiceChannel.join();	//connessione al canale vocale dell'utente che invia il messaggio
-			queueContruct.connection = connection;			
+			serverQueue.connection = connection;			
 			this.start(message.guild, serverQueue.songs[0]);	//starata la prima canzone in coda
 		} catch (err) {
 			console.log(err.stack);
