@@ -65,6 +65,7 @@ exports.playPL= function (message, serverQueue) {
     db.leggiPL(id, nomePl,async function(risult){
         if (risult) {
             await play(message,risult[0].song,serverQueue);
+            sleep(1000);
             console.log("ho dormito");
 			for (let index = 1; index < risult.length; index++) {
                 console.log("Ho iniziato il ciclo");
@@ -161,6 +162,7 @@ play = async function (message, songUrl,serverQueue){
 		//return message.reply(song.title +" "+ lingua.songAddQueue)
 	}
 }
+
 function sleep(milliseconds) {
     const date = Date.now();
     let currentDate = null;
