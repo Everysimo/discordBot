@@ -64,7 +64,11 @@ exports.playPL= function (message, serverQueue) {
     const id=message.member.user.id;
     db.leggiPL(id, nomePl,async function(risult){
         for (const element of risult) {
-            await musica.playPlaylist(message,element.song,serverQueue);
+            musica.playPlaylist(message,element.song,serverQueue);
+            await sleep(2000)
         }
     });
+}
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
