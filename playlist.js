@@ -70,7 +70,8 @@ exports.playPL= function (message, serverQueue) {
 			for (let index = 1; index < risult.length; index++) {
                 console.log("Ho iniziato il ciclo");
 				const element = risult[index];
-				if (serverQueue) {	
+				if (serverQueue) {
+                    console.log("server queue funziona");
 					var songInfo;
 
 					try{
