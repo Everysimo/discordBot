@@ -67,7 +67,7 @@ exports.playPL= function (message, serverQueue) {
             play(message,risult[0].song,serverQueue);
 			sleep(2000)
 			for (let index = 1; index < risult.length; index++) {
-				const element = array[index];
+				const element = risult[index];
 				if (serverQueue) {	
 					var songInfo;
 
