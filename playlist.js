@@ -83,7 +83,7 @@ exports.playPL= function (message) {
 			}
 			for (let index = 0; index < result.length||index < nC; index++) {
 				const element = result.shift()
-				result.push(element);
+				result=result.push(element);
 			}
 			for (let index = 0; index < result.length; index++) {
 				const element = result[index];
