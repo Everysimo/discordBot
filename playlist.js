@@ -64,43 +64,55 @@ exports.playPL= function (message, serverQueue) {
     const id=message.member.user.id;
     db.leggiPL(id, nomePl,async function(risult){
         if (risult) {
-            await play(message,risult[0].song,serverQueue).then(async ()=>{
-				await sleep(10000);
-				for (let index = 1; index < risult.length; index++) {
-					console.log("Ho iniziato il ciclo");
-					const element = risult[index];
-	
-						console.log("aggiungo la canzone in coda");
-						var songInfo;
+			if (!serverQueue) {					//se la coda delle canzoni è vuota
+				const queueContruct = {
+					textChannel: message.channel,
+					voiceChannel: voiceChannel,
+					connection: null,
+					songs: [],
+					volume: 50,
+					playing: true,
+				};
+				musica.queue.set(message.guild.id, queueContruct);
+			}
+			for (let index = 0; index < risult.length; index++) {
+				const element = risult[index];
+				var songInfo;
 
-						try{
-							songInfo = await ytdl.getInfo(element.song);			//ottiene informazioni della canzone passata come argomento
-						}
-						catch(err){
-							throw new Error("errore nel caricamento dell informazioni della canzone");
-						}
-		
-						var song = {
-							title: songInfo.videoDetails.title,
-							url: songInfo.videoDetails.video_url,
-							isLive: songInfo.videoDetails.isLiveContent,
-							username: message.member.user.username,
-						};
-						serverQueue.songs.push(song);
-						const messaggioAggiuntaCoda = new Discord.MessageEmbed();
-						messaggioAggiuntaCoda.setTitle(lingua.songAddQueue);
-						messaggioAggiuntaCoda.setDescription("[ @"+message.member.user.username+" ]");
-						messaggioAggiuntaCoda.addFields({
-						name: song.title,value:" "+song.url}
-						);
-						message.reply(messaggioAggiuntaCoda);
+				try{
+					songInfo = await ytdl.getInfo(element.song);			//ottiene informazioni della canzone passata come argomento
 				}
-				return
-			});
+				catch(err){
+					throw new Error("errore nel caricamento dell informazioni della canzone");
+				}
+				var song = {
+    				title: songInfo.videoDetails.title,
+					url: songInfo.videoDetails.video_url,
+					isLive: songInfo.videoDetails.isLiveContent,
+					username: message.member.user.username,
+				};
+				serverQueue.songs.push(song);
+				const messaggioAggiuntaCoda = new Discord.MessageEmbed();
+				messaggioAggiuntaCoda.setTitle(lingua.songAddQueue);
+				messaggioAggiuntaCoda.setDescription("[ @"+message.member.user.username+" ]");
+				messaggioAggiuntaCoda.addFields({
+					name: song.title,value:" "+song.url}
+				);
+				message.reply(messaggioAggiuntaCoda);
+			}
+		}
+		try {
+			var connection = await voiceChannel.join();	//connessione al canale vocale dell'utente che invia il messaggio
+			serverQueue.connection = connection;			
+			this.start(message.guild, serverQueue.songs[0]);	//starata la prima canzone in coda
+		} catch (err) {
+			console.log(err.stack);
+			musica.queue.delete(message.guild.id);
+			message.reply(lingua.errorJoinVoiceChannel);
 		}
     });
 }
-
+/*
 play = async function (message, songUrl,serverQueue){
 	const voiceChannel = message.member.voice.channel;	//connessione al canale vocale
   	if (!voiceChannel){									//se l'utente non è in un canale genera eccezione
@@ -169,4 +181,4 @@ async function sleep(milliseconds) {
     do {
         currentDate = Date.now();
     } while (currentDate - date < milliseconds);
-}
+}*/
