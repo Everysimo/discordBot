@@ -64,8 +64,7 @@ exports.playPL= function (message, serverQueue) {
     const id=message.member.user.id;
     db.leggiPL(id, nomePl,async function(risult){
         if (risult) {
-            play(message,risult[0].song,serverQueue);
-			sleep(2000);
+            await play(message,risult[0].song,serverQueue);
             console.log("ho dormito");
 			for (let index = 1; index < risult.length; index++) {
                 console.log("Ho iniziato il ciclo");
