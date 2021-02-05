@@ -39,7 +39,7 @@ exports.printPL = function (message) {
         db.leggiPL(id, nomePl,function(risult){
             const stampa= new Discord.MessageEmbed();
             stampa.setTitle("Playlist: "+nomePl);          
-            risult.forEach(element => {
+            risult.every(element => {
                 ytdl.getInfo(element.song).then(songInfo=>{
                     var song = {
                         title: songInfo.videoDetails.title,
