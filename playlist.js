@@ -40,12 +40,10 @@ exports.printPL = function (message) {
             const stampa= new Discord.MessageEmbed();
             stampa.setTitle("Playlist: "+nomePl);          
             risult.forEach(element => {
-                ytdl.getInfo(element.Song).then(songInfo=>{
+                ytdl.getInfo(element.song).then(songInfo=>{
                     var song = {
-                        title: songInfo.videoDetails.title,
-                        url: songInfo.videoDetails.video_url,
-                        isLive: songInfo.videoDetails.isLiveContent,
-                        username: message.member.user.username,
+                        title: songInfo.items[0].title,
+                        url: songInfo.items[0].video_url,
                     };
                     stampa.addField(song.title,song.url,true);
                 })		//ottiene informazioni della canzone passata come argomento
