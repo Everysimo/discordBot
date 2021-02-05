@@ -126,15 +126,6 @@ function getSaldo(message){
 	}
 }
 
-//mappa che collega il commando a una funzione
-let comandiMusicali =new Map();
-comandiMusicali.set("play",musica.play);
-comandiMusicali.set("skip",musica.skip);
-comandiMusicali.set("stop",musica.stop);
-comandiMusicali.set("volumeup",musica.volumeUp);
-comandiMusicali.set("volumedown",musica.volumeDown);
-comandiMusicali.set("setvolume",musica.setvolume);
-
 //mappa comandi non musicali
 let comandi =new Map();
 comandi.set("addsongpl",playlist.addSongToPL);
@@ -149,6 +140,12 @@ comandi.set("help",help);
 comandi.set("saldo",getSaldo);
 comandi.set("roulette",gameRoom.roulette);
 comandi.set("playPL",playlist.playPL);
+comandi.set("play",musica.play);
+comandi.set("skip",musica.skip);
+comandi.set("stop",musica.stop);
+comandi.set("volumeup",musica.volumeUp);
+comandi.set("volumedown",musica.volumeDown);
+comandi.set("setvolume",musica.setvolume);
 
 //gestore ricezione messaggi
 client.on("message", message => {
