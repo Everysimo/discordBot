@@ -40,7 +40,7 @@ exports.printPL = function (message) {
             const stampa= new Discord.MessageEmbed();
             stampa.setTitle("Playlist: "+nomePl);          
             risult.forEach(element => {
-                infoSong(message,stampa,element.url);
+                infoSong(message,stampa,element.song);
             });
             message.channel.send(stampa);
         });
