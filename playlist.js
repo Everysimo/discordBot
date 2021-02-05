@@ -40,7 +40,7 @@ exports.printPL = function (message) {
             const stampa= new Discord.MessageEmbed();
             stampa.setTitle("Playlist: "+nomePl);          
             risult.forEach(element => {
-                songInfo = ytdl.getInfo(element.Song).then(()=>{
+                ytdl.getInfo(element.Song).then(songInfo=>{
                     var song = {
                         title: songInfo.videoDetails.title,
                         url: songInfo.videoDetails.video_url,
