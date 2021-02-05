@@ -95,7 +95,6 @@ exports.playPL= function (message, serverQueue) {
 						message.reply(messaggioAggiuntaCoda);
 				}
 				return
-			}	
 			});
 		}
     });
