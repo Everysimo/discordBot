@@ -71,6 +71,17 @@ exports.playPL= function (message, serverQueue) {
   	    if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
     	    return message.reply(lingua.voiceChannelNotPermission);
 	    }
+        if (!serverQueue) {					//se la coda delle canzoni è vuota
+            const queueContruct = {
+                textChannel: message.channel,
+                voiceChannel: voiceChannel,
+                connection: null,
+                songs: [],
+                volume: 50,
+                playing: true,
+            };
+            musica.queue.set(message.guild.id, queueContruct);
+        }
         for (const element of risult) {
             try{
                 songInfo = await ytdl.getInfo(element.song);			//ottiene informazioni della canzone passata come argomento
@@ -84,27 +95,14 @@ exports.playPL= function (message, serverQueue) {
                 isLive: songInfo.videoDetails.isLiveContent,
                 username: message.member.user.username,
             };
-            if (!serverQueue) {					//se la coda delle canzoni è vuota
-                const queueContruct = {
-                    textChannel: message.channel,
-                    voiceChannel: voiceChannel,
-                    connection: null,
-                    songs: [],
-                    volume: 50,
-                    playing: true,
-                };
-                musica.queue.set(message.guild.id, queueContruct);
-                queueContruct.songs.push(song);
-            }else{
-                serverQueue.songs.push(song);
-                const messaggioAggiuntaCoda = new Discord.MessageEmbed();
-		        messaggioAggiuntaCoda.setTitle(lingua.songAddQueue);
-		        messaggioAggiuntaCoda.setDescription("[ @"+message.member.user.username+" ]");
-		        messaggioAggiuntaCoda.addFields({
-		            name: song.title,value:" "+song.url}
-		        );
+            serverQueue.songs.push(song);
+            const messaggioAggiuntaCoda = new Discord.MessageEmbed();
+		    messaggioAggiuntaCoda.setTitle(lingua.songAddQueue);
+		    messaggioAggiuntaCoda.setDescription("[ @"+message.member.user.username+" ]");
+		    messaggioAggiuntaCoda.addFields({
+		        name: song.title,value:" "+song.url}
+		    );
 		    return message.reply(messaggioAggiuntaCoda);
-            }
         }
         try {
 			var connection = await voiceChannel.join();	//connessione al canale vocale dell'utente che invia il messaggio
