@@ -83,9 +83,8 @@ exports.playPL= function (message) {
 			for (let index = 0; index < risult.length||index < nC; index++) {
 				const element = risult.shift()
 				risult.push(element);
-				
 			}
-			for (let index = nC; index < risult.length; index++) {
+			for (let index = 0; index < risult.length; index++) {
 				const element = risult[index];
 				var songInfo;
 
