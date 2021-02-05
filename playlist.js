@@ -65,7 +65,7 @@ exports.playPL= function (message, serverQueue) {
     db.leggiPL(id, nomePl,async function(risult){
         for (const element of risult) {
             musica.playPlaylist(message,element.song,serverQueue);
-            await sleep(350)
+            await sleep(375)
         }
     });
 }
