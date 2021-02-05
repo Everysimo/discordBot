@@ -40,20 +40,15 @@ exports.printPL = function (message) {
             const stampa= new Discord.MessageEmbed();
             stampa.setTitle("Playlist: "+nomePl);          
             risult.forEach(element => {
-                try{
-                    songInfo = ytdl.getInfo(element.Song).then(()=>{
-                        var song = {
-                            title: songInfo.videoDetails.title,
-                            url: songInfo.videoDetails.video_url,
-                            isLive: songInfo.videoDetails.isLiveContent,
-                            username: message.member.user.username,
-                        };
-                        stampa.addField(song.title,song.url,true);
-                    })		//ottiene informazioni della canzone passata come argomento
-                }
-                catch(err){
-                    throw new Error("errore nel caricamento dell informazioni della canzone");
-                }
+                songInfo = ytdl.getInfo(element.Song).then(()=>{
+                    var song = {
+                        title: songInfo.videoDetails.title,
+                        url: songInfo.videoDetails.video_url,
+                        isLive: songInfo.videoDetails.isLiveContent,
+                        username: message.member.user.username,
+                    };
+                    stampa.addField(song.title,song.url,true);
+                })		//ottiene informazioni della canzone passata come argomento
             });
             message.channel.send(stampa);
         });
