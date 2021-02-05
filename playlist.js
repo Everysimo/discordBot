@@ -41,7 +41,7 @@ exports.printPL = function (message) {
             stampa.setTitle("Playlist: "+nomePl);          
             risult.forEach(element => {
                 try{
-                    songInfo = await ytdl.getInfo(urlSong).then(()=>{
+                    songInfo = ytdl.getInfo(urlSong).then(()=>{
                         var song = {
                             title: songInfo.videoDetails.title,
                             url: songInfo.videoDetails.video_url,
