@@ -15,8 +15,6 @@ client.once('ready', () => {
 
 //prefisso comandi non musica !
 const pnm=config.prefissoNonMusica;
-//prefisso comandi musica $
-const pm=config.prefissoMusica;
 
 //login nel server tramite token
 client.login(process.env.tokenBotDiscord);
@@ -163,22 +161,6 @@ client.on("message", message => {
 		}
 		//se il comando non è nella mappa dei messaggi
 		else{
-			message.reply(lingua.commandNotFound);
-		}
-	}
-	// se non è bot e il messaggio inizia con "$"
-	else if (message.content.startsWith(pm)){
-		//ottiene l'attuale coda delle canzoni
-		const serverQueue = musica.queue.get(message.guild.id);
-		//salva il contenuto del messaggio corrispondente al comando
-		const com=message.content.split(" ")[0].substr(1);
-
-		//se il comando è nella mappa dei comandi musicali
-		if (comandiMusicali.has(com)) {
-			//esegue il comando specificato
-			comandiMusicali.get(com)(message,serverQueue);
-		}else{
-			//risponde che il comando non esiste
 			message.reply(lingua.commandNotFound);
 		}
 	}
