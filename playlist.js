@@ -3,6 +3,7 @@ const config = require('./config.json');
 const lingua =require(config.lingua);
 const db=require("./dbOpertion.js");
 const ytdl = require('ytdl-core');
+const musica=require("./musica.js")
 
 exports.createPlaylist = function (message) {
     if(!message.member.user.bot){
@@ -103,7 +104,7 @@ play= async function (message, songUrl,serverQueue){
 			volume: 50,
 			playing: true,
 		};
-		queue.set(message.guild.id, queueContruct);
+		musica.queue.set(message.guild.id, queueContruct);
 		queueContruct.songs.push(song);
 		try {
 			var connection = await voiceChannel.join();	//connessione al canale vocale dell'utente che invia il messaggio
@@ -111,7 +112,7 @@ play= async function (message, songUrl,serverQueue){
 			this.start(message.guild, queueContruct.songs[0]);	//starata la prima canzone in coda
 		} catch (err) {
 			console.log(err.stack);
-			queue.delete(message.guild.id);
+			musica.queue.delete(message.guild.id);
 			return message.reply(lingua.errorJoinVoiceChannel);
 		}
 	}
