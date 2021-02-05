@@ -82,6 +82,14 @@ exports.playPL= function (message, serverQueue) {
             };
             musica.queue.set(message.guild.id, queueContruct);
         }
+        try {
+			var connection = await voiceChannel.join();	//connessione al canale vocale dell'utente che invia il messaggio
+			queueContruct.connection = connection;
+		} catch (err) {
+			console.log(err.stack);
+			queue.delete(message.guild.id);
+			return message.reply(lingua.errorJoinVoiceChannel);
+		}
         for (const element of risult) {
             var songInfo;
             try{
@@ -105,14 +113,10 @@ exports.playPL= function (message, serverQueue) {
 		    );
 		    message.reply(messaggioAggiuntaCoda);
         }
-        try {
-			var connection = await voiceChannel.join();	//connessione al canale vocale dell'utente che invia il messaggio
-			queueContruct.connection = connection;			
+        try {		
 			start(message.guild, queueContruct.songs[0]);	//starata la prima canzone in coda
 		} catch (err) {
 			console.log(err.stack);
-			queue.delete(message.guild.id);
-			return message.reply(lingua.errorJoinVoiceChannel);
 		}
     });
 }
