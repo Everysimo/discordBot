@@ -67,7 +67,7 @@ exports.playPL= function (message, serverQueue) {
 			if (!serverQueue) {					//se la coda delle canzoni è vuota
 				const queueContruct = {
 					textChannel: message.channel,
-					voiceChannel: voiceChannel,
+					voiceChannel: message.member.voice.channel,
 					connection: null,
 					songs: [],
 					volume: 50,
