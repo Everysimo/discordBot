@@ -163,5 +163,7 @@ client.on("message", message => {
 		else{
 			message.reply(lingua.commandNotFound);
 		}
+	}else{
+		message.reply(lingua.commandNotFound);
 	}
 });
