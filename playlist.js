@@ -65,11 +65,41 @@ exports.playPL= function (message, serverQueue) {
     db.leggiPL(id, nomePl,async function(risult){
         if (risult) {
             play(message,risult[0].song,serverQueue);
+			sleep(2000)
+			for (let index = 1; index < risult.length; index++) {
+				const element = array[index];
+				if (serverQueue) {	
+					var songInfo;
+
+					try{
+						songInfo = await ytdl.getInfo(songUrl);			//ottiene informazioni della canzone passata come argomento
+					}
+					catch(err){
+						throw new Error("errore nel caricamento dell informazioni della canzone");
+					}
+	
+					var song = {
+    					title: songInfo.videoDetails.title,
+						url: songInfo.videoDetails.video_url,
+						isLive: songInfo.videoDetails.isLiveContent,
+						username: message.member.user.username,
+					};
+					serverQueue.songs.push(song);
+					const messaggioAggiuntaCoda = new Discord.MessageEmbed();
+					messaggioAggiuntaCoda.setTitle(lingua.songAddQueue);
+					messaggioAggiuntaCoda.setDescription("[ @"+message.member.user.username+" ]");
+					messaggioAggiuntaCoda.addFields({
+					name: song.title,value:" "+song.url}
+					);
+					return message.reply(messaggioAggiuntaCoda);
+					//return message.reply(song.title +" "+ lingua.songAddQueue)
+				}
+			}
         }
     });
 }
 
-play= async function (message, songUrl,serverQueue){
+play = async function (message, songUrl,serverQueue){
 	const voiceChannel = message.member.voice.channel;	//connessione al canale vocale
   	if (!voiceChannel){									//se l'utente non è in un canale genera eccezione
 		return message.reply(lingua.voiceChannelNotFound);
@@ -129,4 +159,11 @@ play= async function (message, songUrl,serverQueue){
 		return message.reply(messaggioAggiuntaCoda);
 		//return message.reply(song.title +" "+ lingua.songAddQueue)
 	}
+}
+function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+        currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
 }
