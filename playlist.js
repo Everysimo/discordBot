@@ -36,19 +36,23 @@ exports.printPL = function (message) {
     if(!message.member.user.bot){
         const nomePl=message.content.split(" ")[1];
     	const id=message.member.user.id;
-        db.leggiPL(id, nomePl,function(risult){
+        db.leggiPL(id, nomePl,async function(risult){
             const stampa= new Discord.MessageEmbed();
-            stampa.setTitle("Playlist: "+nomePl);          
-            risult.every(element => {
-                ytdl.getInfo(element.song).then(songInfo=>{
-                    var song = {
-                        title: songInfo.videoDetails.title,
-                        url: songInfo.videoDetails.video_url,
-                    };
-                    stampa.addFields({ name: song.title, value: song.url, inline:true},);
-                    console.log(song);
-                })		//ottiene informazioni della canzone passata come argomento
-            });
+            stampa.setTitle("Playlist: "+nomePl);
+            for (const element of risult) {
+                var songInfo;
+	            try{
+		            songInfo = await ytdl.getInfo(args[1]);			//ottiene informazioni della canzone passata come argomento
+	            }
+	            catch(err){
+		            throw new Error("errore nel caricamento dell informazioni della canzone");
+	            }
+	            var song = {
+    	            title: songInfo.videoDetails.title,
+		            url: songInfo.videoDetails.video_url,
+	            };		//ottiene informazioni della canzone passata come 
+                stampa.addField(song.title,song.url,true);
+            }
             message.channel.send(stampa);
         });
     }
