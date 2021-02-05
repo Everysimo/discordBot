@@ -65,13 +65,14 @@ exports.playPL= function (message, serverQueue) {
     db.leggiPL(id, nomePl,async function(risult){
         if (risult) {
             await play(message,risult[0].song,serverQueue).then(async ()=>{
+				await sleep(10000);
 				for (let index = 1; index < risult.length; index++) {
 					console.log("Ho iniziato il ciclo");
 					const element = risult[index];
 	
 						console.log("aggiungo la canzone in coda");
 						var songInfo;
-	
+
 						try{
 							songInfo = await ytdl.getInfo(element.song);			//ottiene informazioni della canzone passata come argomento
 						}
