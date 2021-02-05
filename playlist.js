@@ -62,7 +62,7 @@ exports.printPL = function (message) {
 
 exports.playPL= function (message) {
     const nomePl=message.content.split(" ")[1];
-	const nC=parseInt(message.content.split(" ")[2]);
+	var nC=parseInt(message.content.split(" ")[2]);
 	if (isNaN(nC)) {
 		nC=0;
 	}
