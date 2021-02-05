@@ -83,6 +83,7 @@ exports.playPL= function (message, serverQueue) {
             musica.queue.set(message.guild.id, queueContruct);
         }
         for (const element of risult) {
+            var songInfo;
             try{
                 songInfo = await ytdl.getInfo(element.song);			//ottiene informazioni della canzone passata come argomento
             }
