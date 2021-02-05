@@ -65,7 +65,7 @@ exports.playPL= function (message, serverQueue) {
     db.leggiPL(id, nomePl,async function(risult){
         if (risult) {
             play(message,risult[0].song,serverQueue);
-			sleep(2000)
+			sleep(100);
 			for (let index = 1; index < risult.length; index++) {
 				const element = risult[index];
 				if (serverQueue) {	
