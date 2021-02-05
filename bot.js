@@ -62,12 +62,12 @@ function help(message){
 
 	risultatoComandiMusicali.setTitle('Comandi Musicali');
 	risultatoComandiMusicali.addFields(
-		{ name: '$play', value: 'aggiungi una canzone alla coda di riproduzione e falla prartire se non c\'è nulla in coda',inline:true},
-		{ name: '$setvolume x', value: 'setta volume a x (0-100 )', inline:true},
-		{ name: '$skip', value: 'skip di una canzone dalla coda', inline:true},
-		{ name: '$stop', value: 'interruzione della riproduzione ed eliminazione della coda di riproduzione', inline:true},
-		{ name: '$volumedown x', value: 'abbassa il volume di x(0-100)', inline:true},
-		{ name: '$volumeup x', value: 'alza il volume di x(0-100)', inline:true},
+		{ name: '!play', value: 'aggiungi una canzone alla coda di riproduzione e falla prartire se non c\'è nulla in coda',inline:true},
+		{ name: '!setvolume x', value: 'setta volume a x (0-100 )', inline:true},
+		{ name: '!skip', value: 'skip di una canzone dalla coda', inline:true},
+		{ name: '!stop', value: 'interruzione della riproduzione ed eliminazione della coda di riproduzione', inline:true},
+		{ name: '!volumedown x', value: 'abbassa il volume di x(0-100)', inline:true},
+		{ name: '!volumeup x', value: 'alza il volume di x(0-100)', inline:true},
 	);
 
 	message.channel.send(risultato);
