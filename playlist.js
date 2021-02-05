@@ -66,7 +66,9 @@ exports.playPL= function (message, serverQueue) {
         if (risult) {
             play(message,risult[0].song,serverQueue);
 			sleep(100);
+            console.log("ho dormito");
 			for (let index = 1; index < risult.length; index++) {
+                console.log("Ho iniziato il ciclo");
 				const element = risult[index];
 				if (serverQueue) {	
 					var songInfo;
