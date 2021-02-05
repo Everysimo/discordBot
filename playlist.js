@@ -62,18 +62,9 @@ exports.printPL = function (message) {
 exports.playPL= function (message, serverQueue) {
     const nomePl=message.content.split(" ")[1];
     const id=message.member.user.id;
-    db.leggiPL(id, nomePl,function(risult){
+    db.leggiPL(id, nomePl,async function(risult){
         for (const element of risult) {
-            musica.playPlaylist(message,element.song,serverQueue);
-            sleep(10000)
+            await musica.playPlaylist(message,element.song,serverQueue);
         }
     });
 }
-function sleep(milliseconds) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-        currentDate = Date.now();
-    } while (currentDate - date < milliseconds);
-}
-  
