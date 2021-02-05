@@ -69,8 +69,8 @@ exports.playPL= function (message, serverQueue) {
 			for (let index = 1; index < risult.length; index++) {
                 console.log("Ho iniziato il ciclo");
 				const element = risult[index];
-				if (serverQueue) {
-                    console.log("server queue funziona");
+
+                    console.log("aggiungo la canzone in coda");
 					var songInfo;
 
 					try{
@@ -94,8 +94,6 @@ exports.playPL= function (message, serverQueue) {
 					name: song.title,value:" "+song.url}
 					);
 					message.reply(messaggioAggiuntaCoda);
-					//return message.reply(song.title +" "+ lingua.songAddQueue)
-				}
 			}
             return
         }
