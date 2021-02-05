@@ -40,7 +40,8 @@ exports.printPL = function (message) {
         db.leggiPL(id, nomePl,async function(risult){
             const stampa= new Discord.MessageEmbed();
             stampa.setTitle("Playlist: "+nomePl);
-            for (const element of risult) {
+			for (let index = 0; index < risult.length; index++) {
+				const element = risult[index];
                 var songInfo;
 	            try{
 		            songInfo = await ytdl.getInfo(element.song);			//ottiene informazioni della canzone passata come argomento
@@ -52,7 +53,7 @@ exports.printPL = function (message) {
     	            title: songInfo.videoDetails.title,
 		            url: songInfo.videoDetails.video_url,
 	            };		//ottiene informazioni della canzone passata come 
-                stampa.addField(song.title,song.url,true);
+                stampa.addField(index+") "+song.title,song.url,true);
             }
             message.channel.send(stampa);
         });
