@@ -42,7 +42,7 @@ exports.printPL = function (message) {
             for (const element of risult) {
                 var songInfo;
 	            try{
-		            songInfo = await ytdl.getInfo(args[1]);			//ottiene informazioni della canzone passata come argomento
+		            songInfo = await ytdl.getInfo(element.song);			//ottiene informazioni della canzone passata come argomento
 	            }
 	            catch(err){
 		            throw new Error("errore nel caricamento dell informazioni della canzone");
