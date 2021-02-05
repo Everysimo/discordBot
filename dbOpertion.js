@@ -152,7 +152,7 @@ exports.addSong = function (id, url, nomePlaylist){
 		}
 	});
 }
-exports.leggiPL = function (id,nomePlaylist,risultato){
+exports.leggiPL = async function (id,nomePlaylist,risultato){
 	dbpool.getConnection((err, db) => {
 		var sql= `SELECT song FROM contenuto where playlist_utente='${id}' and playlist_nome='${nomePlaylist}'`;	
 		db.query(sql, function (err,result) {

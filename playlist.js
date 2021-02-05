@@ -32,16 +32,16 @@ exports.removeSongFromPL = function (message) {
     }
 }
 
-exports.printPL = function (message) {
+exports.printPL = async function (message) {
     if(!message.member.user.bot){
         const nomePl=message.content.split(" ")[1];
     	const id=message.member.user.id;
-        db.leggiPL(id, nomePl,result= (risult)=>{
+        db.leggiPL(id, nomePl,result= async (risult)=>{
             const stampa= new Discord.MessageEmbed();
             stampa.setTitle("Playlist: "+nomePl);          
             risult.forEach(element => {
                 try{
-                    songInfo = ytdl.getInfo(element.url);			//ottiene informazioni della canzone passata come argomento
+                    songInfo = await ytdl.getInfo(element.url);			//ottiene informazioni della canzone passata come argomento
                 }
                 catch(err){
                     throw new Error("errore nel caricamento dell informazioni della canzone");
