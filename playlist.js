@@ -104,7 +104,7 @@ exports.playPL= function (message, serverQueue) {
 		try {
 			var connection = await message.member.voice.channel.join();	//connessione al canale vocale dell'utente che invia il messaggio
 			musica.queue.get(message.guild.id).connection = connection;			
-			this.start(message.guild, serverQueue.songs[0]);	//starata la prima canzone in coda
+			this.start(message.guild, musica.queue.get(message.guild.id).songs[0]);	//starata la prima canzone in coda
 		} catch (err) {
 			console.log(err.stack);
 			musica.queue.delete(message.guild.id);
