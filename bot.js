@@ -143,6 +143,7 @@ comandi.set("slot",gameRoom.slot);
 comandi.set("signin",signIn);
 comandi.set("coinflip",gameRoom.coinflip);
 comandi.set("creapl",playlist.createPlaylist);
+comandi.set("printPL",playlist.printPL);
 comandi.set("join",join);
 comandi.set("help",help);
 comandi.set("saldo",getSaldo);

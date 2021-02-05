@@ -152,3 +152,23 @@ exports.addSong = function (id, url, nomePlaylist){
 		}
 	});
 }
+exports.leggiPL = function (id,nomePlaylist,risultato){
+	dbpool.getConnection((err, db) => {
+		var sql= `SELECT song FROM contenuto where playlist_utente='${id}' and playlist_nome='${nomePlaylist}'`;	
+		db.query(sql, function (err,result) {
+			db.release();
+			if(err){
+				console.log("errore nella lettura della playlist");
+				return
+			}
+			else{
+				return risultato(result);
+			}
+		});
+		
+		if(err){
+			console.log(err.message);
+			return
+		}
+	});
+}
