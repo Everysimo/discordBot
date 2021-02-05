@@ -69,6 +69,7 @@ exports.playPL= function (message) {
     const id=message.member.user.id;
     db.leggiPL(id, nomePl,async function(risult){
         if (risult) {
+			var result=risult;
 			if (!musica.queue.has(message.guild.id)) {					//se la coda delle canzoni è vuota
 				const queueContruct = {
 					textChannel: message.channel,
@@ -80,12 +81,12 @@ exports.playPL= function (message) {
 				};
 				musica.queue.set(message.guild.id, queueContruct);
 			}
-			for (let index = 0; index < risult.length||index < nC; index++) {
-				const element = risult.shift()
-				risult.push(element);
+			for (let index = 0; index < result.length||index < nC; index++) {
+				const element = result.shift()
+				result.push(element);
 			}
-			for (let index = 0; index < risult.length; index++) {
-				const element = risult[index];
+			for (let index = 0; index < result.length; index++) {
+				const element = result[index];
 				var songInfo;
 
 				try{
