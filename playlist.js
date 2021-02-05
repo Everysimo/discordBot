@@ -103,7 +103,7 @@ exports.playPL= function (message, serverQueue) {
 		    messaggioAggiuntaCoda.addFields({
 		        name: song.title,value:" "+song.url}
 		    );
-		    return message.reply(messaggioAggiuntaCoda);
+		    message.reply(messaggioAggiuntaCoda);
         }
         try {
 			var connection = await voiceChannel.join();	//connessione al canale vocale dell'utente che invia il messaggio
