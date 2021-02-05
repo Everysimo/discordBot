@@ -52,7 +52,7 @@ exports.printPL = function (message) {
                     isLive: songInfo.videoDetails.isLiveContent,
                     username: message.member.user.username,
                 };
-                stampa.addField(title,url,true);
+                stampa.addField(song.title,song.url,true);
             });
         });
     }
