@@ -64,6 +64,7 @@ exports.playPL= function (message, serverQueue) {
     const id=message.member.user.id;
     db.leggiPL(id, nomePl,async function(risult){
         if (risult) {
+			const voiceChannel = message.member.voice.channel;
 			if (!serverQueue) {					//se la coda delle canzoni è vuota
 				const queueContruct = {
 					textChannel: message.channel,
