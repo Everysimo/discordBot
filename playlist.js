@@ -3,6 +3,7 @@ const config = require('./config.json');
 const lingua =require(config.lingua);
 const db=require("./dbOpertion.js");
 const ytdl = require('ytdl-core');
+const musica=require("./musica.js")
 
 exports.createPlaylist = function (message) {
     if(!message.member.user.bot){
@@ -58,4 +59,12 @@ exports.printPL = function (message) {
     }
 }
 
-
+exports.playPL= function (message, serverQueue) {
+    const nomePl=message.content.split(" ")[1];
+    const id=message.member.user.id;
+    db.leggiPL(id, nomePl,async function(risult){
+        for (const element of risult) {
+            musica.playPlaylist(message,element.song,serverQueue);
+        }
+    });
+}
