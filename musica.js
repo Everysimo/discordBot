@@ -48,7 +48,7 @@ exports.play= async function (message, serverQueue){
 		try {
 			var connection = await voiceChannel.join();	//connessione al canale vocale dell'utente che invia il messaggio
 			queueContruct.connection = connection;			
-			start(message.guild, queueContruct.songs[0]);	//starata la prima canzone in coda
+			this.start(message.guild, queueContruct.songs[0]);	//starata la prima canzone in coda
 		} catch (err) {
 			console.log(err.stack);
 			queue.delete(message.guild.id);
@@ -70,7 +70,7 @@ exports.play= async function (message, serverQueue){
 	}
 }
 //starta la canzona
-exports.start = function (guild, song) {
+start = function (guild, song) {
 	var serverQueue = queue.get(guild.id);
 	if (!song) {
 	  serverQueue.voiceChannel.leave();
