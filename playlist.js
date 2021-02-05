@@ -59,7 +59,7 @@ exports.printPL = function (message) {
     }
 }
 
-exports.playPL= function (message, serverQueue) {
+exports.playPL= function (message) {
     const nomePl=message.content.split(" ")[1];
     const id=message.member.user.id;
     db.leggiPL(id, nomePl,async function(risult){

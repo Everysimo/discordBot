@@ -134,7 +134,6 @@ comandiMusicali.set("stop",musica.stop);
 comandiMusicali.set("volumeup",musica.volumeUp);
 comandiMusicali.set("volumedown",musica.volumeDown);
 comandiMusicali.set("setvolume",musica.setvolume);
-comandiMusicali.set("playPL",playlist.playPL);
 
 //mappa comandi non musicali
 let comandi =new Map();
@@ -149,6 +148,7 @@ comandi.set("join",join);
 comandi.set("help",help);
 comandi.set("saldo",getSaldo);
 comandi.set("roulette",gameRoom.roulette);
+comandi.set("playPL",playlist.playPL);
 
 //gestore ricezione messaggi
 client.on("message", message => {
