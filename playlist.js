@@ -45,7 +45,7 @@ exports.printPL = function (message) {
                         title: songInfo.videoDetails.title,
                         url: songInfo.videoDetails.video_url,
                     };
-                    stampa.addField(song.title,song.url,true);
+                    stampa.addFields({ name: song.title, value: song.url, inline:true},);
                 })		//ottiene informazioni della canzone passata come argomento
             });
             message.channel.send(stampa);
