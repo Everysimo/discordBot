@@ -81,9 +81,9 @@ exports.playPL= function (message) {
 				};
 				musica.queue.set(message.guild.id, queueContruct);
 			}
-			for (let index = 0; index < result.length||index < nC; index++) {
+			for (let index = 0; index < result.length&&index < nC; index++) {
 				const element = result.shift()
-				result=result.push(element);
+				result.push(element);
 			}
 			for (let index = 0; index < result.length; index++) {
 				const element = result[index];
