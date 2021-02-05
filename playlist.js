@@ -32,7 +32,7 @@ exports.removeSongFromPL = function (message) {
     }
 }
 
-exports.printPL = function (message) {
+exports.printPL = async function (message) {
     if(!message.member.user.bot){
         const nomePl=message.content.split(" ")[1];
     	const id=message.member.user.id;
