@@ -139,7 +139,7 @@ exports.buySong=function (message){
 		var nPl=parseInt(message.content.split(" ")[2]);
 		const id=message.member.user.id;
 		if (!isNaN(nPl)) {
-			db.addnSong(nPl,id);
+			db.addnSong(nPl,id,nomePl);
 		}else{
 			message.reply("importo non valito")
 		}

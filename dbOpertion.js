@@ -298,7 +298,7 @@ exports.addnPL=function(n,id){
 	});
 }
 
-exports.addnPL=function(n,id){
+exports.addnSong=function(n,id,nomePlaylist){
 	dbpool.getConnection((err, db) => {
 		var sql= `SELECT maxCanzoni FROM playlist where utente='${id}' and nome='${nomePlaylist}'`;	
 		db.query(sql, function (err,result) {
