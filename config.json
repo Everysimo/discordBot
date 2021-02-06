@@ -1,5 +1,5 @@
 {
-  "prefissoNonMusica": "!",
+  "prefissoNonMusica": "$",
   "lingua":"./ita.json",
   "slotItem":[
       "🍏",
