@@ -1,7 +1,6 @@
 const mysql = require('mysql');
 const config = require('./config.json');
 const lingua =require(config.lingua);
-const fs = require('fs');
 
 exports.dbConnect = function () {
     //creazione pool di connessione al DataBase
@@ -166,6 +165,81 @@ exports.leggiPL = function (id,nomePlaylist,risultato){
 			}
 			else{
 				return risultato(result);
+			}
+		});
+		
+		if(err){
+			console.log(lingua.errorDataBaseConnectionFailed,err);
+			return
+		}
+	});
+}
+
+function controlloNPL(id,nomePlaylist,risultato) {
+	dbpool.getConnection((err, db) => {
+		var sql= `SELECT maxPlaylist FROM utente where idutente='${id}'`;	
+		db.query(sql, function (err,result) {
+			db.release();
+			if(err){
+				console.log("errore nella lettura dell utente");
+				return
+			}
+			else{
+				dbpool.getConnection((err, db) => {
+					var sql= `SELECT count(*) as nPlaylist FROM playlist where utente='${id}' and nome='${nomePlaylist}'`;	
+					db.query(sql, function (err,result1) {
+						db.release();
+						if(err){
+							console.log("errore nella lettura della playlist");
+							return
+						}
+						else{
+							return risultato(result1[0].nPlaylist<result[0].maxPlaylist);
+						}
+					});
+					
+					if(err){
+						console.log(lingua.errorDataBaseConnectionFailed,err);
+						return
+					}
+				});
+			}
+		});
+		if(err){
+			console.log(lingua.errorDataBaseConnectionFailed,err);
+			return
+		}
+	});
+}
+
+function controlloNSong(params) {
+	dbpool.getConnection((err, db) => {
+		var sql= `SELECT maxCanzoni FROM playlist where utente='${id}' and nome='${nomePlaylist}'`;	
+		db.query(sql, function (err,result) {
+			db.release();
+			if(err){
+				console.log("errore nella lettura della playlist");
+				return
+			}
+			else{
+				dbpool.getConnection((err, db) => {
+					var sql= `SELECT count(*) as nSong FROM contenuto where playlist_utente='${id}' and playlist_nome='${nomePlaylist}'`;	
+					db.query(sql, function (err,result1) {
+						db.release();
+						if(err){
+							console.log("errore nella lettura del contenuto della playlist");
+							return
+						}
+						else{
+							return risultato(result1[0].nSong<result[0].maxCanzoni);
+						}
+					});
+					
+					if(err){
+						console.log(lingua.errorDataBaseConnectionFailed,err);
+						return
+					}
+				});
 			}
 		});
 		
