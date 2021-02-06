@@ -1,6 +1,7 @@
 const mysql = require('mysql');
 const config = require('./config.json');
 const lingua =require(config.lingua);
+const fs = require('fs');
 
 exports.dbConnect = function () {
     //creazione pool di connessione al DataBase
@@ -10,7 +11,9 @@ exports.dbConnect = function () {
 	    password: process.env.password,
 	    database: process.env.database,
 	    port: 3306,
-		ssl:{ca:fs.readFileSync("discordBot\BaltimoreCyberTrustRoot.crt.pem")},
+		ssl  : {
+			ca : fs.readFileSync('./BaltimoreCyberTrustRoot.crt.pem')
+		}
     });
     global.dbpool = dbpool;
 
