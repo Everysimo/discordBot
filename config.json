@@ -1,10 +1,10 @@
 {
   "prefissoNonMusica": "$",
   "lingua":"./ita.json",
-  "coinPL":100,
-  "coinSong":10,
-  "maxJackpot":9,
-  "minJackpot":5,
+  "coinPL":10000,
+  "coinSong":1000,
+  "moltiplicatoreNormale":9,
+  "moltiplicatoreJackpot":50,
   "slotItem":[
       "🍏",
       "🍓",

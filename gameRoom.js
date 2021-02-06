@@ -92,7 +92,12 @@ exports.slot = function (message){
 					);
 				}
 				if (vinto) {
-					var moltiplicatore =Math.floor(Math.random()*(config.maxJackpot - config.minJackpot))+config.minJackpot
+					var jackpot=false;
+					var moltiplicatore = config.moltiplicatoreNormale;
+					if (Math.floor(Math.random()*1000)==66) {
+						jackpot=true;
+						moltiplicatore=config.moltiplicatoreJackpot;
+					}
 					db.aggiornaSaldo(saldo+(importo*moltiplicatore),id);
 					risultato.addFields(
 						{ name: lingua.win, value: importo*moltiplicatore+' coin' },
