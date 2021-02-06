@@ -44,12 +44,13 @@ async function join(message){
 
 //stampa la lista dei comandi disponibili
 function help(message){
-	const risultato = new Discord.MessageEmbed();
-	const risultatoComandiMusicali = new Discord.MessageEmbed();
+	const resultBotCommands = new Discord.MessageEmbed();
+	const resultMusicCommands = new Discord.MessageEmbed();
 	const resultPlayListCommands = new Discord.MessageEmbed();
-	risultato.setTitle('HydraBot');
-	risultato.setDescription('Bot Commands');
-	risultato.addFields(
+
+	resultBotCommands.setTitle('HydraBot');
+	resultBotCommands.setDescription('Bot Commands');
+	resultBotCommands.addFields(
 		{ name: '!coinflip X value', value: lingua.descCoinFlip, inline:true},
 		{ name: '!help', value: lingua.descHelp, inline:true},
 		{ name: '!join', value: lingua.descJoin, inline:true},
@@ -59,8 +60,8 @@ function help(message){
 		{ name: '!slot value', value: lingua.descSlot, inline:true},
 	);
 
-	risultatoComandiMusicali.setTitle('Music Commands');
-	risultatoComandiMusicali.addFields(
+	resultMusicCommands.setTitle('Music Commands');
+	resultMusicCommands.addFields(
 		{ name: '!play', value: lingua.descPlay,inline:true},
 		{ name: '!setvolume x', value: lingua.descSetVolume, inline:true},
 		{ name: '!next', value: lingua.descNext, inline:true},
@@ -78,8 +79,9 @@ function help(message){
 		{ name: '!rmsongpl namePl Url', value: lingua.descRmSongPl,inline:true},
 	);
 
-	message.channel.send(risultato);
-	message.channel.send(risultatoComandiMusicali);
+	message.channel.send(resultBotCommands);
+	message.channel.send(resultMusicCommands);
+	message.channel.send(resultPlayListCommands);
 }
 
 function signIn(message){
