@@ -46,32 +46,44 @@ async function join(message){
 
 //stampa la lista dei comandi disponibili
 function help(message){
-	const risultato = new Discord.MessageEmbed();
-	const risultatoComandiMusicali = new Discord.MessageEmbed();
-	risultato.setTitle('HydraBot');
-	risultato.setDescription('Comandi');
-	risultato.addFields(
-		{ name: '!coinflip X value', value: 'prova a vincere dei coin con un lancio di moneta X: (testa,t) (croce,c)', inline:true},
-		{ name: '!help', value: 'lista dei comandi', inline:true},
-		{ name: '!join', value: 'Il BOT entra nel tuo attuale canale vocale', inline:true},
-		{ name: '!roulette X value', value: 'Giro di roulette, x= rosso/r x3, nero/n x3, numero x36, 0 x 50', inline:true},
-		{ name: '!saldo', value: 'Restituisce il tuo saldo corrente', inline:true},
-		{ name: '!signin', value: 'iscriviti al server per poter giocare', inline:true},
-		{ name: '!slot value', value: 'prova a vincere dei coin alle slot', inline:true},
+	const resultBotCommands = new Discord.MessageEmbed();
+	const resultMusicCommands = new Discord.MessageEmbed();
+	const resultPlayListCommands = new Discord.MessageEmbed();
+
+	resultBotCommands.setTitle('HydraBot');
+	resultBotCommands.setDescription('Bot Commands');
+	resultBotCommands.addFields(
+		{ name: '!coinflip X value', value: lingua.descCoinFlip, inline:true},
+		{ name: '!help', value: lingua.descHelp, inline:true},
+		{ name: '!join', value: lingua.descJoin, inline:true},
+		{ name: '!roulette X value', value: lingua.descRoulette, inline:true},
+		{ name: '!coin', value: lingua.descCoin, inline:true},
+		{ name: '!signin', value: lingua.descSignIn, inline:true},
+		{ name: '!slot value', value: lingua.descSlot, inline:true},
 	);
 
-	risultatoComandiMusicali.setTitle('Comandi Musicali');
-	risultatoComandiMusicali.addFields(
-		{ name: '!play', value: 'aggiungi una canzone alla coda di riproduzione e falla prartire se non c\'è nulla in coda',inline:true},
-		{ name: '!setvolume x', value: 'setta volume a x (0-100 )', inline:true},
-		{ name: '!skip', value: 'skip di una canzone dalla coda', inline:true},
-		{ name: '!stop', value: 'interruzione della riproduzione ed eliminazione della coda di riproduzione', inline:true},
-		{ name: '!volumedown x', value: 'abbassa il volume di x(0-100)', inline:true},
-		{ name: '!volumeup x', value: 'alza il volume di x(0-100)', inline:true},
+	resultMusicCommands.setTitle('Music Commands');
+	resultMusicCommands.addFields(
+		{ name: '!play', value: lingua.descPlay,inline:true},
+		{ name: '!setvolume x', value: lingua.descSetVolume, inline:true},
+		{ name: '!next', value: lingua.descNext, inline:true},
+		{ name: '!stop', value: lingua.descStop, inline:true},
+		{ name: '!volumedown x', value: lingua.descVolumeDown, inline:true},
+		{ name: '!volumeup x', value: lingua.descVolumeUp, inline:true},
 	);
 
-	message.channel.send(risultato);
-	message.channel.send(risultatoComandiMusicali);
+	resultPlayListCommands.setTitle('PlayList Commands');
+	resultPlayListCommands.addFields(
+		{ name: '!addsongpl namePl Url', value: lingua.descAddSongPl,inline:true},
+		{ name: '!makepl namePl', value: lingua.descMakePl,inline:true},
+		{ name: '!playpl namePl -Optional:song number-', value: lingua.descPlayPl,inline:true},
+		{ name: '!showpl namePl', value: lingua.descShowPl,inline:true},
+		{ name: '!rmsongpl namePl Url', value: lingua.descRmSongPl,inline:true},
+	);
+
+	message.channel.send(resultBotCommands);
+	message.channel.send(resultMusicCommands);
+	message.channel.send(resultPlayListCommands);
 }
 
 function signIn(message){
@@ -83,19 +95,21 @@ function signIn(message){
 			
 			db.query(sql, function (err) {
 				db.release();
-				if(err.code.match('ER_DUP_ENTRY')){
+				if(err){
+					if(err.code.match('ER_DUP_ENTRY')){
 
-					const messaggioRifiuto = new Discord.MessageEmbed();
-					messaggioRifiuto.setTitle("Furbacchione "+ nickname);
-					messaggioRifiuto.addFields(
-						{ name: 'Ti sei già iscritto una volta',
-						 value: 'So che volevi un altro Bonus, ma per altri coin devi sudarteli', inline:true},
-					)
+						const messaggioRifiuto = new Discord.MessageEmbed();
+						messaggioRifiuto.setTitle("Furbacchione "+ nickname);
+						messaggioRifiuto.addFields(
+							{ name: 'Ti sei già iscritto una volta',
+							 value: 'So che volevi un altro Bonus, ma per altri coin devi sudarteli', inline:true},
+						)
 					
-					console.log("Utente già presente del database");
-					message.channel.send(messaggioRifiuto);
-					return
-				}
+						console.log("Utente già presente del database");
+						message.channel.send(messaggioRifiuto);
+						return
+					}
+				}	
 				else{
 					const messaggioConferma = new Discord.MessageEmbed();
 					messaggioConferma.setTitle("Benvenuto "+ nickname);
@@ -110,7 +124,7 @@ function signIn(message){
 			});
 			
 			if(err){
-				console.log("Errore durante la connessione al DataBase",err);
+				console.log(lingua.errorDataBaseConnectionFailed,err);
 				return
 			}
 		});
@@ -129,23 +143,23 @@ function getSaldo(message){
 //mappa comandi non musicali
 let comandi =new Map();
 comandi.set("addsongpl",playlist.addSongToPL);
-comandi.set("rmsongpl",playlist.removeSongFromPL);
-comandi.set("slot",gameRoom.slot);
-comandi.set("signin",signIn);
+comandi.set("coin",getSaldo);
 comandi.set("coinflip",gameRoom.coinflip);
-comandi.set("creapl",playlist.createPlaylist);
-comandi.set("printPL",playlist.printPL);
-comandi.set("join",join);
+comandi.set("makepl",playlist.createPlaylist);
 comandi.set("help",help);
-comandi.set("saldo",getSaldo);
-comandi.set("roulette",gameRoom.roulette);
-comandi.set("playPL",playlist.playPL);
+comandi.set("join",join);
+comandi.set("next",musica.skip);
 comandi.set("play",musica.play);
-comandi.set("skip",musica.skip);
-comandi.set("stop",musica.stop);
-comandi.set("volumeup",musica.volumeUp);
-comandi.set("volumedown",musica.volumeDown);
+comandi.set("playpl",playlist.playPL);
+comandi.set("showpl",playlist.printPL);
+comandi.set("rmsongpl",playlist.removeSongFromPL);
+comandi.set("roulette",gameRoom.roulette);
 comandi.set("setvolume",musica.setvolume);
+comandi.set("signin",signIn);
+comandi.set("slot",gameRoom.slot);
+comandi.set("stop",musica.stop);
+comandi.set("volumedown",musica.volumeDown);
+comandi.set("volumeup",musica.volumeUp);
 
 //gestore ricezione messaggi
 client.on("message", message => {

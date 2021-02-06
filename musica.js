@@ -66,7 +66,6 @@ exports.play= async function (message){
 		name: song.title,value:" "+song.url}
 		);
 		return message.reply(messaggioAggiuntaCoda);
-		//return message.reply(song.title +" "+ lingua.songAddQueue)
 	}
 }
 //starta la canzona
@@ -98,7 +97,6 @@ start = function (guild, song) {
 		);
 
 	return serverQueue.textChannel.send(messaggioRiproduzione);
-	//serverQueue.textChannel.send(lingua.startPlay+" "+song.title);
 }
 
 //skippa la canzone
