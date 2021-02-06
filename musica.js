@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const config = require('./config.json');
 const ytdl = require('ytdl-core');
 const lingua =require(config.lingua);
+const ytsr=require('ytsr')
 //coda di riproduzione
 const queue = new Map();
 exports.queue = queue;
@@ -10,8 +11,7 @@ exports.play= async function (message){
 	var serverQueue = queue.get(message.guild.id);
 	const args = message.content.split(" ");	//input argomento 
 	if(!ytdl.validateURL(args[1])){
-		message.reply("link non valito")
-		return;
+		args=await ytsr(args);
 	}			
 	const voiceChannel = message.member.voice.channel;	//connessione al canale vocale
   	if (!voiceChannel){									//se l'utente non è in un canale genera eccezione
