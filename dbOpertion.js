@@ -10,6 +10,7 @@ exports.dbConnect = function () {
 	    password: process.env.password,
 	    database: process.env.database,
 	    port: 3306,
+		ssl:{ca:fs.readFileSync("discordBot\BaltimoreCyberTrustRoot.crt.pem")},
     });
     global.dbpool = dbpool;
 
