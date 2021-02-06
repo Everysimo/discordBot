@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 const config = require('./config.json');
 const lingua =require(config.lingua);
-
+const gameRoom=require("./gameRoom.js")
 exports.dbConnect = function () {
     //creazione pool di connessione al DataBase
     const dbpool = mysql.createPool({
@@ -278,7 +278,9 @@ exports.addnPL=function(n,id){
 							return
 						}else{
 							saldoGiocatore(id,saldo=>{
-								aggiornaSaldo(saldo+(config.coinPL*n),id);
+								if(gameRoom.verificaSaldo(config.coinPL,saldo)){
+									aggiornaSaldo(saldo+(config.coinPL*n),id);
+								}
 							});
 						}
 					});

@@ -3,6 +3,7 @@ const config = require('./config.json');
 const lingua =require(config.lingua);
 const db=require("./dbOpertion.js");
 const bot = require('./bot');
+
 //lancio moneta testa o croce
 exports.coinflip = function (message){
 	const m=message.content.split(" ")[1];
@@ -282,6 +283,7 @@ function verificaSaldo(importo,saldo){
 		return false;
 	}
 }
+exports.verificaSaldo=verificaSaldo;
 
 
 exports.estrai = function () {
