@@ -3,7 +3,8 @@ const config = require('./config.json');
 const lingua =require(config.lingua);
 const db=require("./dbOpertion.js");
 const ytdl = require('ytdl-core');
-const musica=require("./musica.js")
+const musica=require("./musica.js");
+const ytsr=require('ytsr');
 
 exports.createPlaylist = function (message) {
     if(!message.member.user.bot){
