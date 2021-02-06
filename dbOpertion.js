@@ -1,4 +1,6 @@
 const mysql = require('mysql');
+const config = require('./config.json');
+const lingua =require(config.lingua);
 
 exports.dbConnect = function () {
     //creazione pool di connessione al DataBase
@@ -15,7 +17,7 @@ exports.dbConnect = function () {
     dbpool.getConnection(function(err){
 	    if (err) {
 	    	console.log(err.stack);
-	    	throw new Error("Errore durante la connessione al database");
+	    	throw new Error(lingua.errorDataBaseConnectionFailed);
 	    }
 	    console.log("Database connesso!");
     });
@@ -36,7 +38,7 @@ exports.saldoGiocatore = function (id,saldo) {
 		});
 		
 		if(err){
-			console.log(err.message);
+			console.log(lingua.errorDataBaseConnectionFailed);
 			return
 		}
 	});
@@ -53,7 +55,7 @@ exports.aggiornaSaldo = function (nuovoSaldo,id){
 			}
 		});
 		if(err){
-			console.log(err.message);
+			console.log(lingua.errorDataBaseConnectionFailed,err);
 			return
 		}
 	});
@@ -79,7 +81,7 @@ exports.createPlayListDB = function (id, nome){
 		});
 
 		if(err){
-			console.log(err.message);
+			console.log(lingua.errorDataBaseConnectionFailed,err);
 			return
 		}
 	});
@@ -97,7 +99,7 @@ exports.removeSongFromPlBD = function (id, url, nomePlaylist){
 			}
 		});
 		if(err){
-			console.log(err.message);
+			console.log(lingua.errorDataBaseConnectionFailed,err);
 			return
 		}
 	});
@@ -147,7 +149,7 @@ exports.addSong = function (id, url, nomePlaylist){
 			}
 		});
 		if(err){
-			console.log(err.message);
+			console.log(lingua.errorDataBaseConnectionFailed,err);
 			return
 		}
 	});
@@ -167,7 +169,7 @@ exports.leggiPL = function (id,nomePlaylist,risultato){
 		});
 		
 		if(err){
-			console.log(err.message);
+			console.log(lingua.errorDataBaseConnectionFailed,err);
 			return
 		}
 	});

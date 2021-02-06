@@ -93,19 +93,21 @@ function signIn(message){
 			
 			db.query(sql, function (err) {
 				db.release();
-				if(err.code.match('ER_DUP_ENTRY')){
+				if(err){
+					if(err.code.match('ER_DUP_ENTRY')){
 
-					const messaggioRifiuto = new Discord.MessageEmbed();
-					messaggioRifiuto.setTitle("Furbacchione "+ nickname);
-					messaggioRifiuto.addFields(
-						{ name: 'Ti sei già iscritto una volta',
-						 value: 'So che volevi un altro Bonus, ma per altri coin devi sudarteli', inline:true},
-					)
+						const messaggioRifiuto = new Discord.MessageEmbed();
+						messaggioRifiuto.setTitle("Furbacchione "+ nickname);
+						messaggioRifiuto.addFields(
+							{ name: 'Ti sei già iscritto una volta',
+							 value: 'So che volevi un altro Bonus, ma per altri coin devi sudarteli', inline:true},
+						)
 					
-					console.log("Utente già presente del database");
-					message.channel.send(messaggioRifiuto);
-					return
-				}
+						console.log("Utente già presente del database");
+						message.channel.send(messaggioRifiuto);
+						return
+					}
+				}	
 				else{
 					const messaggioConferma = new Discord.MessageEmbed();
 					messaggioConferma.setTitle("Benvenuto "+ nickname);
@@ -120,7 +122,7 @@ function signIn(message){
 			});
 			
 			if(err){
-				console.log("Errore durante la connessione al DataBase",err);
+				console.log(lingua.errorDataBaseConnectionFailed,err);
 				return
 			}
 		});

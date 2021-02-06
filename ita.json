@@ -19,15 +19,17 @@
     "descStop":"interruzione della riproduzione ed eliminazione della coda di riproduzione",
     "descVolumeDown":"alza il volume di x(0-100)",
     "descVolumeUp":"abbassa il volume di x(0-100)",
+    
+    "errorJoinVoiceChannel":"errore nell'entrare nella chat vocale",
+    "errorDataBaseConnectionFailed":"Errore durante la connessione al DataBase",
+    "lose":"hai perso",
+    "notSelect":"nessuna selezione valida",
+    "notSong":"nessuna canzone in coda",
+    "songAddQueue":"Aggiunta alla coda",
+    "startPlay":"In riproduzione:",
 
     "voiceChannelNotFound":"non sei in nessuna chat vocale",
     "voiceChannelNotPermission":"non ho i permessi in quel canale vocale",
-    "songAddQueue":"Aggiunta alla coda",
-    "errorJoinVoiceChannel":"errore nell'entrare nella chat vocale",
-    "startPlay":"In riproduzione:",
-    "notSong":"nessuna canzone in coda",
-    "win":"hai vinto",
-    "lose":"hai perso",
-    "notSelect":"nessuna selezione valida"
+    "win":"hai vinto"
 
 }
