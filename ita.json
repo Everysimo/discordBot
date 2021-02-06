@@ -1,8 +1,6 @@
 {
     "commandNotFound":"comando non trovato",
-
-
-
+    
     "descAddSongPl":"aggiunge una canzone alla playlist",
     "descCoin":"Restituisce il tuo saldo corrente",
     "descCoinFlip":"prova a vincere dei coin con un lancio di moneta X: (testa,t) (croce,c)",
@@ -21,20 +19,23 @@
     "descStop":"interruzione della riproduzione ed eliminazione della coda di riproduzione",
     "descVolumeDown":"alza il volume di x(0-100)",
     "descVolumeUp":"abbassa il volume di x(0-100)",
+
+    "dbMsgUserAlreadySigned":"Utente già presente del database",
+    "dbMsgUserCorrectlySigned":"Utente registrato correttamente",
     
     "errorJoinVoiceChannel":"errore nell'entrare nella chat vocale",
     "errorDataBaseConnectionFailed":"Errore durante la connessione al DataBase",
+    "errorNotValidLink":"link non valido",
     "lose":"hai perso",
 
     "titleMsgWelcomeSignIn":"Benvenuto ",
+    "titleMsgAlreadySignedIn":"Furbacchione ",
+
     "msgWelcomeSignIn":"Sei diventato ufficialmente una testa dell'Hydra",
     "msgDescWelcomeSignIn":"Come Benvenuto ti regaliamo 1000 coin da poter spendere allo !shop o scommetterli, per maggiori info !help",
-    "dbMsgUserCorrectlySigned":"Utente registrato correttamente",
 
-    "titleMsgAlreadySignedIn":"Furbacchione ",
     "msgAlreadySignedIn":"Ti sei già iscritto una volta",
     "msgDescAlreadySignIn":"So che volevi un altro Bonus, ma per altri coin devi sudarteli",
-    "dbMsgUserAlreadySigned":"Utente già presente del database",
 
     "msgGetCoin":"Il tuo saldo ammonta a: ",
     "notSelect":"nessuna selezione valida",
