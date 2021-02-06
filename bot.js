@@ -8,7 +8,7 @@ const musica=require("./musica.js")
 const playlist=require("./playlist.js")
 db.dbConnect();
 
-//setInterval( gameRoom.estrai, 2000)
+setInterval( gameRoom.estrai, 60000)
 
 //quando il nuovo cliente è pronto esegue log
 client.once('ready', () => {
