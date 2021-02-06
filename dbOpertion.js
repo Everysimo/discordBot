@@ -106,51 +106,54 @@ exports.removeSongFromPlBD = function (id, url, nomePlaylist){
 }
 
 exports.addSong = function (id, url, nomePlaylist){
-	dbpool.getConnection((err, db) => {
-
-		var sql= `Insert Into song Values ('${url}')`;
-		db.query(sql, function (err) {
-			if(err){
-				if(err.code.match('ER_DUP_ENTRY')){
-					sql= `Insert Into contenuto Values ('${url}','${id}','${nomePlaylist}')`;
-					db.query(sql, function (err) {
-						if(err){
-							if(err.code.match('ER_DUP_ENTRY')){
-								console.log("Canzone già presente nel database");
-								return
-							}
-							else{
-								console.log("errore durante aggiunzione di una canzone alla playlist\n");
-								return
-							}
+	controlloNSong(id,nomePlaylist,risultato=>{
+		if(risultato){
+			dbpool.getConnection((err, db) => {
+				var sql= `Insert Into song Values ('${url}')`;
+				db.query(sql, function (err) {
+					if(err){
+						if(err.code.match('ER_DUP_ENTRY')){
+							sql= `Insert Into contenuto Values ('${url}','${id}','${nomePlaylist}')`;
+							db.query(sql, function (err) {
+								if(err){
+									if(err.code.match('ER_DUP_ENTRY')){
+										console.log("Canzone già presente nel database");
+										return
+									}
+									else{
+										console.log("errore durante aggiunzione di una canzone alla playlist\n");
+										return
+									}
+								}
+							});
 						}
-					});
-				}
-				else{
-					console.log("errore durante aggiunzione di una canzone");
+						else{
+							console.log("errore durante aggiunzione di una canzone");
+							return
+						}
+						
+					}
+				});
+				sql= `Insert Into contenuto Values ('${url}','${id}','${nomePlaylist}')`;
+				db.query(sql, function (err) {
+					db.release();
+		
+					if(err){
+						if(err.code.match('ER_DUP_ENTRY')){
+							console.log("Canzone già presente nella PlayList");
+							return
+						}
+						else{
+							console.log("errore durante aggiunzione di una canzone alla playlist");
+							return
+						}
+					}
+				});
+				if(err){
+					console.log(lingua.errorDataBaseConnectionFailed,err);
 					return
 				}
-				
-			}
-		});
-		sql= `Insert Into contenuto Values ('${url}','${id}','${nomePlaylist}')`;
-		db.query(sql, function (err) {
-			db.release();
-
-			if(err){
-				if(err.code.match('ER_DUP_ENTRY')){
-					console.log("Canzone già presente nella PlayList");
-					return
-				}
-				else{
-					console.log("errore durante aggiunzione di una canzone alla playlist");
-					return
-				}
-			}
-		});
-		if(err){
-			console.log(lingua.errorDataBaseConnectionFailed,err);
-			return
+			});
 		}
 	});
 }
@@ -212,7 +215,7 @@ function controlloNPL(id,nomePlaylist,risultato) {
 	});
 }
 
-function controlloNSong(params) {
+function controlloNSong(id,nomePlaylist,risultato) {
 	dbpool.getConnection((err, db) => {
 		var sql= `SELECT maxCanzoni FROM playlist where utente='${id}' and nome='${nomePlaylist}'`;	
 		db.query(sql, function (err,result) {
