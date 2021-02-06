@@ -13,6 +13,8 @@ exports.play= async function (message){
 	if(!ytdl.validateURL(args)){
 		var titolo=await ytsr(args);
 		args=titolo.items.shift();
+		console.log(args);
+		return;
 	}			
 	const voiceChannel = message.member.voice.channel;	//connessione al canale vocale
   	if (!voiceChannel){									//se l'utente non è in un canale genera eccezione
