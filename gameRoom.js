@@ -283,9 +283,10 @@ function verificaSaldo(importo,saldo){
 	}
 }
 
-setInterval( estrai, 600000)
-function estrai() {
-	const client = new Discord.Client();
-	const channel = client.channels.cache.get('806311011178905625');
-	channel.send('prova messaggio periodico');
+
+exports.estrai = function () {
+	//const client = new Discord.Client();
+	//const channel = client.channels.cache.get('806311011178905625');
+	//channel.send('prova messaggio periodico');
+	console.log('prova funzione a tempo');
 }
