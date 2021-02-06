@@ -14,7 +14,7 @@ exports.createPlaylist = function (message) {
     }
 }
 
-exports.addSongToPL = function (message) {
+exports.addSongToPL = async function (message) {
     if(!message.member.user.bot){
         const nomePl=message.content.split(" ")[1];
         var songUrl=message.content.split(" ")[2];
