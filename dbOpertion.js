@@ -23,7 +23,7 @@ exports.dbConnect = function () {
     });
 }
 
-exports.saldoGiocatore = function (id,saldo) {
+function saldoGiocatore (id,saldo) {
 	dbpool.getConnection((err, db) => {
 		var sql= `SELECT saldo FROM utente where idutente='${id}'`;	
 		db.query(sql, function (err,result) {
@@ -43,8 +43,9 @@ exports.saldoGiocatore = function (id,saldo) {
 		}
 	});
 }
+exports.saldoGiocatore = saldoGiocatore;
 
-exports.aggiornaSaldo = function (nuovoSaldo,id){ 
+function aggiornaSaldo(nuovoSaldo,id){ 
 	dbpool.getConnection((err, db) => {
 		var sql= `Update utente set saldo='${nuovoSaldo}' where idutente='${id}'`;
 		db.query(sql, function (err) {
@@ -60,6 +61,7 @@ exports.aggiornaSaldo = function (nuovoSaldo,id){
 		}
 	});
 }
+exports.aggiornaSaldo =aggiornaSaldo;
 
 exports.createPlayListDB = function (id, nome){
 	controlloNPL(id,risultato=>{
@@ -249,6 +251,44 @@ function controlloNSong(id,nomePlaylist,risultato) {
 			}
 		});
 		
+		if(err){
+			console.log(lingua.errorDataBaseConnectionFailed,err);
+			return
+		}
+	});
+}
+
+exports.addnPL=function(n,id){
+	dbpool.getConnection((err, db) => {
+		var sql= `SELECT maxPlaylist FROM utente where idutente='${id}'`;	
+		db.query(sql, function (err,result) {
+			db.release();
+			if(err){
+				console.log("errore nella lettura dell utente");
+				return
+			}
+			else{
+				n=result[0].maxPlaylist+n;
+				dbpool.getConnection((err, db) => {
+					var sql= `Update utente set maxPlaylist='${n}' where idutente='${id}'`;
+					db.query(sql, function (err) {
+						db.release();
+						if(err){
+							console.log("errore durante l'aggiornamento del numero max di playlist");
+							return
+						}else{
+							saldoGiocatore(id,saldo=>{
+								aggiornaSaldo(saldo+(config.coinPL*n),id);
+							});
+						}
+					});
+					if(err){
+						console.log(lingua.errorDataBaseConnectionFailed,err);
+						return
+					}
+				});
+			}
+		});
 		if(err){
 			console.log(lingua.errorDataBaseConnectionFailed,err);
 			return
