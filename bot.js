@@ -8,8 +8,6 @@ const musica=require("./musica.js")
 const playlist=require("./playlist.js")
 db.dbConnect();
 
-setInterval( gameRoom.estrai, 60000)
-
 //quando il nuovo cliente è pronto esegue log
 client.once('ready', () => {
 	console.log('Ready!');
@@ -20,6 +18,8 @@ const pnm=config.prefissoNonMusica;
 
 //login nel server tramite token
 client.login(process.env.tokenBotDiscord);
+
+setInterval( gameRoom.estrai(client), 60000);
 
 //il bot join nel canale vocale del mittente del messaggio
 async function join(message){

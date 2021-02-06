@@ -284,10 +284,8 @@ function verificaSaldo(importo,saldo){
 }
 
 
-exports.estrai = function () {
-	const client = new Discord.Client();
+exports.estrai = function (client) {
 	client.channels.fetch('806311011178905625').then(channel=>{
 		channel.send('prova funzione periodica');
 	});
-	
 }
