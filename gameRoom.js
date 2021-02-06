@@ -92,6 +92,7 @@ exports.slot = function (message){
 					);
 				}
 				if (vinto) {
+					var moltiplicatore =Math.floor(Math.random()*(config.maxJackpot - config.minJackpot))+config.minJackpot
 					db.aggiornaSaldo(saldo+(importo*9),id);
 					risultato.addFields(
 						{ name: lingua.win, value: importo*9+' coin' },

@@ -3,6 +3,8 @@
   "lingua":"./ita.json",
   "coinPL":100,
   "coinSong":10,
+  "maxJackpot":9,
+  "minJackpot":5,
   "slotItem":[
       "🍏",
       "🍓",
