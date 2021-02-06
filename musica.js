@@ -11,7 +11,11 @@ exports.play= async function (message){
 	var serverQueue = queue.get(message.guild.id);
 	var args = message.content.split(" ")[1];	//input argomento 
 	if(!ytdl.validateURL(args)){
-		var titolo=await ytsr(args);
+		var titolo=await ytsr(args,{limit:1});
+		if (!titolo) {
+			message.reply("nessun risultato trovato");
+			return;
+		}
 		args=titolo.items.shift().url;
 	}			
 	const voiceChannel = message.member.voice.channel;	//connessione al canale vocale
