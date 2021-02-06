@@ -126,10 +126,9 @@ exports.buyPL=function (message){
 	if(!message.member.user.bot){
 		var nPl=parseInt(message.content.split(" ")[1]);
 		const id=message.member.user.id;
-		if (!isNaN(nPl)) {
-			db.addnPL(nPL,id);
-		}else{
-			message.reply("importo non valito");
+		if (isNaN(nPl)) {
+			npl=1;
 		}
+		db.addnPL(nPl,id);
 	}
 }
