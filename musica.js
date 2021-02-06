@@ -9,7 +9,7 @@ exports.queue = queue;
 
 exports.play= async function (message){
 	var serverQueue = queue.get(message.guild.id);
-	const args = message.content.split(" ")[1];	//input argomento 
+	var args = message.content.split(" ")[1];	//input argomento 
 	if(!ytdl.validateURL(args)){
 		args=await ytsr(args);
 	}			
