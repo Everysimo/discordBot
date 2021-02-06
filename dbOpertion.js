@@ -268,9 +268,9 @@ exports.addnPL=function(n,id){
 				return
 			}
 			else{
-				n=result[0].maxPlaylist+n;
+				var n1=result[0].maxPlaylist+n;
 				dbpool.getConnection((err, db) => {
-					var sql= `Update utente set maxPlaylist='${n}' where idutente='${id}'`;
+					var sql= `Update utente set maxPlaylist='${n1}' where idutente='${id}'`;
 					db.query(sql, function (err) {
 						db.release();
 						if(err){
