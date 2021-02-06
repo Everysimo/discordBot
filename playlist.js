@@ -133,3 +133,15 @@ exports.buyPL=function (message){
 		}
 	}
 }
+exports.buySong=function (message){
+	if(!message.member.user.bot){
+		const nomePl=message.content.split(" ")[1];
+		var nPl=parseInt(message.content.split(" ")[2]);
+		const id=message.member.user.id;
+		if (!isNaN(nPl)) {
+			db.addnSong(nPl,id);
+		}else{
+			message.reply("importo non valito")
+		}
+	}
+}

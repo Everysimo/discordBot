@@ -2,6 +2,7 @@
   "prefissoNonMusica": "$",
   "lingua":"./ita.json",
   "coinPL":100,
+  "coinSong":10,
   "slotItem":[
       "🍏",
       "🍓",

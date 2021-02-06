@@ -297,3 +297,43 @@ exports.addnPL=function(n,id){
 		}
 	});
 }
+
+exports.addnPL=function(n,id){
+	dbpool.getConnection((err, db) => {
+		var sql= `SELECT maxCanzoni FROM playlist where utente='${id}' and nome='${nomePlaylist}'`;	
+		db.query(sql, function (err,result) {
+			db.release();
+			if(err){
+				console.log("errore nella lettura dell playlist");
+				return
+			}
+			else{
+				var n1=result[0].maxCanzoni+n;
+				dbpool.getConnection((err, db) => {
+					var sql= `Update playlist set maxCanzoni=${n1} where utente='${id}' and nome='${nomePlaylist}'`;
+					db.query(sql, function (err) {
+						db.release();
+						if(err){
+							console.log("errore durante l'aggiornamento del numero max di playlist");
+							return
+						}else{
+							saldoGiocatore(id,saldo=>{
+								if(gameRoom.verificaSaldo(config.coinSong*n,saldo)){
+									aggiornaSaldo(saldo-(config.coinSong*n),id);
+								}
+							});
+						}
+					});
+					if(err){
+						console.log(lingua.errorDataBaseConnectionFailed,err);
+						return
+					}
+				});
+			}
+		});
+		if(err){
+			console.log(lingua.errorDataBaseConnectionFailed,err);
+			return
+		}
+	});
+}
