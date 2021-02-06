@@ -13,7 +13,7 @@ exports.play= async function (message){
 	if(!ytdl.validateURL(args)){
 		var element;
 		for (let index = 1; index < message.content.split(" ").length; index++) {
-			element=element+ message.content.split(" ")[index];
+			element=element+ " " + message.content.split(" ")[index];
 		}
 		var titolo=await ytsr(element,{limit:1});
 		if (!titolo) {
