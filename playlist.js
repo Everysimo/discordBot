@@ -126,9 +126,8 @@ exports.buyPL=function (message){
 	if(!message.member.user.bot){
 		var nPl=parseInt(message.content.split(" ")[1]);
 		const id=message.member.user.id;
-		if (isNaN(nPl)) {
-			npl=1;
+		if (!isNaN(nPl)) {
+			db.addnPL(nPl,id);
 		}
-		db.addnPL(nPl,id);
 	}
 }
