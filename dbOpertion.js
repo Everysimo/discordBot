@@ -278,8 +278,8 @@ exports.addnPL=function(n,id){
 							return
 						}else{
 							saldoGiocatore(id,saldo=>{
-								if(gameRoom.verificaSaldo(config.coinPL,saldo)){
-									aggiornaSaldo(saldo+(config.coinPL*n),id);
+								if(gameRoom.verificaSaldo(config.coinPL*n,saldo)){
+									aggiornaSaldo(saldo-(config.coinPL*n),id);
 								}
 							});
 						}
