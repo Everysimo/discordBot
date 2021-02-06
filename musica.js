@@ -9,8 +9,8 @@ exports.queue = queue;
 
 exports.play= async function (message){
 	var serverQueue = queue.get(message.guild.id);
-	const args = message.content.split(" ");	//input argomento 
-	if(!ytdl.validateURL(args[1])){
+	const args = message.content.split(" ")[1];	//input argomento 
+	if(!ytdl.validateURL(args)){
 		args=await ytsr(args);
 	}			
 	const voiceChannel = message.member.voice.channel;	//connessione al canale vocale
@@ -25,7 +25,7 @@ exports.play= async function (message){
 	var songInfo;
 
 	try{
-		songInfo = await ytdl.getInfo(args[1]);			//ottiene informazioni della canzone passata come argomento
+		songInfo = await ytdl.getInfo(args);			//ottiene informazioni della canzone passata come argomento
 	}
 	catch(err){
 		throw new Error("errore nel caricamento dell informazioni della canzone");
