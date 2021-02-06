@@ -124,7 +124,7 @@ exports.playPL= function (message) {
 
 exports.buyPL=function (message){
 	if(!message.member.user.bot){
-		var nPl=message.content.split(" ")[1];
+		var nPl=parseInt(message.content.split(" ")[1]);
 		const id=message.member.user.id;
 		if (isNaN(nPl)) {
 			nPl=1;
