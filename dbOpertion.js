@@ -62,27 +62,30 @@ exports.aggiornaSaldo = function (nuovoSaldo,id){
 }
 
 exports.createPlayListDB = function (id, nome){
-	dbpool.getConnection((err, db) => {
+	controlloNPL(id,risultato=>{
+		if (risultato) {
+			dbpool.getConnection((err, db) => {
 
-		var sql= `Insert Into playlist (nome,utente) Values ('${nome}','${id}')`;
-		db.query(sql, function (err) {
-			db.release();
-			
-			if(err){
-				if(err.code.match('ER_DUP_ENTRY')){
-					console.log("PlayList già esistente");
-				}
-				else{
-					console.log("errore durante l'inserimento di una nuova playlist");
+				var sql= `Insert Into playlist (nome,utente) Values ('${nome}','${id}')`;
+				db.query(sql, function (err) {
+					db.release();
+					
+					if(err){
+						if(err.code.match('ER_DUP_ENTRY')){
+							console.log("PlayList già esistente");
+						}
+						else{
+							console.log("errore durante l'inserimento di una nuova playlist");
+							return
+						}
+					}
+					
+				});
+				if(err){
+					console.log(lingua.errorDataBaseConnectionFailed,err);
 					return
 				}
-			}
-			
-		});
-
-		if(err){
-			console.log(lingua.errorDataBaseConnectionFailed,err);
-			return
+			});
 		}
 	});
 }
@@ -178,7 +181,7 @@ exports.leggiPL = function (id,nomePlaylist,risultato){
 	});
 }
 
-function controlloNPL(id,nomePlaylist,risultato) {
+function controlloNPL(id,risultato) {
 	dbpool.getConnection((err, db) => {
 		var sql= `SELECT maxPlaylist FROM utente where idutente='${id}'`;	
 		db.query(sql, function (err,result) {
@@ -189,7 +192,7 @@ function controlloNPL(id,nomePlaylist,risultato) {
 			}
 			else{
 				dbpool.getConnection((err, db) => {
-					var sql= `SELECT count(*) as nPlaylist FROM playlist where utente='${id}' and nome='${nomePlaylist}'`;	
+					var sql= `SELECT count(*) as nPlaylist FROM playlist where utente='${id}'`;	
 					db.query(sql, function (err,result1) {
 						db.release();
 						if(err){
