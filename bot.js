@@ -99,26 +99,26 @@ function signIn(message){
 					if(err.code.match('ER_DUP_ENTRY')){
 
 						const messaggioRifiuto = new Discord.MessageEmbed();
-						messaggioRifiuto.setTitle("Furbacchione "+ nickname);
+						messaggioRifiuto.setTitle(lingua.titleMsgAlreadySignedIn + nickname);
 						messaggioRifiuto.addFields(
-							{ name: 'Ti sei già iscritto una volta',
-							 value: 'So che volevi un altro Bonus, ma per altri coin devi sudarteli', inline:true},
+							{ name: lingua.msgWelcomeSignIn,
+							 value: lingua.msgDescWelcomeSignIn, inline:true},
 						)
 					
-						console.log("Utente già presente del database");
+						console.log(lingua.dbMsgUserCorrectlySigned);
 						message.channel.send(messaggioRifiuto);
 						return
 					}
 				}	
 				else{
 					const messaggioConferma = new Discord.MessageEmbed();
-					messaggioConferma.setTitle("Benvenuto "+ nickname);
+					messaggioConferma.setTitle(lingua.titleMsgWelcomeSignIn + nickname);
 					messaggioConferma.addFields(
-						{ name: 'Sei diventato ufficialmente una testa dell\'Hydra',
-						 value: 'Come Benvenuto ti regaliamo 1000 coin da poter spendere allo !shop o scommetterli, per maggiori info !comandi', inline:true},
+						{ name: lingua.msgAlreadySignedIn,
+						 value: lingua.msgDescAlreadySignIn, inline:true},
 					)
 
-					console.log("Utente registrato correttamente");
+					console.log(lingua.dbMsgUserAlreadySigned);
 					message.channel.send(messaggioConferma);
 				}
 			});
@@ -135,7 +135,7 @@ function getSaldo(message){
 	if(!message.member.user.bot){
 		const id=message.member.user.id;
 		db.saldoGiocatore(id,function(saldo){
-			message.reply("saldo: "+saldo);
+			message.reply(lingua.msgGetCoin+saldo);
 		});
 	}
 }

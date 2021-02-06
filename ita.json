@@ -1,6 +1,8 @@
 {
     "commandNotFound":"comando non trovato",
 
+
+
     "descAddSongPl":"aggiunge una canzone alla playlist",
     "descCoin":"Restituisce il tuo saldo corrente",
     "descCoinFlip":"prova a vincere dei coin con un lancio di moneta X: (testa,t) (croce,c)",
@@ -23,6 +25,18 @@
     "errorJoinVoiceChannel":"errore nell'entrare nella chat vocale",
     "errorDataBaseConnectionFailed":"Errore durante la connessione al DataBase",
     "lose":"hai perso",
+
+    "titleMsgWelcomeSignIn":"Benvenuto ",
+    "msgWelcomeSignIn":"Sei diventato ufficialmente una testa dell'Hydra",
+    "msgDescWelcomeSignIn":"Come Benvenuto ti regaliamo 1000 coin da poter spendere allo !shop o scommetterli, per maggiori info !help",
+    "dbMsgUserCorrectlySigned":"Utente registrato correttamente",
+
+    "titleMsgAlreadySignedIn":"Furbacchione ",
+    "msgAlreadySignedIn":"Ti sei già iscritto una volta",
+    "msgDescAlreadySignIn":"So che volevi un altro Bonus, ma per altri coin devi sudarteli",
+    "dbMsgUserAlreadySigned":"Utente già presente del database",
+
+    "msgGetCoin":"Il tuo saldo ammonta a: ",
     "notSelect":"nessuna selezione valida",
     "notSong":"nessuna canzone in coda",
     "songAddQueue":"Aggiunta alla coda",
