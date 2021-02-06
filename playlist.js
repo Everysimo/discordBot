@@ -17,11 +17,19 @@ exports.createPlaylist = function (message) {
 exports.addSongToPL = function (message) {
     if(!message.member.user.bot){
         const nomePl=message.content.split(" ")[1];
-        const songUrl=message.content.split(" ")[2];
+        var songUrl=message.content.split(" ")[2];
         const id=message.member.user.id;
         if(!ytdl.validateURL(songUrl)){
-			message.reply("link non valito")
-			return;
+			var element;
+			for (let index = 1; index < message.content.split(" ").length; index++) {
+				element=element+ " " + message.content.split(" ")[index];
+			}
+			var titolo=await ytsr(element,{limit:1});
+			if (!titolo) {
+				message.reply("nessun risultato trovato");
+				return;
+			}
+			songUrl=titolo.items.shift().url;
 		}
         db.addSong(id,songUrl,nomePl);
     }
