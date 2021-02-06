@@ -19,7 +19,10 @@ exports.addSongToPL = function (message) {
         const nomePl=message.content.split(" ")[1];
         const songUrl=message.content.split(" ")[2];
         const id=message.member.user.id;
-        
+        if(!ytdl.validateURL(songUrl)){
+			message.reply("link non valito")
+			return;
+		}
         db.addSong(id,songUrl,nomePl);
     }
 }

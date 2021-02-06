@@ -8,7 +8,11 @@ exports.queue = queue;
 
 exports.play= async function (message){
 	var serverQueue = queue.get(message.guild.id);
-	const args = message.content.split(" ");			//input argomento 
+	const args = message.content.split(" ");	//input argomento 
+	if(!ytdl.validateURL(args[1])){
+		message.reply("link non valito")
+		return;
+	}			
 	const voiceChannel = message.member.voice.channel;	//connessione al canale vocale
   	if (!voiceChannel){									//se l'utente non è in un canale genera eccezione
 		return message.reply(lingua.voiceChannelNotFound);
