@@ -128,6 +128,8 @@ exports.buyPL=function (message){
 		const id=message.member.user.id;
 		if (!isNaN(nPl)) {
 			db.addnPL(nPl,id);
+		}else{
+			message.reply("importo non valito")
 		}
 	}
 }
