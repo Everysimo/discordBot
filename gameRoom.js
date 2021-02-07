@@ -293,19 +293,16 @@ function verificaSaldo(importo,saldo){
 exports.verificaSaldo=verificaSaldo;
 
 
-exports.estrai = function () {
-
-	bot.client.channels.fetch('806311011178905625').then(channel=>{
-		var numeriVincenti=new Array();
-		var i=0;
-		while (i<6) {
-			let nEstratto=Math.floor(Math.random()*89)+1
-			if (numeriVincenti.indexOf(nEstratto)==-1) {
-				numeriVincenti.push(nEstratto);
-				i++;
-			}
+exports.estrai = function (numeriEstrare,maxNumero) {
+	var numeriVincenti=new Array();
+	var i=0;
+	while (i<numeriEstrare) {
+		let nEstratto=Math.floor(Math.random()*(maxNumero-1))+1
+		if (numeriVincenti.indexOf(nEstratto)==-1) {
+			numeriVincenti.push(nEstratto);
+			i++;
 		}
-		numeriVincenti.sort(function(a, b){return a - b});
-		channel.send(numeriVincenti.toString());
-	});
+	}
+	numeriVincenti.sort(function(a, b){return a - b});
+	return numeriVincenti;
 }
