@@ -157,6 +157,7 @@ comandi.set("playpl",playlist.playPL);
 comandi.set("showpl",playlist.printPL);
 comandi.set("buypl",playlist.buyPL);
 comandi.set("buysong",playlist.buySong);
+comandi.set("buybt",gameRoom.buyBiglietto);
 //comandi.set("radio",musica.radio);
 comandi.set("rmsongpl",playlist.removeSongFromPL);
 comandi.set("roulette",gameRoom.roulette);

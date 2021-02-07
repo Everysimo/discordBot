@@ -337,3 +337,41 @@ exports.addnSong=function(n,id,nomePlaylist){
 		}
 	});
 }
+
+exports.creaBiglietto = function (id,numeri) {
+	controlloNPL(id,risultato=>{
+		if (risultato) {
+			dbpool.getConnection((err, db) => {
+
+				var sql= `Insert Into bigliettolotteria (user,numero1,numero2,numero3,numero4,numero5,numero6) Values ('${id}','${numeri[0]}',${numeri[1]},${numeri[2]},${numeri[3]},${numeri[4]},${numeri[5]})`;
+				db.query(sql, function (err) {
+					db.release();
+					
+					if(err){
+						if(err.code.match('ER_DUP_ENTRY')){
+							console.log("PlayList già esistente");
+						}
+						else{
+							console.log("errore durante l'inserimento di una nuova playlist");
+							return
+						}
+					}else{
+						saldoGiocatore(id,saldo=>{
+							if(gameRoom.verificaSaldo(config.coinBiglietto,saldo)){
+								aggiornaSaldo(saldo-(config.coinBiglietto),id);
+							}
+						});
+					}
+				});
+				if(err){
+					console.log(lingua.errorDataBaseConnectionFailed,err);
+					return
+				}
+			});
+		}
+	});
+}
+
+exports.ottieniBiglietti = function (result) {
+	
+}
