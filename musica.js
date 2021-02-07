@@ -208,24 +208,28 @@ exports.showRadio = function (message){
 exports.playRadio = function playRadio(message){
 	const q = message.content.split(" ")[1];
 	const radioNumber = parseInt(q);
-	const resultPlayRadio = new Discord.Message(message.client,"play nightcore radio 24/7",message.channel);
 	const resultErrorPlayRadio = new Discord.MessageEmbed();
 	
 	switch (radioNumber){
 		case 0:
-			play(resultPlayRadio);
+			message.edit("play nightcore radio 24/7")
+			play(message);
 			break;
 		case 1:
-			play("play lo-fi radio 24/7");
+			message.edit("play lo-fi radio 24/7");
+			play(message);
 			break;
 		case 2:
-			play("play lo-fi radio 24/7");
+			message.edit("play lo-fi radio 24/7");
+			play(message);
 			break;
 		case 3:
-			play("play lo-fi radio 24/7");
+			message.edit("play lo-fi radio 24/7");
+			play(message);
 			break;
 		case 4:
-			play("play lo-fi radio 24/7");
+			message.edit("play lo-fi radio 24/7");
+			play(message);
 			break;
 		default:
 			resultErrorPlayRadio.setTitle("Radio non Trovata");
@@ -233,6 +237,6 @@ exports.playRadio = function playRadio(message){
 				{ name: 'la radio '+radioNumber+'non esiste',inline:true},
 			);
 			message.reply(resultErrorPlayRadio);
-			break;
+		break;
 	}
 }
