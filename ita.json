@@ -43,6 +43,8 @@
     "songAddQueue":"Aggiunta alla coda",
     "startPlay":"In riproduzione:",
 
+    "errorAmountNotValid":"importo non valido",
+
     "voiceChannelNotFound":"non sei in nessuna chat vocale",
     "voiceChannelNotPermission":"non ho i permessi in quel canale vocale",
     "win":"hai vinto"

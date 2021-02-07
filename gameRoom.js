@@ -60,7 +60,7 @@ exports.coinflip = function (message){
 				message.reply("non hai abbastanza coin");
 			}
 		}else{
-			message.reply("importo non valito");
+			message.reply(lingua.errorAmountNotValid);
 		}
 	});
 
@@ -100,13 +100,13 @@ exports.slot = function (message){
 					}
 					db.aggiornaSaldo(saldo+(importo*moltiplicatore),id);
 					risultato.addFields(
-						{ name: message.member.user.name + lingua.win, value: importo*moltiplicatore+' coin' },
+						{ name: message.member.user.username +" "+ lingua.win, value: importo*moltiplicatore+' coin' },
 					);
 					risultato.setColor("#00ff37");
 				}else{
 					db.aggiornaSaldo(saldo-importo,id);
 					risultato.addFields(
-						{ name: message.member.user.name + lingua.lose, value: importo+' coin' },
+						{ name: message.member.user.username +" "+ lingua.lose, value: importo+' coin' },
 					);
 					risultato.setColor("#f50505");
 				}
@@ -115,7 +115,7 @@ exports.slot = function (message){
 				message.reply("non hai abbastanza coin");
 			}
 		}else{
-			message.reply("importo non valito");
+			message.reply(lingua.errorAmountNotValid);
 		}
 	});	
 }
@@ -275,7 +275,7 @@ exports.roulette = function (message){
 				}
 			}
 		}else{
-			message.reply("importo non valito");
+			message.reply(lingua.errorAmountNotValid);
 		}
 	});
 	}
