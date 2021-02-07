@@ -20,7 +20,7 @@ const pnm=config.prefissoNonMusica;
 //login nel server tramite token
 client.login(process.env.tokenBotDiscord);
 
-//setInterval(gameRoom.estrai, config.lotteria);
+setInterval(gameRoom.estrai, config.lotteria);
 
 //il bot join nel canale vocale del mittente del messaggio
 async function join(message){

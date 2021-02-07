@@ -3,6 +3,7 @@ const config = require('./config.json');
 const lingua =require(config.lingua);
 const db=require("./dbOpertion.js");
 const bot = require('./bot');
+const { match } = require('ffmpeg-static');
 
 //lancio moneta testa o croce
 exports.coinflip = function (message){
@@ -295,6 +296,15 @@ exports.verificaSaldo=verificaSaldo;
 exports.estrai = function () {
 
 	bot.client.channels.fetch('806311011178905625').then(channel=>{
-		channel.send('prova funzione periodica');
+		var numeriVincenti=new Array();
+		var i=0;
+		while (i<6) {
+			let nEstratto=Math.floor(Math.random()*89)+1
+			if (numeriVincenti.indexOf(nEstratto)==-1) {
+				numeriVincenti.push(nEstratto);
+				i++;
+			}
+		}
+		channel.send(numeriVincenti.toString());
 	});
 }
