@@ -54,32 +54,34 @@ function help(message){
 	resultBotCommands.setTitle('HydraBot');
 	resultBotCommands.setDescription('Bot Commands');
 	resultBotCommands.addFields(
-		{ name: '!coinflip X value', value: lingua.descCoinFlip, inline:true},
+		{ name: '!coinflip *X* *value*', value: lingua.descCoinFlip, inline:true},
 		{ name: '!help', value: lingua.descHelp, inline:true},
 		{ name: '!join', value: lingua.descJoin, inline:true},
-		{ name: '!roulette X value', value: lingua.descRoulette, inline:true},
+		{ name: '!roulette *X* *value*', value: lingua.descRoulette, inline:true},
 		{ name: '!coin', value: lingua.descCoin, inline:true},
 		{ name: '!signin', value: lingua.descSignIn, inline:true},
-		{ name: '!slot value', value: lingua.descSlot, inline:true},
+		{ name: '!slot *value*', value: lingua.descSlot, inline:true},
 	);
 
 	resultMusicCommands.setTitle('Music Commands');
 	resultMusicCommands.addFields(
-		{ name: '!play', value: lingua.descPlay,inline:true},
-		{ name: '!setvolume x', value: lingua.descSetVolume, inline:true},
 		{ name: '!next', value: lingua.descNext, inline:true},
+		{ name: '!play *url/titolo*', value: lingua.descPlay,inline:true},
+		{ name: '!radio *number*', value: lingua.descRadio,inline:true},
+		{ name: '!setvolume *x*', value: lingua.descSetVolume, inline:true},
+		{ name: '!showRadio ', value: lingua.descShowRadio, inline:true},
 		{ name: '!stop', value: lingua.descStop, inline:true},
-		{ name: '!volumedown x', value: lingua.descVolumeDown, inline:true},
-		{ name: '!volumeup x', value: lingua.descVolumeUp, inline:true},
+		{ name: '!volumedown *x*', value: lingua.descVolumeDown, inline:true},
+		{ name: '!volumeup *x*', value: lingua.descVolumeUp, inline:true},
 	);
 
 	resultPlayListCommands.setTitle('PlayList Commands');
 	resultPlayListCommands.addFields(
-		{ name: '!addsongpl namePl Url', value: lingua.descAddSongPl,inline:true},
-		{ name: '!makepl namePl', value: lingua.descMakePl,inline:true},
-		{ name: '!playpl namePl -Optional:song number-', value: lingua.descPlayPl,inline:true},
-		{ name: '!showpl namePl', value: lingua.descShowPl,inline:true},
-		{ name: '!rmsongpl namePl Url', value: lingua.descRmSongPl,inline:true},
+		{ name: '!addsongpl *namePl* *Url*', value: lingua.descAddSongPl,inline:true},
+		{ name: '!makepl *namePl*', value: lingua.descMakePl,inline:true},
+		{ name: '!playpl *namePl* *Optional:song number*', value: lingua.descPlayPl,inline:true},
+		{ name: '!showpl *namePl*', value: lingua.descShowPl,inline:true},
+		{ name: '!rmsongpl *namePl* *Url*', value: lingua.descRmSongPl,inline:true},
 	);
 
 	message.channel.send(resultBotCommands);
@@ -155,9 +157,11 @@ comandi.set("playpl",playlist.playPL);
 comandi.set("showpl",playlist.printPL);
 comandi.set("buypl",playlist.buyPL);
 comandi.set("buysong",playlist.buySong);
+//comandi.set("radio",musica.radio);
 comandi.set("rmsongpl",playlist.removeSongFromPL);
 comandi.set("roulette",gameRoom.roulette);
 comandi.set("setvolume",musica.setvolume);
+comandi.set("showradio",musica.showRadio);
 comandi.set("signin",signIn);
 comandi.set("slot",gameRoom.slot);
 comandi.set("stop",musica.stop);

@@ -185,3 +185,19 @@ exports.setvolume = function (message){
 	serverQueue.connection.dispatcher.setVolume(serverQueue.volume / 100);
 	message.channel.send("volume settato a "+volume);
 }
+
+//show le radio disponibili
+exports.showRadio = function (message){
+	const resultRadioList = new Discord.MessageEmbed();
+
+	resultRadioList.setTitle('\uD83D\uDCFB Radio \uD83D\uDCFB');
+	resultRadioList.addFields(
+		{ name: '!radio 0', value: "nightcore Radio", inline:true},
+		{ name: '!radio 1', value: "lo-fi Radio", inline:true},
+		{ name: '!radio 2', value: "pop Radio", inline:true},
+		{ name: '!radio 3', value: "rock Radio", inline:true},
+		{ name: '!radio 4', value: "anime Radio", inline:true},
+	);
+
+	message.channel.send(resultRadioList);
+}
