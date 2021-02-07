@@ -16,11 +16,12 @@ exports.play= async function (message){
 			element=element+ " " + message.content.split(" ")[index];
 		}
 		var titolo=await ytsr(element,{limit:1});
-		if (titolo.items.shift()) {
+		args=titolo.items.shift();
+		if (!args) {
 			message.reply("nessun risultato trovato");
 			return;
 		}
-		args=titolo.items.shift().url;
+		args=args.url;
 	}			
 	const voiceChannel = message.member.voice.channel;	//connessione al canale vocale
   	if (!voiceChannel){									//se l'utente non è in un canale genera eccezione

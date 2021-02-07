@@ -25,12 +25,12 @@ exports.addSongToPL = async function (message) {
 			for (let index = 1; index < message.content.split(" ").length; index++) {
 				element=element+ " " + message.content.split(" ")[index];
 			}
-			var titolo=await ytsr(element,{limit:1});
-			if (!titolo) {
+			args=titolo.items.shift();
+			if (!args) {
 				message.reply("nessun risultato trovato");
 				return;
 			}
-			songUrl=titolo.items.shift().url;
+			songUrl=args.url;
 		}
         db.addSong(id,songUrl,nomePl);
     }
