@@ -208,13 +208,11 @@ exports.showRadio = function (message){
 exports.playRadio = function playRadio(message){
 	const q = message.content.split(" ")[1];
 	const radioNumber = parseInt(q);
-	var newMessage = message;
 	const resultErrorPlayRadio = new Discord.MessageEmbed();
 	
 	switch (radioNumber){
 		case 0:
-			newMessage.edit("play nightcore radio 24/7");
-			play(newMessage);
+			message.content="play nightcore radio 24/7"
 			break;
 		case 1:
 			newMessage.edit("play lo-fi radio 24/7");
