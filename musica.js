@@ -228,7 +228,7 @@ exports.playRadio = function playRadio(message){
 			break;
 		default:
 			resultPlayRadio.setTitle("Radio non Trovata");
-			resultPlayRadioaddFields(
+			resultPlayRadio.addFields(
 				{ name: 'la radio '+radioNumber+'non esiste',inline:true},
 			);
 			message.channel.reply(resultPlayRadio);
