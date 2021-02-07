@@ -234,7 +234,7 @@ exports.playRadio = function playRadio(message){
 		default:
 			resultErrorPlayRadio.setTitle("Radio non Trovata");
 			resultErrorPlayRadio.addFields(
-				{ name: 'la radio '+radioNumber+'non esiste',inline:true},
+				{ name: 'la radio '+radioNumber+' non esiste ',inline:true},
 			);
 			message.reply(resultErrorPlayRadio);
 		break;
