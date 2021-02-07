@@ -12,6 +12,10 @@ exports.client=client;
 //quando il nuovo cliente è pronto esegue log
 client.once('ready', () => {
 	console.log('Ready!');
+
+	client.user.setStatus("Online");
+
+	client.user.setGame("Al suo servizio padrone umano, !help")
 });
 
 //prefisso comandi non musica !
