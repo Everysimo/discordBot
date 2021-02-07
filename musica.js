@@ -213,23 +213,22 @@ exports.playRadio = function playRadio(message){
 	
 	switch (radioNumber){
 		case 0:
-			newMessage.edit("play nightcore radio 24/7",content)
+			newMessage.edit("play nightcore radio 24/7");
 			play(newMessage);
 			break;
 		case 1:
-			newMessage.edit("play lo-fi radio 24/7",content);
-			play(newMessage);
+			newMessage.edit("play lo-fi radio 24/7");
 			break;
 		case 2:
-			newMessage.edit("play pop radio 24/7",content);
+			newMessage.edit("play pop radio 24/7");
 			play(newMessage);
 			break;
 		case 3:
-			newMessage.edit("play rock radio 24/7",content);
+			newMessage.edit("play rock radio 24/7");
 			play(newMessage);
 			break;
 		case 4:
-			newMessage.edit("play anime radio 24/7",content);
+			newMessage.edit("play anime radio 24/7");
 			play(newMessage);
 			break;
 		default:
