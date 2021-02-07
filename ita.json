@@ -37,7 +37,7 @@
     "msgAlreadySignedIn":"Ti sei già iscritto una volta",
     "msgDescAlreadySignIn":"So che volevi un altro Bonus, ma per altri coin devi sudarteli",
 
-    "msgGetCoin":"Il tuo saldo ammonta a: ",
+    "msgGetCoin":"\uD83C\uDFE7 Il tuo saldo ammonta a: ",
     "notSelect":"nessuna selezione valida",
     "notSong":"nessuna canzone in coda",
     "songAddQueue":"Aggiunta alla coda",
