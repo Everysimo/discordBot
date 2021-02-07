@@ -71,8 +71,6 @@ function help(message){
 		{ name: '!setvolume *x*', value: lingua.descSetVolume, inline:true},
 		{ name: '!showRadio ', value: lingua.descShowRadio, inline:true},
 		{ name: '!stop', value: lingua.descStop, inline:true},
-		{ name: '!volumedown *x*', value: lingua.descVolumeDown, inline:true},
-		{ name: '!volumeup *x*', value: lingua.descVolumeUp, inline:true},
 	);
 
 	resultPlayListCommands.setTitle('PlayList Commands');
@@ -166,8 +164,6 @@ comandi.set("showradio",musica.showRadio);
 comandi.set("signin",signIn);
 comandi.set("slot",gameRoom.slot);
 comandi.set("stop",musica.stop);
-comandi.set("volumedown",musica.volumeDown);
-comandi.set("volumeup",musica.volumeUp);
 
 //gestore ricezione messaggi
 client.on("message", message => {

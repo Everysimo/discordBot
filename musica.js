@@ -135,41 +135,6 @@ exports.stop = function (message) {
 	serverQueue.songs = [];
 	serverQueue.connection.dispatcher.end();
 }
-//aumentare volume di n della canzone in riproduzione
-exports.volumeUp = function (message){
-	var serverQueue = queue.get(message.guild.id);
-	const q = message.content.split(" ")[1];
-	if (!message.member.voice.channel)
-		return message.reply(lingua.voiceChannelNotFound);
-	if (!serverQueue)
-		return message.reply(lingua.notSong);
-		var volume=parseInt(q);
-	if (isNaN(volume)) {
-		volume = 1;
-	}else{
-		serverQueue.volume=serverQueue.volume+volume;
-	}
-	serverQueue.connection.dispatcher.setVolume(serverQueue.volume / 100);
-	message.channel.send("volume alzato di "+volume);
-}
-
-//abbassare volume di n della canzone in riproduzione
-exports.volumeDown = function (message){
-	var serverQueue = queue.get(message.guild.id);
-	const q = message.content.split(" ")[1];
-	if (!message.member.voice.channel)
-		return message.reply(lingua.voiceChannelNotFound);
-	if (!serverQueue)
-		return message.reply(lingua.notSong);
-	var volume=parseInt(q);
-	if (isNaN(volume)) {
-		volume = 1;
-	}else{
-		serverQueue.volume=serverQueue.volume-volume;
-	}
-	serverQueue.connection.dispatcher.setVolume(serverQueue.volume / 100);
-	message.channel.send("volume abbassato di "+volume);
-}
 //settare volume di n della canzone in riproduzione
 exports.setvolume = function (message){
 	var serverQueue = queue.get(message.guild.id);
@@ -179,6 +144,9 @@ exports.setvolume = function (message){
 	if (!serverQueue)
 		return message.reply(lingua.notSong);
 	var volume=parseInt(q);
+	if(volume>100){
+		volume=100;
+	}
 	if (isNaN(volume)) {
 		volume = serverQueue.volume;
 	}else{

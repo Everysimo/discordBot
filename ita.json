@@ -19,8 +19,6 @@
     "descSignIn":"iscrizione ufficiale al server per poter ottenere molti vantaggi",
     "descSlot":"prova a vincere dei coin alle slot",
     "descStop":"interruzione della riproduzione ed eliminazione della coda di riproduzione",
-    "descVolumeDown":"alza il volume di x(0-100)",
-    "descVolumeUp":"abbassa il volume di x(0-100)",
 
     "dbMsgUserAlreadySigned":"Utente già presente del database",
     "dbMsgUserCorrectlySigned":"Utente registrato correttamente",
