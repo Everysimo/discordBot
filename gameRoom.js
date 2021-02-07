@@ -313,7 +313,10 @@ exports.buyBiglietto = function(message){
 	message.reply("i tuoi numeri sono: \n"+numeri.toString())
 }
 
-exports.valutaVincita = function(biglieti,numeriVincenti){
+exports.valutaVincita = function(risultato){
+	db.ottieniBiglietti(result=>{
+
+	});
 }
 
 exports.stampaVincita=function() {

@@ -349,10 +349,10 @@ exports.creaBiglietto = function (id,numeri) {
 					
 					if(err){
 						if(err.code.match('ER_DUP_ENTRY')){
-							console.log("PlayList già esistente");
+							console.log("biglietto già esistente");
 						}
 						else{
-							console.log("errore durante l'inserimento di una nuova playlist");
+							console.log("errore durante l'inserimento di una nuovo biglietto");
 							return
 						}
 					}else{
@@ -368,6 +368,22 @@ exports.creaBiglietto = function (id,numeri) {
 	});
 }
 
-exports.ottieniBiglietti = function (result) {
-	
+exports.ottieniBiglietti = function (risultato) {
+	dbpool.getConnection((err, db) => {
+		var sql= `SELECT * FROM bigliettolotteria`;	
+		db.query(sql, function (err,result) {
+			db.release();
+			if(err){
+				console.log("errore nella lettura dei biglietti");
+				return
+			}
+			else{
+				return risultato(result);
+			}
+		});
+		if(err){
+			console.log(lingua.errorDataBaseConnectionFailed,err);
+			return
+		}
+	});
 }
