@@ -7,7 +7,7 @@ const ytsr=require('ytsr');
 const queue = new Map();
 exports.queue = queue;
 
-exports.play= async function (message){
+async function play (message){
 	var serverQueue = queue.get(message.guild.id);
 	var args = message.content.split(" ")[1];	//input argomento 
 	if(!ytdl.validateURL(args)){
@@ -82,6 +82,8 @@ exports.play= async function (message){
 		return message.reply(messaggioAggiuntaCoda);
 	}
 }
+exports.play = play;
+
 //starta la canzona
 start = function (guild, song) {
 	var serverQueue = queue.get(guild.id);
@@ -200,4 +202,36 @@ exports.showRadio = function (message){
 	);
 
 	message.channel.send(resultRadioList);
+}
+
+//riproduce la radio selezionata
+exports.playRadio = function playRadio(message){
+	const q = message.content.split(" ")[1];
+	const radioNumber = parseInt(q);
+	const resultPlayRadio = new Discord.MessageEmbed();
+	
+	switch (radioNumber){
+		case 0:
+			play("play nightcore radio 24/7");
+			break;
+		case 1:
+			play("play lo-fi radio 24/7");
+			break;
+		case 2:
+			play("play lo-fi radio 24/7");
+			break;
+		case 3:
+			play("play lo-fi radio 24/7");
+			break;
+		case 4:
+			play("play lo-fi radio 24/7");
+			break;
+		default:
+			resultPlayRadio.setTitle("Radio non Trovata");
+			resultPlayRadioaddFields(
+				{ name: 'la radio '+radioNumber+'non esiste',inline:true},
+			);
+			message.channel.reply(resultPlayRadio);
+			break;
+	}
 }
