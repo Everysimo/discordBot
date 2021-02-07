@@ -292,8 +292,7 @@ function verificaSaldo(importo,saldo){
 }
 exports.verificaSaldo=verificaSaldo;
 
-
-exports.estrai = function (numeriEstrare,maxNumero) {
+function estrai(numeriEstrare,maxNumero) {
 	var numeriVincenti=new Array();
 	var i=0;
 	while (i<numeriEstrare) {
@@ -305,4 +304,17 @@ exports.estrai = function (numeriEstrare,maxNumero) {
 	}
 	numeriVincenti.sort(function(a, b){return a - b});
 	return numeriVincenti;
+}
+exports.estrai=estrai;
+exports.buyBiglietto = function(message){
+	const id=message.member.user.id;
+	var numeri= estrai(6,90);
+	db.creaBiglietto(id,numeri);
+	message.reply("i tuoi numeri sono: \n"+numeri.toString())
+}
+
+exports.valutaVincita = function(biglieti,numeriVincenti){
+}
+
+exports.stampaVincita=function() {
 }
