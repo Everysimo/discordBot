@@ -102,8 +102,8 @@ function signIn(message){
 						const messaggioRifiuto = new Discord.MessageEmbed();
 						messaggioRifiuto.setTitle(lingua.titleMsgAlreadySignedIn + nickname);
 						messaggioRifiuto.addFields(
-							{ name: lingua.msgWelcomeSignIn,
-							 value: lingua.msgDescWelcomeSignIn, inline:true},
+							{ name: lingua.msgAlreadySignedIn,
+							 value: lingua.msgDescAlreadySignIn, inline:true},
 						)
 					
 						console.log(lingua.dbMsgUserCorrectlySigned);
@@ -115,8 +115,8 @@ function signIn(message){
 					const messaggioConferma = new Discord.MessageEmbed();
 					messaggioConferma.setTitle(lingua.titleMsgWelcomeSignIn + nickname);
 					messaggioConferma.addFields(
-						{ name: lingua.msgAlreadySignedIn,
-						 value: lingua.msgDescAlreadySignIn, inline:true},
+						{ name: lingua.msgWelcomeSignIn,
+						 value: lingua.msgDescWelcomeSignIn, inline:true},
 					)
 
 					console.log(lingua.dbMsgUserAlreadySigned);
