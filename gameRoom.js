@@ -305,6 +305,7 @@ exports.estrai = function () {
 				i++;
 			}
 		}
+		numeriVincenti.sort(function(a, b){return a - b});
 		channel.send(numeriVincenti.toString());
 	});
 }
