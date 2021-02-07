@@ -220,15 +220,15 @@ exports.playRadio = function playRadio(message){
 			play(message);
 			break;
 		case 2:
-			message.edit("play lo-fi radio 24/7");
+			message.edit("play pop radio 24/7");
 			play(message);
 			break;
 		case 3:
-			message.edit("play lo-fi radio 24/7");
+			message.edit("play rock radio 24/7");
 			play(message);
 			break;
 		case 4:
-			message.edit("play lo-fi radio 24/7");
+			message.edit("play anime radio 24/7");
 			play(message);
 			break;
 		default:
