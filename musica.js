@@ -16,7 +16,7 @@ exports.play= async function (message){
 			element=element+ " " + message.content.split(" ")[index];
 		}
 		var titolo=await ytsr(element,{limit:1});
-		if (!titolo) {
+		if (titolo.items.shift()) {
 			message.reply("nessun risultato trovato");
 			return;
 		}
