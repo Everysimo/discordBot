@@ -259,81 +259,115 @@ function controlloNSong(id,nomePlaylist,risultato) {
 }
 
 exports.addnPL=function(n,id){
-	dbpool.getConnection((err, db) => {
-		var sql= `SELECT maxPlaylist FROM utente where idutente='${id}'`;	
-		db.query(sql, function (err,result) {
-			db.release();
-			if(err){
-				console.log("errore nella lettura dell utente");
-				return
-			}
-			else{
-				var n1=result[0].maxPlaylist+n;
-				dbpool.getConnection((err, db) => {
-					var sql= `Update utente set maxPlaylist='${n1}' where idutente='${id}'`;
-					db.query(sql, function (err) {
-						db.release();
-						if(err){
-							console.log("errore durante l'aggiornamento del numero max di playlist");
-							return
-						}else{
-							saldoGiocatore(id,saldo=>{
-								if(gameRoom.verificaSaldo(config.coinPL*n,saldo)){
+	saldoGiocatore(id,saldo=>{
+		if(gameRoom.verificaSaldo(config.coinPL*n,saldo)){
+			dbpool.getConnection((err, db) => {
+				var sql= `SELECT maxPlaylist FROM utente where idutente='${id}'`;	
+				db.query(sql, function (err,result) {
+					db.release();
+					if(err){
+						console.log("errore nella lettura dell utente");
+						return
+					}
+					else{
+						var n1=result[0].maxPlaylist+n;
+						dbpool.getConnection((err, db) => {
+							var sql= `Update utente set maxPlaylist='${n1}' where idutente='${id}'`;
+							db.query(sql, function (err) {
+								db.release();
+								if(err){
+									console.log("errore durante l'aggiornamento del numero max di playlist");
+									return
+								}else{
 									aggiornaSaldo(saldo-(config.coinPL*n),id);
 								}
 							});
-						}
-					});
-					if(err){
-						console.log(lingua.errorDataBaseConnectionFailed,err);
-						return
+							if(err){
+								console.log(lingua.errorDataBaseConnectionFailed,err);
+								return
+							}
+						});
 					}
 				});
-			}
-		});
-		if(err){
-			console.log(lingua.errorDataBaseConnectionFailed,err);
-			return
+				if(err){
+					console.log(lingua.errorDataBaseConnectionFailed,err);
+					return
+				}
+			});
 		}
 	});
 }
 
 exports.addnSong=function(n,id,nomePlaylist){
-	dbpool.getConnection((err, db) => {
-		var sql= `SELECT maxCanzoni FROM playlist where utente='${id}' and nome='${nomePlaylist}'`;	
-		db.query(sql, function (err,result) {
-			db.release();
-			if(err){
-				console.log("errore nella lettura dell playlist");
-				return
-			}
-			else{
-				var n1=result[0].maxCanzoni+n;
-				dbpool.getConnection((err, db) => {
-					var sql= `Update playlist set maxCanzoni=${n1} where utente='${id}' and nome='${nomePlaylist}'`;
-					db.query(sql, function (err) {
-						db.release();
-						if(err){
-							console.log("errore durante l'aggiornamento del numero max di playlist");
-							return
-						}else{
-							saldoGiocatore(id,saldo=>{
-								if(gameRoom.verificaSaldo(config.coinSong*n,saldo)){
+	saldoGiocatore(id,saldo=>{
+		if(gameRoom.verificaSaldo(config.coinSong*n,saldo)){
+			dbpool.getConnection((err, db) => {
+				var sql= `SELECT maxCanzoni FROM playlist where utente='${id}' and nome='${nomePlaylist}'`;	
+				db.query(sql, function (err,result) {
+					db.release();
+					if(err){
+						console.log("errore nella lettura dell playlist");
+						return
+					}
+					else{
+						var n1=result[0].maxCanzoni+n;
+						dbpool.getConnection((err, db) => {
+							var sql= `Update playlist set maxCanzoni=${n1} where utente='${id}' and nome='${nomePlaylist}'`;
+							db.query(sql, function (err) {
+								db.release();
+								if(err){
+									console.log("errore durante l'aggiornamento del numero max di playlist");
+									return
+								}else{
 									aggiornaSaldo(saldo-(config.coinSong*n),id);
 								}
 							});
-						}
-					});
-					if(err){
-						console.log(lingua.errorDataBaseConnectionFailed,err);
-						return
+							if(err){
+								console.log(lingua.errorDataBaseConnectionFailed,err);
+								return
+							}
+						});
 					}
 				});
-			}
-		});
-		if(err){
-			console.log(lingua.errorDataBaseConnectionFailed,err);
-			return
+				if(err){
+					console.log(lingua.errorDataBaseConnectionFailed,err);
+					return
+				}
+			});
 		}
 	});
+}
+
+exports.creaBiglietto = function (id,numeri) {
+	saldoGiocatore(id,saldo=>{
+		if(gameRoom.verificaSaldo(config.coinBiglietto,saldo)){
+			dbpool.getConnection((err, db) => {
+
+				var sql= `Insert Into bigliettolotteria (user,numero1,numero2,numero3,numero4,numero5,numero6) Values ('${id}','${numeri[0]}',${numeri[1]},${numeri[2]},${numeri[3]},${numeri[4]},${numeri[5]})`;
+				db.query(sql, function (err) {
+					db.release();
+					
+					if(err){
+						if(err.code.match('ER_DUP_ENTRY')){
+							console.log("PlayList già esistente");
+						}
+						else{
+							console.log("errore durante l'inserimento di una nuova playlist");
+							return
+						}
+					}else{
+						aggiornaSaldo(saldo-(config.coinBiglietto),id);
+					}
+				});
+				if(err){
+					console.log(lingua.errorDataBaseConnectionFailed,err);
+					return
+				}
+			});
+		}
+	});
+}
+
+exports.ottieniBiglietti = function (result) {
+	
 }
