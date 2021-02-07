@@ -15,6 +15,7 @@ client.once('ready', () => {
 
 	client.user.setStatus("Online");
 
+	client.user.type("LISTENING");
 	client.user.setActivity("Al suo servizio padrone umano, !help");
 });
 
