@@ -19,7 +19,7 @@ client.once('ready', () => {
 });
 
 //prefixCommand comandi non musica !
-const pnm=config.prefixCommandNonMusica;
+const pnm=config.prefixCommand;
 
 //login nel server tramite token
 client.login(process.env.tokenBotDiscord);
