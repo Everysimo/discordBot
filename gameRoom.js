@@ -3,7 +3,6 @@ const config = require('./config.json');
 const lingua =require(config.lingua);
 const db=require("./dbOpertion.js");
 const bot = require('./bot');
-const { match } = require('ffmpeg-static');
 
 //lancio moneta testa o croce
 exports.coinflip = function (message){
