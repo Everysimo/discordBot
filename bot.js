@@ -15,7 +15,7 @@ client.once('ready', () => {
 
 	client.user.setStatus("Online");
 
-	client.user.setActivity("Al suo servizio padrone umano, !help");
+	client.user.setActivity("Al suo servizio padrone umano, !help",{type:WATCHING});
 });
 
 //prefisso comandi non musica !
