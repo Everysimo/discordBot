@@ -3,7 +3,6 @@ const config = require('./config.json');
 const lingua =require(config.lingua);
 const db=require("./dbOpertion.js");
 const bot = require('./bot');
-const { match } = require('ffmpeg-static');
 
 //lancio moneta testa o croce
 exports.coinflip = function (message){
@@ -316,17 +315,17 @@ exports.buyBiglietto = function(message){
 
 function valutaVincita(element,numeriVincente){
 	var sbagli=0;
-	if (element.numero1!==bigliettoVincente[0]) {
+	if (element.numero1!==numeriVincente[0]) {
 		sbagli=sbagli+1;
-	}else if (element.numero2!==bigliettoVincente[1]) {
+	}else if (element.numero2!==numeriVincente[1]) {
 		sbagli=sbagli+1;
-	}else if (element.numero3!==bigliettoVincente[2]) {
+	}else if (element.numero3!==numeriVincente[2]) {
 		sbagli=sbagli+1;
-	}else if (element.numero4!==bigliettoVincente[3]) {
+	}else if (element.numero4!==numeriVincente[3]) {
 		sbagli=sbagli+1;
-	}else if (element.numero5!==bigliettoVincente[4]) {
+	}else if (element.numero5!==numeriVincente[4]) {
 		sbagli=sbagli+1;
-	}else if (element.numero6!==bigliettoVincente[5]) {
+	}else if (element.numero6!==numeriVincente[5]) {
 		sbagli=sbagli+1;
 	}
 	return sbagli;
