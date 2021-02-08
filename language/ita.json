@@ -23,9 +23,11 @@
     "dbMsgUserAlreadySigned":"Utente già presente del database",
     "dbMsgUserCorrectlySigned":"Utente registrato correttamente",
     
+    "errorAmountNotValid":"\u274C importo non valido \u274C",
     "errorJoinVoiceChannel":"\u274C errore nell'entrare nella chat vocale \u274C",
     "errorDataBaseConnectionFailed":"\u274C Errore durante la connessione al DataBase \u274C",
     "errorNotValidLink":"\u274C link non valido \u274C",
+    
     "lose":"hai perso",
 
     "titleMsgWelcomeSignIn":"Benvenuto ",
@@ -42,8 +44,6 @@
     "notSong":"\u274C nessuna canzone in coda \u274C",
     "songAddQueue":"\u2714\uFE0F Aggiunta alla coda \u2714\uFE0F",
     "startPlay":"\u25B6\uFE0F In riproduzione:",
-
-    "errorAmountNotValid":"\u274C importo non valido \u274C",
 
     "voiceChannelNotFound":"\u274C non sei in nessuna chat vocale \u274C",
     "voiceChannelNotPermission":"\u274C non ho i permessi in quel canale vocale \u274C",
