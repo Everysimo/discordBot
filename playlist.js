@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const config = require('./config.json');
-const lingua =require(config.lingua);
+const lingua =require('./language/'+config.lingua+'/playlist.json');
 const db=require("./dbOpertion.js");
 const ytdl = require('ytdl-core');
 const musica=require("./musica.js");

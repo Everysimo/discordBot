@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const config = require('./config.json');
-const lingua =require(config.lingua);
+const lingua =require('./language/'+config.lingua+'/gameRoom.json');
 const db=require("./dbOpertion.js");
 const bot = require('./bot');
 

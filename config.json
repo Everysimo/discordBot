@@ -1,6 +1,6 @@
 {
   "prefissoNonMusica": "$",
-  "lingua":"./ita.json",
+  "lingua":"ita",
   "coinPL":10000,
   "coinSong":1000,
   "moltiplicatoreNormale":9,

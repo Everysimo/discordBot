@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const config = require('./config.json');
 const ytdl = require('ytdl-core');
-const lingua =require(config.lingua);
+const lingua =require('./language/'+config.lingua+'/musica.json');
 const ytsr=require('ytsr');
 //coda di riproduzione
 const queue = new Map();
