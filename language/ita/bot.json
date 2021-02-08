@@ -1,4 +1,5 @@
 {
+    "botActivity":"Al suo servizio padrone umano, !help",
     "commandNotFound":"comando non trovato",
     
     "descAddSongPl":"aggiunge una canzone alla playlist",

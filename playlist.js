@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const config = require('./config.json');
-const lingua =require('./language/'+config.lingua+'/playlist.json');
+const language =require('./language/'+config.language+'/playlist.json');
 const db=require("./dbOpertion.js");
 const ytdl = require('ytdl-core');
 const musica=require("./musica.js");
@@ -114,7 +114,7 @@ exports.playPL= function (message) {
 				};
 				musica.queue.get(message.guild.id).songs.push(song);
 				const messaggioAggiuntaCoda = new Discord.MessageEmbed();
-				messaggioAggiuntaCoda.setTitle(lingua.songAddQueue);
+				messaggioAggiuntaCoda.setTitle(language.songAddQueue);
 				messaggioAggiuntaCoda.setDescription("[ @"+message.member.user.username+" ]");
 				messaggioAggiuntaCoda.addFields({
 					name: song.title,value:" "+song.url}
@@ -129,7 +129,7 @@ exports.playPL= function (message) {
 		} catch (err) {
 			console.log(err.stack);
 			musica.queue.delete(message.guild.id);
-			message.reply(lingua.errorJoinVoiceChannel);
+			message.reply(language.errorJoinVoiceChannel);
 		}
     });
 }

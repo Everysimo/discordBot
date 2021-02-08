@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const { validateURL } = require('ytdl-core');
 const client = new Discord.Client();
 const config = require('./config.json');
-const lingua =require('./language/'+config.lingua+'/bot.json');
+const language =require('./language/'+config.language+'/bot.json');
 const db=require("./dbOpertion.js");
 const gameRoom=require("./gameRoom.js")
 const musica=require("./musica.js")
@@ -15,7 +15,7 @@ client.once('ready', () => {
 
 	client.user.setStatus("Online");
 
-	client.user.setActivity("Al suo servizio padrone umano, !help",{type:"LISTENING@"});
+	client.user.setActivity(language.botActivity,{type:"LISTENING@"});
 });
 
 //prefisso comandi non musica !
@@ -30,12 +30,12 @@ client.login(process.env.tokenBotDiscord);
 async function join(message){
 	const voiceChannel = message.member.voice.channel;	//memorizza il canale vocale del mittente del messaggio
 	if (!voiceChannel){
-		return message.reply(lingua.voiceChannelNotFound);
+		return message.reply(language.voiceChannelNotFound);
 	}
 	else{
 		const permissions = voiceChannel.permissionsFor(message.client.user);	//verifica permessi utente che richiama il messggio
   		if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
-    		return message.reply(lingua.voiceChannelNotPermission);
+    		return message.reply(language.voiceChannelNotPermission);
 		}
 		else{
 			try{
@@ -43,7 +43,7 @@ async function join(message){
 			}
 			catch(err){
 				console.log(err.stack);
-				return message.reply(lingua.errorJoinVoiceChannel);
+				return message.reply(language.errorJoinVoiceChannel);
 			}
 		}
 	}
@@ -58,32 +58,32 @@ function help(message){
 	resultBotCommands.setTitle('HydraBot');
 	resultBotCommands.setDescription('Bot Commands');
 	resultBotCommands.addFields(
-		{ name: '!coinflip *X* *value*', value: lingua.descCoinFlip, inline:true},
-		{ name: '!help', value: lingua.descHelp, inline:true},
-		{ name: '!join', value: lingua.descJoin, inline:true},
-		{ name: '!roulette *X* *value*', value: lingua.descRoulette, inline:true},
-		{ name: '!coin', value: lingua.descCoin, inline:true},
-		{ name: '!signin', value: lingua.descSignIn, inline:true},
-		{ name: '!slot *value*', value: lingua.descSlot, inline:true},
+		{ name: '!coinflip *X* *value*', value: language.descCoinFlip, inline:true},
+		{ name: '!help', value: language.descHelp, inline:true},
+		{ name: '!join', value: language.descJoin, inline:true},
+		{ name: '!roulette *X* *value*', value: language.descRoulette, inline:true},
+		{ name: '!coin', value: language.descCoin, inline:true},
+		{ name: '!signin', value: language.descSignIn, inline:true},
+		{ name: '!slot *value*', value: language.descSlot, inline:true},
 	);
 
 	resultMusicCommands.setTitle('Music Commands');
 	resultMusicCommands.addFields(
-		{ name: '!next', value: lingua.descNext, inline:true},
-		{ name: '!play *url/titolo*', value: lingua.descPlay,inline:true},
-		{ name: '!radio *number*', value: lingua.descRadio,inline:true},
-		{ name: '!setvolume *x*', value: lingua.descSetVolume, inline:true},
-		{ name: '!showRadio ', value: lingua.descShowRadio, inline:true},
-		{ name: '!stop', value: lingua.descStop, inline:true},
+		{ name: '!next', value: language.descNext, inline:true},
+		{ name: '!play *url/titolo*', value: language.descPlay,inline:true},
+		{ name: '!radio *number*', value: language.descRadio,inline:true},
+		{ name: '!setvolume *x*', value: language.descSetVolume, inline:true},
+		{ name: '!showRadio ', value: language.descShowRadio, inline:true},
+		{ name: '!stop', value: language.descStop, inline:true},
 	);
 
 	resultPlayListCommands.setTitle('PlayList Commands');
 	resultPlayListCommands.addFields(
-		{ name: '!addsongpl *namePl* *Url*', value: lingua.descAddSongPl,inline:true},
-		{ name: '!makepl *namePl*', value: lingua.descMakePl,inline:true},
-		{ name: '!playpl *namePl* *Optional:song number*', value: lingua.descPlayPl,inline:true},
-		{ name: '!showpl *namePl*', value: lingua.descShowPl,inline:true},
-		{ name: '!rmsongpl *namePl* *Url*', value: lingua.descRmSongPl,inline:true},
+		{ name: '!addsongpl *namePl* *Url*', value: language.descAddSongPl,inline:true},
+		{ name: '!makepl *namePl*', value: language.descMakePl,inline:true},
+		{ name: '!playpl *namePl* *Optional:song number*', value: language.descPlayPl,inline:true},
+		{ name: '!showpl *namePl*', value: language.descShowPl,inline:true},
+		{ name: '!rmsongpl *namePl* *Url*', value: language.descRmSongPl,inline:true},
 	);
 
 	message.channel.send(resultBotCommands);
@@ -104,32 +104,32 @@ function signIn(message){
 					if(err.code.match('ER_DUP_ENTRY')){
 
 						const messaggioRifiuto = new Discord.MessageEmbed();
-						messaggioRifiuto.setTitle(lingua.titleMsgAlreadySignedIn + nickname);
+						messaggioRifiuto.setTitle(language.titleMsgAlreadySignedIn + nickname);
 						messaggioRifiuto.addFields(
-							{ name: lingua.msgAlreadySignedIn,
-							 value: lingua.msgDescAlreadySignIn, inline:true},
+							{ name: language.msgAlreadySignedIn,
+							 value: language.msgDescAlreadySignIn, inline:true},
 						)
 					
-						console.log(lingua.dbMsgUserCorrectlySigned);
+						console.log(language.dbMsgUserCorrectlySigned);
 						message.channel.send(messaggioRifiuto);
 						return
 					}
 				}	
 				else{
 					const messaggioConferma = new Discord.MessageEmbed();
-					messaggioConferma.setTitle(lingua.titleMsgWelcomeSignIn + nickname);
+					messaggioConferma.setTitle(language.titleMsgWelcomeSignIn + nickname);
 					messaggioConferma.addFields(
-						{ name: lingua.msgWelcomeSignIn,
-						 value: lingua.msgDescWelcomeSignIn, inline:true},
+						{ name: language.msgWelcomeSignIn,
+						 value: language.msgDescWelcomeSignIn, inline:true},
 					)
 
-					console.log(lingua.dbMsgUserAlreadySigned);
+					console.log(language.dbMsgUserAlreadySigned);
 					message.channel.send(messaggioConferma);
 				}
 			});
 			
 			if(err){
-				console.log(lingua.errorDataBaseConnectionFailed,err);
+				console.log(language.errorDataBaseConnectionFailed,err);
 				return
 			}
 		});
@@ -140,7 +140,7 @@ function getSaldo(message){
 	if(!message.member.user.bot){
 		const id=message.member.user.id;
 		db.saldoGiocatore(id,function(saldo){
-			message.reply(lingua.msgGetCoin+saldo);
+			message.reply(language.msgGetCoin+saldo);
 		});
 	}
 }
@@ -185,7 +185,7 @@ client.on("message", message => {
 		}
 		//se il comando non è nella mappa dei messaggi
 		else{
-			message.reply(lingua.commandNotFound);
+			message.reply(language.commandNotFound);
 		}
 	}
 });
