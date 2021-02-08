@@ -18,13 +18,13 @@ client.once('ready', () => {
 	client.user.setActivity(language.botActivity,{type:"LISTENING@"});
 });
 
-//prefisso comandi non musica !
-const pnm=config.prefissoNonMusica;
+//prefixCommand comandi non musica !
+const pnm=config.prefixCommandNonMusica;
 
 //login nel server tramite token
 client.login(process.env.tokenBotDiscord);
 
-//setInterval(gameRoom.calcolaVincita, config.lotteria);
+//setInterval(gameRoom.calcolaVincita, config.lottery);
 
 //il bot join nel canale vocale del mittente del messaggio
 async function join(message){

@@ -340,10 +340,10 @@ exports.addnSong=function(n,id,nomePlaylist){
 
 exports.creaBiglietto = function (id,numeri) {
 	saldoGiocatore(id,saldo=>{
-		if(gameRoom.verificaSaldo(config.coinBiglietto,saldo)){
+		if(gameRoom.verificaSaldo(config.lotteryTicket,saldo)){
 			dbpool.getConnection((err, db) => {
 
-				var sql= `Insert Into bigliettolotteria (user,numero1,numero2,numero3,numero4,numero5,numero6) Values ('${id}','${numeri[0]}',${numeri[1]},${numeri[2]},${numeri[3]},${numeri[4]},${numeri[5]})`;
+				var sql= `Insert Into bigliettolottery (user,numero1,numero2,numero3,numero4,numero5,numero6) Values ('${id}','${numeri[0]}',${numeri[1]},${numeri[2]},${numeri[3]},${numeri[4]},${numeri[5]})`;
 				db.query(sql, function (err) {
 					db.release();
 					
@@ -356,7 +356,7 @@ exports.creaBiglietto = function (id,numeri) {
 							return
 						}
 					}else{
-						aggiornaSaldo(saldo-(config.coinBiglietto),id);
+						aggiornaSaldo(saldo-(config.lotteryTicket),id);
 					}
 				});
 				if(err){
@@ -370,7 +370,7 @@ exports.creaBiglietto = function (id,numeri) {
 
 exports.ottieniBiglietti = function (risultato) {
 	dbpool.getConnection((err, db) => {
-		var sql= `SELECT * FROM bigliettolotteria`;	
+		var sql= `SELECT * FROM bigliettolottery`;	
 		db.query(sql, function (err,result) {
 			db.release();
 			if(err){

@@ -93,10 +93,10 @@ exports.slot = function (message){
 				}
 				if (vinto) {
 					var jackpot=false;
-					var moltiplicatore = config.moltiplicatoreNormale;
+					var moltiplicatore = config.multiplier;
 					if (Math.floor(Math.random()*10)==1) {
 						jackpot=true;
-						moltiplicatore=config.moltiplicatoreJackpot;
+						moltiplicatore=config.multiplierJackpot;
 					}
 					db.aggiornaSaldo(saldo+(importo*moltiplicatore),id);
 					risultato.addFields(
@@ -345,7 +345,7 @@ exports.calcolaVincita=function() {
 				vincitoreCon5.push(element.user);
 			}
 		})
-		var vincitaTotale=Math.floor((result.length*config.coinBiglietto)/2);
+		var vincitaTotale=Math.floor((result.length*config.lotteryTicket)/2);
 		var vincitaSingola=Math.floor(vincitaTotale/(vincitore.length+vincitoreCon5.length));
 		var vincitaSingolacon5=Math.floor(vincitaSingola/1.5);
 		for (let index = 0; index < vincitore.length; index++) {

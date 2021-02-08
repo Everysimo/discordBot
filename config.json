@@ -1,12 +1,12 @@
 {
-  "prefissoNonMusica": "$",
+  "prefixCommand": "$",
   "language":"ita",
   "coinPL":10000,
   "coinSong":1000,
-  "moltiplicatoreNormale":9,
-  "moltiplicatoreJackpot":50,
-  "lotteria":60000,
-  "coinBiglietto":500,
+  "multiplier":9,
+  "multiplierJackpot":50,
+  "lottery":60000,
+  "lotteryTicket":500,
   "slotItem":[
       "🍏",
       "🍓",
