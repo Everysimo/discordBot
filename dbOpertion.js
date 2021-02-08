@@ -19,7 +19,7 @@ exports.dbConnect = function () {
 	    	console.log(err.stack);
 	    	throw new Error(language.errorDataBaseConnectionFailed);
 	    }
-	    console.log("Database connesso!");
+	    console.log(language.dbConnected);
     });
 }
 
@@ -29,7 +29,7 @@ function saldoGiocatore (id,saldo) {
 		db.query(sql, function (err,result) {
 			db.release();
 			if(err){
-				console.log("errore nel caricamento del tuo saldo");
+				console.log(language.errorGetCoin);
 				return
 			}
 			else{
@@ -51,7 +51,7 @@ function aggiornaSaldo(nuovoSaldo,id){
 		db.query(sql, function (err) {
 			db.release();
 			if(err){
-				console.log("errore durante l'aggiornamento del saldo");
+				console.log(language.errorUpdateCoin);
 				return
 			}
 		});
@@ -74,10 +74,10 @@ exports.createPlayListDB = function (id, nome){
 					
 					if(err){
 						if(err.code.match('ER_DUP_ENTRY')){
-							console.log("PlayList già esistente");
+							console.log(language.playlistAlreadyExists);
 						}
 						else{
-							console.log("errore durante l'inserimento di una nuova playlist");
+							console.log(language.errorCreatingPlayList);
 							return
 						}
 					}

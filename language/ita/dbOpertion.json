@@ -1,3 +1,11 @@
 {
-    "errorDataBaseConnectionFailed":"\u274C Errore durante la connessione al DataBase \u274C"
+    "dbConnected":"Database connesso!",
+    "errorDataBaseConnectionFailed":"\u274C Errore durante la connessione al DataBase \u274C",
+    "errorGetCoin":"errore nel caricamento del saldo",
+    "errorUpdateCoin":"errore durante l'aggiornamento del saldo",
+    "errorCreatingPlayList":"errore durante l'inserimento di una nuova playlist",
+
+    "playlistAlreadyExists":"PlayList già esistente"
+
+
 }
