@@ -1,3 +1,7 @@
 {
-    
+    "errorAmountNotValid":"\u274C importo non valido \u274C",
+    "lose":"hai perso",
+    "notSelect":"\u274C nessuna selezione valida \u274C",
+
+    "win":"hai vinto"
 }

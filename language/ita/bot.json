@@ -23,12 +23,9 @@
     "dbMsgUserAlreadySigned":"Utente già presente del database",
     "dbMsgUserCorrectlySigned":"Utente registrato correttamente",
     
-    "errorAmountNotValid":"\u274C importo non valido \u274C",
     "errorJoinVoiceChannel":"\u274C errore nell'entrare nella chat vocale \u274C",
     "errorDataBaseConnectionFailed":"\u274C Errore durante la connessione al DataBase \u274C",
-    "errorNotValidLink":"\u274C link non valido \u274C",
     
-    "lose":"hai perso",
 
     "titleMsgWelcomeSignIn":"Benvenuto ",
     "titleMsgAlreadySignedIn":"Furbacchione ",
@@ -40,13 +37,8 @@
     "msgDescAlreadySignIn":"So che volevi un altro Bonus, ma per altri coin devi sudarteli",
 
     "msgGetCoin":"\uD83C\uDFE7 Il tuo saldo ammonta a: ",
-    "notSelect":"\u274C nessuna selezione valida \u274C",
-    "notSong":"\u274C nessuna canzone in coda \u274C",
-    "songAddQueue":"\u2714\uFE0F Aggiunta alla coda \u2714\uFE0F",
-    "startPlay":"\u25B6\uFE0F In riproduzione:",
 
     "voiceChannelNotFound":"\u274C non sei in nessuna chat vocale \u274C",
-    "voiceChannelNotPermission":"\u274C non ho i permessi in quel canale vocale \u274C",
-    "win":"hai vinto"
+    "voiceChannelNotPermission":"\u274C non ho i permessi in quel canale vocale \u274C"
 
 }
