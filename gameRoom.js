@@ -311,13 +311,60 @@ exports.buyBiglietto = function(message){
 	var numeri= estrai(6,90);
 	db.creaBiglietto(id,numeri);
 	message.reply("i tuoi numeri sono: \n"+numeri.toString())
+	//TODO messaggio se non hai abbastanza coin
 }
 
-exports.valutaVincita = function(risultato){
-	db.ottieniBiglietti(result=>{
+function valutaVincita(element,numeriVincente){
+	var sbagli=0;
+	if (element.numero1!==bigliettoVincente[0]) {
+		sbagli=sbagli+1;
+	}else if (element.numero2!==bigliettoVincente[1]) {
+		sbagli=sbagli+1;
+	}else if (element.numero3!==bigliettoVincente[2]) {
+		sbagli=sbagli+1;
+	}else if (element.numero4!==bigliettoVincente[3]) {
+		sbagli=sbagli+1;
+	}else if (element.numero5!==bigliettoVincente[4]) {
+		sbagli=sbagli+1;
+	}else if (element.numero6!==bigliettoVincente[5]) {
+		sbagli=sbagli+1;
+	}
+	return sbagli;
+}
 
+exports.calcolaVincita=function() {
+	var numeriVincente=estrai(6,90);
+	stampanumeriVincenti(numeriVincente);
+	var vincitore=new Array();
+	var vincitoreCon5=new Array();
+	db.ottieniBiglietti(result=>{
+		result.forEach(element=>{
+			var sbagli=valutaVincita(element,numeriVincente);
+			if (sbagli===0) {
+				vincitore.push(element.user);
+			}else if(sbagli===1){
+				vincitoreCon5.push(element.user);
+			}
+		})
+		var vincitaTotale=Math.floor((result.length*config.coinBiglietto)/2);
+		var vincitaSingola=Math.floor(vincitaTotale/(vincitore.length+vincitoreCon5.length));
+		var vincitaSingolacon5=Math.floor(vincitaSingola/1.5);
+		for (let index = 0; index < vincitore.length; index++) {
+			const element = vincitore[index];
+			stampaVincita(element,vincitaSingola)
+		}
+		for (let index = 0; index < vincitoreCon5.length; index++) {
+			const element = vincitoreCon5[index];
+			stampaVincita(element,vincitaSingolacon5);
+		}
 	});
 }
-
-exports.stampaVincita=function() {
+function stampanumeriVincenti(numeriVincenti){
+	//TODO messaggio con numeri vincenti
+}
+function stampaVincita(id,vincita){
+	saldoGiocatore(id,saldo=>{
+		aggiornaSaldo(saldo+(vincita),id);
+	});
+	//TODO messaggio vincita
 }
