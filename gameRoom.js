@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const config = require('./config.json');
-const lingua =require('./language/'+config.lingua+'/gameRoom.json');
+const language =require('./language/'+config.language+'/gameRoom.json');
 const db=require("./dbOpertion.js");
 const bot = require('./bot');
 
@@ -39,19 +39,19 @@ exports.coinflip = function (message){
 						win=true;
 					}
 				}else{
-					message.reply(lingua.notSelect);
+					message.reply(language.notSelect);
 					return;
 				}
 				if (win) {
 					db.aggiornaSaldo(saldo+(importo*2),id);
 					risultato.addFields(
-						{ name: lingua.win, value: importo*2+' coin' },
+						{ name: language.win, value: importo*2+' coin' },
 					);
 					risultato.setColor("#00ff37");
 				}else{
 					db.aggiornaSaldo(saldo-importo,id);
 					risultato.addFields(
-						{ name: lingua.lose, value: importo+' coin' },
+						{ name: language.lose, value: importo+' coin' },
 					);
 					risultato.setColor("#f50505");
 				}
@@ -60,7 +60,7 @@ exports.coinflip = function (message){
 				message.reply("non hai abbastanza coin");
 			}
 		}else{
-			message.reply(lingua.errorAmountNotValid);
+			message.reply(language.errorAmountNotValid);
 		}
 	});
 
@@ -100,13 +100,13 @@ exports.slot = function (message){
 					}
 					db.aggiornaSaldo(saldo+(importo*moltiplicatore),id);
 					risultato.addFields(
-						{ name: message.member.user.username +" "+ lingua.win, value: importo*moltiplicatore+' coin' },
+						{ name: message.member.user.username +" "+ language.win, value: importo*moltiplicatore+' coin' },
 					);
 					risultato.setColor("#00ff37");
 				}else{
 					db.aggiornaSaldo(saldo-importo,id);
 					risultato.addFields(
-						{ name: message.member.user.username +" "+ lingua.lose, value: importo+' coin' },
+						{ name: message.member.user.username +" "+ language.lose, value: importo+' coin' },
 					);
 					risultato.setColor("#f50505");
 				}
@@ -115,7 +115,7 @@ exports.slot = function (message){
 				message.reply("non hai abbastanza coin");
 			}
 		}else{
-			message.reply(lingua.errorAmountNotValid);
+			message.reply(language.errorAmountNotValid);
 		}
 	});	
 }
@@ -160,14 +160,14 @@ exports.roulette = function (message){
 					if(numeriRossi.includes(resultNumeber)){
 						db.aggiornaSaldo(saldo+(importo*3),id);
 						risultato.addFields(
-							{ name: lingua.win, value: importo*3+' coin' },
+							{ name: language.win, value: importo*3+' coin' },
 						);
 						risultato.setColor("#00ff37");
 					}
 					else{
 						db.aggiornaSaldo(saldo-importo,id);
 					risultato.addFields(
-						{ name: lingua.lose, value: importo+' coin' },
+						{ name: language.lose, value: importo+' coin' },
 					);
 					risultato.setColor("#f50505");
 				}
@@ -180,14 +180,14 @@ exports.roulette = function (message){
 					if(numeriNeri.includes(resultNumeber)){
 						db.aggiornaSaldo(saldo+(importo*3),id);
 						risultato.addFields(
-							{ name: lingua.win, value: importo*3+' coin' },
+							{ name: language.win, value: importo*3+' coin' },
 						);
 						risultato.setColor("#00ff37");
 					}
 						else{
 							db.aggiornaSaldo(saldo-importo,id);
 							risultato.addFields(
-							{ name: lingua.lose, value: importo+' coin' },
+							{ name: language.lose, value: importo+' coin' },
 						);
 						risultato.setColor("#f50505");
 					}
@@ -200,14 +200,14 @@ exports.roulette = function (message){
 					if(resultNumeber%2==0 && resultNumeber !=0){
 						db.aggiornaSaldo(saldo+(importo*3),id);
 						risultato.addFields(
-							{ name: lingua.win, value: importo*3+' coin' },
+							{ name: language.win, value: importo*3+' coin' },
 						);
 						risultato.setColor("#00ff37");
 					}
 						else{
 							db.aggiornaSaldo(saldo-importo,id);
 							risultato.addFields(
-							{ name: lingua.lose, value: importo+' coin' },
+							{ name: language.lose, value: importo+' coin' },
 						);
 						risultato.setColor("#f50505");
 					}
@@ -220,14 +220,14 @@ exports.roulette = function (message){
 					if(resultNumeber%2!=0 && resultNumeber !=0){
 						db.aggiornaSaldo(saldo+(importo*3),id);
 						risultato.addFields(
-							{ name: lingua.win, value: importo*3+' coin' },
+							{ name: language.win, value: importo*3+' coin' },
 						);
 						risultato.setColor("#00ff37");
 					}
 						else{
 							db.aggiornaSaldo(saldo-importo,id);
 							risultato.addFields(
-							{ name: lingua.lose, value: importo+' coin' },
+							{ name: language.lose, value: importo+' coin' },
 						);
 						risultato.setColor("#f50505");
 					}
@@ -245,7 +245,7 @@ exports.roulette = function (message){
 							if(resultNumeber===0){
 								db.aggiornaSaldo(saldo+(importo*49),id);
 								risultato.addFields(
-									{ name: lingua.win, value: importo*40+' coin' },
+									{ name: language.win, value: importo*40+' coin' },
 								);
 								risultato.setColor("#00ff37");
 							}
@@ -253,7 +253,7 @@ exports.roulette = function (message){
 							else{
 								db.aggiornaSaldo(saldo+(importo*35),id);
 								risultato.addFields(
-								{ name: lingua.win, value: importo*35+' coin' },
+								{ name: language.win, value: importo*35+' coin' },
 								);
 								risultato.setColor("#00ff37");ù
 							}
@@ -262,7 +262,7 @@ exports.roulette = function (message){
 					else{
 						db.aggiornaSaldo(saldo-importo,id);
 						risultato.addFields(
-						{ name: lingua.lose, value: importo+' coin' },
+						{ name: language.lose, value: importo+' coin' },
 					);
 					risultato.setColor("#f50505");
 					}
@@ -275,7 +275,7 @@ exports.roulette = function (message){
 				}
 			}
 		}else{
-			message.reply(lingua.errorAmountNotValid);
+			message.reply(language.errorAmountNotValid);
 		}
 	});
 	}

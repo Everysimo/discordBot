@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const config = require('./config.json');
 const ytdl = require('ytdl-core');
-const lingua =require('./language/'+config.lingua+'/musica.json');
+const language =require('./language/'+config.language+'/musica.json');
 const ytsr=require('ytsr');
 //coda di riproduzione
 const queue = new Map();
@@ -25,12 +25,12 @@ async function play (message){
 	}			
 	const voiceChannel = message.member.voice.channel;	//connessione al canale vocale
   	if (!voiceChannel){									//se l'utente non è in un canale genera eccezione
-		return message.reply(lingua.voiceChannelNotFound);
+		return message.reply(language.voiceChannelNotFound);
 	}
 
 	const permissions = voiceChannel.permissionsFor(message.client.user);	//verifica permessi utente che richiama il messggio
   	if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
-    	return message.reply(lingua.voiceChannelNotPermission);
+    	return message.reply(language.voiceChannelNotPermission);
 	}
 	var songInfo;
 
@@ -66,7 +66,7 @@ async function play (message){
 		} catch (err) {
 			console.log(err.stack);
 			queue.delete(message.guild.id);
-			return message.reply(lingua.errorJoinVoiceChannel);
+			return message.reply(language.errorJoinVoiceChannel);
 		}
 	}
 	else{	//se la coda delle canzoni non è vuota aggiunge la canzone alla coda
@@ -74,7 +74,7 @@ async function play (message){
 		serverQueue.songs.push(song);
 
 		const messaggioAggiuntaCoda = new Discord.MessageEmbed();
-		messaggioAggiuntaCoda.setTitle(lingua.songAddQueue);
+		messaggioAggiuntaCoda.setTitle(language.songAddQueue);
 		messaggioAggiuntaCoda.setDescription("[ @"+message.member.user.username+" ]");
 		messaggioAggiuntaCoda.addFields({
 		name: song.title,value:" "+song.url}
@@ -106,7 +106,7 @@ start = function (guild, song) {
 	dispatcher.setVolume(serverQueue.volume / 100);
 
 	const messaggioRiproduzione = new Discord.MessageEmbed();
-	messaggioRiproduzione.setTitle(lingua.startPlay);
+	messaggioRiproduzione.setTitle(language.startPlay);
 	messaggioRiproduzione.setDescription("[ @"+song.username+" ]");
 	messaggioRiproduzione.addFields({
 		name: song.title,value:" "+song.url}
@@ -119,9 +119,9 @@ start = function (guild, song) {
 exports.skip = function (message) {
 	var serverQueue = queue.get(message.guild.id);
 	if (!message.member.voice.channel)
-		return message.reply(lingua.voiceChannelNotFound);
+		return message.reply(language.voiceChannelNotFound);
 	if (!serverQueue)
-		return message.reply(lingua.notSong);
+		return message.reply(language.notSong);
 	serverQueue.connection.dispatcher.end();
 }
 
@@ -129,9 +129,9 @@ exports.skip = function (message) {
 exports.stop = function (message) {
 	var serverQueue = queue.get(message.guild.id);
 	if (!message.member.voice.channel)
-	  	return message.reply(lingua.voiceChannelNotFound);
+	  	return message.reply(language.voiceChannelNotFound);
 	if (!serverQueue)
-		return message.reply(lingua.notSong);
+		return message.reply(language.notSong);
 	serverQueue.songs = [];
 	serverQueue.connection.dispatcher.end();
 }
@@ -140,9 +140,9 @@ exports.setvolume = function (message){
 	var serverQueue = queue.get(message.guild.id);
 	const q = message.content.split(" ")[1];
 	if (!message.member.voice.channel)
-		return message.reply(lingua.voiceChannelNotFound);
+		return message.reply(language.voiceChannelNotFound);
 	if (!serverQueue)
-		return message.reply(lingua.notSong);
+		return message.reply(language.notSong);
 	var volume=parseInt(q);
 	if(volume>100){
 		volume=100;
