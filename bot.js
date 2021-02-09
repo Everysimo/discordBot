@@ -28,17 +28,17 @@ const p=config.prefixCommand;
 
 async function countUser(){
 	setInterval(()=>{
-		const guild = client.guilds.cache.get('341919077008146432');
+		const guild = client.guilds.cache.get(config.IdServer);
 		const memberCount = guild.memberCount;
-		const channel=guild.channels.cache.get('808772063446827068');
+		const channel=guild.channels.cache.get(config.IdMemberChannel);
 		channel.setName("total member: "+memberCount.toString());
 	},1000);
 }
 async function countUserOnline(){
 	setInterval(()=>{
-		const guild = client.guilds.cache.get('341919077008146432');
+		const guild = client.guilds.cache.get(config.IdServer);
 		const onlineMember=guild.members.cache.filter(member=>member.presence.status==="online").size
-		const channel=guild.channels.cache.get('808787440026386452');
+		const channel=guild.channels.cache.get(config.IdMemberChannelOnline);
 		channel.setName("total online: "+onlineMember.toString());
 	},1000);
 }
