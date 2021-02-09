@@ -35,8 +35,8 @@ async function countUser(){
 }
 async function countUserOnline(){
 	const guild = client.guilds.cache.get('341919077008146432');
-	const member=guild.members.cache.array();
 	setInterval(()=>{
+		const member=guild.members.cache.array();
 		var onlineMember=0;
 		for (let index = 0; index < member.length; index++) {
 			const element = member[index];
