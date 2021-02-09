@@ -23,6 +23,8 @@ client.once('ready', () => {
 	countUserOnline();
 
 	countUser();
+
+	countBot();
 });
 
 //Command Prefix 
