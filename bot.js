@@ -46,7 +46,7 @@ async function countUserOnline(){
 		}
 		const channel=guild.channels.cache.get('808787440026386452');
 		channel.setName("total online: "+onlineMember.toString());
-	},1000);
+	},5000);
 }
 
 
