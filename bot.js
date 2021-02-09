@@ -17,7 +17,7 @@ client.once('ready', () => {
 
 	client.user.setActivity(language.botActivity,{type:"LISTENING"});
 
-	countUserOnline();
+	countUser();
 
 	countUserOnline();
 });
