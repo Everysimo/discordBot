@@ -7,6 +7,7 @@ const db=require("./dbOpertion.js");
 const gameRoom=require("./gameRoom.js")
 const musica=require("./musica.js")
 const playlist=require("./playlist.js")
+const command=require("./command.js")
 db.dbConnect();
 exports.client=client;
 //quando il nuovo cliente è pronto esegue log
@@ -182,30 +183,29 @@ function getSaldo(message){
 
 //mappa comandi non musicali
 let comandi =new Map();
-comandi.set("addsongpl",playlist.addSongToPL);
-comandi.set("buypl",playlist.buyPL);
-comandi.set("buysongs",playlist.buySongs);
-comandi.set("coin",getSaldo);
-comandi.set("coinflip",gameRoom.coinflip);
-comandi.set("makepl",playlist.createPlaylist);
-comandi.set("help",help);
-comandi.set("join",join);
-comandi.set("next",musica.skip);
-comandi.set("play",musica.play);
-comandi.set("playpl",playlist.playPL);
-comandi.set("showpl",playlist.printPL);
-comandi.set("buypl",playlist.buyPL);
-comandi.set("buysong",playlist.buySong);
-comandi.set("buybt",gameRoom.buyBiglietto);
-comandi.set("radio",musica.playRadio);
-comandi.set("rmsongpl",playlist.removeSongFromPL);
-comandi.set("roulette",gameRoom.roulette);
-comandi.set("setvolume",musica.setvolume);
-comandi.set("shop",shop)
-comandi.set("showradio",musica.showRadio);
-comandi.set("signin",signIn);
-comandi.set("slot",gameRoom.slot);
-comandi.set("stop",musica.stop);
+comandi.set(command.addsongpl,playlist.addSongToPL);
+comandi.set(command.buybt,gameRoom.buyBiglietto);
+comandi.set(command.buypl,playlist.buyPL);
+comandi.set(command.buysongs,playlist.buySongs);
+comandi.set(command.coin,getSaldo);
+comandi.set(command.coinflip,gameRoom.coinflip);
+comandi.set(command.help,help);
+comandi.set(command.join,join);
+comandi.set(command.makepl,playlist.createPlaylist);
+comandi.set(command.next,musica.skip);
+comandi.set(command.play,musica.play);
+comandi.set(command.playpl,playlist.playPL);
+comandi.set(command.radio,musica.playRadio);
+comandi.set(command.rmsongpl,playlist.removeSongFromPL);
+comandi.set(command.roulette,gameRoom.roulette);
+comandi.set(command.setvolume,musica.setvolume);
+comandi.set(command.shop,shop);
+comandi.set(command.showpl,playlist.printPL);
+comandi.set(command.showradio,musica.showRadio);
+comandi.set(command.signin,signIn);
+comandi.set(command.slot,gameRoom.slot);
+comandi.set(command.stop,musica.stop);
+
 
 //gestore ricezione messaggi
 client.on("message", message => {
