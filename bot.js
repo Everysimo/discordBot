@@ -215,7 +215,7 @@ client.on("message", message => {
 	}// se non è bot e il messaggio inizia con "!"
 	else if (message.content.startsWith(p)) {
 		//salva il contenuto del messaggio corrispondente al comando
-		const com=message.content.split(" ")[0].substr(1);
+		const com=message.content.split(" ")[0].substr(p.length);
 		//se il comando è nella mappa dei comandi
 		if (comandi.has(com)) {
 			//esegue il comando specificato
