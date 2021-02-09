@@ -4,6 +4,7 @@ const ytdl = require('ytdl-core');
 const language =require('./language/'+config.language+'/musica.json');
 const ytsr=require('ytsr');
 const command=require("./command.json")
+const radio=require("./radio.json")
 //coda di riproduzione
 const queue = new Map();
 exports.queue = queue;
@@ -162,14 +163,12 @@ exports.showRadio = function (message){
 	const resultRadioList = new Discord.MessageEmbed();
 
 	resultRadioList.setTitle('\uD83D\uDCFB Radio \uD83D\uDCFB');
-	resultRadioList.addFields(
-		{ name: config.prefixCommand+command.radio+' 0', value: "nightcore Radio", inline:true},
-		{ name: config.prefixCommand+command.radio+' 1', value: "lo-fi Radio", inline:true},
-		{ name: config.prefixCommand+command.radio+' 2', value: "pop Radio", inline:true},
-		{ name: config.prefixCommand+command.radio+' 3', value: "rock Radio", inline:true},
-		{ name: config.prefixCommand+command.radio+' 4', value: "anime Radio", inline:true},
-		{ name: config.prefixCommand+command.radio+' 5', value: "K-pop Radio", inline:true},
-	);
+	for (let index = 0; index < radio.radio.length; index++) {
+		const element = radio.radio[index];
+		resultRadioList.addFields(
+			{ name: config.prefixCommand+command.radio+' '+index, value: element.name, inline:true}
+		);
+	}
 
 	message.channel.send(resultRadioList);
 }
@@ -179,38 +178,14 @@ exports.playRadio = function playRadio(message){
 	const q = message.content.split(" ")[1];
 	const radioNumber = parseInt(q);
 	const resultErrorPlayRadio = new Discord.MessageEmbed();
-	
-	switch (radioNumber){
-		case 0:
-			message.content="play nightcore radio 24/7";
-			play(message);
-			break;
-		case 1:
-			message.content="play lo-fi radio 24/7";
-			play(message);
-			break;
-		case 2:
-			message.content="play pop radio 24/7";
-			play(message);
-			break;
-		case 3:
-			message.content="play rock radio 24/7";
-			play(message);
-			break;
-		case 4:
-			message.content="play anime radio 24/7";
-			play(message);
-			break;
-		case 5:
-			message.content="play THE K-POP : 24/7 ";
-			play(message);
-			break;
-		default:
-			resultErrorPlayRadio.setTitle(language.radioNotFound);
-			resultErrorPlayRadio.addFields(
-				{ name: language.radio+radioNumber+language.notExists,inline:true},
-			);
-			message.reply(resultErrorPlayRadio);
-		break;
+	if (!isNaN(radioNumber)&&q>=radio.radio.length) {
+		message.content="play "+radio.radio[q].researche;
+		play(message);
+	}else{
+		resultErrorPlayRadio.setTitle(language.radioNotFound);
+		resultErrorPlayRadio.addFields(
+			{ name: language.radio+radioNumber+language.notExists,inline:true},
+		);
+		message.reply(resultErrorPlayRadio);
 	}
 }
