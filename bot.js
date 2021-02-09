@@ -19,7 +19,7 @@ client.once('ready', () => {
 });
 
 //prefixCommand comandi non musica !
-const pnm=config.prefixCommand;
+const p=config.prefixCommand;
 
 //login nel server tramite token
 client.login(process.env.tokenBotDiscord);
@@ -58,32 +58,32 @@ function help(message){
 	resultBotCommands.setTitle('HydraBot');
 	resultBotCommands.setDescription('Bot Commands');
 	resultBotCommands.addFields(
-		{ name: '!coinflip *X* *value*', value: language.descCoinFlip, inline:true},
-		{ name: '!help', value: language.descHelp, inline:true},
-		{ name: '!join', value: language.descJoin, inline:true},
-		{ name: '!roulette *X* *value*', value: language.descRoulette, inline:true},
-		{ name: '!coin', value: language.descCoin, inline:true},
-		{ name: '!signin', value: language.descSignIn, inline:true},
-		{ name: '!slot *value*', value: language.descSlot, inline:true},
+		{ name: p+'coinflip *X* *value*', value: language.descCoinFlip, inline:true},
+		{ name: p+'help', value: language.descHelp, inline:true},
+		{ name: p+'join', value: language.descJoin, inline:true},
+		{ name: p+'roulette *X* *value*', value: language.descRoulette, inline:true},
+		{ name: p+'coin', value: language.descCoin, inline:true},
+		{ name: p+'signin', value: language.descSignIn, inline:true},
+		{ name: p+'slot *value*', value: language.descSlot, inline:true},
 	);
 
 	resultMusicCommands.setTitle('Music Commands');
 	resultMusicCommands.addFields(
-		{ name: '!next', value: language.descNext, inline:true},
-		{ name: '!play *url/titolo*', value: language.descPlay,inline:true},
-		{ name: '!radio *number*', value: language.descRadio,inline:true},
-		{ name: '!setvolume *x*', value: language.descSetVolume, inline:true},
-		{ name: '!showRadio ', value: language.descShowRadio, inline:true},
-		{ name: '!stop', value: language.descStop, inline:true},
+		{ name: p+'next', value: language.descNext, inline:true},
+		{ name: p+'play *url/titolo*', value: language.descPlay,inline:true},
+		{ name: p+'radio *number*', value: language.descRadio,inline:true},
+		{ name: p+'setvolume *x*', value: language.descSetVolume, inline:true},
+		{ name: p+'showRadio ', value: language.descShowRadio, inline:true},
+		{ name: p+'stop', value: language.descStop, inline:true},
 	);
 
 	resultPlayListCommands.setTitle('PlayList Commands');
 	resultPlayListCommands.addFields(
-		{ name: '!addsongpl *namePl* *Url*', value: language.descAddSongPl,inline:true},
-		{ name: '!makepl *namePl*', value: language.descMakePl,inline:true},
-		{ name: '!playpl *namePl* *Optional:song number*', value: language.descPlayPl,inline:true},
-		{ name: '!showpl *namePl*', value: language.descShowPl,inline:true},
-		{ name: '!rmsongpl *namePl* *Url*', value: language.descRmSongPl,inline:true},
+		{ name: p+'addsongpl *namePl* *Url*', value: language.descAddSongPl,inline:true},
+		{ name: p+'makepl *namePl*', value: language.descMakePl,inline:true},
+		{ name: p+'playpl *namePl* *Optional:song number*', value: language.descPlayPl,inline:true},
+		{ name: p+'showpl *namePl*', value: language.descShowPl,inline:true},
+		{ name: p+'rmsongpl *namePl* *Url*', value: language.descRmSongPl,inline:true},
 	);
 
 	message.channel.send(resultBotCommands);
@@ -175,7 +175,7 @@ client.on("message", message => {
 	if (message.author.bot) {
 		return;
 	}// se non è bot e il messaggio inizia con "!"
-	else if (message.content.startsWith(pnm)) {
+	else if (message.content.startsWith(p)) {
 		//salva il contenuto del messaggio corrispondente al comando
 		const com=message.content.split(" ")[0].substr(1);
 		//se il comando è nella mappa dei comandi
