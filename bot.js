@@ -36,17 +36,10 @@ async function countUser(){
 async function countUserOnline(){
 	const guild = client.guilds.cache.get('341919077008146432');
 	setInterval(()=>{
-		const member=guild.members.cache.array();
-		var onlineMember=0;
-		for (let index = 0; index < member.length; index++) {
-			const element = member[index];
-			if (element.presence.status==="online") {
-				onlineMember=onlineMember+1;
-			}
-		}
+		const onlineMember=guild.members.cache.filter(member=>member.presence.status==="online").size
 		const channel=guild.channels.cache.get('808787440026386452');
 		channel.setName("total online: "+onlineMember.toString());
-	},5000);
+	},1000);
 }
 
 
