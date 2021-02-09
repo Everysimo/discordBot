@@ -21,6 +21,8 @@ client.once('ready', () => {
 	countUser();
 
 	countUserOnline();
+
+	countUserNoBot();
 });
 
 //Command Prefix 
@@ -40,6 +42,14 @@ async function countUserOnline(){
 		const onlineMember=guild.members.cache.filter(member=>member.presence.status==="online").size
 		const channel=guild.channels.cache.get(config.IdMemberChannelOnline);
 		channel.setName("total online: "+onlineMember.toString());
+	},1000);
+}
+async function countUserNoBot(){
+	setInterval(()=>{
+		const guild = client.guilds.cache.get(config.IdServer);
+		const userCount=guild.members.cache.filter(member=>!member.user.bot).size
+		const channel=guild.channels.cache.get(config.IdMemberChannelNotBot);
+		channel.setName("total users: "+userCount.toString());
 	},1000);
 }
 
