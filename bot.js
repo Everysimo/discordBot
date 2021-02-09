@@ -16,12 +16,14 @@ client.once('ready', () => {
 	client.user.setStatus("Online");
 
 	client.user.setActivity(language.botActivity,{type:"LISTENING"});
+
+	countUser();
 });
 
 //Command Prefix 
 const p=config.prefixCommand;
 
-async function count (){
+async function countUser(){
 	const guild = client.guilds.cache.get('341919077008146432');
 	setInterval(()=>{
 		const memberCount = guild.memberCount;
