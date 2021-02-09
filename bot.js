@@ -29,7 +29,7 @@ async function countUser(){
 	setInterval(()=>{
 		const guild = client.guilds.cache.get(config.IdServer);
 		const memberCount = guild.memberCount;
-		const channel=guild.channels.cache.get(config.MemberChannel);
+		const channel=guild.channels.cache.get(config.IdMemberChannel);
 		channel.setName("total member: "+memberCount.toString());
 	},1000);
 }
