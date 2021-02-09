@@ -22,7 +22,7 @@ client.once('ready', () => {
 
 	countUserOnline();
 
-	countUserNoBot();
+	countUser();
 });
 
 //Command Prefix 
@@ -44,7 +44,7 @@ async function countUserOnline(){
 		channel.setName("total online: "+onlineMember.toString());
 	},1000);
 }
-async function countUserNoBot(){
+async function countUser(){
 	setInterval(()=>{
 		const guild = client.guilds.cache.get(config.IdServer);
 		const userCount=guild.members.cache.filter(member=>!member.user.bot).size
@@ -52,6 +52,15 @@ async function countUserNoBot(){
 		channel.setName("total users: "+userCount.toString());
 	},1000);
 }
+async function countBot(){
+	setInterval(()=>{
+		const guild = client.guilds.cache.get(config.IdServer);
+		const botCount=guild.members.cache.filter(member=>member.user.bot).size
+		const channel=guild.channels.cache.get(config.IdMemberChannelBot);
+		channel.setName("total bot: "+botCount.toString());
+	},1000);
+}
+
 
 
 //login nel server tramite token
