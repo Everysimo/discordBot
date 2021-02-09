@@ -35,7 +35,7 @@ async function countUser(){
 		const guild = client.guilds.cache.get(config.IdServer);
 		const memberCount = guild.memberCount;
 		const channel=guild.channels.cache.get(config.IdMemberChannel);
-		channel.setName("total member: "+memberCount.toString());
+		channel.setName("👥 total member: "+memberCount.toString()+" 👥");
 	},1000);
 }
 async function countUserOnline(){
@@ -43,7 +43,7 @@ async function countUserOnline(){
 		const guild = client.guilds.cache.get(config.IdServer);
 		const onlineMember=guild.members.cache.filter(member=>member.presence.status==="online").size
 		const channel=guild.channels.cache.get(config.IdMemberChannelOnline);
-		channel.setName("total online: "+onlineMember.toString());
+		channel.setName("👨‍💻 total online: "+onlineMember.toString() + " 👩‍💻");
 	},1000);
 }
 async function countUser(){
