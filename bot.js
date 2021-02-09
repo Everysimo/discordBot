@@ -97,7 +97,7 @@ function shop(message){
 
 	resultShopCommands.setTitle('Shop');
 	resultShopCommands.addFields(
-		{ name: p+'buypl', value: language.descAddSongPl,inline:true},
+		{ name: p+'buypl', value: language.descBuyPl,inline:true},
 		{ name: p+'buysongs *namePl*', value: language.descBuySong,inline:true},
 	);
 
