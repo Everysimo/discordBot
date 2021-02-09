@@ -178,7 +178,7 @@ exports.playRadio = function playRadio(message){
 	const q = message.content.split(" ")[1];
 	const radioNumber = parseInt(q);
 	const resultErrorPlayRadio = new Discord.MessageEmbed();
-	if (!isNaN(radioNumber)&&q>=radio.radio.length) {
+	if (!isNaN(radioNumber)&&q<radio.radio.length) {
 		message.content="play "+radio.radio[q].researche;
 		play(message);
 	}else{
