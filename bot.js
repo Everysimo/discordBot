@@ -18,6 +18,8 @@ client.once('ready', () => {
 	client.user.setActivity(language.botActivity,{type:"LISTENING"});
 
 	countUserOnline();
+
+	countUserOnline();
 });
 
 //Command Prefix 
@@ -33,11 +35,12 @@ async function countUser(){
 }
 async function countUserOnline(){
 	const guild = client.guilds.cache.get('341919077008146432');
-	setInterval(()=>{
-		const onlineCount = guild.members.filter(m => m.presence.status === 'online').size;
-		const channel=guild.channels.cache.get('808787440026386452');
-		channel.setName("total online member: "+onlineCount.toString());
-	},1000);
+	guild.members.fetch({withPresences: true }).then(console.log)
+	//setInterval(()=>{
+		
+		//const channel=guild.channels.cache.get('808787440026386452');
+		//channel.setName("total online member: "+onlineCount.toString());
+	//},1000);
 }
 
 
