@@ -21,12 +21,15 @@ client.once('ready', () => {
 //Command Prefix 
 const p=config.prefixCommand;
 
-client.once("guildMemberAvailable",(guildMember)=>{
-	var name=guildMember.guild.channels.cache.get("808772063446827068").name;
-	var slitName=name.split(" ");
-	var count=parseInt(slitName[slitName.length-1]);
-	guildMember.guild.channels.cache.get("808772063446827068").setName("online-user "+count);
-});
+async function count (){
+	const guild = client.guilds.cache.get('341919077008146432');
+	setInterval(()=>{
+		const memberCount = guild.memberCount;
+		const channel=guild.channels.cache.get('808772063446827068');
+		channel.setName("total member: "+memberCount.toString);
+	},1000);
+}
+
 
 //login nel server tramite token
 client.login(process.env.tokenBotDiscord);
