@@ -21,6 +21,10 @@ client.once('ready', () => {
 //Command Prefix 
 const p=config.prefixCommand;
 
+
+var countUser=client.guilds.cache.get("341919077008146432").memberCount;
+client.guilds.cache.get("341919077008146432").channels.cache.get("808772063446827068").setName("online-user:"+countUser);
+
 //login nel server tramite token
 client.login(process.env.tokenBotDiscord);
 
