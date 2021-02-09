@@ -98,11 +98,20 @@ exports.slot = function (message){
 						jackpot=true;
 						moltiplicatore=config.multiplierJackpot;
 					}
-					db.aggiornaSaldo(saldo+(importo*moltiplicatore),id);
-					risultato.addFields(
-						{ name: message.member.user.username +" "+ language.win, value: importo*moltiplicatore+' '+config.coinName },
-					);
-					risultato.setColor("#00ff37");
+					if(!jackpot){
+						db.aggiornaSaldo(saldo+(importo*moltiplicatore),id);
+						risultato.addFields(
+							{ name: message.member.user.username +" "+ language.win, value: importo*moltiplicatore+' '+config.coinName },
+						);
+						risultato.setColor("#00ff37");
+					}
+					else{
+						db.aggiornaSaldo(saldo+(importo*moltiplicatore),id);
+						risultato.addFields(
+							{ name: message.member.user.username +" "+ language.winJackpot, value: importo*moltiplicatore+' '+config.coinName },
+						);
+						risultato.setColor("#00ff37");
+					}
 				}else{
 					db.aggiornaSaldo(saldo-importo,id);
 					risultato.addFields(
@@ -305,6 +314,7 @@ function estrai(numeriEstrare,maxNumero) {
 	return numeriVincenti;
 }
 exports.estrai=estrai;
+
 exports.buyBiglietto = function(message){
 	const id=message.member.user.id;
 	var numeri= estrai(6,90);
@@ -359,11 +369,25 @@ exports.calcolaVincita=function() {
 	});
 }
 function stampanumeriVincenti(numeriVincenti){
-	//TODO messaggio con numeri vincenti
+	const resultWinningNumbers = new Discord.MessageEmbed();
+
+	resultWinningNumbers.setTitle(language.winningNumbers);
+	resultWinningNumbers.addFields(
+		{ name: numeriVincenti, inline:true},
+	);
+	//TO-DO inviare messaggio
 }
+
 function stampaVincita(id,vincita){
 	saldoGiocatore(id,saldo=>{
 		aggiornaSaldo(saldo+(vincita),id);
 	});
-	//TODO messaggio vincita
+
+	const resultWin = new Discord.MessageEmbed();
+
+	resultWin.setTitle(language.winnigNumbers);
+	resultWin.addFields(
+		{ name: language.win + vincita, inline:true},
+	);
+	//TO-DO inviare messaggio
 }
