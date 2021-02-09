@@ -81,33 +81,33 @@ function help(message){
 	resultBotCommands.setTitle('HydraBot');
 	resultBotCommands.setDescription('Bot Commands');
 	resultBotCommands.addFields(
-		{ name: p+'coin', value: language.descCoin, inline:true},
-		{ name: p+'coinflip *X* *value*', value: language.descCoinFlip, inline:true},
-		{ name: p+'help', value: language.descHelp, inline:true},
-		{ name: p+'join', value: language.descJoin, inline:true},
-		{ name: p+'roulette *X* *value*', value: language.descRoulette, inline:true},
-		{ name: p+'shop', value: language.descShop, inline:true},
-		{ name: p+'signin', value: language.descSignIn, inline:true},
-		{ name: p+'slot *value*', value: language.descSlot, inline:true},
+		{ name: p+command.coin, value: language.descCoin, inline:true},
+		{ name: p+command.coinflip+' *X* *value*', value: language.descCoinFlip, inline:true},
+		{ name: p+command.help, value: language.descHelp, inline:true},
+		{ name: p+command.join, value: language.descJoin, inline:true},
+		{ name: p+command.roulette+' *X* *value*', value: language.descRoulette, inline:true},
+		{ name: p+command.shop, value: language.descShop, inline:true},
+		{ name: p+command.signin, value: language.descSignIn, inline:true},
+		{ name: p+command.slot+' *value*', value: language.descSlot, inline:true},
 	);
 
 	resultMusicCommands.setTitle('Music Commands');
 	resultMusicCommands.addFields(
-		{ name: p+'next', value: language.descNext, inline:true},
-		{ name: p+'play *url/titolo*', value: language.descPlay,inline:true},
-		{ name: p+'radio *number*', value: language.descRadio,inline:true},
-		{ name: p+'setvolume *x*', value: language.descSetVolume, inline:true},
-		{ name: p+'showRadio ', value: language.descShowRadio, inline:true},
-		{ name: p+'stop', value: language.descStop, inline:true},
+		{ name: p+command.next, value: language.descNext, inline:true},
+		{ name: p+command.play+' *url/titolo*', value: language.descPlay,inline:true},
+		{ name: p+command.radio+' *number*', value: language.descRadio,inline:true},
+		{ name: p+command.setvolume+' *x*', value: language.descSetVolume, inline:true},
+		{ name: p+command.showRadio, value: language.descShowRadio, inline:true},
+		{ name: p+command.stop, value: language.descStop, inline:true},
 	);
 
 	resultPlayListCommands.setTitle('PlayList Commands');
 	resultPlayListCommands.addFields(
-		{ name: p+'addsongpl *namePl* *Url*', value: language.descAddSongPl,inline:true},
-		{ name: p+'makepl *namePl*', value: language.descMakePl,inline:true},
-		{ name: p+'playpl *namePl* *Optional:song number*', value: language.descPlayPl,inline:true},
-		{ name: p+'showpl *namePl*', value: language.descShowPl,inline:true},
-		{ name: p+'rmsongpl *namePl* *Url*', value: language.descRmSongPl,inline:true},
+		{ name: p+command.addsongpl+' *namePl* *Url*', value: language.descAddSongPl,inline:true},
+		{ name: p+command.makepl+' *namePl*', value: language.descMakePl,inline:true},
+		{ name: p+command.playpl+' *namePl* *Optional:song number*', value: language.descPlayPl,inline:true},
+		{ name: p+command.showpl+' *namePl*', value: language.descShowPl,inline:true},
+		{ name: p+command.rmsongpl+' *namePl* *Url*', value: language.descRmSongPl,inline:true},
 	);
 
 	message.channel.send(resultBotCommands);
@@ -120,8 +120,8 @@ function shop(message){
 
 	resultShopCommands.setTitle('Shop');
 	resultShopCommands.addFields(
-		{ name: p+'buypl', value: language.descBuyPl,inline:true},
-		{ name: p+'buysongs *namePl*', value: language.descBuySong,inline:true},
+		{ name: p+command.buypl, value: language.descBuyPl,inline:true},
+		{ name: p+command.buysongs+' *namePl*', value: language.descBuySong,inline:true},
 	);
 
 	message.channel.send(resultShopCommands);

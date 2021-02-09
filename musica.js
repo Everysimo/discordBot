@@ -3,6 +3,7 @@ const config = require('./config.json');
 const ytdl = require('ytdl-core');
 const language =require('./language/'+config.language+'/musica.json');
 const ytsr=require('ytsr');
+const command=require("./command.json")
 //coda di riproduzione
 const queue = new Map();
 exports.queue = queue;
@@ -162,12 +163,12 @@ exports.showRadio = function (message){
 
 	resultRadioList.setTitle('\uD83D\uDCFB Radio \uD83D\uDCFB');
 	resultRadioList.addFields(
-		{ name: config.prefixCommand+'radio 0', value: "nightcore Radio", inline:true},
-		{ name: config.prefixCommand+'radio 1', value: "lo-fi Radio", inline:true},
-		{ name: config.prefixCommand+'radio 2', value: "pop Radio", inline:true},
-		{ name: config.prefixCommand+'radio 3', value: "rock Radio", inline:true},
-		{ name: config.prefixCommand+'radio 4', value: "anime Radio", inline:true},
-		{ name: config.prefixCommand+'radio 5', value: "K-pop Radio", inline:true},
+		{ name: config.prefixCommand+command.radio+' 0', value: "nightcore Radio", inline:true},
+		{ name: config.prefixCommand+command.radio+' 1', value: "lo-fi Radio", inline:true},
+		{ name: config.prefixCommand+command.radio+' 2', value: "pop Radio", inline:true},
+		{ name: config.prefixCommand+command.radio+' 3', value: "rock Radio", inline:true},
+		{ name: config.prefixCommand+command.radio+' 4', value: "anime Radio", inline:true},
+		{ name: config.prefixCommand+command.radio+' 5', value: "K-pop Radio", inline:true},
 	);
 
 	message.channel.send(resultRadioList);
