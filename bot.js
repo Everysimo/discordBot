@@ -7,7 +7,7 @@ const db=require("./dbOpertion.js");
 const gameRoom=require("./gameRoom.js")
 const musica=require("./musica.js")
 const playlist=require("./playlist.js")
-const command=require("./command.js")
+const command=require("./command.json")
 db.dbConnect();
 exports.client=client;
 //quando il nuovo cliente è pronto esegue log
