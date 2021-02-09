@@ -18,7 +18,7 @@ client.once('ready', () => {
 	client.user.setActivity(language.botActivity,{type:"LISTENING"});
 });
 
-//prefixCommand comandi non musica !
+//Command Prefix 
 const p=config.prefixCommand;
 
 //login nel server tramite token
