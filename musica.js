@@ -162,11 +162,12 @@ exports.showRadio = function (message){
 
 	resultRadioList.setTitle('\uD83D\uDCFB Radio \uD83D\uDCFB');
 	resultRadioList.addFields(
-		{ name: '!radio 0', value: "nightcore Radio", inline:true},
-		{ name: '!radio 1', value: "lo-fi Radio", inline:true},
-		{ name: '!radio 2', value: "pop Radio", inline:true},
-		{ name: '!radio 3', value: "rock Radio", inline:true},
-		{ name: '!radio 4', value: "anime Radio", inline:true},
+		{ name: config.prefixCommand+'radio 0', value: "nightcore Radio", inline:true},
+		{ name: config.prefixCommand+'radio 1', value: "lo-fi Radio", inline:true},
+		{ name: config.prefixCommand+'radio 2', value: "pop Radio", inline:true},
+		{ name: config.prefixCommand+'radio 3', value: "rock Radio", inline:true},
+		{ name: config.prefixCommand+'radio 4', value: "anime Radio", inline:true},
+		{ name: config.prefixCommand+'radio 5', value: "K-pop Radio", inline:true},
 	);
 
 	message.channel.send(resultRadioList);
@@ -197,6 +198,10 @@ exports.playRadio = function playRadio(message){
 			break;
 		case 4:
 			message.content="play anime radio 24/7";
+			play(message);
+			break;
+		case 5:
+			message.content="play THE K-POP : 24/7 ";
 			play(message);
 			break;
 		default:
