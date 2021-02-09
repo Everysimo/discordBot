@@ -3,6 +3,8 @@
     "commandNotFound":"comando non trovato",
     
     "descAddSongPl":"aggiunge una canzone alla playlist",
+    "descBuyPl":"compra uno slot aggiuntivo per creare una nuova playlist",
+    "descBuySong":"compra 3 slots aggiuntivi per una aggiungere canzoni ad una playlist",
     "descCoin":"Restituisce il tuo saldo corrente",
     "descCoinFlip":"prova a vincere dei coin con un lancio di moneta X: (testa,t) (croce,c)",
     "descHelp":"lista dei comandi",
@@ -15,6 +17,7 @@
     "descRmSongPl":"rimuove una canzone dalla playlist",
     "descRoulette":"Giro di roulette, x= rosso/r x3, nero/n x3, numero x36, 0 x 50",
     "descSetVolume":"setta volume a x (0-100 )",
+    "descShop":"Qui puoi spendere i tuoi soldini in vari modi",
     "descShowPl":"Mostra tutte le canzoni all'interno della playlist",
     "descShowRadio":"Mostra tutte le radio disponibili che possono essere riporodotte tramite !radio",
     "descSignIn":"iscrizione ufficiale al server per poter ottenere molti vantaggi",

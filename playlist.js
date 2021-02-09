@@ -145,7 +145,8 @@ exports.buyPL=function (message){
 		}
 	}
 }
-exports.buySong=function (message){
+
+exports.buySongs=function (message){
 	if(!message.member.user.bot){
 		const nomePl=message.content.split(" ")[1];
 		var nPl=parseInt(message.content.split(" ")[2]);

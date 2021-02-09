@@ -58,11 +58,12 @@ function help(message){
 	resultBotCommands.setTitle('HydraBot');
 	resultBotCommands.setDescription('Bot Commands');
 	resultBotCommands.addFields(
+		{ name: p+'coin', value: language.descCoin, inline:true},
 		{ name: p+'coinflip *X* *value*', value: language.descCoinFlip, inline:true},
 		{ name: p+'help', value: language.descHelp, inline:true},
 		{ name: p+'join', value: language.descJoin, inline:true},
 		{ name: p+'roulette *X* *value*', value: language.descRoulette, inline:true},
-		{ name: p+'coin', value: language.descCoin, inline:true},
+		{ name: p+'shop', value: language.descShop, inline:true},
 		{ name: p+'signin', value: language.descSignIn, inline:true},
 		{ name: p+'slot *value*', value: language.descSlot, inline:true},
 	);
@@ -89,6 +90,18 @@ function help(message){
 	message.channel.send(resultBotCommands);
 	message.channel.send(resultMusicCommands);
 	message.channel.send(resultPlayListCommands);
+}
+
+function shop(message){
+	const resultShopCommands = new Discord.MessageEmbed();
+
+	resultShopCommands.setTitle('Shop');
+	resultShopCommands.addFields(
+		{ name: p+'buypl', value: language.descAddSongPl,inline:true},
+		{ name: p+'buysongs *namePl*', value: language.descBuySong,inline:true},
+	);
+
+	message.channel.send(resultShopCommands);
 }
 
 function signIn(message){
@@ -140,7 +153,7 @@ function getSaldo(message){
 	if(!message.member.user.bot){
 		const id=message.member.user.id;
 		db.saldoGiocatore(id,function(saldo){
-			message.reply(language.msgGetCoin+saldo);
+			message.reply(language.msgGetCoin+saldo+" "+config.coinName);
 		});
 	}
 }
@@ -148,6 +161,8 @@ function getSaldo(message){
 //mappa comandi non musicali
 let comandi =new Map();
 comandi.set("addsongpl",playlist.addSongToPL);
+comandi.set("buypl",playlist.buyPL);
+comandi.set("buysongs",playlist.buySongs);
 comandi.set("coin",getSaldo);
 comandi.set("coinflip",gameRoom.coinflip);
 comandi.set("makepl",playlist.createPlaylist);
@@ -164,6 +179,7 @@ comandi.set("radio",musica.playRadio);
 comandi.set("rmsongpl",playlist.removeSongFromPL);
 comandi.set("roulette",gameRoom.roulette);
 comandi.set("setvolume",musica.setvolume);
+comandi.set("shop",shop)
 comandi.set("showradio",musica.showRadio);
 comandi.set("signin",signIn);
 comandi.set("slot",gameRoom.slot);
