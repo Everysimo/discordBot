@@ -1,6 +1,7 @@
 {
   "prefixCommand": "$",
   "language":"ita",
+  "coinName":"soldini",
   "coinPL":10000,
   "coinSong":1000,
   "multiplier":9,

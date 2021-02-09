@@ -15,7 +15,7 @@ client.once('ready', () => {
 
 	client.user.setStatus("Online");
 
-	client.user.setActivity(language.botActivity,{type:"LISTENING@"});
+	client.user.setActivity(language.botActivity,{type:"LISTENING"});
 });
 
 //prefixCommand comandi non musica !

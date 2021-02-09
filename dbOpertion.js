@@ -99,7 +99,7 @@ exports.removeSongFromPlBD = function (id, url, nomePlaylist){
 		db.query(sql, function (err) {
 			db.release();
 			if(err){
-				console.log("errore durante l'eliminazione della canzone");
+				console.log(language.errorDeletingSongFromPl);
 				return
 			}
 		});
@@ -122,18 +122,18 @@ exports.addSong = function (id, url, nomePlaylist){
 							db.query(sql, function (err) {
 								if(err){
 									if(err.code.match('ER_DUP_ENTRY')){
-										console.log("Canzone già presente nel database");
+										console.log(language.songAlreadyInDb);
 										return
 									}
 									else{
-										console.log("errore durante aggiunzione di una canzone alla playlist\n");
+										console.log(language.errorAddingSongToPl);
 										return
 									}
 								}
 							});
 						}
 						else{
-							console.log("errore durante aggiunzione di una canzone");
+							console.log(language.errorAddingSongToPl);
 							return
 						}
 						
@@ -145,11 +145,11 @@ exports.addSong = function (id, url, nomePlaylist){
 		
 					if(err){
 						if(err.code.match('ER_DUP_ENTRY')){
-							console.log("Canzone già presente nella PlayList");
+							console.log(language.songAlreadyInPl);
 							return
 						}
 						else{
-							console.log("errore durante aggiunzione di una canzone alla playlist");
+							console.log(language.errorAddingSongToPl);
 							return
 						}
 					}
@@ -168,7 +168,7 @@ exports.leggiPL = function (id,nomePlaylist,risultato){
 		db.query(sql, function (err,result) {
 			db.release();
 			if(err){
-				console.log("errore nella lettura della playlist");
+				console.log(language.errorReadingPl);
 				return
 			}
 			else{
@@ -189,7 +189,7 @@ function controlloNPL(id,risultato) {
 		db.query(sql, function (err,result) {
 			db.release();
 			if(err){
-				console.log("errore nella lettura dell utente");
+				console.log(language.errorReadingUser,err);
 				return
 			}
 			else{
@@ -198,7 +198,7 @@ function controlloNPL(id,risultato) {
 					db.query(sql, function (err,result1) {
 						db.release();
 						if(err){
-							console.log("errore nella lettura della playlist");
+							console.log(language.errorReadingPl,err);
 							return
 						}
 						else{
@@ -226,7 +226,7 @@ function controlloNSong(id,nomePlaylist,risultato) {
 		db.query(sql, function (err,result) {
 			db.release();
 			if(err){
-				console.log("errore nella lettura della playlist");
+				console.log(language.errorReadingPl,err);
 				return
 			}
 			else{
@@ -235,7 +235,7 @@ function controlloNSong(id,nomePlaylist,risultato) {
 					db.query(sql, function (err,result1) {
 						db.release();
 						if(err){
-							console.log("errore nella lettura del contenuto della playlist");
+							console.log(language.errorReadingPlContent,err);
 							return
 						}
 						else{
@@ -266,7 +266,7 @@ exports.addnPL=function(n,id){
 				db.query(sql, function (err,result) {
 					db.release();
 					if(err){
-						console.log("errore nella lettura dell utente");
+						console.log(language.errorReadingUser,err);
 						return
 					}
 					else{
@@ -276,7 +276,7 @@ exports.addnPL=function(n,id){
 							db.query(sql, function (err) {
 								db.release();
 								if(err){
-									console.log("errore durante l'aggiornamento del numero max di playlist");
+									console.log(language.errorUpdateMaxPlaylist,err);
 									return
 								}else{
 									aggiornaSaldo(saldo-(config.coinPL*n),id);
@@ -306,7 +306,7 @@ exports.addnSong=function(n,id,nomePlaylist){
 				db.query(sql, function (err,result) {
 					db.release();
 					if(err){
-						console.log("errore nella lettura dell playlist");
+						console.log(language.errorReadingPl,err);
 						return
 					}
 					else{
@@ -316,7 +316,7 @@ exports.addnSong=function(n,id,nomePlaylist){
 							db.query(sql, function (err) {
 								db.release();
 								if(err){
-									console.log("errore durante l'aggiornamento del numero max di playlist");
+									console.log(language.errorUpdateMaxSongsPl,err);
 									return
 								}else{
 									aggiornaSaldo(saldo-(config.coinSong*n),id);
@@ -349,10 +349,10 @@ exports.creaBiglietto = function (id,numeri) {
 					
 					if(err){
 						if(err.code.match('ER_DUP_ENTRY')){
-							console.log("biglietto già esistente");
+							console.log(language.ticketAlreadyInDb);
 						}
 						else{
-							console.log("errore durante l'inserimento di una nuovo biglietto");
+							console.log(language.errorAddingTicket);
 							return
 						}
 					}else{
@@ -374,7 +374,7 @@ exports.ottieniBiglietti = function (risultato) {
 		db.query(sql, function (err,result) {
 			db.release();
 			if(err){
-				console.log("errore nella lettura dei biglietti");
+				console.log(language.errorReadingTicket,err);
 				return
 			}
 			else{

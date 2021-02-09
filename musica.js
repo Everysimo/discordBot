@@ -18,7 +18,7 @@ async function play (message){
 		var titolo=await ytsr(element,{limit:1});
 		args=titolo.items.shift();
 		if (!args) {
-			message.reply("nessun risultato trovato");
+			message.reply(language.msgNoResultFound);
 			return;
 		}
 		args=args.url;
@@ -38,7 +38,7 @@ async function play (message){
 		songInfo = await ytdl.getInfo(args);			//ottiene informazioni della canzone passata come argomento
 	}
 	catch(err){
-		throw new Error("errore nel caricamento dell informazioni della canzone");
+		throw new Error(language.errorLoadingSongInfo);
 	}
 	
 	var song = {
@@ -153,7 +153,7 @@ exports.setvolume = function (message){
 		serverQueue.volume=volume;
 	}
 	serverQueue.connection.dispatcher.setVolume(serverQueue.volume / 100);
-	message.channel.send("volume settato a "+volume);
+	message.channel.send(language.msgVolumeSetted+volume);
 }
 
 //show le radio disponibili
@@ -200,9 +200,9 @@ exports.playRadio = function playRadio(message){
 			play(message);
 			break;
 		default:
-			resultErrorPlayRadio.setTitle("Radio non Trovata");
+			resultErrorPlayRadio.setTitle(language.radioNotFound);
 			resultErrorPlayRadio.addFields(
-				{ name: 'la radio '+radioNumber+' non esiste ',inline:true},
+				{ name: language.radio+radioNumber+language.notExists,inline:true},
 			);
 			message.reply(resultErrorPlayRadio);
 		break;

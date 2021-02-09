@@ -3,9 +3,23 @@
     "errorDataBaseConnectionFailed":"\u274C Errore durante la connessione al DataBase \u274C",
     "errorGetCoin":"errore nel caricamento del saldo",
     "errorUpdateCoin":"errore durante l'aggiornamento del saldo",
+    "errorUpdateMaxPlaylist":"errore durante l'aggiornamento del numero max di playlist",
+    "errorUpdateMaxSongsPl":"errore durante l'aggiornamento del numero max songs della playlist",
     "errorCreatingPlayList":"errore durante l'inserimento di una nuova playlist",
+    "errorReadingPl":"errore durante la lettura della playlist",
+    "errorReadingPlContent":"errore durante la lettura del contenuto della playlist",
+    "errorReadingUser":"errore durante la lettura dell'utente",
+    "errorDeletingSongFromPl":"errore durante l'eliminazione delle canzone dalla playlist",
+    "errorAddingSongToPl":"errore durante l'aggiunzione delle canzone alla playlist'",
+    "errorAddingTicket":"errore durante l'inserimento di una nuovo biglietto",
+    "errorReadingTicket":"errore durante la lettura del biglietto",
 
-    "playlistAlreadyExists":"PlayList già esistente"
+    "playlistAlreadyExists":"PlayList già esistente",
+
+    "songAlreadyInDb":"Canzone già presente nel database",
+    "songAlreadyInPl":"Canzone già presente nella Playlist",
+    "ticketAlreadyInDb":"biglietto già esistente"
+
 
 
 }

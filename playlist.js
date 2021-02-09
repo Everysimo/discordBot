@@ -27,7 +27,7 @@ exports.addSongToPL = async function (message) {
 			}
 			args=titolo.items.shift();
 			if (!args) {
-				message.reply("nessun risultato trovato");
+				message.reply(language.noResulFound);
 				return;
 			}
 			songUrl=args.url;
@@ -59,7 +59,7 @@ exports.printPL = function (message) {
 		            songInfo = await ytdl.getInfo(element.song);			//ottiene informazioni della canzone passata come argomento
 	            }
 	            catch(err){
-		            throw new Error("errore nel caricamento dell informazioni della canzone");
+		            throw new Error(language.errorLoadingSongInfo);
 	            }
 	            var song = {
     	            title: songInfo.videoDetails.title,
@@ -104,7 +104,7 @@ exports.playPL= function (message) {
 					songInfo = await ytdl.getInfo(element.song);			//ottiene informazioni della canzone passata come argomento
 				}
 				catch(err){
-					throw new Error("errore nel caricamento dell informazioni della canzone");
+					throw new Error(language.errorLoadingSongInfo);
 				}
 				var song = {
     				title: songInfo.videoDetails.title,
@@ -141,7 +141,7 @@ exports.buyPL=function (message){
 		if (!isNaN(nPl)) {
 			db.addnPL(nPl,id);
 		}else{
-			message.reply("importo non valito")
+			message.reply(language.notValidImport)
 		}
 	}
 }
@@ -153,7 +153,7 @@ exports.buySong=function (message){
 		if (!isNaN(nPl)) {
 			db.addnSong(nPl,id,nomePl);
 		}else{
-			message.reply("importo non valito")
+			message.reply(language.notValidImport)
 		}
 	}
 }

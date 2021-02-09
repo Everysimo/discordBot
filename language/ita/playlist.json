@@ -1,4 +1,7 @@
 {
+    "errorLoadingSongInfo":"errore nel caricamento dell informazioni della canzone",
     "errorJoinVoiceChannel":"\u274C errore nell'entrare nella chat vocale \u274C",
+    "noResultFound":"nessun risultato trovato",
+    "notValidImport":"importo non valido",
     "songAddQueue":"\u2714\uFE0F Aggiunta alla coda \u2714\uFE0F"
 }
