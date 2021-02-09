@@ -41,11 +41,11 @@ async function countUserOnline(){
 		for (let index = 0; index < member.length; index++) {
 			const element = member[index];
 			if (element.presence.status==="online") {
-				onlineMember++;
+				onlineMember=onlineMember+1;
 			}
 		}
 		const channel=guild.channels.cache.get('808787440026386452');
-		channel.setName("total online member: "+onlineMember);
+		channel.setName("total online member: "+onlineMember.toString());
 	},1000);
 }
 
