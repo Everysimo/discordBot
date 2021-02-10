@@ -110,6 +110,7 @@ function help(message){
 		{ name: p+command.radio+' *number*', value: language.descRadio,inline:true},
 		{ name: p+command.setvolume+' *x*', value: language.descSetVolume, inline:true},
 		{ name: p+command.showradio, value: language.descShowRadio, inline:true},
+		{ name: p+command.showqueue, value: language.descShowQueue, inline:true},
 		{ name: p+command.stop, value: language.descStop, inline:true},
 	);
 
@@ -215,6 +216,7 @@ comandi.set(command.setvolume,musica.setvolume);
 comandi.set(command.shop,shop);
 comandi.set(command.showpl,playlist.printPL);
 comandi.set(command.showradio,musica.showRadio);
+comandi.set(command.showqueue,musica.showQueue);
 comandi.set(command.signin,signIn);
 comandi.set(command.slot,gameRoom.slot);
 comandi.set(command.stop,musica.stop);

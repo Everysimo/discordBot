@@ -117,6 +117,27 @@ start = function (guild, song) {
 	return serverQueue.textChannel.send(messaggioRiproduzione);
 }
 
+exports.showQueue= function(message){
+	var serverQueue = queue.get(message.guild.id);
+	if(!serverQueue){
+		message.reply("Non ci sono canzoni in coda");
+	}
+	else{
+		var i=0;
+		const messageQueue = new Discord.MessageEmbed();
+		do{
+			song=serverQueue.songs[i];
+			messageQueue.setTitle(language.messaggioAggiuntaCoda);
+			messageQueue.setDescription("[ @"+song.username+" ]");
+			messageQueue.addFields({
+				name: song.title,value:" "+song.url}
+			);
+			i++;
+			message.channel.send(messageQueue);
+		}while(serverQueue.songs.shift())
+	}
+}
+
 //skippa la canzone
 exports.skip = function (message) {
 	var serverQueue = queue.get(message.guild.id);

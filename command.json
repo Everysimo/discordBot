@@ -19,6 +19,7 @@
     "setvolume":"setvolume",
     "shop":"shop",
     "showradio":"showradio",
+    "showqueue":"showqueue",
     "signin":"signin",
     "slot":"slot",
     "stop":"stop"
