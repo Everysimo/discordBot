@@ -126,7 +126,7 @@ exports.showQueue= function(message){
 		var i=0;
 		const messageQueue = new Discord.MessageEmbed();
 		do{
-			song=serverQueue.songs[i];
+			var song=serverQueue.songs[i];
 			messageQueue.setTitle(language.messaggioAggiuntaCoda);
 			messageQueue.setDescription("[ @"+song.username+" ]");
 			messageQueue.addFields({
