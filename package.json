@@ -1,20 +1,20 @@
 {
-  "name": "discorbot",
-  "description": "bot",
-  "version": "0.0.1",
-  "main": "bot.js",
-  "scripts": {
-    "start": "node bot.js"
-  },
-  "engines": {
-    "node": "14.15.4"
-  },
-  "dependencies": {
-    "@discordjs/opus": "^0.4.0",
-    "discord.js": "^12.5.1",
-    "ffmpeg-static": "^4.2.7",
-    "ytdl-core": "^4.4.5",
-    "mysql":"^2.18.1",
-    "ytsr": "^3.2.4"
-  }
+    "name": "discorbot",
+    "description": "bot",
+    "version": "0.0.1",
+    "main": "bot.js",
+    "scripts": {
+        "start": "node bot.js"
+    },
+    "engines": {
+        "node": "14.15.4"
+    },
+    "dependencies": {
+        "@discordjs/opus": "^0.4.0",
+        "discord.js": "^12.5.1",
+        "ffmpeg-static": "^4.2.7",
+        "ytdl-core": "^4.4.5",
+        "mysql":"^2.18.1",
+        "ytsr": "^3.2.4"
+    }
 }
