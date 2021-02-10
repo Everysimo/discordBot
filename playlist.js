@@ -49,13 +49,13 @@ exports.printPL = function (message) {
     if(!message.member.user.bot){
         const nomePl=message.content.split(" ")[1];
     	const id=message.member.user.id;
-		if(isNaN(nomePl)){
+		if(!nomePl){
 			db.getPLNames(id,async function(risult){
 				const stampa= new Discord.MessageEmbed();
-				stampa.setTitle("Playlists: "+nomePl);
+				stampa.setTitle("Playlists: ");
 				for (let index = 0; index < risult.length; index++) {
-					const plName = risult[index];
-					stampa.addField(index+") "+plName,true);
+					const resultQuery = risult[index];
+					stampa.addField(index+") "+resultQuery.nome,true);
 				}
 				message.channel.send(stampa);
 			});
@@ -77,7 +77,7 @@ exports.printPL = function (message) {
     	            title: songInfo.videoDetails.title,
 		            url: songInfo.videoDetails.video_url,
 	            };		//ottiene informazioni della canzone passata come 
-                stampa.addField(index+") "+song.title,song.url,true);
+                stampa.addField(index+") "+song.title,song.url);
             }
             message.channel.send(stampa);
         	});
