@@ -123,16 +123,18 @@ exports.showQueue= function(message){
 		message.reply("Non ci sono canzoni in coda");
 	}
 	else{
-		const messageQueue = new Discord.MessageEmbed();
-		messageQueue.setTitle(language.messaggioAggiuntaCoda);
-		messageQueue.setDescription("[ @"+song.username+" ]");
+		
 		for (let index = 0; index < serverQueue.songs.length; index++) {
 			const element = serverQueue.songs[index];
+			const messageQueue = new Discord.MessageEmbed();
+			messageQueue.setTitle(language.messaggioAggiuntaCoda);
+			messageQueue.setDescription("[ @"+element.username+" ]");
 			messageQueue.addFields({
 				name: element.title,value: element.url}
 			);
+			message.channel.send(messageQueue);
 		}
-		message.channel.send(messageQueue);
+		
 
 	}
 }
