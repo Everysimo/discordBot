@@ -21,10 +21,6 @@ client.once('ready', () => {
 	countMember();
 
 	countUserOnline();
-
-	countUser();
-
-	countBot();
 });
 
 //Command Prefix 
@@ -53,32 +49,6 @@ async function countUserOnline(){
 		}
 		catch(err){
 			console.log("errore durante l'aggiornamento del canale tot online",err);
-		}
-	},1000);
-}
-async function countUser(){
-	setInterval(()=>{
-		const guild = client.guilds.cache.get(config.IdServer);
-		const userCount=guild.members.cache.filter(member=>!member.user.bot).size
-		const channel=guild.channels.cache.get(config.IdMemberChannelNotBot);
-		try{
-		channel.setName("\uD83D\uDDE3\uFE0F total users: "+userCount.toString()+ " \uD83D\uDDE3\uFE0F");
-		}
-		catch(err){
-			console.log("errore durante l'aggiornamento del canale tot user",err);
-		}
-	},1000);
-}
-async function countBot(){
-	setInterval(()=>{
-		const guild = client.guilds.cache.get(config.IdServer);
-		const botCount=guild.members.cache.filter(member=>member.user.bot).size
-		const channel=guild.channels.cache.get(config.IdMemberChannelBot);
-		try{
-		channel.setName("\uD83D\uDDE3\uFE0F total bot: "+botCount.toString()+ " \uD83D\uDDE3\uFE0F");
-		}
-		catch(err){
-			console.log("errore durante l'aggiornamento del canale tot bot",err);
 		}
 	},1000);
 }
