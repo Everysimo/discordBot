@@ -375,7 +375,7 @@ function stampanumeriVincenti(numeriVincenti){
 	resultWinningNumbers.addFields(
 		{ name: numeriVincenti, inline:true},
 	);
-	bot.clientchannels.cache.get(config.lotteryChannel);
+	bot.client.channels.cache.get(config.lotteryChannel);
 	channel.send(resultWin);
 	//TO-DO inviare messaggio
 }
@@ -391,7 +391,7 @@ function stampaVincita(id,vincita){
 	resultWin.addFields(
 		{ name: language.win + vincita, inline:true},
 	);
-	bot.clientchannels.cache.get(config.lotteryChannel);
+	bot.client.channels.cache.get(config.lotteryChannel);
 	channel.send(resultWin);
 	//TO-DO inviare messaggio
 }
