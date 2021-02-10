@@ -87,7 +87,7 @@ exports.playPL= function (message) {
 					voiceChannel: message.member.voice.channel,
 					connection: null,
 					songs: [],
-					volume: 50,
+					volume: 10,
 					playing: true,
 				};
 				musica.queue.set(message.guild.id, queueContruct);
