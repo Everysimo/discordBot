@@ -18,7 +18,7 @@ client.once('ready', () => {
 
 	client.user.setActivity(language.botActivity,{type:"LISTENING"});
 
-	countUser();
+	countMember();
 
 	countUserOnline();
 
@@ -30,7 +30,7 @@ client.once('ready', () => {
 //Command Prefix 
 const p=config.prefixCommand;
 
-async function countUser(){
+async function countMember(){
 	setInterval(()=>{
 		const guild = client.guilds.cache.get(config.IdServer);
 		const memberCount = guild.memberCount;
