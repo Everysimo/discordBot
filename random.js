@@ -4,5 +4,5 @@ const ksoft = new KSoftClient(process.env.tokenKsoft);
 
 exports.image= async function (message) {
     const { url } = await ksoft.images.aww();
-    message.channel.reply(url);
+    message.reply(url);
 }
