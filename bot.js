@@ -13,7 +13,7 @@ exports.client=client;
 //quando il nuovo cliente è pronto esegue log
 client.once('ready', () => {
 	console.log('Ready!');
-	console.log('hello word!');
+
 	client.user.setStatus("Online");
 
 	client.user.setActivity(language.botActivity,{type:"LISTENING"});
