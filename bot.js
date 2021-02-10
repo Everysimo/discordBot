@@ -109,7 +109,7 @@ function help(message){
 		{ name: p+command.play+' *url/titolo*', value: language.descPlay,inline:true},
 		{ name: p+command.radio+' *number*', value: language.descRadio,inline:true},
 		{ name: p+command.setvolume+' *x*', value: language.descSetVolume, inline:true},
-		{ name: p+command.showRadio, value: language.descShowRadio, inline:true},
+		{ name: p+command.showradio, value: language.descShowRadio, inline:true},
 		{ name: p+command.stop, value: language.descStop, inline:true},
 	);
 
