@@ -78,7 +78,7 @@ async function countBot(){
 		channel.setName("\uD83D\uDDE3\uFE0F total bot: "+botCount.toString()+ " \uD83D\uDDE3\uFE0F");
 		}
 		catch(err){
-			console.log("errore durante l'aggiornamento del canale tot meber",err);
+			console.log("errore durante l'aggiornamento del canale tot bot",err);
 		}
 	},1000);
 }
