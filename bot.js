@@ -35,7 +35,7 @@ async function countUser(){
 		const guild = client.guilds.cache.get(config.IdServer);
 		const memberCount = guild.memberCount;
 		const channel=guild.channels.cache.get(config.IdMemberChannel);
-		channel.setName("\uD83D\uDC65 total member "+memberCount.toString()+" \uD83D\uDC65");
+		channel.setName("\uD83D\uDDE3\uFE0F total member "+memberCount.toString()+" \uD83D\uDDE3\uFE0F");
 	},1000);
 }
 async function countUserOnline(){
@@ -51,7 +51,7 @@ async function countUser(){
 		const guild = client.guilds.cache.get(config.IdServer);
 		const userCount=guild.members.cache.filter(member=>!member.user.bot).size
 		const channel=guild.channels.cache.get(config.IdMemberChannelNotBot);
-		channel.setName("total users: "+userCount.toString());
+		channel.setName("\uD83D\uDDE3\uFE0F total users: "+userCount.toString()+ " \uD83D\uDDE3\uFE0F");
 	},1000);
 }
 async function countBot(){
@@ -59,7 +59,7 @@ async function countBot(){
 		const guild = client.guilds.cache.get(config.IdServer);
 		const botCount=guild.members.cache.filter(member=>member.user.bot).size
 		const channel=guild.channels.cache.get(config.IdMemberChannelBot);
-		channel.setName("total bot: "+botCount.toString());
+		channel.setName("\uD83D\uDDE3\uFE0F total bot: "+botCount.toString()+ " \uD83D\uDDE3\uFE0F");
 	},1000);
 }
 
