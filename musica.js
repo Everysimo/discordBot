@@ -56,7 +56,7 @@ async function play (message){
 			voiceChannel: voiceChannel,
 			connection: null,
 			songs: [],
-			volume: 20,
+			volume: 10,
 			playing: true,
 		};
 		queue.set(message.guild.id, queueContruct);
