@@ -32,7 +32,7 @@ async function countMember(){
 		const memberCount = guild.memberCount;
 		const channel=guild.channels.cache.get(config.IdMemberChannel);
 		try{
-			channel.setName("\uD83D\uDDE3\uFE0F total member "+memberCount.toString()+" \uD83D\uDDE3\uFE0F");
+			channel.setName("\uD83D\uDC65 total member "+memberCount.toString()+" \uD83D\uDC65");
 		}
 		catch(err){
 			console.log("errore durante l'aggiornamento del canale tot member",err);
