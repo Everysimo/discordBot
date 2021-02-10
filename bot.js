@@ -35,7 +35,12 @@ async function countUser(){
 		const guild = client.guilds.cache.get(config.IdServer);
 		const memberCount = guild.memberCount;
 		const channel=guild.channels.cache.get(config.IdMemberChannel);
-		channel.setName("\uD83D\uDDE3\uFE0F total member "+memberCount.toString()+" \uD83D\uDDE3\uFE0F");
+		try{
+			channel.setName("\uD83D\uDDE3\uFE0F total member "+memberCount.toString()+" \uD83D\uDDE3\uFE0F");
+		}
+		catch(err){
+			console.log("errore durante l'aggiornamento del canale tot member",err);
+		}
 	},1000);
 }
 async function countUserOnline(){
@@ -43,7 +48,12 @@ async function countUserOnline(){
 		const guild = client.guilds.cache.get(config.IdServer);
 		const onlineMember=guild.members.cache.filter(member=>member.presence.status==="online").size
 		const channel=guild.channels.cache.get(config.IdMemberChannelOnline);
+		try{
 		channel.setName("\uD83D\uDDE3\uFE0F total online "+onlineMember.toString() + " \uD83D\uDDE3\uFE0F");
+		}
+		catch(err){
+			console.log("errore durante l'aggiornamento del canale tot online",err);
+		}
 	},1000);
 }
 async function countUser(){
@@ -51,7 +61,12 @@ async function countUser(){
 		const guild = client.guilds.cache.get(config.IdServer);
 		const userCount=guild.members.cache.filter(member=>!member.user.bot).size
 		const channel=guild.channels.cache.get(config.IdMemberChannelNotBot);
+		try{
 		channel.setName("\uD83D\uDDE3\uFE0F total users: "+userCount.toString()+ " \uD83D\uDDE3\uFE0F");
+		}
+		catch(err){
+			console.log("errore durante l'aggiornamento del canale tot user",err);
+		}
 	},1000);
 }
 async function countBot(){
@@ -59,7 +74,12 @@ async function countBot(){
 		const guild = client.guilds.cache.get(config.IdServer);
 		const botCount=guild.members.cache.filter(member=>member.user.bot).size
 		const channel=guild.channels.cache.get(config.IdMemberChannelBot);
+		try{
 		channel.setName("\uD83D\uDDE3\uFE0F total bot: "+botCount.toString()+ " \uD83D\uDDE3\uFE0F");
+		}
+		catch(err){
+			console.log("errore durante l'aggiornamento del canale tot meber",err);
+		}
 	},1000);
 }
 
