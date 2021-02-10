@@ -49,7 +49,8 @@ exports.printPL = function (message) {
     if(!message.member.user.bot){
         const nomePl=message.content.split(" ")[1];
     	const id=message.member.user.id;
-        db.leggiPL(id, nomePl,async function(risult){
+		if(!isNaN(nomePl)){
+       	 db.leggiPL(id, nomePl,async function(risult){
             const stampa= new Discord.MessageEmbed();
             stampa.setTitle("Playlist: "+nomePl);
 			for (let index = 0; index < risult.length; index++) {
@@ -68,7 +69,18 @@ exports.printPL = function (message) {
                 stampa.addField(index+") "+song.title,song.url,true);
             }
             message.channel.send(stampa);
-        });
+        	});
+		}
+		else{
+			db.getPLNames(id,async function(risult){
+			const stampa= new Discord.MessageEmbed();
+			stampa.setTitle("Playlists: "+nomePl);
+			for (let index = 0; index < risult.length; index++) {
+				const plName = risult[index];
+				stampa.addField(index+") "+plName,true);
+			}
+			message.channel.send(stampa);
+		});
     }
 }
 

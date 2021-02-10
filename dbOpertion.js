@@ -183,6 +183,27 @@ exports.leggiPL = function (id,nomePlaylist,risultato){
 	});
 }
 
+exports.getPLNames= function(id,risultato){
+	dbpool.getConnection((err, db) => {
+		var sql= `SELECT nome FROM playlist where utente='${id}'`;	
+		db.query(sql, function (err,result) {
+			db.release();
+			if(err){
+				console.log(language.errorReadingPl);
+				return
+			}
+			else{
+				return risultato(result);
+			}
+		});
+		
+		if(err){
+			console.log(language.errorDataBaseConnectionFailed,err);
+			return
+		}
+	});
+}
+
 function controlloNPL(id,risultato) {
 	dbpool.getConnection((err, db) => {
 		var sql= `SELECT maxPlaylist FROM utente where idutente='${id}'`;	
