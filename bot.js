@@ -208,7 +208,7 @@ comandi.set(command.next,musica.skip);
 comandi.set(command.play,musica.play);
 comandi.set(command.playpl,playlist.playPL);
 comandi.set(command.radio,musica.playRadio);
-comandi.set(command.randomImg,random.image);
+//comandi.set(command.randomImg,random.image);
 comandi.set(command.rmsongpl,playlist.removeSongFromPL);
 comandi.set(command.roulette,gameRoom.roulette);
 comandi.set(command.setvolume,musica.setvolume);
