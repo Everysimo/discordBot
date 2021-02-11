@@ -1,5 +1,5 @@
 {
-    "prefixCommand": "$",
+    "prefixCommand": "!",
     "language":"ita",
     "coinName":"soldini",
     "coinPL":10000,
