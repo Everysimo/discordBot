@@ -10,7 +10,7 @@ async function addCoin(){
 	for (let index = 0; index < activeMember.length; index++) {
 		try{
 			var id = activeMember[index].id;
-        	 
+			await sleep(1000);
 			getSaldoGiocatore(id,saldo=>{
 				aggiornaSaldo(saldo+(config.coinForTime),id);
 				console.log("sto aggiungendo soldini a "+id);
@@ -19,7 +19,6 @@ async function addCoin(){
 		catch(err){
 			console.log("errore nell'aggioranre il saldo",err.stack)
 		}
-		await sleep(1000);
 	}
 }
 exports.addCoin = addCoin;
