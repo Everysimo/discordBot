@@ -3,7 +3,7 @@ const db=require("./dbOpertion.js");
 const language =require('./language/'+config.language+'/user.json');
 
 function aggiornaSaldo(nuovoSaldo,id){ 
-	db.dbpool.getConnection((err, db) => {
+	dbpool.getConnection((err, db) => {
 		var sql= `Update utente set saldo='${nuovoSaldo}' where idutente='${id}'`;
 		db.query(sql, function (err) {
 			db.release();
@@ -22,7 +22,7 @@ exports.aggiornaSaldo = aggiornaSaldo;
 
 
 function getSaldoGiocatore (id,saldo) {
-	db.dbpool.getConnection((err, db) => {
+	dbpool.getConnection((err, db) => {
 		var sql= `SELECT saldo FROM utente where idutente='${id}'`;	
 		db.query(sql, function (err,result) {
 			db.release();
