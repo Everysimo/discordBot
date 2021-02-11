@@ -11,10 +11,11 @@ async function addCoin(){
 	for (let index = 0; index < activeMember.length; index++) {
 		try{
 			var id = activeMember[pos].id;
-			console.log("sto aggiungendo soldini a "+id);
+			console.log("prendo ha "+id);
 			getSaldoGiocatore(id,saldo=>{
+				console.log("aggiungo ha "+id);
 				aggiornaSaldo(saldo+(config.coinForTime),id);
-				console.log("sto aggiungendo soldini a "+id);
+				console.log("aggiunto ha "+id);
 			});
             pos++;
 		}
