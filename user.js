@@ -3,6 +3,23 @@ const config = require('./config.json');
 const db=require("./dbOpertion.js");
 const language =require('./language/'+config.language+'/user.json');
 
+function addCoin(){ 
+	const guild = client.guilds.cache.get(config.IdServer);
+	const activeMember= await guild.members.cache.filter(member=>member.voice.channel!==null);
+	for (let index = 0; index < activeMember.length; index++) {
+		const element = activeMember[index];
+		try{
+			user.getSaldoGiocatore(id,saldo=>{
+				user.aggiornaSaldo(saldo+(config.coinForTime),id);
+			});
+		}
+		catch(err){
+			console.log("errore nell'aggioranre il saldo",err.stack)
+		}
+	}
+}
+exports.addCoin = addCoin;
+
 function aggiornaSaldo(nuovoSaldo,id){ 
 	dbpool.getConnection((err, db) => {
 		var sql= `Update utente set saldo='${nuovoSaldo}' where idutente='${id}'`;

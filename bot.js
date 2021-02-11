@@ -60,6 +60,8 @@ async function countUserOnline(){
 client.login(process.env.tokenBotDiscord);
 
 setInterval(gameRoom.calcolaVincita, config.lottery);
+setInterval(user.addCoin, config.addCoin);
+
 
 //il bot join nel canale vocale del mittente del messaggio
 async function join(message){
