@@ -381,8 +381,8 @@ function stampanumeriVincenti(numeriVincenti){
 }
 
 function stampaVincita(id,vincita){
-	saldoGiocatore(id,saldo=>{
-		aggiornaSaldo(saldo+(vincita),id);
+	db.saldoGiocatore(id,saldo=>{
+		db.aggiornaSaldo(saldo+(vincita),id);
 	});
 
 	const resultWin = new Discord.MessageEmbed();
