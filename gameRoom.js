@@ -308,7 +308,7 @@ exports.estrai=estrai;
 
 exports.buyBiglietto = function(message){
 	const id=message.member.user.id;
-	const saldo = user.getSaldoGiocatore(id);
+	user.getSaldoGiocatore(id,saldo=>{
 	if(user.verificaSaldo(config.lotteryTicket,saldo)){
 		var numeri= estrai(6,90);
 		db.creaBiglietto(id,numeri);
@@ -317,6 +317,7 @@ exports.buyBiglietto = function(message){
 	else{
 		message.reply(language.msgNotEnoughCoin);
 	}
+});
 }
 
 function valutaVincita(element,numeriVincente){
