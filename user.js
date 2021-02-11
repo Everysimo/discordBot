@@ -53,7 +53,7 @@ function getSaldoGiocatore (id,saldo) {
 				return
 			}
 			else{
-				if (result) {
+				if (result.length===0) {
 					return saldo(result[0].saldo);
 				}
 			}
