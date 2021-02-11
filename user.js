@@ -10,7 +10,8 @@ async function addCoin(){
 	for (let index = 0; index < activeMember.length; index++) {
 		var element = activeMember[index];
         var id = element.id;
-        console.log("sto aggiungendo soldini a tutti");
+        
+        console.log("sto aggiungendo soldini a "+id);
 		try{
 			getSaldoGiocatore(id,saldo=>{
 				if (saldo) {
