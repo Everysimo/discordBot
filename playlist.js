@@ -178,6 +178,7 @@ exports.buyPL=function (message){
 				if(user.verificaSaldo(config.coinPL*nPl,saldo)){
 				
 					db.addnPL(nPl,id);
+					user.aggiornaSaldo(config.coinPL*nPl,id);
 					message.reply(language.msgBuyPlSuccess);
 				}
 				else{
@@ -200,6 +201,7 @@ exports.buySongs=function (message){
 				if(user.verificaSaldo(config.coinSong*nPl,saldo)){
 				const nomePl=message.content.split(" ")[1];
 				db.addnSong(nPl,id,nomePl);
+				user.aggiornaSaldo(saldo-config.coinSong*nPl,id);
 				message.reply(language.msgBuySongsSuccess);
 				}
 				else{
