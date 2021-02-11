@@ -13,7 +13,9 @@ async function addCoin(){
         console.log("sto aggiungendo soldini a tutti");
 		try{
 			getSaldoGiocatore(id,saldo=>{
-				aggiornaSaldo(saldo+(config.coinForTime),id);
+				if (saldo) {
+					aggiornaSaldo(saldo+(config.coinForTime),id);
+				}
 			});
 		}
 		catch(err){
