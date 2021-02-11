@@ -7,14 +7,16 @@ async function addCoin(){
 	const guild = bot.client.guilds.cache.get(config.IdServer);
 	const activeMember= await guild.members.cache.filter(member=>member.voice.channel!==null).array();
     console.log("provo ad aggiungere soldini "+activeMember);
+    var pos = 0;
 	for (let index = 0; index < activeMember.length; index++) {
 		try{
-			var id = activeMember[index].id;
+			var id = activeMember[pos].id;
 			sleep(1000);
 			getSaldoGiocatore(id,saldo=>{
 				aggiornaSaldo(saldo+(config.coinForTime),id);
 				console.log("sto aggiungendo soldini a "+id);
 			});
+            pos++;
 		}
 		catch(err){
 			console.log("errore nell'aggioranre il saldo",err.stack)
