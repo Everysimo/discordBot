@@ -175,7 +175,7 @@ exports.buyPL=function (message){
 		var nPl=parseInt(message.content.split(" ")[1]);
 		if(!isNaN(nPl)){
 			user.getSaldoGiocatore(id,function (saldo){
-				if(user.verificaSaldo(config.coinPL*n,saldo)){
+				if(user.verificaSaldo(config.coinPL*nPl,saldo)){
 				
 					db.addnPL(nPl,id)
 				}
