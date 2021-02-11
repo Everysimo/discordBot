@@ -72,7 +72,7 @@ function signIn(message){
 							 value: language.msgDescAlreadySignIn, inline:true},
 						)
 					
-						console.log(language.dbMsgUserCorrectlySigned);
+						console.log(language.dbMsgUserAlreadySigned);
 						message.channel.send(messaggioRifiuto);
 						return
 					}
@@ -85,7 +85,7 @@ function signIn(message){
 						 value: language.msgDescWelcomeSignIn, inline:true},
 					)
 
-					console.log(language.dbMsgUserAlreadySigned);
+					console.log(language.dbMsgUserCorrectlySigned);
 					message.channel.send(messaggioConferma);
 				}
 			});
