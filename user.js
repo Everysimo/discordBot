@@ -1,10 +1,10 @@
 const Discord = require('discord.js');
 const config = require('./config.json');
-const db=require("./dbOpertion.js");
 const language =require('./language/'+config.language+'/user.json');
+const bot = require('./bot');
 
 async function addCoin(){ 
-	const guild = client.guilds.cache.get(config.IdServer);
+	const guild = bot.client.guilds.cache.get(config.IdServer);
 	const activeMember= await guild.members.cache.filter(member=>member.voice.channel!==null);
 	for (let index = 0; index < activeMember.length; index++) {
 		const element = activeMember[index];
