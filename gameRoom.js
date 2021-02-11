@@ -386,10 +386,10 @@ function stampaVincita(id,vincita){
 	});
 
 	const resultWin = new Discord.MessageEmbed();
-
+	const user = bot.client.users.cache.get(id);
 	resultWin.setTitle(language.winnigNumbers);
 	resultWin.addFields(
-		{ name: language.win + vincita, inline:true},
+		{ name: language.win + vincita,value: user.username, inline:true},
 	);
 	const channel=bot.client.channels.cache.get(config.lotteryChannel);
 	channel.send(resultWin);
