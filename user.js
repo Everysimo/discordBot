@@ -6,7 +6,7 @@ const bot = require('./bot');
 async function addCoin(){ 
 	const guild = bot.client.guilds.cache.get(config.IdServer);
 	const activeMember= await guild.members.cache.filter(member=>member.voice.channel!==null).array();
-    console.log("provo ad aggiungere soldini");
+    console.log("provo ad aggiungere soldini "+activeMember);
 	for (let index = 0; index < activeMember.length; index++) {
 		try{
 			var id = activeMember[index].id;
