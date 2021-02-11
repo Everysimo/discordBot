@@ -177,7 +177,8 @@ exports.buyPL=function (message){
 			user.getSaldoGiocatore(id,function (saldo){
 				if(user.verificaSaldo(config.coinPL*nPl,saldo)){
 				
-					db.addnPL(nPl,id)
+					db.addnPL(nPl,id);
+					message.reply(language.msgBuyPlSuccess);
 				}
 				else{
 					message.reply(language.notEnoughCoin);
@@ -199,6 +200,7 @@ exports.buySongs=function (message){
 				if(user.verificaSaldo(config.coinSong*nPl,saldo)){
 				const nomePl=message.content.split(" ")[1];
 				db.addnSong(nPl,id,nomePl);
+				message.reply(language.msgBuySongsSuccess);
 				}
 				else{
 					message.reply(language.notEnoughCoin);
