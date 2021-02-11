@@ -7,6 +7,8 @@
     "msgRemoveSongFail":"Errore durante la rimozione della canzone",
     "msgAddSongSuccess":"Canzone aggiunta con successo",
     "msgAddSongFail":"Errore durante l'aggiunta della canzone",
+    "msgBuySongsSuccess":"Slot canzoni acquistate con successo",
+    "msgBuyPlSuccess":"Slot playlist acquistate con successo",
     "notEnoughCoin":"Non ha abbastanza coin per effettuare l'acquisto, continua a farmare",
     "noResultFound":"nessun risultato trovato",
     "notValidImport":"importo non valido",

@@ -173,20 +173,20 @@ exports.buyPL=function (message){
 	if(!message.member.user.bot){
 		const id=message.member.user.id;
 		var nPl=parseInt(message.content.split(" ")[1]);
-		if(!isNaN(nPl)){
-			user.getSaldoGiocatore(id,function (saldo){
-				if(user.verificaSaldo(config.coinPL*nPl,saldo)){
-				
-					db.addnPL(nPl,id)
-				}
-				else{
-					message.reply(language.notEnoughCoin);
-				}
-			});
+		if(isNaN(nPl)){
+			nPl =1;
 		}
-		else{
-			message.reply(language.notValidImport);
-		}
+		user.getSaldoGiocatore(id,function (saldo){
+			if(user.verificaSaldo(config.coinPL*nPl,saldo)){
+			
+				db.addnPL(nPl,id);
+				user.aggiornaSaldo(config.coinPL*nPl,id);
+				message.reply(language.msgBuyPlSuccess);
+			}
+			else{
+				message.reply(language.notEnoughCoin);
+			}
+		});
 	}
 }
 
@@ -194,18 +194,20 @@ exports.buySongs=function (message){
 	if(!message.member.user.bot){
 		const id=message.member.user.id;
 		var nPl=parseInt(message.content.split(" ")[2]);
-		if (!isNaN(nPl)) {
-			user.getSaldoGiocatore(id,function (saldo){
-				if(user.verificaSaldo(config.coinSong*nPl,saldo)){
-				const nomePl=message.content.split(" ")[1];
-				db.addnSong(nPl,id,nomePl);
-				}
-				else{
-					message.reply(language.notEnoughCoin);
-				}
-			});
-		}else{
-			message.reply(language.notValidImport)
+		if(isNaN(nPl)){
+			nPl =1;
 		}
+			user.getSaldoGiocatore(id,function (saldo){
+			if(user.verificaSaldo(config.coinSong*nPl,saldo)){
+			const nomePl=message.content.split(" ")[1];
+			db.addnSong(nPl,id,nomePl);
+			user.aggiornaSaldo(saldo-config.coinSong*nPl,id);
+			message.reply(language.msgBuySongsSuccess);
+			}
+			else{
+				message.reply(language.notEnoughCoin);
+			}
+		});
+		
 	}
 }
