@@ -324,21 +324,26 @@ exports.buyBiglietto = function(message){
 }
 
 function valutaVincita(element,numeriVincente){
-	var sbagli=0;
-	if (element.numero1!==numeriVincente[0]) {
-		sbagli=sbagli+1;
-	}else if (element.numero2!==numeriVincente[1]) {
-		sbagli=sbagli+1;
-	}else if (element.numero3!==numeriVincente[2]) {
-		sbagli=sbagli+1;
-	}else if (element.numero4!==numeriVincente[3]) {
-		sbagli=sbagli+1;
-	}else if (element.numero5!==numeriVincente[4]) {
-		sbagli=sbagli+1;
-	}else if (element.numero6!==numeriVincente[5]) {
-		sbagli=sbagli+1;
+	var esatti=0;
+	if (numeriVincente.includes(element.numero1)) {
+		esatti=esatti+1;
 	}
-	return sbagli;
+	if (numeriVincente.includes(element.numero2)) {
+		esatti=esatti+1;
+	}
+	if (numeriVincente.includes(element.numero3)) {
+		esatti=esatti+1;
+	}
+	if (numeriVincente.includes(element.numero4)) {
+		esatti=esatti+1;
+	}
+	if (numeriVincente.includes(element.numero5)) {
+		esatti=esatti+1;
+	}
+	if (numeriVincente.includes(element.numero6)) {
+		esatti=esatti+1;
+	}
+	return esatti;
 }
 
 exports.calcolaVincita=function() {
@@ -348,10 +353,10 @@ exports.calcolaVincita=function() {
 	var vincitoreCon5=new Array();
 	db.ottieniBiglietti(result=>{
 		result.forEach(element=>{
-			var sbagli=valutaVincita(element,numeriVincente);
-			if (sbagli===0) {
+			var esatti=valutaVincita(element,numeriVincente);
+			if (esatti===6) {
 				vincitore.push(element.user);
-			}else if(sbagli===1){
+			}else if(esatti===5){
 				vincitoreCon5.push(element.user);
 			}
 		})
