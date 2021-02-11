@@ -7,25 +7,19 @@ async function addCoin(){
 	const guild = bot.client.guilds.cache.get(config.IdServer);
 	const activeMember= await guild.members.cache.filter(member=>member.voice.channel!==null).array();
     console.log("provo ad aggiungere soldini "+activeMember);
-    var pos = 0;
 	for (let index = 0; index < activeMember.length; index++) {
-		try{
-			var id = activeMember[pos].id;
-			console.log("prendo ha "+id);
-			getSaldoGiocatore(id,saldo=>{
-				console.log("aggiungo ha "+id);
-				aggiornaSaldo(saldo+(config.coinForTime),id);
-				console.log("aggiunto ha "+id);
-			});
-            pos++;
-		}
-		catch(err){
-			console.log("errore nell'aggioranre il saldo",err.stack)
-		}
+		var id = activeMember[index].id;
+		addCoin2(id)
 	}
 }
 exports.addCoin = addCoin;
-
+function addCoin2(id){
+	getSaldoGiocatore(id,saldo=>{
+		console.log("aggiungo ha "+id);
+		aggiornaSaldo(saldo+(config.coinForTime),id);
+		console.log("aggiunto ha "+id);
+	});
+}
 function aggiornaSaldo(nuovoSaldo,id){ 
 	dbpool.getConnection((err, db) => {
 		var sql= `Update utente set saldo='${nuovoSaldo}' where idutente='${id}'`;
