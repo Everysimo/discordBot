@@ -9,8 +9,8 @@ async function addCoin(){
     console.log("provo ad aggiungere soldini");
 	for (let index = 0; index < activeMember.length; index++) {
 		try{
-			var element = activeMember[index];
-        	var id = element.id;
+			var id = activeMember[index].id;
+        	 
 			getSaldoGiocatore(id,saldo=>{
 				aggiornaSaldo(saldo+(config.coinForTime),id);
 				console.log("sto aggiungendo soldini a "+id);
