@@ -358,10 +358,12 @@ exports.calcolaVincita=function() {
 		var vincitaTotale=Math.floor((result.length*config.lotteryTicket)/2);
 		var vincitaSingola=Math.floor(vincitaTotale/(vincitore.length+vincitoreCon5.length));
 		var vincitaSingolacon5=Math.floor(vincitaSingola/1.5);
+
 		for (let index = 0; index < vincitore.length; index++) {
 			const element = vincitore[index];
 			stampaVincita(element,vincitaSingola)
 		}
+
 		for (let index = 0; index < vincitoreCon5.length; index++) {
 			const element = vincitoreCon5[index];
 			stampaVincita(element,vincitaSingolacon5);
@@ -394,7 +396,7 @@ function stampaVincita(id,vincita){
 	const user = bot.client.users.cache.get(id);
 	resultWin.setTitle(language.winnigNumbers);
 	resultWin.addFields(
-		{ name: language.win + vincita,value: user.username, inline:true},
+		{ name: language.win +" "+ vincita,value: user.username, inline:true},
 	);
 	const channel=bot.client.channels.cache.get(config.lotteryChannel);
 	channel.send(resultWin);
