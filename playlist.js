@@ -196,7 +196,7 @@ exports.buySongs=function (message){
 		var nPl=parseInt(message.content.split(" ")[2]);
 		if (!isNaN(nPl)) {
 			user.getSaldoGiocatore(id,function (saldo){
-				if(user.verificaSaldo(config.coinSong*n,saldo)){
+				if(user.verificaSaldo(config.coinSong*nPl,saldo)){
 				const nomePl=message.content.split(" ")[1];
 				db.addnSong(nPl,id,nomePl);
 				}
