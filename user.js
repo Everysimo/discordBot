@@ -1,3 +1,4 @@
+const Discord = require('discord.js');
 const config = require('./config.json');
 const db=require("./dbOpertion.js");
 const language =require('./language/'+config.language+'/user.json');
