@@ -4,7 +4,6 @@ const language =require('./language/'+config.language+'/playlist.json');
 const db=require("./dbOpertion.js");
 const ytdl = require('ytdl-core');
 const musica=require("./musica.js");
-const ytsr=require('ytsr');
 
 exports.createPlaylist = function (message) {
     if(!message.member.user.bot){
@@ -12,11 +11,11 @@ exports.createPlaylist = function (message) {
         const id=message.member.user.id;
         try{
 			db.createPlayListDB(id, nomePl);
-			message.reply(msgCreatingPlSuccess);
+			message.reply(language.msgCreatingPlSuccess);
 		}
 		catch(err){
-			console.log(msgCreatingPlFail+"\n",err);
-			message.reply(msgCreatingPlFail);
+			console.log(language.msgCreatingPlFail+"\n",err);
+			message.reply(language.msgCreatingPlFail);
 		}
         
     }
@@ -41,11 +40,11 @@ exports.addSongToPL = async function (message) {
 		}
 		try{
 			db.addSong(id,songUrl,nomePl);
-			message.reply(msgAddSongSuccess);
+			message.reply(language.msgAddSongSuccess);
 		}
 		catch(err){
-			console.log(msgAddSongFail+"\n",err);
-			message.reply(msgAddSongFail);
+			console.log(language.msgAddSongFail+"\n",err);
+			message.reply(language.msgAddSongFail);
 		}
         
     }
@@ -58,11 +57,11 @@ exports.removeSongFromPL = function (message) {
         const id=message.member.user.id;
 		try{
         	db.removeSongFromPlBD(id,songUrl,nomePl);
-			message.reply(msgRemoveSongSuccess);
+			message.reply(language.msgRemoveSongSuccess);
 		}
 		catch(err){
-			console.log(msgRemoveSongFail+"\n",err);
-			message.reply(msgRemoveSongFail);
+			console.log(language.msgRemoveSongFail+"\n",err);
+			message.reply(language.msgRemoveSongFail);
 		}
     }
 }
