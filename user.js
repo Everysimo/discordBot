@@ -1,3 +1,5 @@
+const language =require('./language/'+config.language+'/user.json');
+
 function aggiornaSaldo(nuovoSaldo,id){ 
 	dbpool.getConnection((err, db) => {
 		var sql= `Update utente set saldo='${nuovoSaldo}' where idutente='${id}'`;
@@ -47,7 +49,7 @@ function getSaldo(message){
 		});
 	}
 }
-
+exports.getSaldo = getSaldo;
 function signIn(message){
 	if(!message.member.user.bot){
 		dbpool.getConnection((err, db) => {
@@ -92,7 +94,7 @@ function signIn(message){
 		});
 	}
 }
-
+exports.signIn = signIn;
 function verificaSaldo(importo,saldo){
 	if(importo <= saldo){
 		return true;

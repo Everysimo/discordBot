@@ -3,15 +3,16 @@ const config = require('./config.json');
 const language =require('./language/'+config.language+'/gameRoom.json');
 const db=require("./dbOpertion.js");
 const bot = require('./bot');
+const user = require('./user.js');
 
 //lancio moneta testa o croce
 exports.coinflip = function (message){
 	const m=message.content.split(" ")[1];
 	const id=message.member.user.id;
-	db.getSaldoGiocatore(id,function(saldo){
+	user.getSaldoGiocatore(id,function(saldo){
 		var importo=parseInt(message.content.split(" ")[2]);
 		if (!isNaN(importo) && importo > 0) {
-			if (verificaSaldo(importo,saldo)) {
+			if (user.verificaSaldo(importo,saldo)) {
 				var testa;
 				var win;
 				const risultato = new Discord.MessageEmbed();
@@ -43,13 +44,13 @@ exports.coinflip = function (message){
 					return;
 				}
 				if (win) {
-					db.aggiornaSaldo(saldo+(importo*2),id);
+					user.aggiornaSaldo(saldo+(importo*2),id);
 					risultato.addFields(
 						{ name: language.win, value: importo*2+' '+config.coinName },
 					);
 					risultato.setColor("#00ff37");
 				}else{
-					db.aggiornaSaldo(saldo-importo,id);
+					user.aggiornaSaldo(saldo-importo,id);
 					risultato.addFields(
 						{ name: language.lose, value: importo+' '+config.coinName },
 					);
@@ -69,10 +70,10 @@ exports.coinflip = function (message){
 //genera una slot 
 exports.slot = function (message){
 	const id=message.member.user.id;
-	db.getSaldoGiocatore(id,function(saldo){
+	user.getSaldoGiocatore(id,function(saldo){
 		var importo=parseInt(message.content.split(" ")[1]);
 		if (!isNaN(importo) && importo > 0) {
-			if (verificaSaldo(importo,saldo)) {
+			if (user.verificaSaldo(importo,saldo)) {
 				const slotList=new Array();
 				for (let index = 0; index < config.slotItem.length; index++) {
 					slotList.push(Math.floor(Math.random() * config.slotItem.length));
@@ -99,21 +100,21 @@ exports.slot = function (message){
 						moltiplicatore=config.multiplierJackpot;
 					}
 					if(!jackpot){
-						db.aggiornaSaldo(saldo+(importo*moltiplicatore),id);
+						user.aggiornaSaldo(saldo+(importo*moltiplicatore),id);
 						risultato.addFields(
 							{ name: message.member.user.username +" "+ language.win, value: importo*moltiplicatore+' '+config.coinName },
 						);
 						risultato.setColor("#00ff37");
 					}
 					else{
-						db.aggiornaSaldo(saldo+(importo*moltiplicatore),id);
+						user.aggiornaSaldo(saldo+(importo*moltiplicatore),id);
 						risultato.addFields(
 							{ name: message.member.user.username +" "+ language.winJackpot, value: importo*moltiplicatore+' '+config.coinName },
 						);
 						risultato.setColor("#00ff37");
 					}
 				}else{
-					db.aggiornaSaldo(saldo-importo,id);
+					user.aggiornaSaldo(saldo-importo,id);
 					risultato.addFields(
 						{ name: message.member.user.username +" "+ language.lose, value: importo+' '+config.coinName },
 					);
@@ -134,10 +135,10 @@ exports.roulette = function (message){
 	if(!message.member.user.bot){
 	const giocata=message.content.split(" ")[1];
 	const id=message.member.user.id;
-	db.getSaldoGiocatore(id,function(saldo){
+	user.getSaldoGiocatore(id,function(saldo){
 		var importo=parseInt(message.content.split(" ")[2]);
 		if (!isNaN(importo) && importo > 0) {
-			if (verificaSaldo(importo,saldo)) {
+			if (user.verificaSaldo(importo,saldo)) {
 				const numeriRossi = [1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
 				const numeriNeri =[2,4,6,8,10,11,13,15,17,20,22,24,26,28,28,31,33,35];
 				const risultato = new Discord.MessageEmbed();
@@ -167,14 +168,14 @@ exports.roulette = function (message){
 				//giocata colore rosso
 				if(giocata === language.red ||giocata === language.r){
 					if(numeriRossi.includes(resultNumeber)){
-						db.aggiornaSaldo(saldo+(importo*3),id);
+						user.aggiornaSaldo(saldo+(importo*3),id);
 						risultato.addFields(
 							{ name: language.win, value: importo*3+' '+config.coinName },
 						);
 						risultato.setColor("#00ff37");
 					}
 					else{
-						db.aggiornaSaldo(saldo-importo,id);
+						user.aggiornaSaldo(saldo-importo,id);
 					risultato.addFields(
 						{ name: language.lose, value: importo+' '+config.coinName },
 					);
@@ -187,14 +188,14 @@ exports.roulette = function (message){
 				//giocata colore nero
 				if(giocata === language.black||giocata === language.b){
 					if(numeriNeri.includes(resultNumeber)){
-						db.aggiornaSaldo(saldo+(importo*3),id);
+						user.aggiornaSaldo(saldo+(importo*3),id);
 						risultato.addFields(
 							{ name: language.win, value: importo*3+' '+config.coinName },
 						);
 						risultato.setColor("#00ff37");
 					}
 						else{
-							db.aggiornaSaldo(saldo-importo,id);
+							user.aggiornaSaldo(saldo-importo,id);
 							risultato.addFields(
 							{ name: language.lose, value: importo+' '+config.coinName },
 						);
@@ -207,14 +208,14 @@ exports.roulette = function (message){
 				//giocata pari
 				if(giocata === language.odd ||giocata === language.o){
 					if(resultNumeber%2==0 && resultNumeber !=0){
-						db.aggiornaSaldo(saldo+(importo*3),id);
+						user.aggiornaSaldo(saldo+(importo*3),id);
 						risultato.addFields(
 							{ name: language.win, value: importo*3+' '+config.coinName },
 						);
 						risultato.setColor("#00ff37");
 					}
 						else{
-							db.aggiornaSaldo(saldo-importo,id);
+							user.aggiornaSaldo(saldo-importo,id);
 							risultato.addFields(
 							{ name: language.lose, value: importo+' '+config.coinName },
 						);
@@ -227,14 +228,14 @@ exports.roulette = function (message){
 				//giocata dispari
 				if(giocata === language.even ||giocata === language.e){
 					if(resultNumeber%2!=0 && resultNumeber !=0){
-						db.aggiornaSaldo(saldo+(importo*3),id);
+						user.aggiornaSaldo(saldo+(importo*3),id);
 						risultato.addFields(
 							{ name: language.win, value: importo*3+' '+config.coinName },
 						);
 						risultato.setColor("#00ff37");
 					}
 						else{
-							db.aggiornaSaldo(saldo-importo,id);
+							user.aggiornaSaldo(saldo-importo,id);
 							risultato.addFields(
 							{ name: language.lose, value: importo+' '+config.coinName },
 						);
@@ -252,7 +253,7 @@ exports.roulette = function (message){
 					if(intGiocata === resultNumeber){
 							//se 0 vincita X50
 							if(resultNumeber===0){
-								db.aggiornaSaldo(saldo+(importo*49),id);
+								user.aggiornaSaldo(saldo+(importo*49),id);
 								risultato.addFields(
 									{ name: language.win, value: importo*40+' '+config.coinName },
 								);
@@ -260,7 +261,7 @@ exports.roulette = function (message){
 							}
 							//ALTRO NUMERO X36
 							else{
-								db.aggiornaSaldo(saldo+(importo*35),id);
+								user.aggiornaSaldo(saldo+(importo*35),id);
 								risultato.addFields(
 								{ name: language.win, value: importo*35+' '+config.coinName },
 								);
@@ -269,7 +270,7 @@ exports.roulette = function (message){
 						}
 					//se NUMERO NO UGUALE PERDITA
 					else{
-						db.aggiornaSaldo(saldo-importo,id);
+						user.aggiornaSaldo(saldo-importo,id);
 						risultato.addFields(
 						{ name: language.lose, value: importo+' '+config.coinName },
 					);
@@ -306,7 +307,7 @@ function estrai(numeriEstrare,maxNumero) {
 exports.estrai=estrai;
 
 exports.buyBiglietto = function(message){
-	if(gameRoom.verificaSaldo(config.lotteryTicket,saldo)){
+	if(user.verificaSaldo(config.lotteryTicket,saldo)){
 		const id=message.member.user.id;
 		var numeri= estrai(6,90);
 		db.creaBiglietto(id,numeri);
@@ -383,8 +384,8 @@ function stampanumeriVincenti(numeriVincenti){
 
 function stampaVincita(id,vincita){
 	try{
-		db.getSaldoGiocatore(id,saldo=>{
-			db.aggiornaSaldo(saldo+(vincita),id);
+		user.getSaldoGiocatore(id,saldo=>{
+			user.aggiornaSaldo(saldo+(vincita),id);
 		});
 	}
 	catch(err){

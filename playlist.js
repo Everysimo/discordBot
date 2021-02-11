@@ -4,6 +4,7 @@ const language =require('./language/'+config.language+'/playlist.json');
 const db=require("./dbOpertion.js");
 const ytdl = require('ytdl-core');
 const musica=require("./musica.js");
+const user = require('./user.js');
 
 exports.createPlaylist = function (message) {
     if(!message.member.user.bot){
@@ -173,8 +174,8 @@ exports.buyPL=function (message){
 		const id=message.member.user.id;
 		var nPl=parseInt(message.content.split(" ")[1]);
 		if(!isNaN(nPl)){
-			db.getSaldoGiocatore(id,function (saldo){
-				if(gameRoom.verificaSaldo(config.coinPL*n,saldo)){
+			user.getSaldoGiocatore(id,function (saldo){
+				if(user.verificaSaldo(config.coinPL*n,saldo)){
 				
 					db.addnPL(nPl,id)
 				}
@@ -194,8 +195,8 @@ exports.buySongs=function (message){
 		const id=message.member.user.id;
 		var nPl=parseInt(message.content.split(" ")[2]);
 		if (!isNaN(nPl)) {
-			db.getSaldoGiocatore(id,function (saldo){
-				if(gameRoom.verificaSaldo(config.coinSong*n,saldo)){
+			user.getSaldoGiocatore(id,function (saldo){
+				if(user.verificaSaldo(config.coinSong*n,saldo)){
 				const nomePl=message.content.split(" ")[1];
 				db.addnSong(nPl,id,nomePl);
 				}

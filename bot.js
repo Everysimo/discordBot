@@ -9,6 +9,7 @@ const musica=require("./musica.js")
 const playlist=require("./playlist.js")
 const command=require("./command.json")
 const random=require("./random.js")
+const user = require('./user.js');
 db.dbConnect();
 exports.client=client;
 
@@ -145,7 +146,7 @@ comandi.set(command.addsongpl,playlist.addSongToPL);
 comandi.set(command.buybt,gameRoom.buyBiglietto);
 comandi.set(command.buypl,playlist.buyPL);
 comandi.set(command.buysongs,playlist.buySongs);
-comandi.set(command.coin,getSaldo);
+comandi.set(command.coin,user.getSaldo);
 comandi.set(command.coinflip,gameRoom.coinflip);
 comandi.set(command.help,help);
 comandi.set(command.join,join);
@@ -162,7 +163,7 @@ comandi.set(command.shop,shop);
 comandi.set(command.showpl,playlist.printPL);
 comandi.set(command.showradio,musica.showRadio);
 comandi.set(command.showqueue,musica.showQueue);
-comandi.set(command.signin,signIn);
+comandi.set(command.signin,user.signIn);
 comandi.set(command.slot,gameRoom.slot);
 comandi.set(command.stop,musica.stop);
 
