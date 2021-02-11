@@ -307,8 +307,9 @@ function estrai(numeriEstrare,maxNumero) {
 exports.estrai=estrai;
 
 exports.buyBiglietto = function(message){
+	const id=message.member.user.id;
+	const saldo = user.getSaldoGiocatore(id);
 	if(user.verificaSaldo(config.lotteryTicket,saldo)){
-		const id=message.member.user.id;
 		var numeri= estrai(6,90);
 		db.creaBiglietto(id,numeri);
 		message.reply(language.msgYourNumbers+numeri.toString());
