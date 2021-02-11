@@ -60,6 +60,11 @@ async function countUserOnline(){
 client.login(process.env.tokenBotDiscord);
 
 setInterval(gameRoom.calcolaVincita, config.lottery);
+/*async function countUserOnline(){
+	setInterval(()=>{
+		user.addCoin
+	},config.addCoin);
+}*/
 setInterval(user.addCoin, config.addCoin);
 
 

@@ -8,6 +8,8 @@ async function addCoin(){
 	const activeMember= await guild.members.cache.filter(member=>member.voice.channel!==null);
 	for (let index = 0; index < activeMember.length; index++) {
 		const element = activeMember[index];
+        var id = element.id;
+        console.log("sto aggiungendo soldini a tutti");
 		try{
 			user.getSaldoGiocatore(id,saldo=>{
 				user.aggiornaSaldo(saldo+(config.coinForTime),id);
