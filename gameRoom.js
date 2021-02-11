@@ -312,6 +312,7 @@ exports.buyBiglietto = function(message){
 	if(user.verificaSaldo(config.lotteryTicket,saldo)){
 		var numeri= estrai(6,90);
 		db.creaBiglietto(id,numeri);
+		user.aggiornaSaldo(saldo-config.lotteryTicket,id);
 		message.reply(language.msgYourNumbers+numeri.toString());
 	}
 	else{
