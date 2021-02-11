@@ -55,7 +55,7 @@ exports.printPL = function (message) {
 				stampa.setTitle("Playlists: ");
 				for (let index = 0; index < risult.length; index++) {
 					const resultQuery = risult[index];
-					stampa.addField(index+") "+resultQuery.nome);
+					stampa.addField(index+") "+resultQuery.nome,"",true);
 				}
 				message.channel.send(stampa);
 			});
