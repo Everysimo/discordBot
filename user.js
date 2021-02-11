@@ -14,9 +14,7 @@ async function addCoin(){
         console.log("sto aggiungendo soldini a "+id);
 		try{
 			getSaldoGiocatore(id,async saldo=>{
-				if (saldo) {
-					await aggiornaSaldo(saldo+(config.coinForTime),id);
-				}
+				await aggiornaSaldo(saldo+(config.coinForTime),id);
 			});
 		}
 		catch(err){
@@ -55,7 +53,9 @@ function getSaldoGiocatore (id,saldo) {
 				return
 			}
 			else{
-				return saldo(result[0].saldo);
+				if (result) {
+					return saldo(result[0].saldo);
+				}
 			}
 		});
 		
