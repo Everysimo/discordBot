@@ -13,9 +13,9 @@ async function addCoin(){
         
         console.log("sto aggiungendo soldini a "+id);
 		try{
-			getSaldoGiocatore(id,saldo=>{
+			getSaldoGiocatore(id,async saldo=>{
 				if (saldo) {
-					aggiornaSaldo(saldo+(config.coinForTime),id);
+					await aggiornaSaldo(saldo+(config.coinForTime),id);
 				}
 			});
 		}
@@ -26,7 +26,7 @@ async function addCoin(){
 }
 exports.addCoin = addCoin;
 
-function aggiornaSaldo(nuovoSaldo,id){ 
+async function aggiornaSaldo(nuovoSaldo,id){ 
 	dbpool.getConnection((err, db) => {
 		var sql= `Update utente set saldo='${nuovoSaldo}' where idutente='${id}'`;
 		db.query(sql, function (err) {
