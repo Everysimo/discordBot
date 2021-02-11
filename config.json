@@ -9,7 +9,7 @@
     "IdMemberChannelOnline":"809111090817400832",
     "multiplier":9,
     "multiplierJackpot":50,
-    "lottery":60000,
+    "lottery":1209600000,
     "lotteryTicket":500,
     "lotteryChannel":"809133390171340832",
     "slotItem":[
