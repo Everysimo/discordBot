@@ -7,6 +7,7 @@
     "msgRemoveSongFail":"Errore durante la rimozione della canzone",
     "msgAddSongSuccess":"Canzone aggiunta con successo",
     "msgAddSongFail":"Errore durante l'aggiunta della canzone",
+    "notEnoughCoin":"Non ha abbastanza coin per effettuare l'acquisto, continua a farmare",
     "noResultFound":"nessun risultato trovato",
     "notValidImport":"importo non valido",
     "songAddQueue":"\u2714\uFE0F Aggiunta alla coda \u2714\uFE0F"

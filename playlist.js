@@ -170,23 +170,39 @@ exports.playPL= function (message) {
 
 exports.buyPL=function (message){
 	if(!message.member.user.bot){
-		var nPl=parseInt(message.content.split(" ")[1]);
 		const id=message.member.user.id;
-		if (!isNaN(nPl)) {
-			db.addnPL(nPl,id);
-		}else{
-			message.reply(language.notValidImport)
+		var nPl=parseInt(message.content.split(" ")[1]);
+		if(!isNaN(nPl)){
+			db.getSaldoGiocatore(id,function (saldo){
+				if(gameRoom.verificaSaldo(config.coinPL*n,saldo)){
+				
+					db.addnPL(nPl,id)
+				}
+				else{
+					message.reply(language.notEnoughCoin);
+				}
+			});
+		}
+		else{
+			message.reply(language.notValidImport);
 		}
 	}
 }
 
 exports.buySongs=function (message){
 	if(!message.member.user.bot){
-		const nomePl=message.content.split(" ")[1];
-		var nPl=parseInt(message.content.split(" ")[2]);
 		const id=message.member.user.id;
+		var nPl=parseInt(message.content.split(" ")[2]);
 		if (!isNaN(nPl)) {
-			db.addnSong(nPl,id,nomePl);
+			db.getSaldoGiocatore(id,function (saldo){
+				if(gameRoom.verificaSaldo(config.coinSong*n,saldo)){
+				const nomePl=message.content.split(" ")[1];
+				db.addnSong(nPl,id,nomePl);
+				}
+				else{
+					message.reply(language.notEnoughCoin);
+				}
+			});
 		}else{
 			message.reply(language.notValidImport)
 		}

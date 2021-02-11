@@ -188,7 +188,7 @@ function signIn(message){
 function getSaldo(message){
 	if(!message.member.user.bot){
 		const id=message.member.user.id;
-		db.saldoGiocatore(id,function(saldo){
+		db.getSaldoGiocatore(id,function(saldo){
 			message.reply(language.msgGetCoin+saldo+" "+config.coinName);
 		});
 	}

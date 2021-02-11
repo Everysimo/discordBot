@@ -8,7 +8,7 @@ const bot = require('./bot');
 exports.coinflip = function (message){
 	const m=message.content.split(" ")[1];
 	const id=message.member.user.id;
-	db.saldoGiocatore(id,function(saldo){
+	db.getSaldoGiocatore(id,function(saldo){
 		var importo=parseInt(message.content.split(" ")[2]);
 		if (!isNaN(importo) && importo > 0) {
 			if (verificaSaldo(importo,saldo)) {
@@ -69,7 +69,7 @@ exports.coinflip = function (message){
 //genera una slot 
 exports.slot = function (message){
 	const id=message.member.user.id;
-	db.saldoGiocatore(id,function(saldo){
+	db.getSaldoGiocatore(id,function(saldo){
 		var importo=parseInt(message.content.split(" ")[1]);
 		if (!isNaN(importo) && importo > 0) {
 			if (verificaSaldo(importo,saldo)) {
@@ -134,7 +134,7 @@ exports.roulette = function (message){
 	if(!message.member.user.bot){
 	const giocata=message.content.split(" ")[1];
 	const id=message.member.user.id;
-	db.saldoGiocatore(id,function(saldo){
+	db.getSaldoGiocatore(id,function(saldo){
 		var importo=parseInt(message.content.split(" ")[2]);
 		if (!isNaN(importo) && importo > 0) {
 			if (verificaSaldo(importo,saldo)) {
@@ -316,11 +316,15 @@ function estrai(numeriEstrare,maxNumero) {
 exports.estrai=estrai;
 
 exports.buyBiglietto = function(message){
-	const id=message.member.user.id;
-	var numeri= estrai(6,90);
-	db.creaBiglietto(id,numeri);
-	message.reply(language.msgYourNumbers+numeri.toString())
-	//TODO messaggio se non hai abbastanza coin
+	if(gameRoom.verificaSaldo(config.lotteryTicket,saldo)){
+		const id=message.member.user.id;
+		var numeri= estrai(6,90);
+		db.creaBiglietto(id,numeri);
+		message.reply(language.msgYourNumbers+numeri.toString());
+	}
+	else{
+		message.reply(language.msgNotEnoughCoin);
+	}
 }
 
 function valutaVincita(element,numeriVincente){
@@ -389,7 +393,7 @@ function stampanumeriVincenti(numeriVincenti){
 
 function stampaVincita(id,vincita){
 	try{
-		db.saldoGiocatore(id,saldo=>{
+		db.getSaldoGiocatore(id,saldo=>{
 			db.aggiornaSaldo(saldo+(vincita),id);
 		});
 	}
