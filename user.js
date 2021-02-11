@@ -20,7 +20,7 @@ async function addCoin(){
 		catch(err){
 			console.log("errore nell'aggioranre il saldo",err.stack)
 		}
-		sleep(100);
+		await sleep(100);
 	}
 }
 exports.addCoin = addCoin;
