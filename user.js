@@ -6,19 +6,16 @@ const bot = require('./bot');
 async function addCoin(){ 
 	const guild = bot.client.guilds.cache.get(config.IdServer);
 	const activeMember= await guild.members.cache.filter(member=>member.voice.channel!==null).array();
-    console.log("provo ad aggiungere soldini "+activeMember);
 	for (let index = 0; index < activeMember.length; index++) {
 		var id = activeMember[index].id;
-		applyAddCoin2(id)
+		applyAddCoin(id)
 	}
 }
 exports.addCoin = addCoin;
 
 function applyAddCoin(id){
 	getSaldoGiocatore(id,saldo=>{
-		console.log("aggiungo ha "+id);
 		aggiornaSaldo(saldo+(config.coinForTime),id);
-		console.log("aggiunto ha "+id);
 	});
 }
 function aggiornaSaldo(nuovoSaldo,id){ 
