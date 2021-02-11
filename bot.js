@@ -46,7 +46,7 @@ async function countUserOnline(){
 		const onlineMember=guild.members.cache.filter(member=>member.presence.status==="online").size
 		const channel=guild.channels.cache.get(config.IdMemberChannelOnline);
 		try{
-		channel.setName("\uD83D\uDDE3\uFE0F total online  "+onlineMember.toString() + "  \uD83D\uDDE3\uFE0F");
+			channel.setName("\uD83D\uDDE3\uFE0F total online "+onlineMember.toString() + "\uD83D\uDDE3\uFE0F");
 		}
 		catch(err){
 			console.log("errore durante l'aggiornamento del canale tot online",err);
