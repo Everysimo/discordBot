@@ -373,23 +373,23 @@ function stampanumeriVincenti(numeriVincenti){
 
 	resultWinningNumbers.setTitle(language.winningNumbers);
 	resultWinningNumbers.addFields(
-		{ name: numeriVincenti, inline:true},
+		{ name: "numeri vincenti", value: numeriVincenti, inline:true},
 	);
 	const channel=bot.client.channels.cache.get(config.lotteryChannel);
-	channel.send(resultWin);
+	channel.send(resultWinningNumbers);
 	//TO-DO inviare messaggio
 }
 
 function stampaVincita(id,vincita){
-	saldoGiocatore(id,saldo=>{
-		aggiornaSaldo(saldo+(vincita),id);
+	db.saldoGiocatore(id,saldo=>{
+		db.aggiornaSaldo(saldo+(vincita),id);
 	});
 
 	const resultWin = new Discord.MessageEmbed();
-
+	const user = bot.client.users.cache.get(id);
 	resultWin.setTitle(language.winnigNumbers);
 	resultWin.addFields(
-		{ name: language.win + vincita, inline:true},
+		{ name: language.win + vincita,value: user.username, inline:true},
 	);
 	const channel=bot.client.channels.cache.get(config.lotteryChannel);
 	channel.send(resultWin);
