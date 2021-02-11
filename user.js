@@ -13,7 +13,8 @@ async function addCoin(){
 	}
 }
 exports.addCoin = addCoin;
-function addCoin2(id){
+
+function applyAddCoin(id){
 	getSaldoGiocatore(id,saldo=>{
 		console.log("aggiungo ha "+id);
 		aggiornaSaldo(saldo+(config.coinForTime),id);
