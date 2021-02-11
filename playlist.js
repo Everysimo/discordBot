@@ -180,7 +180,7 @@ exports.buyPL=function (message){
 			if(user.verificaSaldo(config.coinPL*nPl,saldo)){
 			
 				db.addnPL(nPl,id);
-				user.aggiornaSaldo(config.coinPL*nPl,id);
+				user.aggiornaSaldo(saldo-config.coinPL*nPl,id);
 				message.reply(language.msgBuyPlSuccess);
 			}
 			else{
