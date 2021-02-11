@@ -10,8 +10,15 @@ exports.createPlaylist = function (message) {
     if(!message.member.user.bot){
         const nomePl=message.content.split(" ")[1];
         const id=message.member.user.id;
+        try{
+			db.createPlayListDB(id, nomePl);
+			message.reply(msgCreatingPlSuccess);
+		}
+		catch(err){
+			console.log(msgCreatingPlFail+"\n",err);
+			message.reply(msgCreatingPlFail);
+		}
         
-        db.createPlayListDB(id, nomePl);
     }
 }
 
@@ -32,7 +39,15 @@ exports.addSongToPL = async function (message) {
 			}
 			songUrl=args.url;
 		}
-        db.addSong(id,songUrl,nomePl);
+		try{
+			db.addSong(id,songUrl,nomePl);
+			message.reply(msgAddSongSuccess);
+		}
+		catch(err){
+			console.log(msgAddSongFail+"\n",err);
+			message.reply(msgAddSongFail);
+		}
+        
     }
 }
 
@@ -41,7 +56,14 @@ exports.removeSongFromPL = function (message) {
         const nomePl=message.content.split(" ")[1];
         const songUrl=message.content.split(" ")[2];
         const id=message.member.user.id;
-        db.removeSongFromPlBD(id,songUrl,nomePl)
+		try{
+        	db.removeSongFromPlBD(id,songUrl,nomePl);
+			message.reply(msgRemoveSongSuccess);
+		}
+		catch(err){
+			console.log(msgRemoveSongFail+"\n",err);
+			message.reply(msgRemoveSongFail);
+		}
     }
 }
 
