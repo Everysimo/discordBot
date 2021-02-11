@@ -13,18 +13,19 @@ async function addCoin(){
         
         console.log("sto aggiungendo soldini a "+id);
 		try{
-			await getSaldoGiocatore(id,async saldo=>{
-				await aggiornaSaldo(saldo+(config.coinForTime),id);
+			getSaldoGiocatore(id,async saldo=>{
+				aggiornaSaldo(saldo+(config.coinForTime),id);
 			});
 		}
 		catch(err){
 			console.log("errore nell'aggioranre il saldo",err.stack)
 		}
+		sleep(100);
 	}
 }
 exports.addCoin = addCoin;
 
-async function aggiornaSaldo(nuovoSaldo,id){ 
+function aggiornaSaldo(nuovoSaldo,id){ 
 	dbpool.getConnection((err, db) => {
 		var sql= `Update utente set saldo='${nuovoSaldo}' where idutente='${id}'`;
 		db.query(sql, function (err) {
@@ -43,7 +44,7 @@ async function aggiornaSaldo(nuovoSaldo,id){
 exports.aggiornaSaldo = aggiornaSaldo;
 
 
-async function getSaldoGiocatore (id,saldo) {
+function getSaldoGiocatore (id,saldo) {
 	dbpool.getConnection((err, db) => {
 		var sql= `SELECT saldo FROM utente where idutente='${id}'`;	
 		db.query(sql, function (err,result) {
@@ -76,6 +77,13 @@ function getSaldo(message){
 	}
 }
 exports.getSaldo = getSaldo;
+function sleep(milliseconds) {
+	const date = Date.now();
+	let currentDate = null;
+	do {
+	  currentDate = Date.now();
+	} while (currentDate - date < milliseconds);
+}
 function signIn(message){
 	if(!message.member.user.bot){
 		dbpool.getConnection((err, db) => {
@@ -130,3 +138,4 @@ function verificaSaldo(importo,saldo){
 	}
 }
 exports.verificaSaldo=verificaSaldo;
+
