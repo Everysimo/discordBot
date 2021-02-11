@@ -373,7 +373,7 @@ function stampanumeriVincenti(numeriVincenti){
 
 	resultWinningNumbers.setTitle(language.winningNumbers);
 	resultWinningNumbers.addFields(
-		{ name: numeriVincenti, inline:true},
+		{ name: "numeri vincenti", value: numeriVincenti, inline:true},
 	);
 	const channel=bot.client.channels.cache.get(config.lotteryChannel);
 	channel.send(resultWinningNumbers);
