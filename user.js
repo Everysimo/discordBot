@@ -1,6 +1,6 @@
-const language =require('./language/'+config.language+'/user.json');
 const config = require('./config.json');
 const db=require("./dbOpertion.js");
+const language =require('./language/'+config.language+'/user.json');
 
 function aggiornaSaldo(nuovoSaldo,id){ 
 	db.dbpool.getConnection((err, db) => {
