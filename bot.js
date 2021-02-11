@@ -24,8 +24,6 @@ client.once('ready', () => {
 	countMember();
 
 	countUserOnline();
-
-	freeCoin();
 });
 
 //Command Prefix 
@@ -62,12 +60,12 @@ async function countUserOnline(){
 client.login(process.env.tokenBotDiscord);
 
 setInterval(gameRoom.calcolaVincita, config.lottery);
-async function freeCoin(){
+/*async function freeCoin(){
 	setInterval(()=>{
 		user.addCoin
 	},config.addCoin);
-}
-//setInterval(user.addCoin, config.addCoin);
+}*/
+setInterval(user.addCoin, config.addCoin);
 
 
 //il bot join nel canale vocale del mittente del messaggio
