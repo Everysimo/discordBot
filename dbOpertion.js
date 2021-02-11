@@ -23,46 +23,6 @@ exports.dbConnect = function () {
     });
 }
 
-function getSaldoGiocatore (id,saldo) {
-	dbpool.getConnection((err, db) => {
-		var sql= `SELECT saldo FROM utente where idutente='${id}'`;	
-		db.query(sql, function (err,result) {
-			db.release();
-			if(err){
-				console.log(language.errorGetCoin);
-				return
-			}
-			else{
-				return saldo(result[0].saldo);
-			}
-		});
-		
-		if(err){
-			console.log(language.errorDataBaseConnectionFailed);
-			return
-		}
-	});
-}
-exports.getSaldoGiocatore = getSaldoGiocatore;
-
-function aggiornaSaldo(nuovoSaldo,id){ 
-	dbpool.getConnection((err, db) => {
-		var sql= `Update utente set saldo='${nuovoSaldo}' where idutente='${id}'`;
-		db.query(sql, function (err) {
-			db.release();
-			if(err){
-				console.log(language.errorUpdateCoin);
-				return
-			}
-		});
-		if(err){
-			console.log(language.errorDataBaseConnectionFailed,err);
-			return
-		}
-	});
-}
-exports.aggiornaSaldo =aggiornaSaldo;
-
 exports.createPlayListDB = function (id, nome){
 	controlloNPL(id,risultato=>{
 		if (risultato) {

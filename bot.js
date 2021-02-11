@@ -11,6 +11,7 @@ const command=require("./command.json")
 const random=require("./random.js")
 db.dbConnect();
 exports.client=client;
+
 //quando il nuovo cliente è pronto esegue log
 client.once('ready', () => {
 	console.log('Ready!');
@@ -53,8 +54,6 @@ async function countUserOnline(){
 		}
 	},1000);
 }
-
-
 
 //login nel server tramite token
 client.login(process.env.tokenBotDiscord);
@@ -138,60 +137,6 @@ function shop(message){
 	);
 
 	message.channel.send(resultShopCommands);
-}
-
-function signIn(message){
-	if(!message.member.user.bot){
-		dbpool.getConnection((err, db) => {
-			const nickname=message.member.user.username;
-			const id=message.member.user.id;
-			var sql= `INSERT INTO utente (idutente, nickname) VALUES ('${id}','${nickname}')`;
-			
-			db.query(sql, function (err) {
-				db.release();
-				if(err){
-					if(err.code.match('ER_DUP_ENTRY')){
-
-						const messaggioRifiuto = new Discord.MessageEmbed();
-						messaggioRifiuto.setTitle(language.titleMsgAlreadySignedIn + nickname);
-						messaggioRifiuto.addFields(
-							{ name: language.msgAlreadySignedIn,
-							 value: language.msgDescAlreadySignIn, inline:true},
-						)
-					
-						console.log(language.dbMsgUserCorrectlySigned);
-						message.channel.send(messaggioRifiuto);
-						return
-					}
-				}	
-				else{
-					const messaggioConferma = new Discord.MessageEmbed();
-					messaggioConferma.setTitle(language.titleMsgWelcomeSignIn + nickname);
-					messaggioConferma.addFields(
-						{ name: language.msgWelcomeSignIn,
-						 value: language.msgDescWelcomeSignIn, inline:true},
-					)
-
-					console.log(language.dbMsgUserAlreadySigned);
-					message.channel.send(messaggioConferma);
-				}
-			});
-			
-			if(err){
-				console.log(language.errorDataBaseConnectionFailed,err);
-				return
-			}
-		});
-	}
-}
-
-function getSaldo(message){
-	if(!message.member.user.bot){
-		const id=message.member.user.id;
-		db.getSaldoGiocatore(id,function(saldo){
-			message.reply(language.msgGetCoin+saldo+" "+config.coinName);
-		});
-	}
 }
 
 //mappa comandi non musicali

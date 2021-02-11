@@ -290,16 +290,6 @@ exports.roulette = function (message){
 	}
 }
 
-function verificaSaldo(importo,saldo){
-	if(importo <= saldo){
-		return true;
-	}
-	else{
-		return false;
-	}
-}
-exports.verificaSaldo=verificaSaldo;
-
 function estrai(numeriEstrare,maxNumero) {
 	var numeriVincenti=new Array();
 	var i=0;
