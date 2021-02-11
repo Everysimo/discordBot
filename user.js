@@ -9,7 +9,7 @@ async function addCoin(){
     console.log("provo ad aggiungere soldini "+activeMember);
 	for (let index = 0; index < activeMember.length; index++) {
 		var id = activeMember[index].id;
-		addCoin2(id)
+		applyAddCoin2(id)
 	}
 }
 exports.addCoin = addCoin;
