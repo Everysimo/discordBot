@@ -376,7 +376,7 @@ function stampanumeriVincenti(numeriVincenti){
 		{ name: numeriVincenti, inline:true},
 	);
 	const channel=bot.client.channels.cache.get(config.lotteryChannel);
-	channel.send(resultWin);
+	channel.send(resultWinningNumbers);
 	//TO-DO inviare messaggio
 }
 
