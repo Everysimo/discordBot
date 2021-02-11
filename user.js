@@ -3,7 +3,7 @@ const config = require('./config.json');
 const db=require("./dbOpertion.js");
 const language =require('./language/'+config.language+'/user.json');
 
-function addCoin(){ 
+async function addCoin(){ 
 	const guild = client.guilds.cache.get(config.IdServer);
 	const activeMember= await guild.members.cache.filter(member=>member.voice.channel!==null);
 	for (let index = 0; index < activeMember.length; index++) {
