@@ -22,6 +22,7 @@ exports.dbConnect = function () {
 	    console.log(language.dbConnected);
     });
 }
+exports.dbpool=dbpool;
 
 exports.createPlayListDB = function (id, nome){
 	controlloNPL(id,risultato=>{
