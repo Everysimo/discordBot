@@ -1,0 +1,13 @@
+{
+    "errorLoadingSongInfo":"errore nel caricamento dell informazioni della canzone",
+    "errorJoinVoiceChannel":"\u274C errore nell'entrare nella chat vocale \u274C",
+    "msgCreatingPlSuccess":"Playlist creata correttamente",
+    "msgCreatingPlFail":"Errore durante la creazione della Playlist",
+    "msgRemoveSongSuccess":"Canzone rimossa con successo",
+    "msgRemoveSongFail":"Errore durante la rimozione della canzone",
+    "msgAddSongSuccess":"Canzone aggiunta con successo",
+    "msgAddSongFail":"Errore durante l'aggiunta della canzone",
+    "noResultFound":"nessun risultato trovato",
+    "notValidImport":"importo non valido",
+    "songAddQueue":"\u2714\uFE0F Aggiunta alla coda \u2714\uFE0F"
+}

@@ -1,9 +1,20 @@
 {
-  "prefissoNonMusica": "!",
-  "lingua":"./ita.json",
-  "slotItem":[
-      "🍏",
-      "🍓",
-      "🍊"
-  ]
+    "prefixCommand": "$",
+    "language":"ita",
+    "coinName":"soldini",
+    "coinPL":10000,
+    "coinSong":1000,
+    "IdServer":"341919077008146432",
+    "IdMemberChannel":"808838637374406684",
+    "IdMemberChannelOnline":"809111090817400832",
+    "multiplier":9,
+    "multiplierJackpot":50,
+    "lottery":60000,
+    "lotteryTicket":500,
+    "lotteryChannel":"809133390171340832",
+    "slotItem":[
+        "🍏",
+        "🍓",
+        "🍊"
+    ]
 }

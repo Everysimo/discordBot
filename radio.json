@@ -1,0 +1,28 @@
+{
+    "radio":[
+        {
+            "name":"nightcore Radio",
+            "researche":"nightcore radio 24/7"
+        },
+        {
+            "name":"lo-fi Radio",
+            "researche":"lo-fi radio 24/7"
+        },
+        {
+            "name":"pop Radio",
+            "researche":"pop radio 24/7"
+        },
+        {
+            "name":"rock Radio",
+            "researche":"rock radio 24/7"
+        },
+        {
+            "name":"anime Radio",
+            "researche":"anime radio 24/7"
+        },
+        {
+            "name":"K-pop Radio",
+            "researche":"THE K-POP : 24/7 "
+        }
+    ]
+}

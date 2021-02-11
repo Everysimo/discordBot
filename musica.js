@@ -1,30 +1,46 @@
 const Discord = require('discord.js');
 const config = require('./config.json');
 const ytdl = require('ytdl-core');
-const lingua =require(config.lingua);
+const language =require('./language/'+config.language+'/musica.json');
+const ytsr=require('ytsr');
+const command=require("./command.json")
+const radio=require("./radio.json")
 //coda di riproduzione
 const queue = new Map();
 exports.queue = queue;
 
-exports.play= async function (message){
+async function play (message){
 	var serverQueue = queue.get(message.guild.id);
-	const args = message.content.split(" ");			//input argomento 
+	var args = message.content.split(" ")[1];	//input argomento 
+	if(!ytdl.validateURL(args)){
+		var element;
+		for (let index = 1; index < message.content.split(" ").length; index++) {
+			element=element+ " " + message.content.split(" ")[index];
+		}
+		var titolo=await ytsr(element,{limit:1});
+		args=titolo.items.shift();
+		if (!args) {
+			message.reply(language.msgNoResultFound);
+			return;
+		}
+		args=args.url;
+	}			
 	const voiceChannel = message.member.voice.channel;	//connessione al canale vocale
   	if (!voiceChannel){									//se l'utente non è in un canale genera eccezione
-		return message.reply(lingua.voiceChannelNotFound);
+		return message.reply(language.voiceChannelNotFound);
 	}
 
 	const permissions = voiceChannel.permissionsFor(message.client.user);	//verifica permessi utente che richiama il messggio
   	if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
-    	return message.reply(lingua.voiceChannelNotPermission);
+    	return message.reply(language.voiceChannelNotPermission);
 	}
 	var songInfo;
 
 	try{
-		songInfo = await ytdl.getInfo(args[1]);			//ottiene informazioni della canzone passata come argomento
+		songInfo = await ytdl.getInfo(args);			//ottiene informazioni della canzone passata come argomento
 	}
 	catch(err){
-		throw new Error("errore nel caricamento dell informazioni della canzone");
+		throw new Error(language.errorLoadingSongInfo);
 	}
 	
 	var song = {
@@ -40,7 +56,7 @@ exports.play= async function (message){
 			voiceChannel: voiceChannel,
 			connection: null,
 			songs: [],
-			volume: 50,
+			volume: 10,
 			playing: true,
 		};
 		queue.set(message.guild.id, queueContruct);
@@ -52,7 +68,7 @@ exports.play= async function (message){
 		} catch (err) {
 			console.log(err.stack);
 			queue.delete(message.guild.id);
-			return message.reply(lingua.errorJoinVoiceChannel);
+			return message.reply(language.errorJoinVoiceChannel);
 		}
 	}
 	else{	//se la coda delle canzoni non è vuota aggiunge la canzone alla coda
@@ -60,7 +76,7 @@ exports.play= async function (message){
 		serverQueue.songs.push(song);
 
 		const messaggioAggiuntaCoda = new Discord.MessageEmbed();
-		messaggioAggiuntaCoda.setTitle(lingua.songAddQueue);
+		messaggioAggiuntaCoda.setTitle(language.songAddQueue);
 		messaggioAggiuntaCoda.setDescription("[ @"+message.member.user.username+" ]");
 		messaggioAggiuntaCoda.addFields({
 		name: song.title,value:" "+song.url}
@@ -68,6 +84,8 @@ exports.play= async function (message){
 		return message.reply(messaggioAggiuntaCoda);
 	}
 }
+exports.play = play;
+
 //starta la canzona
 start = function (guild, song) {
 	var serverQueue = queue.get(guild.id);
@@ -90,7 +108,7 @@ start = function (guild, song) {
 	dispatcher.setVolume(serverQueue.volume / 100);
 
 	const messaggioRiproduzione = new Discord.MessageEmbed();
-	messaggioRiproduzione.setTitle(lingua.startPlay);
+	messaggioRiproduzione.setTitle(language.startPlay);
 	messaggioRiproduzione.setDescription("[ @"+song.username+" ]");
 	messaggioRiproduzione.addFields({
 		name: song.title,value:" "+song.url}
@@ -99,13 +117,35 @@ start = function (guild, song) {
 	return serverQueue.textChannel.send(messaggioRiproduzione);
 }
 
+exports.showQueue= function(message){
+	var serverQueue = queue.get(message.guild.id);
+	if(!serverQueue){
+		message.reply("Non ci sono canzoni in coda");
+	}
+	else{
+		
+		for (let index = 0; index < serverQueue.songs.length; index++) {
+			const element = serverQueue.songs[index];
+			const messageQueue = new Discord.MessageEmbed();
+			messageQueue.setTitle(language.songInQueue);
+			messageQueue.setDescription("[ @"+element.username+" ]");
+			messageQueue.addFields({
+				name: element.title,value: element.url}
+			);
+			message.channel.send(messageQueue);
+		}
+		
+
+	}
+}
+
 //skippa la canzone
 exports.skip = function (message) {
 	var serverQueue = queue.get(message.guild.id);
 	if (!message.member.voice.channel)
-		return message.reply(lingua.voiceChannelNotFound);
+		return message.reply(language.voiceChannelNotFound);
 	if (!serverQueue)
-		return message.reply(lingua.notSong);
+		return message.reply(language.notSong);
 	serverQueue.connection.dispatcher.end();
 }
 
@@ -113,61 +153,61 @@ exports.skip = function (message) {
 exports.stop = function (message) {
 	var serverQueue = queue.get(message.guild.id);
 	if (!message.member.voice.channel)
-	  	return message.reply(lingua.voiceChannelNotFound);
+	  	return message.reply(language.voiceChannelNotFound);
 	if (!serverQueue)
-		return message.reply(lingua.notSong);
+		return message.reply(language.notSong);
 	serverQueue.songs = [];
 	serverQueue.connection.dispatcher.end();
-}
-//aumentare volume di n della canzone in riproduzione
-exports.volumeUp = function (message){
-	var serverQueue = queue.get(message.guild.id);
-	const q = message.content.split(" ")[1];
-	if (!message.member.voice.channel)
-		return message.reply(lingua.voiceChannelNotFound);
-	if (!serverQueue)
-		return message.reply(lingua.notSong);
-		var volume=parseInt(q);
-	if (isNaN(volume)) {
-		volume = 1;
-	}else{
-		serverQueue.volume=serverQueue.volume+volume;
-	}
-	serverQueue.connection.dispatcher.setVolume(serverQueue.volume / 100);
-	message.channel.send("volume alzato di "+volume);
-}
-
-//abbassare volume di n della canzone in riproduzione
-exports.volumeDown = function (message){
-	var serverQueue = queue.get(message.guild.id);
-	const q = message.content.split(" ")[1];
-	if (!message.member.voice.channel)
-		return message.reply(lingua.voiceChannelNotFound);
-	if (!serverQueue)
-		return message.reply(lingua.notSong);
-	var volume=parseInt(q);
-	if (isNaN(volume)) {
-		volume = 1;
-	}else{
-		serverQueue.volume=serverQueue.volume-volume;
-	}
-	serverQueue.connection.dispatcher.setVolume(serverQueue.volume / 100);
-	message.channel.send("volume abbassato di "+volume);
 }
 //settare volume di n della canzone in riproduzione
 exports.setvolume = function (message){
 	var serverQueue = queue.get(message.guild.id);
 	const q = message.content.split(" ")[1];
 	if (!message.member.voice.channel)
-		return message.reply(lingua.voiceChannelNotFound);
+		return message.reply(language.voiceChannelNotFound);
 	if (!serverQueue)
-		return message.reply(lingua.notSong);
+		return message.reply(language.notSong);
 	var volume=parseInt(q);
+	if(volume>100){
+		volume=100;
+	}
 	if (isNaN(volume)) {
 		volume = serverQueue.volume;
 	}else{
 		serverQueue.volume=volume;
 	}
 	serverQueue.connection.dispatcher.setVolume(serverQueue.volume / 100);
-	message.channel.send("volume settato a "+volume);
+	message.channel.send(language.msgVolumeSetted+volume);
+}
+
+//show le radio disponibili
+exports.showRadio = function (message){
+	const resultRadioList = new Discord.MessageEmbed();
+
+	resultRadioList.setTitle('\uD83D\uDCFB Radio \uD83D\uDCFB');
+	for (let index = 0; index < radio.radio.length; index++) {
+		const element = radio.radio[index];
+		resultRadioList.addFields(
+			{ name: config.prefixCommand+command.radio+' '+index, value: element.name, inline:true}
+		);
+	}
+
+	message.channel.send(resultRadioList);
+}
+
+//riproduce la radio selezionata
+exports.playRadio = function playRadio(message){
+	const q = message.content.split(" ")[1];
+	const radioNumber = parseInt(q);
+	const resultErrorPlayRadio = new Discord.MessageEmbed();
+	if (!isNaN(radioNumber)&&q<radio.radio.length) {
+		message.content="play "+radio.radio[q].researche;
+		play(message);
+	}else{
+		resultErrorPlayRadio.setTitle(language.radioNotFound);
+		resultErrorPlayRadio.addFields(
+			{ name: language.radio+radioNumber+language.notExists,inline:true},
+		);
+		message.reply(resultErrorPlayRadio);
+	}
 }

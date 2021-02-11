@@ -1,8 +1,9 @@
 const Discord = require('discord.js');
 const config = require('./config.json');
-const lingua =require(config.lingua);
+const language =require('./language/'+config.language+'/gameRoom.json');
 const db=require("./dbOpertion.js");
 const bot = require('./bot');
+
 //lancio moneta testa o croce
 exports.coinflip = function (message){
 	const m=message.content.split(" ")[1];
@@ -25,41 +26,41 @@ exports.coinflip = function (message){
 						risultato.setImage("https://upload.wikimedia.org/wikipedia/it/0/06/1_%E2%82%AC_2007.jpg");
 						break;
 				}
-				if(m==="testa"||m==="t"){
+				if(m===language.head||m===language.h){
 					if (testa) {
 						win=true;
 					}else{
 						win=false;
 					}
-				}else if(m==="croce"||m==="c"){
+				}else if(m===language.tail||m===language.t){
 					if (testa) {
 						win=false;
 					}else{
 						win=true;
 					}
 				}else{
-					message.reply(lingua.notSelect);
+					message.reply(language.notSelect);
 					return;
 				}
 				if (win) {
 					db.aggiornaSaldo(saldo+(importo*2),id);
 					risultato.addFields(
-						{ name: lingua.win, value: importo*2+' coin' },
+						{ name: language.win, value: importo*2+' '+config.coinName },
 					);
 					risultato.setColor("#00ff37");
 				}else{
 					db.aggiornaSaldo(saldo-importo,id);
 					risultato.addFields(
-						{ name: lingua.lose, value: importo+' coin' },
+						{ name: language.lose, value: importo+' '+config.coinName },
 					);
 					risultato.setColor("#f50505");
 				}
 				message.channel.send(risultato);
 			}else{
-				message.reply("non hai abbastanza coin");
+				message.reply(language.msgNotEnoughCoin);
 			}
 		}else{
-			message.reply("importo non valito");
+			message.reply(language.errorAmountNotValid);
 		}
 	});
 
@@ -91,24 +92,39 @@ exports.slot = function (message){
 					);
 				}
 				if (vinto) {
-					db.aggiornaSaldo(saldo+(importo*9),id);
-					risultato.addFields(
-						{ name: lingua.win, value: importo*9+' coin' },
-					);
-					risultato.setColor("#00ff37");
+					var jackpot=false;
+					var moltiplicatore = config.multiplier;
+					if (Math.floor(Math.random()*10)==1) {
+						jackpot=true;
+						moltiplicatore=config.multiplierJackpot;
+					}
+					if(!jackpot){
+						db.aggiornaSaldo(saldo+(importo*moltiplicatore),id);
+						risultato.addFields(
+							{ name: message.member.user.username +" "+ language.win, value: importo*moltiplicatore+' '+config.coinName },
+						);
+						risultato.setColor("#00ff37");
+					}
+					else{
+						db.aggiornaSaldo(saldo+(importo*moltiplicatore),id);
+						risultato.addFields(
+							{ name: message.member.user.username +" "+ language.winJackpot, value: importo*moltiplicatore+' '+config.coinName },
+						);
+						risultato.setColor("#00ff37");
+					}
 				}else{
 					db.aggiornaSaldo(saldo-importo,id);
 					risultato.addFields(
-						{ name: lingua.lose, value: importo+' coin' },
+						{ name: message.member.user.username +" "+ language.lose, value: importo+' '+config.coinName },
 					);
 					risultato.setColor("#f50505");
 				}
 				message.channel.send(risultato);
 			}else{
-				message.reply("non hai abbastanza coin");
+				message.reply(language.msgNotEnoughCoin);
 			}
 		}else{
-			message.reply("importo non valito");
+			message.reply(language.errorAmountNotValid);
 		}
 	});	
 }
@@ -132,35 +148,35 @@ exports.roulette = function (message){
 				const resultNumeber = Math.floor(Math.random() * 36);
 				if(numeriRossi.includes(resultNumeber)){
 					gioco.addFields(
-						{ name: "Numero fortunato: ", value: resultNumeber +" Rosso"},
+						{ name: language.luckyNumber, value: resultNumeber +language.red},
 					);
 				}
 				if(numeriNeri.includes(resultNumeber)){
 					gioco.addFields(
-						{ name: "Numero fortunato: ", value: resultNumeber + " Nero" },
+						{ name: language.luckyNumber, value: resultNumeber + language.black },
 					);
 				}
 				if(resultNumeber===0){
 					gioco.addFields(
-						{ name: "Numero fortunato: ", value: resultNumeber + " Verde"},
+						{ name: language.luckyNumber, value: resultNumeber + language.green},
 					);
 				}
 
 				message.channel.send(gioco);
 				
 				//giocata colore rosso
-				if(giocata === "rosso" ||giocata === "r"){
+				if(giocata === language.red ||giocata === language.r){
 					if(numeriRossi.includes(resultNumeber)){
 						db.aggiornaSaldo(saldo+(importo*3),id);
 						risultato.addFields(
-							{ name: lingua.win, value: importo*3+' coin' },
+							{ name: language.win, value: importo*3+' '+config.coinName },
 						);
 						risultato.setColor("#00ff37");
 					}
 					else{
 						db.aggiornaSaldo(saldo-importo,id);
 					risultato.addFields(
-						{ name: lingua.lose, value: importo+' coin' },
+						{ name: language.lose, value: importo+' '+config.coinName },
 					);
 					risultato.setColor("#f50505");
 				}
@@ -169,18 +185,18 @@ exports.roulette = function (message){
 				}
 
 				//giocata colore nero
-				if(giocata === "nero" ||giocata === "n"){
+				if(giocata === language.black||giocata === language.b){
 					if(numeriNeri.includes(resultNumeber)){
 						db.aggiornaSaldo(saldo+(importo*3),id);
 						risultato.addFields(
-							{ name: lingua.win, value: importo*3+' coin' },
+							{ name: language.win, value: importo*3+' '+config.coinName },
 						);
 						risultato.setColor("#00ff37");
 					}
 						else{
 							db.aggiornaSaldo(saldo-importo,id);
 							risultato.addFields(
-							{ name: lingua.lose, value: importo+' coin' },
+							{ name: language.lose, value: importo+' '+config.coinName },
 						);
 						risultato.setColor("#f50505");
 					}
@@ -189,18 +205,18 @@ exports.roulette = function (message){
 				}
 
 				//giocata pari
-				if(giocata === "pari" ||giocata === "p"){
+				if(giocata === language.odd ||giocata === language.o){
 					if(resultNumeber%2==0 && resultNumeber !=0){
 						db.aggiornaSaldo(saldo+(importo*3),id);
 						risultato.addFields(
-							{ name: lingua.win, value: importo*3+' coin' },
+							{ name: language.win, value: importo*3+' '+config.coinName },
 						);
 						risultato.setColor("#00ff37");
 					}
 						else{
 							db.aggiornaSaldo(saldo-importo,id);
 							risultato.addFields(
-							{ name: lingua.lose, value: importo+' coin' },
+							{ name: language.lose, value: importo+' '+config.coinName },
 						);
 						risultato.setColor("#f50505");
 					}
@@ -209,18 +225,18 @@ exports.roulette = function (message){
 				}
 
 				//giocata dispari
-				if(giocata === "dispari" ||giocata === "d"){
+				if(giocata === language.even ||giocata === language.e){
 					if(resultNumeber%2!=0 && resultNumeber !=0){
 						db.aggiornaSaldo(saldo+(importo*3),id);
 						risultato.addFields(
-							{ name: lingua.win, value: importo*3+' coin' },
+							{ name: language.win, value: importo*3+' '+config.coinName },
 						);
 						risultato.setColor("#00ff37");
 					}
 						else{
 							db.aggiornaSaldo(saldo-importo,id);
 							risultato.addFields(
-							{ name: lingua.lose, value: importo+' coin' },
+							{ name: language.lose, value: importo+' '+config.coinName },
 						);
 						risultato.setColor("#f50505");
 					}
@@ -238,7 +254,7 @@ exports.roulette = function (message){
 							if(resultNumeber===0){
 								db.aggiornaSaldo(saldo+(importo*49),id);
 								risultato.addFields(
-									{ name: lingua.win, value: importo*40+' coin' },
+									{ name: language.win, value: importo*40+' '+config.coinName },
 								);
 								risultato.setColor("#00ff37");
 							}
@@ -246,7 +262,7 @@ exports.roulette = function (message){
 							else{
 								db.aggiornaSaldo(saldo+(importo*35),id);
 								risultato.addFields(
-								{ name: lingua.win, value: importo*35+' coin' },
+								{ name: language.win, value: importo*35+' '+config.coinName },
 								);
 								risultato.setColor("#00ff37");ù
 							}
@@ -255,7 +271,7 @@ exports.roulette = function (message){
 					else{
 						db.aggiornaSaldo(saldo-importo,id);
 						risultato.addFields(
-						{ name: lingua.lose, value: importo+' coin' },
+						{ name: language.lose, value: importo+' '+config.coinName },
 					);
 					risultato.setColor("#f50505");
 					}
@@ -263,12 +279,12 @@ exports.roulette = function (message){
 					return
 				}
 				else{
-					message.reply("giocata non esisente");
+					message.reply(language.errorPlayed);
 					return
 				}
 			}
 		}else{
-			message.reply("importo non valito");
+			message.reply(language.errorAmountNotValid);
 		}
 	});
 	}
@@ -282,11 +298,107 @@ function verificaSaldo(importo,saldo){
 		return false;
 	}
 }
+exports.verificaSaldo=verificaSaldo;
 
+function estrai(numeriEstrare,maxNumero) {
+	var numeriVincenti=new Array();
+	var i=0;
+	while (i<numeriEstrare) {
+		let nEstratto=Math.floor(Math.random()*(maxNumero-1))+1
+		if (numeriVincenti.indexOf(nEstratto)==-1) {
+			numeriVincenti.push(nEstratto);
+			i++;
+		}
+	}
+	numeriVincenti.sort(function(a, b){return a - b});
+	return numeriVincenti;
+}
+exports.estrai=estrai;
 
-exports.estrai = function () {
+exports.buyBiglietto = function(message){
+	const id=message.member.user.id;
+	var numeri= estrai(6,90);
+	db.creaBiglietto(id,numeri);
+	message.reply(language.msgYourNumbers+numeri.toString())
+	//TODO messaggio se non hai abbastanza coin
+}
 
-	bot.client.channels.fetch('806311011178905625').then(channel=>{
-		channel.send('prova funzione periodica');
+function valutaVincita(element,numeriVincente){
+	var sbagli=0;
+	if (element.numero1!==numeriVincente[0]) {
+		sbagli=sbagli+1;
+	}else if (element.numero2!==numeriVincente[1]) {
+		sbagli=sbagli+1;
+	}else if (element.numero3!==numeriVincente[2]) {
+		sbagli=sbagli+1;
+	}else if (element.numero4!==numeriVincente[3]) {
+		sbagli=sbagli+1;
+	}else if (element.numero5!==numeriVincente[4]) {
+		sbagli=sbagli+1;
+	}else if (element.numero6!==numeriVincente[5]) {
+		sbagli=sbagli+1;
+	}
+	return sbagli;
+}
+
+exports.calcolaVincita=function() {
+	var numeriVincente=estrai(6,90);
+	stampanumeriVincenti(numeriVincente);
+	var vincitore=new Array();
+	var vincitoreCon5=new Array();
+	db.ottieniBiglietti(result=>{
+		result.forEach(element=>{
+			var sbagli=valutaVincita(element,numeriVincente);
+			if (sbagli===0) {
+				vincitore.push(element.user);
+			}else if(sbagli===1){
+				vincitoreCon5.push(element.user);
+			}
+		})
+		var vincitaTotale=Math.floor((result.length*config.lotteryTicket)/2);
+		var vincitaSingola=Math.floor(vincitaTotale/(vincitore.length+vincitoreCon5.length));
+		var vincitaSingolacon5=Math.floor(vincitaSingola/1.5);
+
+		for (let index = 0; index < vincitore.length; index++) {
+			const element = vincitore[index];
+			stampaVincita(element,vincitaSingola)
+		}
+
+		for (let index = 0; index < vincitoreCon5.length; index++) {
+			const element = vincitoreCon5[index];
+			stampaVincita(element,vincitaSingolacon5);
+		}
 	});
+}
+function stampanumeriVincenti(numeriVincenti){
+	const resultWinningNumbers = new Discord.MessageEmbed();
+
+	resultWinningNumbers.setTitle(language.winningNumbers);
+	resultWinningNumbers.addFields(
+		{ name: "numeri vincenti", value: numeriVincenti, inline:true},
+	);
+	const channel=bot.client.channels.cache.get(config.lotteryChannel);
+	channel.send(resultWinningNumbers);
+	//TO-DO inviare messaggio
+}
+
+function stampaVincita(id,vincita){
+	try{
+		db.saldoGiocatore(id,saldo=>{
+			db.aggiornaSaldo(saldo+(vincita),id);
+		});
+	}
+	catch(err){
+		console.log("errore nell'aggioranre il saldo",err.stack)
+	}
+
+	const resultWin = new Discord.MessageEmbed();
+	const user = bot.client.users.cache.get(id);
+	resultWin.setTitle(language.winnigNumbers);
+	resultWin.addFields(
+		{ name: language.win +" "+ vincita,value: user.username, inline:true},
+	);
+	const channel=bot.client.channels.cache.get(config.lotteryChannel);
+	channel.send(resultWin);
+	//TO-DO inviare messaggio
 }
