@@ -94,6 +94,30 @@ function getTempoOnline (id,tempoOnline) {
 }
 exports.getTempoOnline = getTempoOnline;
 
+function getTempoOnlineSeconds (id,tempoOnline) {
+	dbpool.getConnection((err, db) => {
+		var sql= `SELECT TIME_TO_SEC(tempoOnline) FROM utente where idutente='${id} '`;	
+		db.query(sql, function (err,result) {
+			db.release();
+			if(err){
+				console.log(language.errorGetOnlineTime);
+				return
+			}
+			else{
+				if (result.length!==0) {
+					return tempoOnline(result[0].tempoOnline);
+				}
+			}
+		});
+		
+		if(err){
+			console.log(language.errorDataBaseConnectionFailed);
+			return
+		}
+	});
+}
+exports.getTempoOnline = getTempoOnline;
+
 function getSaldoGiocatore (id,saldo) {
 	dbpool.getConnection((err, db) => {
 		var sql= `SELECT saldo FROM utente where idutente='${id}'`;	
@@ -131,7 +155,7 @@ exports.printSaldo = printSaldo;
 function printTime(message){
 	if(!message.member.user.bot){
 		const id=message.member.user.id;
-		getTempoOnline(id,function(tempoOnline){
+		getTempoOnlineSeconds(id,function(tempoOnline){
 			message.reply(language.msgGetTime+tempoOnline);
 		});
 	}
@@ -145,6 +169,7 @@ function sleep(milliseconds) {
 	  currentDate = Date.now();
 	} while (currentDate - date < milliseconds);
 }
+
 function signIn(message){
 	if(!message.member.user.bot){
 		dbpool.getConnection((err, db) => {
