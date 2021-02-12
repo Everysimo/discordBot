@@ -30,9 +30,14 @@ async function addTime(){
 exports.addTime = addTime;
 
 function applyAddTime(id){
-	getTempoOnlineSeconds(id,tempoOnline=>{
-		if(tempoOnline===86400){}
-		aggiornaTempoOnline(tempoOnline+1,id);
+	getTempoOnlineSeconds(id,function(tempoOnline,daysOnline){
+		
+		if(time>=86400){
+			daysOnline++;
+			tempoOnline-=86400;
+		}
+
+		aggiornaTempoOnline(tempoOnline,daysOnline,id);
 	});
 }
 
@@ -54,9 +59,9 @@ function aggiornaSaldo(nuovoSaldo,id){
 }
 exports.aggiornaSaldo = aggiornaSaldo;
 
-function aggiornaTempoOnline(nuovoTempo,id){
+function aggiornaTempoOnline(nuovoTempo,newDays,id){
 	dbpool.getConnection((err, db) => {
-		var sql= `Update utente set tempoOnline=SEC_TO_TIME('${nuovoTempo}') where idutente='${id}'`;
+		var sql= `Update utente set tempoOnline=SEC_TO_TIME('${nuovoTempo}'),daysOnline=('${newDays}') where idutente='${id}'`;
 		db.query(sql, function (err) {
 			db.release();
 			if(err){
@@ -106,7 +111,7 @@ function getTempoOnlineSeconds (id,tempoOnline) {
 			}
 			else{
 				if (result.length!==0) {
-					return tempoOnline(result[0].time);
+					return tempoOnline(result[0].time,result[0].daysOnline);
 				}
 			}
 		});
