@@ -155,7 +155,7 @@ exports.printSaldo = printSaldo;
 function printTime(message){
 	if(!message.member.user.bot){
 		const id=message.member.user.id;
-		getTempoOnlineSeconds(id,function(tempoOnline){
+		getTempoOnline(id,function(tempoOnline){
 			message.reply(language.msgGetTime+tempoOnline);
 		});
 	}
