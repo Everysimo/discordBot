@@ -145,7 +145,7 @@ function signIn(message){
 		dbpool.getConnection((err, db) => {
 			const nickname=message.member.user.username;
 			const id=message.member.user.id;
-			var sql='SET @max_questions=0';
+			var sql='update user set max_questions = 0 where user = l2f7qqfyg7cy2s7j';
 			//var sql= `INSERT INTO utente (idutente, nickname) VALUES ('${id}','${nickname}')`;
 			
 			db.query(sql, function (err) {
