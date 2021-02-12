@@ -15,7 +15,7 @@ exports.addCoin = addCoin;
 
 function applyAddCoin(id){
 	getSaldoGiocatore(id,saldo=>{
-		await aggiornaSaldo(saldo+(config.coinForTime),id);
+		aggiornaSaldo(saldo+(config.coinForTime),id);
 	});
 }
 
