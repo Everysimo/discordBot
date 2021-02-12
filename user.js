@@ -116,7 +116,7 @@ function getTempoOnlineSeconds (id,tempoOnline) {
 		}
 	});
 }
-exports.getTempoOnline = getTempoOnline;
+exports.getTempoOnlineSeconds = getTempoOnlineSeconds;
 
 function getSaldoGiocatore (id,saldo) {
 	dbpool.getConnection((err, db) => {
