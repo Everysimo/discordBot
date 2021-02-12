@@ -32,7 +32,7 @@ exports.addTime = addTime;
 function applyAddTime(id){
 	getTempoOnlineSeconds(id,function(tempoOnline,daysOnline){
 		
-		tempoOnline+=1;
+		tempoOnline+=5;
 		if(tempoOnline>=86400){
 			daysOnline++;
 			tempoOnline-=86400;
