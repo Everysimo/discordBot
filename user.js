@@ -132,7 +132,7 @@ function printTime(message){
 	if(!message.member.user.bot){
 		const id=message.member.user.id;
 		getTempoOnline(id,function(tempoOnline){
-			message.reply(language.msgGetTime+tempoOnline);
+			message.reply(language.msgGetTime+tempoOnline.toString);
 		});
 	}
 }
