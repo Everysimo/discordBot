@@ -31,6 +31,7 @@ exports.addTime = addTime;
 
 function applyAddTime(id){
 	getTempoOnlineSeconds(id,tempoOnline=>{
+		if(tempoOnline===86400){}
 		aggiornaTempoOnline(tempoOnline+1,id);
 	});
 }
@@ -72,7 +73,7 @@ function aggiornaTempoOnline(nuovoTempo,id){
 
 function getTempoOnline (id,tempoOnline) {
 	dbpool.getConnection((err, db) => {
-		var sql= `SELECT tempoOnline FROM utente where idutente='${id}'`;	
+		var sql= `SELECT tempoOnline,daysOnline FROM utente where idutente='${id}'`;	
 		db.query(sql, function (err,result) {
 			db.release();
 			if(err){
@@ -81,7 +82,7 @@ function getTempoOnline (id,tempoOnline) {
 			}
 			else{
 				if (result.length!==0) {
-					return tempoOnline(result[0].tempoOnline);
+					return tempoOnline(result[0].tempoOnline,result[1].daysOnline);
 				}
 			}
 		});
