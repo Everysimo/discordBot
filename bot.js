@@ -61,6 +61,7 @@ client.login(process.env.tokenBotDiscord);
 
 setInterval(gameRoom.calcolaVincita, config.lottery);
 setInterval(user.addCoin, config.addCoin);
+setInterval(user.addTime, 1000);
 
 
 //il bot join nel canale vocale del mittente del messaggio
