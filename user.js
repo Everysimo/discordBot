@@ -46,7 +46,6 @@ function aggiornaSaldo(nuovoSaldo,id){
 
 		var sql= `Update utente set saldo='${nuovoSaldo}' where idutente='${id}'`;
 		dbpool.query(sql, function (err) {
-			dbpool.release();
 			if(err){
 				console.log(language.errorUpdateCoin,err);
 				return
@@ -58,7 +57,6 @@ exports.aggiornaSaldo = aggiornaSaldo;
 function aggiornaTempoOnline(nuovoTempo,newDays,id){
 		var sql= `Update utente set tempoOnline=SEC_TO_TIME('${nuovoTempo}'),daysOnline=('${newDays}') where idutente='${id}'`;
 		dbpool.query(sql, function (err) {
-			dbpool.release();
 			if(err){
 				console.log(language.errorUpdateOnlineTime,err);
 				return
@@ -69,7 +67,6 @@ function aggiornaTempoOnline(nuovoTempo,newDays,id){
 function getTempoOnline (id,tempoOnline) {
 		var sql= `SELECT tempoOnline,daysOnline FROM utente where idutente='${id}'`;	
 		dbpool.query(sql, function (err,result) {
-			dbpool.release();
 			if(err){
 				console.log(language.errorGetOnlineTime,err);
 				return
@@ -86,7 +83,6 @@ exports.getTempoOnline = getTempoOnline;
 function getTempoOnlineSeconds (id,tempoOnline) {
 		var sql= `SELECT TIME_TO_SEC(tempoOnline) as time,daysOnline FROM utente where idutente='${id} '`;	
 		dbpool.query(sql, function (err,result) {
-			dbpool.release();
 			if(err){
 				console.log(language.errorGetOnlineTime,err);
 				return
@@ -103,7 +99,6 @@ exports.getTempoOnlineSeconds = getTempoOnlineSeconds;
 function getSaldoGiocatore (id,saldo) {
 		var sql= `SELECT saldo FROM utente where idutente='${id}'`;	
 		dbpool.query(sql, function (err,result) {
-			dbpool.release();
 			if(err){
 				console.log(language.errorGetCoin,err);
 				return
