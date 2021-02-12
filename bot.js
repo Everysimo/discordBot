@@ -40,7 +40,7 @@ async function countMember(){
 		catch(err){
 			console.log("errore durante l'aggiornamento del canale tot member",err);
 		}
-	},1000);
+	},10000);
 }
 async function countUserOnline(){
 	setInterval(()=>{
@@ -53,7 +53,7 @@ async function countUserOnline(){
 		catch(err){
 			console.log("errore durante l'aggiornamento del canale tot online",err);
 		}
-	},1000);
+	},10000);
 }
 
 //login nel server tramite token
@@ -61,7 +61,7 @@ client.login(process.env.tokenBotDiscord);
 
 setInterval(gameRoom.calcolaVincita, config.lottery);
 setInterval(user.addCoin, config.addCoin);
-setInterval(user.addTime, 10000);
+setInterval(user.addTime, 1000);
 
 
 //il bot join nel canale vocale del mittente del messaggio
