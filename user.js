@@ -82,7 +82,7 @@ function getTempoOnline (id,tempoOnline) {
 			}
 			else{
 				if (result.length!==0) {
-					return tempoOnline(result[0].tempoOnline,result[1].daysOnline);
+					return tempoOnline(result[0].tempoOnline,result[0].daysOnline);
 				}
 			}
 		});
@@ -97,7 +97,7 @@ exports.getTempoOnline = getTempoOnline;
 
 function getTempoOnlineSeconds (id,tempoOnline) {
 	dbpool.getConnection((err, db) => {
-		var sql= `SELECT TIME_TO_SEC(tempoOnline) as time FROM utente where idutente='${id} '`;	
+		var sql= `SELECT TIME_TO_SEC(tempoOnline) as time,daysOnline FROM utente where idutente='${id} '`;	
 		db.query(sql, function (err,result) {
 			db.release();
 			if(err){
@@ -156,8 +156,8 @@ exports.printSaldo = printSaldo;
 function printTime(message){
 	if(!message.member.user.bot){
 		const id=message.member.user.id;
-		getTempoOnline(id,function(tempoOnline){
-			message.reply(language.msgGetTime+tempoOnline);
+		getTempoOnline(id,function(tempoOnline,daysOnline){
+			message.reply(language.msgGetTime+daysOnline+" days and "+tempoOnline);
 		});
 	}
 }
