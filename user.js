@@ -81,7 +81,7 @@ function getTempoOnline (id,tempoOnline) {
 			}
 			else{
 				if (result.length!==0) {
-					return tempoOnline(result[0].saldo);
+					return tempoOnline(result[0].tempoOnline);
 				}
 			}
 		});
@@ -92,7 +92,7 @@ function getTempoOnline (id,tempoOnline) {
 		}
 	});
 }
-exports.getSaldoGiocatore = getSaldoGiocatore;
+exports.getTempoOnline = getTempoOnline;
 
 function getSaldoGiocatore (id,saldo) {
 	dbpool.getConnection((err, db) => {
@@ -132,7 +132,7 @@ function printTime(message){
 	if(!message.member.user.bot){
 		const id=message.member.user.id;
 		getTempoOnline(id,function(tempoOnline){
-			message.reply(language.msgGetTime+tempoOnline.toString);
+			message.reply(language.msgGetTime+tempoOnline);
 		});
 	}
 }
