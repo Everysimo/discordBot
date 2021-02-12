@@ -30,8 +30,8 @@ async function addTime(){
 exports.addTime = addTime;
 
 function applyAddTime(id){
-	getTempoOnline(id,tempoOnline=>{
-		aggiornaTempoOnline(tempoOnline+1000,id);
+	getTempoOnlineSeconds(id,tempoOnline=>{
+		aggiornaTempoOnline(tempoOnline+1,id);
 	});
 }
 
@@ -55,7 +55,7 @@ exports.aggiornaSaldo = aggiornaSaldo;
 
 function aggiornaTempoOnline(nuovoTempo,id){
 	dbpool.getConnection((err, db) => {
-		var sql= `Update utente set tempoOnline='${nuovoTempo}' where idutente='${id}'`;
+		var sql= `Update utente set SEC_TO_TIME(tempoOnline)='${nuovoTempo}' where idutente='${id}'`;
 		db.query(sql, function (err) {
 			db.release();
 			if(err){
