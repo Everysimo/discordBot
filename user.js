@@ -48,7 +48,7 @@ function aggiornaSaldo(nuovoSaldo,id){
 		db.query(sql, function (err) {
 			db.release();
 			if(err){
-				console.log(language.errorUpdateCoin);
+				console.log(language.errorUpdateCoin,err);
 				return
 			}
 		});
@@ -66,7 +66,7 @@ function aggiornaTempoOnline(nuovoTempo,newDays,id){
 		db.query(sql, function (err) {
 			db.release();
 			if(err){
-				console.log(language.errorUpdateOnlineTime);
+				console.log(language.errorUpdateOnlineTime,err);
 				return
 			}
 		});
@@ -83,7 +83,7 @@ function getTempoOnline (id,tempoOnline) {
 		db.query(sql, function (err,result) {
 			db.release();
 			if(err){
-				console.log(language.errorGetOnlineTime);
+				console.log(language.errorGetOnlineTime,err);
 				return
 			}
 			else{
@@ -94,7 +94,7 @@ function getTempoOnline (id,tempoOnline) {
 		});
 		
 		if(err){
-			console.log(language.errorDataBaseConnectionFailed);
+			console.log(language.errorDataBaseConnectionFailed,err);
 			return
 		}
 	});
@@ -107,7 +107,7 @@ function getTempoOnlineSeconds (id,tempoOnline) {
 		db.query(sql, function (err,result) {
 			db.release();
 			if(err){
-				console.log(language.errorGetOnlineTime);
+				console.log(language.errorGetOnlineTime,err);
 				return
 			}
 			else{
@@ -118,7 +118,7 @@ function getTempoOnlineSeconds (id,tempoOnline) {
 		});
 		
 		if(err){
-			console.log(language.errorDataBaseConnectionFailed);
+			console.log(language.errorDataBaseConnectionFailed,err);
 			return
 		}
 	});
@@ -131,7 +131,7 @@ function getSaldoGiocatore (id,saldo) {
 		db.query(sql, function (err,result) {
 			db.release();
 			if(err){
-				console.log(language.errorGetCoin);
+				console.log(language.errorGetCoin,err);
 				return
 			}
 			else{
@@ -142,7 +142,7 @@ function getSaldoGiocatore (id,saldo) {
 		});
 		
 		if(err){
-			console.log(language.errorDataBaseConnectionFailed);
+			console.log(language.errorDataBaseConnectionFailed,err);
 			return
 		}
 	});
