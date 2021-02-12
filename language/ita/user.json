@@ -4,7 +4,9 @@
     
     "errorDataBaseConnectionFailed":"\u274C Errore durante la connessione al DataBase \u274C",
     "errorGetCoin":"errore nel caricamento del saldo",
+    "errorGetOnlineTime":"errore nel caricamento del tempoOnline",
     "errorUpdateCoin":"errore durante l'aggiornamento del saldo",
+    "errorUpdateOnlineTime":"errore durante l'aggiornamento del tempoOnline",
     "titleMsgWelcomeSignIn":"Benvenuto ",
     "titleMsgAlreadySignedIn":"Furbacchione ",
 
@@ -13,5 +15,6 @@
 
     "msgAlreadySignedIn":"Ti sei già iscritto una volta",
     "msgDescAlreadySignIn":"So che volevi un altro Bonus, ma per altri coin devi sudarteli",
-    "msgGetCoin":"\uD83C\uDFE7 Il tuo saldo ammonta a: "
+    "msgGetCoin":"\uD83C\uDFE7 Il tuo saldo ammonta a: ",
+    "msgGetTime":"Tempo trascorso nel server: "
 }

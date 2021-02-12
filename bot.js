@@ -60,11 +60,6 @@ async function countUserOnline(){
 client.login(process.env.tokenBotDiscord);
 
 setInterval(gameRoom.calcolaVincita, config.lottery);
-/*async function freeCoin(){
-	setInterval(()=>{
-		user.addCoin
-	},config.addCoin);
-}*/
 setInterval(user.addCoin, config.addCoin);
 
 
@@ -108,6 +103,7 @@ function help(message){
 		{ name: p+command.shop, value: language.descShop, inline:true},
 		{ name: p+command.signin, value: language.descSignIn, inline:true},
 		{ name: p+command.slot+' *value*', value: language.descSlot, inline:true},
+		{ name: p+command.tempoOnline, value: language.descTime, inline:true},
 	);
 
 	resultMusicCommands.setTitle('Music Commands');
@@ -153,7 +149,8 @@ comandi.set(command.addsongpl,playlist.addSongToPL);
 comandi.set(command.buybt,gameRoom.buyBiglietto);
 comandi.set(command.buypl,playlist.buyPL);
 comandi.set(command.buysongs,playlist.buySongs);
-comandi.set(command.coin,user.getSaldo);
+comandi.set(command.coin,user.printSaldo);
+comandi.set(command.tempoOnline,user.printTime);
 comandi.set(command.coinflip,gameRoom.coinflip);
 comandi.set(command.help,help);
 comandi.set(command.join,join);

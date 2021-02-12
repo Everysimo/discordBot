@@ -22,5 +22,6 @@
     "showqueue":"showqueue",
     "signin":"signin",
     "slot":"slot",
-    "stop":"stop"
+    "stop":"stop",
+    "tempoOnline":"time"
 }

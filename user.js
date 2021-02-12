@@ -18,6 +18,23 @@ function applyAddCoin(id){
 		aggiornaSaldo(saldo+(config.coinForTime),id);
 	});
 }
+
+async function addTime(){ 
+	const guild = bot.client.guilds.cache.get(config.IdServer);
+	const activeMember= await guild.members.cache.filter(member=>member.voice.channel!==null).array();
+	for (let index = 0; index < activeMember.length; index++) {
+		var id = activeMember[index].id;
+		applyAddTime(id)
+	}
+}
+exports.addTime = addTime;
+
+function applyAddTime(id){
+	getTempoOnline(id,tempoOnline=>{
+		aggiornaTempoOnline(tempoOnline+1000,id);
+	});
+}
+
 function aggiornaSaldo(nuovoSaldo,id){ 
 	dbpool.getConnection((err, db) => {
 		var sql= `Update utente set saldo='${nuovoSaldo}' where idutente='${id}'`;
@@ -36,6 +53,46 @@ function aggiornaSaldo(nuovoSaldo,id){
 }
 exports.aggiornaSaldo = aggiornaSaldo;
 
+function aggiornaTempoOnline(nuovoTempo,id){
+	dbpool.getConnection((err, db) => {
+		var sql= `Update utente set tempoOnline='${nuovoTempo}' where idutente='${id}'`;
+		db.query(sql, function (err) {
+			db.release();
+			if(err){
+				console.log(language.errorUpdateOnlineTime);
+				return
+			}
+		});
+		if(err){
+			console.log(language.errorDataBaseConnectionFailed,err);
+			return
+		}
+	});
+}
+
+function getTempoOnline (id,tempoOnline) {
+	dbpool.getConnection((err, db) => {
+		var sql= `SELECT tempoOnline FROM utente where idutente='${id}'`;	
+		db.query(sql, function (err,result) {
+			db.release();
+			if(err){
+				console.log(language.errorGetOnlineTime);
+				return
+			}
+			else{
+				if (result.length!==0) {
+					return tempoOnline(result[0].saldo);
+				}
+			}
+		});
+		
+		if(err){
+			console.log(language.errorDataBaseConnectionFailed);
+			return
+		}
+	});
+}
+exports.getSaldoGiocatore = getSaldoGiocatore;
 
 function getSaldoGiocatore (id,saldo) {
 	dbpool.getConnection((err, db) => {
@@ -61,7 +118,7 @@ function getSaldoGiocatore (id,saldo) {
 }
 exports.getSaldoGiocatore = getSaldoGiocatore;
 
-function getSaldo(message){
+function printSaldo(message){
 	if(!message.member.user.bot){
 		const id=message.member.user.id;
 		getSaldoGiocatore(id,function(saldo){
@@ -69,7 +126,18 @@ function getSaldo(message){
 		});
 	}
 }
-exports.getSaldo = getSaldo;
+exports.printSaldo = printSaldo;
+
+function printTime(message){
+	if(!message.member.user.bot){
+		const id=message.member.user.id;
+		getTempoOnline(id,function(tempoOnline){
+			message.reply(language.msgGetTime+tempoOnline);
+		});
+	}
+}
+exports.printTime = printTime;
+
 function sleep(milliseconds) {
 	const date = Date.now();
 	let currentDate = null;
