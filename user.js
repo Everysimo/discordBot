@@ -162,13 +162,13 @@ function printTime(message){
 }
 exports.printTime = printTime;
 
-function sleep(milliseconds) {
+/*function sleep(milliseconds) {
 	const date = Date.now();
 	let currentDate = null;
 	do {
 	  currentDate = Date.now();
 	} while (currentDate - date < milliseconds);
-}
+}*/
 
 function signIn(message){
 	if(!message.member.user.bot){
