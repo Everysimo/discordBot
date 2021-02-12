@@ -96,7 +96,7 @@ exports.getTempoOnline = getTempoOnline;
 
 function getTempoOnlineSeconds (id,tempoOnline) {
 	dbpool.getConnection((err, db) => {
-		var sql= `SELECT TIME_TO_SEC(tempoOnline) FROM utente where idutente='${id} '`;	
+		var sql= `SELECT TIME_TO_SEC(tempoOnline) as time FROM utente where idutente='${id} '`;	
 		db.query(sql, function (err,result) {
 			db.release();
 			if(err){
@@ -105,7 +105,7 @@ function getTempoOnlineSeconds (id,tempoOnline) {
 			}
 			else{
 				if (result.length!==0) {
-					return tempoOnline(result[0].tempoOnline);
+					return tempoOnline(result[0].time);
 				}
 			}
 		});
