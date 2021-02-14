@@ -5,9 +5,8 @@ const gameRoom=require("./gameRoom.js")
 exports.dbConnect = function () {
     //creazione pool di connessione al DataBase
     const dbpool = mysql.createPool({
-		connectionLimit : 9999999,
+		connectionLimit : 100,
 		queueLimit : 0,
-		acquireTimeout: 30000,
     	waitForConnections: true,
 	    host: process.env.host,
 	    user: process.env.user,
