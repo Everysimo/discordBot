@@ -28,8 +28,8 @@ async function addTime(){
 		const element = guild[i];
 		var activeMember= await element.members.cache.filter(member=>member.voice.channel!==null).array();
 		getUsersSignedIn(users=>{
-			for(var i=0;i<activeMember.length;i++){
-				console.log("user:"+users);
+			console.log("user:"+users);
+			for(let y=0;y<activeMember.length;y++){
 				if(!users.array().includes(activeMember[index].id)){
 					delete activeMember[index];
 				}
