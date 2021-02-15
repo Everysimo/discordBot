@@ -95,6 +95,7 @@ function getTempoOnline (id,tempoOnline) {
 exports.getTempoOnline = getTempoOnline;
 
 function getTempoOnlineSeconds (id,tempoOnline) {
+	console.log(id);
 		var sql= `SELECT TIME_TO_SEC(tempoOnline) as time,daysOnline FROM utente where idutente='${id} '`;	
 		dbpool.query(sql, function (err,result) {
 			if(err){
