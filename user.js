@@ -34,7 +34,7 @@ async function addTime(){
 				newActiveMember.push(activeMember.filter(member=>member.id===users[y]));
 			}
 		});
-		for (let index = 0; index < activeMember.length; index++) {
+		for (let index = 0; index < newActiveMember.length; index++) {
 			var id = newActiveMember[index].id;
 			applyAddTime(id)
 		}
