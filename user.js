@@ -31,7 +31,7 @@ async function addTime(){
 		getUsersSignedIn(users=>{
 			console.log("user:"+users);
 			for(let y=0;y<activeMember.length;y++){
-				newActiveMember.push(activeMember.filter(member=>member.id===users[y]));
+				newActiveMember.push(activeMember.filter(member=>member.id===users[y].idutente));
 			}
 		});
 		for (let index = 0; index < newActiveMember.length; index++) {
