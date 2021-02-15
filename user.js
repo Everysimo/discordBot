@@ -6,7 +6,6 @@ const bot = require('./bot');
 async function addCoin(){ 
 	const guild = bot.client.guilds.cache.array();
 	for (let i = 0; i < guild.length; i++) {
-		const element = guild[i];
 		const activeMember= await guild.members.cache.filter(member=>member.voice.channel!==null).array();
 		for (let index = 0; index < activeMember.length; index++) {
 			var id = activeMember[index].id;
@@ -26,16 +25,9 @@ async function addTime(){
 	const guild = bot.client.guilds.cache.array();
 	for (let i = 0; i < guild.length; i++) {
 		const element = guild[i];
-		var activeMember= await element.members.cache.filter(member=>member.voice.channel!==null).array();
-		var newActiveMember=new Array();
-		getUsersSignedIn(users=>{
-			console.log("user:"+users);
-			for(let y=0;y<users.length;y++){
-				newActiveMember.push(activeMember.filter(member=>member.id===users[y].idutente));
-			}
-		});
-		for (let index = 0; index < newActiveMember.length; index++) {
-			var id = newActiveMember[index].id;
+		const activeMember= await element.members.cache.filter(member=>member.voice.channel!==null).array();
+		for (let index = 0; index < activeMember.length; index++) {
+			var id = activeMember[index].id;
 			applyAddTime(id)
 		}
 	}
@@ -95,7 +87,6 @@ function getTempoOnline (id,tempoOnline) {
 exports.getTempoOnline = getTempoOnline;
 
 function getTempoOnlineSeconds (id,tempoOnline) {
-	
 		var sql= `SELECT TIME_TO_SEC(tempoOnline) as time,daysOnline FROM utente where idutente='${id} '`;	
 		dbpool.query(sql, function (err,result) {
 			if(err){
@@ -105,8 +96,6 @@ function getTempoOnlineSeconds (id,tempoOnline) {
 			else{
 				if (result.length!==0) {
 					return tempoOnline(result[0].time,result[0].daysOnline);
-				}else{
-					console.log("no db id:"+id);
 				}
 			}
 		});
@@ -221,7 +210,7 @@ function getUsersSignedIn(users){
 			}
 			else{
 				if (result.length!==0) {
-					return users(result);
+					return users(result[0].idutente);
 				}
 			}
 		});
