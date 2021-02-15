@@ -222,7 +222,7 @@ function getUsersSignedIn(users){
 			}
 			else{
 				if (result.length!==0) {
-					return users(result[0].idutente);
+					return users(result.idutente);
 				}
 			}
 		});
