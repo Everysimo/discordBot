@@ -199,7 +199,7 @@ client.on("message", message => {
 //test
 client.on('guildMemberAdd', member => {
 	if(!member.user.bot){
-		const channel = member.guild.channels.cache.find(ch => ch.name === 'benvenuti');
+		//const channel = member.guild.channels.cache.find(ch => ch.name === 'benvenuti');
 		dbpool.getConnection((err, db) => {
 			const nickname=member.user.username;
 			const id=member.user.id;
@@ -210,28 +210,28 @@ client.on('guildMemberAdd', member => {
 				if(err){
 					if(err.code.match('ER_DUP_ENTRY')){
 
-						const messaggioRifiuto = new Discord.MessageEmbed();
-						messaggioRifiuto.setTitle(language.titleMsgAlreadySignedIn + nickname);
-						messaggioRifiuto.addFields(
-							{ name: language.msgAlreadySignedIn,
-							 value: language.msgDescAlreadySignIn, inline:true},
-						)
+						//const messaggioRifiuto = new Discord.MessageEmbed();
+						//messaggioRifiuto.setTitle(language.titleMsgAlreadySignedIn + nickname);
+						//semessaggioRifiuto.addFields(
+							//{ name: language.msgAlreadySignedIn,
+							// value: language.msgDescAlreadySignIn, inline:true},
+						//)
 					
 						console.log(language.dbMsgUserAlreadySigned);
-						channel.send(messaggioRifiuto);
+						//channel.send(messaggioRifiuto);
 						return
 					}
 				}	
 				else{
-					const messaggioConferma = new Discord.MessageEmbed();
-					messaggioConferma.setTitle(language.titleMsgWelcomeSignIn + nickname);
-					messaggioConferma.addFields(
-						{ name: language.msgWelcomeSignIn,
-						 value: language.msgDescWelcomeSignIn, inline:true},
-					)
+					//const messaggioConferma = new Discord.MessageEmbed();
+					//messaggioConferma.setTitle(language.titleMsgWelcomeSignIn + nickname);
+					//messaggioConferma.addFields(
+					//	{ name: language.msgWelcomeSignIn,
+					//	 value: language.msgDescWelcomeSignIn, inline:true},
+					//)
 
 					console.log(language.dbMsgUserCorrectlySigned);
-					channel.send(messaggioConferma);
+					//channel.send(messaggioConferma);
 				}
 			});
 			
