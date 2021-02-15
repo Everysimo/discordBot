@@ -30,7 +30,7 @@ async function addTime(){
 		var newActiveMember=new Array();
 		getUsersSignedIn(users=>{
 			console.log("user:"+users);
-			for(let y=0;y<activeMember.length;y++){
+			for(let y=0;y<users.length;y++){
 				newActiveMember.push(activeMember.filter(member=>member.id===users[y].idutente));
 			}
 		});
