@@ -29,6 +29,7 @@ async function addTime(){
 		var activeMember= await element.members.cache.filter(member=>member.voice.channel!==null).array();
 		getUsersSignedIn(users=>{
 			for(var i=0;i<activeMember.length;i++){
+				console.log(users);
 				if(!users.array().includes(activeMember[index].id)){
 					delete activeMember[index];
 				}
