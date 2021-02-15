@@ -197,6 +197,6 @@ client.on("message", message => {
 
 
 //test
-client.on('guildMemberAdd', async member => {
-	console.log(member.nickname);
+client.on('guildMemberAdd', member => {
+	console.log(member);
 });
