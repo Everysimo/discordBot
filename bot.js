@@ -198,5 +198,6 @@ client.on("message", message => {
 
 //test
 client.on('guildMemberAdd', member => {
-	console.log(member);
+	console.log("id:"+member.user.id);
+	console.log("user:"+member.user.username);
 });
