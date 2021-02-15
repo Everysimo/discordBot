@@ -26,7 +26,14 @@ async function addTime(){
 	const guild = bot.client.guilds.cache.array();
 	for (let i = 0; i < guild.length; i++) {
 		const element = guild[i];
-		const activeMember= await element.members.cache.filter(member=>member.voice.channel!==null).array();
+		var activeMember= await element.members.cache.filter(member=>member.voice.channel!==null).array();
+		getUsersSignedIn(users=>{
+			for(var i=0;i<activeMember.length;i++){
+				if(!users.array().includes(activeMember[index].id)){
+					delete activeMember[index];
+				}
+			}
+		});
 		for (let index = 0; index < activeMember.length; index++) {
 			var id = activeMember[index].id;
 			applyAddTime(id)
@@ -202,3 +209,18 @@ function verificaSaldo(importo,saldo){
 }
 exports.verificaSaldo=verificaSaldo;
 
+function getUsersSignedIn(users){
+	var sql= `SELECT idutente FROM utente`;	
+		dbpool.query(sql, function (err,result) {
+			if(err){
+				console.log(language.errorGetCoin,err);
+				return
+			}
+			else{
+				if (result.length!==0) {
+					return users(result[0].idutente);
+				}
+			}
+		});
+}
+exports.getUsersSignedIn = getUsersSignedIn;
