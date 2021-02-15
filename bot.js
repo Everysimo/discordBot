@@ -198,6 +198,47 @@ client.on("message", message => {
 
 //test
 client.on('guildMemberAdd', member => {
-	console.log("id:"+member.user.id);
-	console.log("user:"+member.user.username);
+	if(!member.user.bot){
+		const channel = member.guild.channels.cache.find(ch => ch.name === 'benvenuti');
+		dbpool.getConnection((err, db) => {
+			const nickname=member.user.username;
+			const id=member.user.id;
+			var sql= `INSERT INTO utente (idutente, nickname) VALUES ('${id}','${nickname}')`;
+			
+			db.query(sql, function (err) {
+				db.release();
+				if(err){
+					if(err.code.match('ER_DUP_ENTRY')){
+
+						const messaggioRifiuto = new Discord.MessageEmbed();
+						messaggioRifiuto.setTitle(language.titleMsgAlreadySignedIn + nickname);
+						messaggioRifiuto.addFields(
+							{ name: language.msgAlreadySignedIn,
+							 value: language.msgDescAlreadySignIn, inline:true},
+						)
+					
+						console.log(language.dbMsgUserAlreadySigned);
+						channel.send(messaggioRifiuto);
+						return
+					}
+				}	
+				else{
+					const messaggioConferma = new Discord.MessageEmbed();
+					messaggioConferma.setTitle(language.titleMsgWelcomeSignIn + nickname);
+					messaggioConferma.addFields(
+						{ name: language.msgWelcomeSignIn,
+						 value: language.msgDescWelcomeSignIn, inline:true},
+					)
+
+					console.log(language.dbMsgUserCorrectlySigned);
+					channel.send(messaggioConferma);
+				}
+			});
+			
+			if(err){
+				console.log(language.errorDataBaseConnectionFailed,err);
+				return
+			}
+		});
+	}
 });
