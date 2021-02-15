@@ -27,16 +27,15 @@ async function addTime(){
 	for (let i = 0; i < guild.length; i++) {
 		const element = guild[i];
 		var activeMember= await element.members.cache.filter(member=>member.voice.channel!==null).array();
+		var newActiveMember=new Array();
 		getUsersSignedIn(users=>{
 			console.log("user:"+users);
 			for(let y=0;y<activeMember.length;y++){
-				if(!users.array().includes(activeMember[index].id)){
-					delete activeMember[index];
-				}
+				newActiveMember.push(activeMember.filter(member=>member.id===users[y].id));
 			}
 		});
 		for (let index = 0; index < activeMember.length; index++) {
-			var id = activeMember[index].id;
+			var id = newActiveMember[index].id;
 			applyAddTime(id)
 		}
 	}
@@ -222,7 +221,7 @@ function getUsersSignedIn(users){
 			}
 			else{
 				if (result.length!==0) {
-					return users(result.idutente);
+					return users(result);
 				}
 			}
 		});
