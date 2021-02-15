@@ -29,7 +29,7 @@ async function addTime(){
 		var activeMember= await element.members.cache.filter(member=>member.voice.channel!==null).array();
 		getUsersSignedIn(users=>{
 			for(var i=0;i<activeMember.length;i++){
-				console.log(users);
+				console.log("user:"+users);
 				if(!users.array().includes(activeMember[index].id)){
 					delete activeMember[index];
 				}
@@ -96,7 +96,7 @@ function getTempoOnline (id,tempoOnline) {
 exports.getTempoOnline = getTempoOnline;
 
 function getTempoOnlineSeconds (id,tempoOnline) {
-	console.log(id);
+	
 		var sql= `SELECT TIME_TO_SEC(tempoOnline) as time,daysOnline FROM utente where idutente='${id} '`;	
 		dbpool.query(sql, function (err,result) {
 			if(err){
@@ -106,6 +106,8 @@ function getTempoOnlineSeconds (id,tempoOnline) {
 			else{
 				if (result.length!==0) {
 					return tempoOnline(result[0].time,result[0].daysOnline);
+				}else{
+					console.log("no db id:"+id);
 				}
 			}
 		});
