@@ -198,5 +198,29 @@ client.on("message", message => {
 
 //test
 client.on('guildMemberAdd', member => {
-	console.log(member);
+	if(!member.user.bot){
+		dbpool.getConnection((err, db) => {
+			const nickname=member.user.username;
+			const id=member.user.id;
+			var sql= `INSERT INTO utente (idutente, nickname) VALUES ('${id}','${nickname}')`;
+			
+			db.query(sql, function (err) {
+				db.release();
+				if(err){
+					if(err.code.match('ER_DUP_ENTRY')){
+						console.log(language.dbMsgUserAlreadySigned);
+						return
+					}
+				}	
+				else{
+					console.log(language.dbMsgUserCorrectlySigned);
+				}
+			});
+			
+			if(err){
+				console.log(language.errorDataBaseConnectionFailed,err);
+				return
+			}
+		});
+	}
 });
