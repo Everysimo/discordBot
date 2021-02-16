@@ -6,7 +6,8 @@ const bot = require('./bot');
 async function addCoin(){ 
 	const guild = bot.client.guilds.cache.array();
 	for (let i = 0; i < guild.length; i++) {
-		const activeMember= await guild.members.filter(member=>member.voice.channel!==null).array();
+		const element = guild[i];
+		const activeMember= await element.members.cache.filter(member=>member.voice.channel!==null).array();
 		for (let index = 0; index < activeMember.length; index++) {
 			var id = activeMember[index].id;
 			applyAddCoin(id)
