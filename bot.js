@@ -45,7 +45,7 @@ async function countMember(){
 async function countUserOnline(){
 	setInterval(()=>{
 		const guild = client.guilds.cache.get(config.IdServer);
-		var onlineMember=guild.members.cache.filter(member=>member.presence.status==="online").size
+		var onlineMember=guild.members.cache.filter(member=>member.presence.status==="online").array().size
 		const channel=guild.channels.cache.get(config.IdMemberChannelOnline);
 		try{
 			channel.setName("\uD83D\uDDE3\uFE0F total online "+onlineMember.toString() + " \uD83D\uDDE3\uFE0F");
