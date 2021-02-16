@@ -21,9 +21,9 @@ client.once('ready', () => {
 
 	client.user.setActivity(language.botActivity,{type:"LISTENING"});
 
-	//countMember();
+	countMember();
 
-	//countUserOnline();
+	countUserOnline();
 });
 
 //Command Prefix 
