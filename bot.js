@@ -40,7 +40,7 @@ async function countMember(){
 		catch(err){
 			console.log("errore durante l'aggiornamento del canale tot member",err);
 		}
-	},10000);
+	},20000);
 }
 async function countUserOnline(){
 	setInterval(()=>{
@@ -53,7 +53,7 @@ async function countUserOnline(){
 		catch(err){
 			console.log("errore durante l'aggiornamento del canale tot online",err);
 		}
-	},10000);
+	},20000);
 }
 
 //login nel server tramite token
