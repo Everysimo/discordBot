@@ -1,0 +1,20 @@
+{
+    "dbMsgUserAlreadySigned":"Utente già presente del database",
+    "dbMsgUserCorrectlySigned":"Utente registrato correttamente",
+    
+    "errorDataBaseConnectionFailed":"\u274C Errore durante la connessione al DataBase \u274C",
+    "errorGetCoin":"errore nel caricamento del saldo",
+    "errorGetOnlineTime":"errore nel caricamento del tempoOnline",
+    "errorUpdateCoin":"errore durante l'aggiornamento del saldo",
+    "errorUpdateOnlineTime":"errore durante l'aggiornamento del tempoOnline",
+    "titleMsgWelcomeSignIn":"Benvenuto ",
+    "titleMsgAlreadySignedIn":"Furbacchione ",
+
+    "msgWelcomeSignIn":"Sei diventato ufficialmente una testa dell'Hydra",
+    "msgDescWelcomeSignIn":"Come Benvenuto ti regaliamo 1000 coin da poter spendere allo !shop o scommetterli, per maggiori info !help",
+
+    "msgAlreadySignedIn":"Ti sei già iscritto una volta",
+    "msgDescAlreadySignIn":"So che volevi un altro Bonus, ma per altri coin devi sudarteli",
+    "msgGetCoin":"\uD83C\uDFE7 Il tuo saldo ammonta a: ",
+    "msgGetTime":"Tempo trascorso nel server: "
+}

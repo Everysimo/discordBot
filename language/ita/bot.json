@@ -24,24 +24,13 @@
     "descSignIn":"iscrizione ufficiale al server per poter ottenere molti vantaggi",
     "descSlot":"prova a vincere dei coin alle slot",
     "descStop":"interruzione della riproduzione ed eliminazione della coda di riproduzione",
+    "descTime":"resistuisce il tuo tempo trascorso online",
 
     "dbMsgUserAlreadySigned":"Utente già presente del database",
     "dbMsgUserCorrectlySigned":"Utente registrato correttamente",
     
     "errorJoinVoiceChannel":"\u274C errore nell'entrare nella chat vocale \u274C",
     "errorDataBaseConnectionFailed":"\u274C Errore durante la connessione al DataBase \u274C",
-    
-
-    "titleMsgWelcomeSignIn":"Benvenuto ",
-    "titleMsgAlreadySignedIn":"Furbacchione ",
-
-    "msgWelcomeSignIn":"Sei diventato ufficialmente una testa dell'Hydra",
-    "msgDescWelcomeSignIn":"Come Benvenuto ti regaliamo 1000 coin da poter spendere allo !shop o scommetterli, per maggiori info !help",
-
-    "msgAlreadySignedIn":"Ti sei già iscritto una volta",
-    "msgDescAlreadySignIn":"So che volevi un altro Bonus, ma per altri coin devi sudarteli",
-
-    "msgGetCoin":"\uD83C\uDFE7 Il tuo saldo ammonta a: ",
 
     "voiceChannelNotFound":"\u274C non sei in nessuna chat vocale \u274C",
     "voiceChannelNotPermission":"\u274C non ho i permessi in quel canale vocale \u274C"

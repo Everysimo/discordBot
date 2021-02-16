@@ -4,6 +4,7 @@ const language =require('./language/'+config.language+'/playlist.json');
 const db=require("./dbOpertion.js");
 const ytdl = require('ytdl-core');
 const musica=require("./musica.js");
+const user = require('./user.js');
 
 exports.createPlaylist = function (message) {
     if(!message.member.user.bot){
@@ -170,25 +171,43 @@ exports.playPL= function (message) {
 
 exports.buyPL=function (message){
 	if(!message.member.user.bot){
-		var nPl=parseInt(message.content.split(" ")[1]);
 		const id=message.member.user.id;
-		if (!isNaN(nPl)) {
-			db.addnPL(nPl,id);
-		}else{
-			message.reply(language.notValidImport)
+		var nPl=parseInt(message.content.split(" ")[1]);
+		if(isNaN(nPl)){
+			nPl =1;
 		}
+		user.getSaldoGiocatore(id,function (saldo){
+			if(user.verificaSaldo(config.coinPL*nPl,saldo)){
+			
+				db.addnPL(nPl,id);
+				user.aggiornaSaldo(saldo-config.coinPL*nPl,id);
+				message.reply(language.msgBuyPlSuccess);
+			}
+			else{
+				message.reply(language.notEnoughCoin);
+			}
+		});
 	}
 }
 
 exports.buySongs=function (message){
 	if(!message.member.user.bot){
-		const nomePl=message.content.split(" ")[1];
-		var nPl=parseInt(message.content.split(" ")[2]);
 		const id=message.member.user.id;
-		if (!isNaN(nPl)) {
-			db.addnSong(nPl,id,nomePl);
-		}else{
-			message.reply(language.notValidImport)
+		var nPl=parseInt(message.content.split(" ")[2]);
+		if(isNaN(nPl)){
+			nPl =1;
 		}
+			user.getSaldoGiocatore(id,function (saldo){
+			if(user.verificaSaldo(config.coinSong*nPl,saldo)){
+			const nomePl=message.content.split(" ")[1];
+			db.addnSong(nPl,id,nomePl);
+			user.aggiornaSaldo(saldo-config.coinSong*nPl,id);
+			message.reply(language.msgBuySongsSuccess);
+			}
+			else{
+				message.reply(language.notEnoughCoin);
+			}
+		});
+		
 	}
 }

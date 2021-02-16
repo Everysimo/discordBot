@@ -5,6 +5,9 @@ const gameRoom=require("./gameRoom.js")
 exports.dbConnect = function () {
     //creazione pool di connessione al DataBase
     const dbpool = mysql.createPool({
+		connectionLimit : 100,
+		queueLimit : 0,
+    	waitForConnections: true,
 	    host: process.env.host,
 	    user: process.env.user,
 	    password: process.env.password,
@@ -22,46 +25,6 @@ exports.dbConnect = function () {
 	    console.log(language.dbConnected);
     });
 }
-
-function saldoGiocatore (id,saldo) {
-	dbpool.getConnection((err, db) => {
-		var sql= `SELECT saldo FROM utente where idutente='${id}'`;	
-		db.query(sql, function (err,result) {
-			db.release();
-			if(err){
-				console.log(language.errorGetCoin);
-				return
-			}
-			else{
-				return saldo(result[0].saldo);
-			}
-		});
-		
-		if(err){
-			console.log(language.errorDataBaseConnectionFailed);
-			return
-		}
-	});
-}
-exports.saldoGiocatore = saldoGiocatore;
-
-function aggiornaSaldo(nuovoSaldo,id){ 
-	dbpool.getConnection((err, db) => {
-		var sql= `Update utente set saldo='${nuovoSaldo}' where idutente='${id}'`;
-		db.query(sql, function (err) {
-			db.release();
-			if(err){
-				console.log(language.errorUpdateCoin);
-				return
-			}
-		});
-		if(err){
-			console.log(language.errorDataBaseConnectionFailed,err);
-			return
-		}
-	});
-}
-exports.aggiornaSaldo =aggiornaSaldo;
 
 exports.createPlayListDB = function (id, nome){
 	controlloNPL(id,risultato=>{
@@ -280,8 +243,6 @@ function controlloNSong(id,nomePlaylist,risultato) {
 }
 
 exports.addnPL=function(n,id){
-	saldoGiocatore(id,saldo=>{
-		if(gameRoom.verificaSaldo(config.coinPL*n,saldo)){
 			dbpool.getConnection((err, db) => {
 				var sql= `SELECT maxPlaylist FROM utente where idutente='${id}'`;	
 				db.query(sql, function (err,result) {
@@ -300,7 +261,6 @@ exports.addnPL=function(n,id){
 									console.log(language.errorUpdateMaxPlaylist,err);
 									return
 								}else{
-									aggiornaSaldo(saldo-(config.coinPL*n),id);
 								}
 							});
 							if(err){
@@ -315,13 +275,9 @@ exports.addnPL=function(n,id){
 					return
 				}
 			});
-		}
-	});
 }
 
 exports.addnSong=function(n,id,nomePlaylist){
-	saldoGiocatore(id,saldo=>{
-		if(gameRoom.verificaSaldo(config.coinSong*n,saldo)){
 			dbpool.getConnection((err, db) => {
 				var sql= `SELECT maxCanzoni FROM playlist where utente='${id}' and nome='${nomePlaylist}'`;	
 				db.query(sql, function (err,result) {
@@ -339,8 +295,6 @@ exports.addnSong=function(n,id,nomePlaylist){
 								if(err){
 									console.log(language.errorUpdateMaxSongsPl,err);
 									return
-								}else{
-									aggiornaSaldo(saldo-(config.coinSong*n),id);
 								}
 							});
 							if(err){
@@ -355,13 +309,9 @@ exports.addnSong=function(n,id,nomePlaylist){
 					return
 				}
 			});
-		}
-	});
 }
 
 exports.creaBiglietto = function (id,numeri) {
-	saldoGiocatore(id,saldo=>{
-		if(gameRoom.verificaSaldo(config.lotteryTicket,saldo)){
 			dbpool.getConnection((err, db) => {
 
 				var sql= `Insert Into bigliettolotteria (user,numero1,numero2,numero3,numero4,numero5,numero6) Values ('${id}','${numeri[0]}',${numeri[1]},${numeri[2]},${numeri[3]},${numeri[4]},${numeri[5]})`;
@@ -377,7 +327,6 @@ exports.creaBiglietto = function (id,numeri) {
 							return
 						}
 					}else{
-						aggiornaSaldo(saldo-(config.lotteryTicket),id);
 					}
 				});
 				if(err){
@@ -385,8 +334,6 @@ exports.creaBiglietto = function (id,numeri) {
 					return
 				}
 			});
-		}
-	});
 }
 
 exports.ottieniBiglietti = function (risultato) {

@@ -9,8 +9,10 @@ const musica=require("./musica.js")
 const playlist=require("./playlist.js")
 const command=require("./command.json")
 const random=require("./random.js")
+const user = require('./user.js');
 db.dbConnect();
 exports.client=client;
+
 //quando il nuovo cliente è pronto esegue log
 client.once('ready', () => {
 	console.log('Ready!');
@@ -19,9 +21,9 @@ client.once('ready', () => {
 
 	client.user.setActivity(language.botActivity,{type:"LISTENING"});
 
-	countMember();
+	//countMember();
 
-	countUserOnline();
+	//countUserOnline();
 });
 
 //Command Prefix 
@@ -38,28 +40,29 @@ async function countMember(){
 		catch(err){
 			console.log("errore durante l'aggiornamento del canale tot member",err);
 		}
-	},1000);
+	},10000);
 }
 async function countUserOnline(){
 	setInterval(()=>{
 		const guild = client.guilds.cache.get(config.IdServer);
-		const onlineMember=guild.members.cache.filter(member=>member.presence.status==="online").size
+		var onlineMember=guild.members.cache.filter(member=>member.presence.status==="online").size
 		const channel=guild.channels.cache.get(config.IdMemberChannelOnline);
 		try{
-		channel.setName("\uD83D\uDDE3\uFE0F total online  "+onlineMember.toString() + "  \uD83D\uDDE3\uFE0F");
+			channel.setName("\uD83D\uDDE3\uFE0F total online "+onlineMember.toString() + " \uD83D\uDDE3\uFE0F");
 		}
 		catch(err){
 			console.log("errore durante l'aggiornamento del canale tot online",err);
 		}
-	},1000);
+	},10000);
 }
-
-
 
 //login nel server tramite token
 client.login(process.env.tokenBotDiscord);
 
-//setInterval(gameRoom.calcolaVincita, config.lottery);
+setInterval(gameRoom.calcolaVincita, config.lottery);
+setInterval(user.addCoin, config.addCoin);
+setInterval(user.addTime, 1000);
+
 
 //il bot join nel canale vocale del mittente del messaggio
 async function join(message){
@@ -101,6 +104,7 @@ function help(message){
 		{ name: p+command.shop, value: language.descShop, inline:true},
 		{ name: p+command.signin, value: language.descSignIn, inline:true},
 		{ name: p+command.slot+' *value*', value: language.descSlot, inline:true},
+		{ name: p+command.tempoOnline, value: language.descTime, inline:true},
 	);
 
 	resultMusicCommands.setTitle('Music Commands');
@@ -140,67 +144,14 @@ function shop(message){
 	message.channel.send(resultShopCommands);
 }
 
-function signIn(message){
-	if(!message.member.user.bot){
-		dbpool.getConnection((err, db) => {
-			const nickname=message.member.user.username;
-			const id=message.member.user.id;
-			var sql= `INSERT INTO utente (idutente, nickname) VALUES ('${id}','${nickname}')`;
-			
-			db.query(sql, function (err) {
-				db.release();
-				if(err){
-					if(err.code.match('ER_DUP_ENTRY')){
-
-						const messaggioRifiuto = new Discord.MessageEmbed();
-						messaggioRifiuto.setTitle(language.titleMsgAlreadySignedIn + nickname);
-						messaggioRifiuto.addFields(
-							{ name: language.msgAlreadySignedIn,
-							 value: language.msgDescAlreadySignIn, inline:true},
-						)
-					
-						console.log(language.dbMsgUserCorrectlySigned);
-						message.channel.send(messaggioRifiuto);
-						return
-					}
-				}	
-				else{
-					const messaggioConferma = new Discord.MessageEmbed();
-					messaggioConferma.setTitle(language.titleMsgWelcomeSignIn + nickname);
-					messaggioConferma.addFields(
-						{ name: language.msgWelcomeSignIn,
-						 value: language.msgDescWelcomeSignIn, inline:true},
-					)
-
-					console.log(language.dbMsgUserAlreadySigned);
-					message.channel.send(messaggioConferma);
-				}
-			});
-			
-			if(err){
-				console.log(language.errorDataBaseConnectionFailed,err);
-				return
-			}
-		});
-	}
-}
-
-function getSaldo(message){
-	if(!message.member.user.bot){
-		const id=message.member.user.id;
-		db.saldoGiocatore(id,function(saldo){
-			message.reply(language.msgGetCoin+saldo+" "+config.coinName);
-		});
-	}
-}
-
 //mappa comandi non musicali
 let comandi =new Map();
 comandi.set(command.addsongpl,playlist.addSongToPL);
 comandi.set(command.buybt,gameRoom.buyBiglietto);
 comandi.set(command.buypl,playlist.buyPL);
 comandi.set(command.buysongs,playlist.buySongs);
-comandi.set(command.coin,getSaldo);
+comandi.set(command.coin,user.printSaldo);
+comandi.set(command.tempoOnline,user.printTime);
 comandi.set(command.coinflip,gameRoom.coinflip);
 comandi.set(command.help,help);
 comandi.set(command.join,join);
@@ -217,7 +168,7 @@ comandi.set(command.shop,shop);
 comandi.set(command.showpl,playlist.printPL);
 comandi.set(command.showradio,musica.showRadio);
 comandi.set(command.showqueue,musica.showQueue);
-comandi.set(command.signin,signIn);
+comandi.set(command.signin,user.signIn);
 comandi.set(command.slot,gameRoom.slot);
 comandi.set(command.stop,musica.stop);
 
@@ -240,5 +191,36 @@ client.on("message", message => {
 		else{
 			message.reply(language.commandNotFound);
 		}
+	}
+});
+
+
+
+//test
+client.on('guildMemberAdd', member => {
+	if(!member.user.bot){
+		dbpool.getConnection((err, db) => {
+			const nickname=member.user.username;
+			const id=member.user.id;
+			var sql= `INSERT INTO utente (idutente, nickname) VALUES ('${id}','${nickname}')`;
+			
+			db.query(sql, function (err) {
+				db.release();
+				if(err){
+					if(err.code.match('ER_DUP_ENTRY')){
+						console.log(language.dbMsgUserAlreadySigned);
+						return
+					}
+				}	
+				else{
+					console.log(language.dbMsgUserCorrectlySigned);
+				}
+			});
+			
+			if(err){
+				console.log(language.errorDataBaseConnectionFailed,err);
+				return
+			}
+		});
 	}
 });
