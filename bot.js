@@ -8,7 +8,6 @@ const gameRoom=require("./gameRoom.js")
 const musica=require("./musica.js")
 const playlist=require("./playlist.js")
 const command=require("./command.json")
-const random=require("./random.js")
 const user = require('./user.js');
 db.dbConnect();
 exports.client=client;
@@ -164,7 +163,6 @@ comandi.set(command.next,musica.skip);
 comandi.set(command.play,musica.play);
 comandi.set(command.playpl,playlist.playPL);
 comandi.set(command.radio,musica.playRadio);
-//comandi.set(command.randomImg,random.image);
 comandi.set(command.rmsongpl,playlist.removeSongFromPL);
 comandi.set(command.roulette,gameRoom.roulette);
 comandi.set(command.setvolume,musica.setvolume);
