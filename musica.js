@@ -47,15 +47,18 @@ async function play (message){
 	}else{
 		try{
 			songInfo=await spdl.getInfo(args);
+			let video = await Youtube.searchOne(`${songInfo.title} ${songInfo.artist}`);
+			if (!video) video = await Youtube.searchOne(`${infos.body.name}`);
+
 		}
 		catch(err){
 			throw new Error(language.errorLoadingSongInfo);
 		}
 		song = {
 			title: "titolo: "+songInfo.title+" di: "+songInfo.artist,
-			url: songInfo.url,
+			url: video.url,
 			username: message.member.user.username,
-			where: "spotify"
+			where: "youtube"
 		};
 	}
 		
@@ -114,14 +117,7 @@ start = function (guild, song) {
 	  return;
 	}
 	var dispatcher;
-	if (song.where==="spotify") {
-		(spdl(song.url).then(song=>{
-			dispatcher= serverQueue.connection.play(song).on("finish", () => {
-				serverQueue.songs.shift();
-				start(guild, serverQueue.songs[0]);
-			}).on("error", error => console.error(error.stack));
-		}));
-	}else if (song.where==="youtube"){
+	if (song.where==="youtube"){
 		if (song.isLive) {
 			dispatcher = serverQueue.connection.play(ytdl(song.url)).on("finish", () => {
 				serverQueue.songs.shift();
