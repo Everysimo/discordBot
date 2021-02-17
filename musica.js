@@ -52,7 +52,7 @@ async function play (message){
 			throw new Error(language.errorLoadingSongInfo);
 		}
 		song = {
-			title: "titolo: "+songInfo.title+" di: "+artist,
+			title: "titolo: "+songInfo.title+" di: "+songInfo.artist,
 			url: songInfo.url,
 			username: message.member.user.username,
 			where: "spotify"
