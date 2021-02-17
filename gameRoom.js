@@ -44,7 +44,7 @@ exports.coinflip = function (message){
 					return;
 				}
 				if (win) {
-					user.aggiornaSaldo(saldo+(importo*2),id);
+					user.aggiornaSaldo(saldo+(importo),id);
 					risultato.addFields(
 						{ name: language.win, value: importo*2+' '+config.coinName },
 					);
