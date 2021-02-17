@@ -47,8 +47,8 @@ async function play (message){
 	}else{
 		try{
 			songInfo=await spdl.getInfo(args);
-			let video = await Youtube.searchOne(`${songInfo.title} ${songInfo.artist}`);
-			if (!video) video = await Youtube.searchOne(`${infos.body.name}`);
+			var video = await ytsr(`${songInfo.title} ${songInfo.artist}`,{limit:1});
+			if (!video) video = await ytsr(`${songInfo.title}`,{limit:1});
 
 		}
 		catch(err){
