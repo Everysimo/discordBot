@@ -56,7 +56,7 @@ async function play (message){
 		}
 		song = {
 			title: "titolo: "+songInfo.title+" di: "+songInfo.artist,
-			url: video.url,
+			url: video.items.shift().url,
 			username: message.member.user.username,
 			where: "youtube"
 		};
