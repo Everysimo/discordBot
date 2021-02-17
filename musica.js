@@ -56,7 +56,7 @@ async function play (message){
 			throw new Error(language.errorLoadingSongInfo);
 		}
 		song = {
-			title: "titolo: "+songInfo.title+" di: "+songInfo.artist,
+			title: songInfo.title+" by "+songInfo.artist,
 			url: video.items.shift().url,
 			viewsurl:args,
 			username: message.member.user.username,
@@ -103,7 +103,7 @@ async function play (message){
 		messaggioAggiuntaCoda.setTitle(language.songAddQueue);
 		messaggioAggiuntaCoda.setDescription("[ @"+message.member.user.username+" ]");
 		messaggioAggiuntaCoda.addFields({
-		name: song.title,value:" "+song.url}
+		name: song.title,value:" "+song.viewsurl}
 		);
 		return message.reply(messaggioAggiuntaCoda);
 	}
