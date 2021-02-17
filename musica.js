@@ -56,7 +56,7 @@ async function play (message){
 			url: songInfo.url,
 			username: message.member.user.username,
 			where: "spotify"
-		};	
+		};
 	}
 		
 	const voiceChannel = message.member.voice.channel;	//connessione al canale vocale
@@ -114,7 +114,7 @@ start = function (guild, song) {
 	  return;
 	}
 	if (song.where==="spotify") {
-		var dispatcher = serverQueue.connection.play(spdl(song.url)).on("finish", () => {
+		var dispatcher = serverQueue.connection.play(await spdl(song.url)).on("finish", () => {
 			serverQueue.songs.shift();
 			start(guild, serverQueue.songs[0]);
 		}).on("error", error => console.error(error.stack));
