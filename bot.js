@@ -21,47 +21,51 @@ client.once('ready', () => {
 
 	client.user.setActivity(language.botActivity,{type:"LISTENING"});
 
-	//countMember();
+	setInterval(countUserOnline,10000);
 
-	//countUserOnline();
+	setInterval(countMember,20000);
+
+	setInterval(gameRoom.calcolaVincita, config.lottery);
+
+	setInterval(user.addCoin, config.addCoin);
+
+	setInterval(user.addTime, 1000);
+
 });
 
 //Command Prefix 
 const p=config.prefixCommand;
 
 async function countMember(){
-	setInterval(()=>{
-		const guild = client.guilds.cache.get(config.IdServer);
-		const memberCount = guild.memberCount;
-		const channel=guild.channels.cache.get(config.IdMemberChannel);
-		try{
-			channel.setName("\uD83D\uDC65 total member "+memberCount.toString()+" \uD83D\uDC65");
-		}
-		catch(err){
-			console.log("errore durante l'aggiornamento del canale tot member",err);
-		}
-	},10000);
+	
+	const guild = client.guilds.cache.get(config.IdServer);
+	const memberCount = guild.memberCount;
+	const channel=guild.channels.cache.get(config.IdMemberChannel);
+	try{
+		channel.setName("\uD83D\uDC65 total member "+memberCount.toString()+" \uD83D\uDC65");
+	}
+	catch(err){
+		console.log("errore durante l'aggiornamento del canale tot member",err);
+	}
+	
 }
 async function countUserOnline(){
-	setInterval(()=>{
-		const guild = client.guilds.cache.get(config.IdServer);
-		var onlineMember=guild.members.cache.filter(member=>member.presence.status==="online").size
-		const channel=guild.channels.cache.get(config.IdMemberChannelOnline);
-		try{
-			channel.setName("\uD83D\uDDE3\uFE0F total online "+onlineMember.toString() + " \uD83D\uDDE3\uFE0F");
-		}
-		catch(err){
-			console.log("errore durante l'aggiornamento del canale tot online",err);
-		}
-	},10000);
+	
+	const guild = client.guilds.cache.get(config.IdServer);
+	var onlineMember=guild.members.cache.filter(member=>member.presence.status==="online").size
+	const channel=guild.channels.cache.get(config.IdMemberChannelOnline);
+	try{
+		channel.setName("\uD83D\uDDE3\uFE0F total online "+onlineMember.toString() + " \uD83D\uDDE3\uFE0F");
+	}
+	catch(err){
+		console.log("errore durante l'aggiornamento del canale tot online",err);
+	}
+	
 }
 
 //login nel server tramite token
 client.login(process.env.tokenBotDiscord);
 
-setInterval(gameRoom.calcolaVincita, config.lottery);
-setInterval(user.addCoin, config.addCoin);
-setInterval(user.addTime, 1000);
 
 
 //il bot join nel canale vocale del mittente del messaggio
