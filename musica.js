@@ -113,8 +113,8 @@ start = function (guild, song) {
 	  queue.delete(guild.id);
 	  return;
 	}
+	var dispatcher;
 	if (song.where==="spotify") {
-		var dispatcher;
 		(spdl(song.url).then(song=>{
 			dispatcher= serverQueue.connection.play(song).on("finish", () => {
 				serverQueue.songs.shift();
@@ -123,12 +123,12 @@ start = function (guild, song) {
 		}));
 	}else if (song.where==="youtube"){
 		if (song.isLive) {
-			var dispatcher = serverQueue.connection.play(ytdl(song.url)).on("finish", () => {
+			dispatcher = serverQueue.connection.play(ytdl(song.url)).on("finish", () => {
 				serverQueue.songs.shift();
 				start(guild, serverQueue.songs[0]);
 			}).on("error", error => console.error(error.stack));
 		}else{
-			var dispatcher = serverQueue.connection.play(ytdl(song.url,{filter: "audioonly"})).on("finish", () => {
+			dispatcher = serverQueue.connection.play(ytdl(song.url,{filter: "audioonly"})).on("finish", () => {
 				serverQueue.songs.shift();
 				start(guild, serverQueue.songs[0]);
 			}).on("error", error => console.error(error.stack));
