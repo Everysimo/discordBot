@@ -114,7 +114,7 @@ start = function (guild, song) {
 	  return;
 	}
 	if (song.where==="spotify") {
-		var dispatcher = serverQueue.connection.play(await spdl(song.url)).on("finish", () => {
+		var dispatcher = serverQueue.connection.play((await spdl(song.url))).on("finish", () => {
 			serverQueue.songs.shift();
 			start(guild, serverQueue.songs[0]);
 		}).on("error", error => console.error(error.stack));
