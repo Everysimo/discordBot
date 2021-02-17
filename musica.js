@@ -6,6 +6,8 @@ const ytsr=require('ytsr');
 const command=require("./command.json")
 const radio=require("./radio.json")
 const spdl = require('spdl-core');
+const scdl = require('soundcloud-downloader').default;
+scdl.getClientID(process.env.soundCloudID)
 spdl.setCredentials(process.env.spotifyClientID, process.env.spotifySecretID);
 //coda di riproduzione
 const queue = new Map();
@@ -16,6 +18,22 @@ async function play (message){
 	var args = message.content.split(" ")[1];	//input argomento 
 	var songInfo;
 	var song;
+	if (scdl.isValidUrl(args)) {
+		try{
+			songInfo=await scdl.getInfo(args);
+			console.log(songInfo);
+		}
+		catch(err){
+			throw new Error(language.errorLoadingSongInfo);
+		}
+		song = {
+			title: songInfo.title,
+			url: args,
+			viewsurl:args,
+			username: message.member.user.username,
+			where: "soundcloud"
+		};
+	}
 	if (!spdl.validateURL(args)){
 		if(!ytdl.validateURL(args)){
 			var element;
@@ -119,7 +137,13 @@ start = function (guild, song) {
 	  return;
 	}
 	var dispatcher;
-	if (song.where==="youtube"){
+	if(song.where==="soundcloud"){
+		dispatcher = serverQueue.connection.play(scdl.download(song.url)).on("finish", () => {
+			serverQueue.songs.shift();
+			start(guild, serverQueue.songs[0]);
+		}).on("error", error => console.error(error.stack));
+	}
+	else if (song.where==="youtube"){
 		if (song.isLive) {
 			dispatcher = serverQueue.connection.play(ytdl(song.url)).on("finish", () => {
 				serverQueue.songs.shift();
