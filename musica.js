@@ -40,6 +40,7 @@ async function play (message){
 		song = {
 			title: songInfo.videoDetails.title,
 			url: songInfo.videoDetails.video_url,
+			viewsurl:songInfo.videoDetails.video_url,
 			isLive: songInfo.videoDetails.isLiveContent,
 			username: message.member.user.username,
 			where: "youtube"
@@ -57,6 +58,7 @@ async function play (message){
 		song = {
 			title: "titolo: "+songInfo.title+" di: "+songInfo.artist,
 			url: video.items.shift().url,
+			viewsurl:args,
 			username: message.member.user.username,
 			where: "youtube"
 		};
@@ -137,7 +139,7 @@ start = function (guild, song) {
 	messaggioRiproduzione.setTitle(language.startPlay);
 	messaggioRiproduzione.setDescription("[ @"+song.username+" ]");
 	messaggioRiproduzione.addFields({
-		name: song.title,value:" "+song.url}
+		name: song.title,value:" "+song.viewsurl}
 		);
 
 	return serverQueue.textChannel.send(messaggioRiproduzione);
