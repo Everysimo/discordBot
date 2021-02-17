@@ -138,7 +138,8 @@ start = function (guild, song) {
 	}
 	var dispatcher;
 	if(song.where==="soundcloud"){
-		dispatcher = serverQueue.connection.play(scdl.download(song.url)).on("finish", () => {
+		var stream=await scdl.download(song.url);
+		dispatcher = serverQueue.connection.play(stream).on("finish", () => {
 			serverQueue.songs.shift();
 			start(guild, serverQueue.songs[0]);
 		}).on("error", error => console.error(error.stack));
