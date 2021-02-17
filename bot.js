@@ -198,9 +198,6 @@ client.on("message", message => {
 	}
 });
 
-
-
-//test
 client.on('guildMemberAdd', member => {
 	if(!member.user.bot){
 		dbpool.getConnection((err, db) => {
