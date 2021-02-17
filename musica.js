@@ -5,6 +5,8 @@ const language =require('./language/'+config.language+'/musica.json');
 const ytsr=require('ytsr');
 const command=require("./command.json")
 const radio=require("./radio.json")
+const spdl = require('spdl-core');
+spdl.setCredentials(process.env.spotifyClientID, process.env.spotifySecretID);
 //coda di riproduzione
 const queue = new Map();
 exports.queue = queue;
@@ -12,19 +14,41 @@ exports.queue = queue;
 async function play (message){
 	var serverQueue = queue.get(message.guild.id);
 	var args = message.content.split(" ")[1];	//input argomento 
-	if(!ytdl.validateURL(args)){
-		var element;
-		for (let index = 1; index < message.content.split(" ").length; index++) {
-			element=element+ " " + message.content.split(" ")[index];
+	var songInfo;
+	var song;
+	if (!spdl.validateURL(url)){
+		if(!ytdl.validateURL(args)){
+			var element;
+			for (let index = 1; index < message.content.split(" ").length; index++) {
+				element=element+ " " + message.content.split(" ")[index];
+			}
+			var titolo=await ytsr(element,{limit:1});
+			args=titolo.items.shift();
+			if (!args) {
+				message.reply(language.msgNoResultFound);
+				return;
+			}
+			args=args.url;
 		}
-		var titolo=await ytsr(element,{limit:1});
-		args=titolo.items.shift();
-		if (!args) {
-			message.reply(language.msgNoResultFound);
-			return;
+		try{
+			songInfo = await ytdl.getInfo(args);			//ottiene informazioni della canzone passata come argomento
 		}
-		args=args.url;
-	}			
+		catch(err){
+			throw new Error(language.errorLoadingSongInfo);
+		}
+		
+		song = {
+			title: songInfo.videoDetails.title,
+			url: songInfo.videoDetails.video_url,
+			isLive: songInfo.videoDetails.isLiveContent,
+			username: message.member.user.username,
+			where: "youtube"
+		};	
+	}else{
+		songInfo=await spdl.getInfo(args);
+		console.log(songInfo);
+	}
+		
 	const voiceChannel = message.member.voice.channel;	//connessione al canale vocale
   	if (!voiceChannel){									//se l'utente non è in un canale genera eccezione
 		return message.reply(language.voiceChannelNotFound);
@@ -34,21 +58,6 @@ async function play (message){
   	if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
     	return message.reply(language.voiceChannelNotPermission);
 	}
-	var songInfo;
-
-	try{
-		songInfo = await ytdl.getInfo(args);			//ottiene informazioni della canzone passata come argomento
-	}
-	catch(err){
-		throw new Error(language.errorLoadingSongInfo);
-	}
-	
-	var song = {
-    	title: songInfo.videoDetails.title,
-		url: songInfo.videoDetails.video_url,
-		isLive: songInfo.videoDetails.isLiveContent,
-		username: message.member.user.username,
-	};
 
 	if (!serverQueue) {					//se la coda delle canzoni è vuota
 		const queueContruct = {
