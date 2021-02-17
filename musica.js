@@ -27,14 +27,14 @@ async function play (message){
 			throw new Error(language.errorLoadingSongInfo);
 		}
 		song = {
-			title: songInfo.title,
+			title: songInfo.title+" by "+songInfo.user.username,
 			url: args,
 			viewsurl:args,
 			username: message.member.user.username,
 			where: "soundcloud"
 		};
 	}
-	if (!spdl.validateURL(args)){
+	else if (!spdl.validateURL(args)){
 		if(!ytdl.validateURL(args)){
 			var element;
 			for (let index = 1; index < message.content.split(" ").length; index++) {
