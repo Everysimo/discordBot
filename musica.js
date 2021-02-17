@@ -21,7 +21,6 @@ async function play (message){
 	if (scdl.isValidUrl(args)) {
 		try{
 			songInfo=await scdl.getInfo(args);
-			console.log(songInfo);
 		}
 		catch(err){
 			throw new Error(language.errorLoadingSongInfo);
