@@ -129,7 +129,7 @@ async function play (message){
 exports.play = play;
 
 //starta la canzona
-start = function (guild, song) {
+start = async function (guild, song) {
 	var serverQueue = queue.get(guild.id);
 	if (!song) {
 	  serverQueue.voiceChannel.leave();
