@@ -45,7 +45,12 @@ async function play (message){
 			where: "youtube"
 		};	
 	}else{
-		songInfo=await spdl.getInfo(args);
+		try{
+			songInfo=await spdl.getInfo(args);
+		}
+		catch(err){
+			throw new Error(language.errorLoadingSongInfo);
+		}
 		song = {
 			title: "titolo: "+songInfo.title+" di: "+artist,
 			url: songInfo.url,
