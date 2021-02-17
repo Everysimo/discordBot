@@ -46,7 +46,12 @@ async function play (message){
 		};	
 	}else{
 		songInfo=await spdl.getInfo(args);
-		console.log(songInfo);
+		song = {
+			title: "titolo: "+songInfo.title+" di: "+artist,
+			url: songInfo.url,
+			username: message.member.user.username,
+			where: "spotify"
+		};	
 	}
 		
 	const voiceChannel = message.member.voice.channel;	//connessione al canale vocale
@@ -103,17 +108,25 @@ start = function (guild, song) {
 	  queue.delete(guild.id);
 	  return;
 	}
-	if (song.isLive) {
-		var dispatcher = serverQueue.connection.play(ytdl(song.url)).on("finish", () => {
+	if (song.where==="spotify") {
+		var dispatcher = serverQueue.connection.play((await spdl(url)).on("finish", () => {
 			serverQueue.songs.shift();
 			start(guild, serverQueue.songs[0]);
 		}).on("error", error => console.error(error.stack));
-	}else{
-		var dispatcher = serverQueue.connection.play(ytdl(song.url,{filter: "audioonly"})).on("finish", () => {
-			serverQueue.songs.shift();
-			start(guild, serverQueue.songs[0]);
-		}).on("error", error => console.error(error.stack));
+	}else if (song.where==="youtube"){
+		if (song.isLive) {
+			var dispatcher = serverQueue.connection.play(ytdl(song.url)).on("finish", () => {
+				serverQueue.songs.shift();
+				start(guild, serverQueue.songs[0]);
+			}).on("error", error => console.error(error.stack));
+		}else{
+			var dispatcher = serverQueue.connection.play(ytdl(song.url,{filter: "audioonly"})).on("finish", () => {
+				serverQueue.songs.shift();
+				start(guild, serverQueue.songs[0]);
+			}).on("error", error => console.error(error.stack));
+		}
 	}
+	
 	dispatcher.setVolume(serverQueue.volume / 100);
 
 	const messaggioRiproduzione = new Discord.MessageEmbed();
