@@ -16,7 +16,7 @@ async function play (message){
 	var args = message.content.split(" ")[1];	//input argomento 
 	var songInfo;
 	var song;
-	if (!spdl.validateURL(url)){
+	if (!spdl.validateURL(args)){
 		if(!ytdl.validateURL(args)){
 			var element;
 			for (let index = 1; index < message.content.split(" ").length; index++) {
