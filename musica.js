@@ -315,7 +315,7 @@ async function playpl(message){
 	try {
 		var connection = await message.member.voice.channel.join();	//connessione al canale vocale dell'utente che invia il messaggio
 		queue.get(message.guild.id).connection = connection;			
-		this.start(message.guild, musica.queue.get(message.guild.id).songs[0]);	//starata la prima canzone in coda
+		this.start(message.guild, queue.get(message.guild.id).songs[0]);	//starata la prima canzone in coda
 	} catch (err) {
 		console.log(err.stack);
 		queue.delete(message.guild.id);
