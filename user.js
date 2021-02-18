@@ -65,7 +65,7 @@ function aggiornaRuolo(user,days){
 	switch(days){
 		case 7:
 			user.roles.remove("812012075114561536","almeno 7 giorni online");
-			user.roles.add.roles("812013606308675616","7 giorni online");
+			user.roles.add("812013606308675616","7 giorni online");
 	}
 }
 
