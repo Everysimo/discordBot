@@ -299,6 +299,7 @@ async function playpl(message){
 		var song = {
 			title: songInfo.videoDetails.title,
 			url: songInfo.videoDetails.video_url,
+			viewsurl:songInfo.videoDetails.video_url,
 			isLive: songInfo.videoDetails.isLiveContent,
 			username: message.member.user.username,
 			where: "youtube"
