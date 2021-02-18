@@ -28,25 +28,24 @@ async function addTime(){
 		const element = guild[i];
 		const activeMember= await element.members.cache.filter(member=>member.voice.channel!==null).array();
 		for (let index = 0; index < activeMember.length; index++) {
-			var id = activeMember[index].id;
-			applyAddTime(id)
+			applyAddTime(activeMember[index])
 		}
 	}
 	
 }
 exports.addTime = addTime;
 
-function applyAddTime(id){
-	getTempoOnlineSeconds(id,function(tempoOnline,daysOnline){
-		
+function applyAddTime(user){
+	
+	getTempoOnlineSeconds(user.id,function(tempoOnline,daysOnline){
 		tempoOnline+=1;
 		if(tempoOnline>=86400){
 			daysOnline++;
 			tempoOnline-=86400;
-			aggiornaRuolo(id,daysOnline);
+			aggiornaRuolo(user,daysOnline);
 		}
 
-		aggiornaTempoOnline(tempoOnline,daysOnline,id);
+		aggiornaTempoOnline(tempoOnline,daysOnline,user.id);
 	});
 }
 
@@ -62,11 +61,11 @@ function aggiornaSaldo(nuovoSaldo,id){
 }
 exports.aggiornaSaldo = aggiornaSaldo;
 
-function aggiornaRuolo(id,days){
+function aggiornaRuolo(user,days){
 	switch(days){
 		case 7:
-			id.roles.remove("812012075114561536","almeno 7 giorni online");
-			id.add.roles("812013606308675616","7 giorni online");
+			user.roles.remove("812012075114561536","almeno 7 giorni online");
+			user.roles.add.roles("812013606308675616","7 giorni online");
 	}
 }
 
