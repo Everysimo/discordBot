@@ -272,30 +272,26 @@ exports.playRadio = function playRadio(message){
 
 
 async function playpl(message){
-	var risult=new Array();
 	var args = message.content.split(" ")[1];	
 	var playlist=await ytpl(args);
-	do {
-		risult.push(playlist.url);
-		playlist=await ytpl.continueReq(playlist.continuation);
-	} while (!playlist);
-	if (!musica.queue.has(message.guild.id)) {					//se la coda delle canzoni è vuota
+	var risult=playlist.items;
+	if (!queue.has(message.guild.id)) {					//se la coda delle canzoni è vuota
 		const queueContruct = {
 			textChannel: message.channel,
 			voiceChannel: message.member.voice.channel,
 			connection: null,
-			songs: [],
+			songs: new Array(),
 			volume: 10,
 			playing: true,
 		};
-		musica.queue.set(message.guild.id, queueContruct);
+		queue.set(message.guild.id, queueContruct);
 	}
 	for (let index = 0; index < risult.length; index++) {
 		const element = risult[index];
 		var songInfo;
 
 		try{
-			songInfo = await ytdl.getInfo(element.song);			//ottiene informazioni della canzone passata come argomento
+			songInfo = await ytdl.getInfo(element.url);			//ottiene informazioni della canzone passata come argomento
 		}
 		catch(err){
 			throw new Error(language.errorLoadingSongInfo);
@@ -305,8 +301,9 @@ async function playpl(message){
 			url: songInfo.videoDetails.video_url,
 			isLive: songInfo.videoDetails.isLiveContent,
 			username: message.member.user.username,
+			where: "youtube"
 		};
-		musica.queue.get(message.guild.id).songs.push(song);
+		queue.get(message.guild.id).songs.push(song);
 		const messaggioAggiuntaCoda = new Discord.MessageEmbed();
 		messaggioAggiuntaCoda.setTitle(language.songAddQueue);
 		messaggioAggiuntaCoda.setDescription("[ @"+message.member.user.username+" ]");
@@ -317,11 +314,11 @@ async function playpl(message){
 	}
 	try {
 		var connection = await message.member.voice.channel.join();	//connessione al canale vocale dell'utente che invia il messaggio
-		musica.queue.get(message.guild.id).connection = connection;			
-		this.start(message.guild, musica.queue.get(message.guild.id).songs[0]);	//starata la prima canzone in coda
+		queue.get(message.guild.id).connection = connection;			
+		this.start(message.guild, queue.get(message.guild.id).songs[0]);	//starata la prima canzone in coda
 	} catch (err) {
 		console.log(err.stack);
-		musica.queue.delete(message.guild.id);
+		queue.delete(message.guild.id);
 		message.reply(language.errorJoinVoiceChannel);
 	}
 }

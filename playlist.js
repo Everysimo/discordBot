@@ -146,6 +146,7 @@ exports.playPL= function (message) {
 					url: songInfo.videoDetails.video_url,
 					isLive: songInfo.videoDetails.isLiveContent,
 					username: message.member.user.username,
+					where: "youtube"
 				};
 				musica.queue.get(message.guild.id).songs.push(song);
 				const messaggioAggiuntaCoda = new Discord.MessageEmbed();
