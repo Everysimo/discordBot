@@ -62,18 +62,19 @@ function aggiornaSaldo(nuovoSaldo,id){
 exports.aggiornaSaldo = aggiornaSaldo;
 
 function aggiornaRuolo(user,days){
+	const message = new MessageEmbed();
+	message.setTitle("Hai livellato al grado successivo")
 	switch(days){
 		case 7:
 			try{
 				user.roles.remove("812012075114561536","almeno 7 giorni online");
-			}
-			catch(err){
+			}catch(err){
 				console.log("ruolo not found");
 			}
 			try {
 				user.roles.add("812013606308675616","7 giorni online");
-			}
-			catch(err){
+				message.setDescription("Dopo 7 giorni online,Sei diventato ufficialmete una Recluta del server");
+			}catch(err){
 				console.log("errore nell'aggingere il nuovo ruolo");
 			}
 			break;
@@ -86,12 +87,15 @@ function aggiornaRuolo(user,days){
 			}
 			try {
 				user.roles.add("812022805926379550","28 giorni online");
+				message.setDescription("Dopo 28 giorni online,Sei diventato ufficialmete un Membro Onorario del server");
 			}
 			catch(err){
 				console.log("errore nell'aggingere il nuovo ruolo");
 			}
-			break
+			break;
 	}
+	const channel=bot.client.channels.cache.get(config.promotionChannel);
+	channel.reply(message);
 }
 
 function aggiornaTempoOnline(nuovoTempo,newDays,id){
