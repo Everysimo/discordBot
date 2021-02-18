@@ -95,7 +95,7 @@ function aggiornaRuolo(user,days){
 			break;
 	}
 	const channel=bot.client.channels.cache.get(config.promotionChannel);
-	channel.reply(message);
+	channel.send(message);
 }
 
 function aggiornaTempoOnline(nuovoTempo,newDays,id){
