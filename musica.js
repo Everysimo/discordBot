@@ -36,7 +36,7 @@ async function play (message){
 	}
 	else if (!spdl.validateURL(args)){
 		
-		if (!ytpl.validateURL(args)){
+		if (!ytpl.validateID(args)){
 			if(!ytdl.validateURL(args)){
 				var element;
 				for (let index = 1; index < message.content.split(" ").length; index++) {
@@ -271,8 +271,8 @@ exports.playRadio = function playRadio(message){
 }
 
 
-function playpl(message){
-	var risult=new array;
+async function playpl(message){
+	var risult=new Array();
 	var args = message.content.split(" ")[1];	
 	var playlist=await ytpl(args);
 	do {
@@ -289,10 +289,6 @@ function playpl(message){
 			playing: true,
 		};
 		musica.queue.set(message.guild.id, queueContruct);
-	}
-	for (let index = 0; index < risult.length&&index < nC; index++) {
-		const element = risult.shift()
-		risult.push(element);
 	}
 	for (let index = 0; index < risult.length; index++) {
 		const element = risult[index];
