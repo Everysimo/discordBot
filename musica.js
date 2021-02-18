@@ -286,6 +286,9 @@ async function playpl(message){
 		};
 		queue.set(message.guild.id, queueContruct);
 	}
+	const messaggioAggiuntaCoda = new Discord.MessageEmbed();
+	messaggioAggiuntaCoda.setTitle(language.songPlAddQueue);
+	messaggioAggiuntaCoda.setDescription("[ @"+message.member.user.username+" ]");
 	for (let index = 0; index < risult.length; index++) {
 		const element = risult[index];
 		var songInfo;
@@ -305,14 +308,8 @@ async function playpl(message){
 			where: "youtube"
 		};
 		queue.get(message.guild.id).songs.push(song);
-		const messaggioAggiuntaCoda = new Discord.MessageEmbed();
-		messaggioAggiuntaCoda.setTitle(language.songAddQueue);
-		messaggioAggiuntaCoda.setDescription("[ @"+message.member.user.username+" ]");
-		messaggioAggiuntaCoda.addFields({
-			name: song.title,value:" "+song.url}
-		);
-		message.reply(messaggioAggiuntaCoda);
 	}
+	message.reply(messaggioAggiuntaCoda);
 	try {
 		var connection = await message.member.voice.channel.join();	//connessione al canale vocale dell'utente che invia il messaggio
 		queue.get(message.guild.id).connection = connection;			

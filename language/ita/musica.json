@@ -8,7 +8,7 @@
     "radio":"La radio ",
     "notExists":" non esite",
     "songAddQueue":"\u2714\uFE0F Aggiunta alla coda \u2714\uFE0F",
-    "songInQueue":"\u2714\uFE0F In coda \u2714\uFE0F",
+    "songPlAddQueue":"Canzoni aggiunte in coda: ",  "songInQueue":"\u2714\uFE0F In coda \u2714\uFE0F",
     "startPlay":"\u25B6\uFE0F In riproduzione:",
     "voiceChannelNotFound":"\u274C non sei in nessuna chat vocale \u274C",
     "voiceChannelNotPermission":"\u274C non ho i permessi in quel canale vocale \u274C"
