@@ -290,10 +290,6 @@ async function playpl(message){
 		};
 		musica.queue.set(message.guild.id, queueContruct);
 	}
-	for (let index = 0; index < risult.length&&index < nC; index++) {
-		const element = risult.shift()
-		risult.push(element);
-	}
 	for (let index = 0; index < risult.length; index++) {
 		const element = risult[index];
 		var songInfo;
