@@ -43,6 +43,7 @@ function applyAddTime(id){
 		if(tempoOnline>=86400){
 			daysOnline++;
 			tempoOnline-=86400;
+			aggiornaRuolo(id,daysOnline);
 		}
 
 		aggiornaTempoOnline(tempoOnline,daysOnline,id);
@@ -60,6 +61,14 @@ function aggiornaSaldo(nuovoSaldo,id){
 		});
 }
 exports.aggiornaSaldo = aggiornaSaldo;
+
+function aggiornaRuolo(id,days){
+	switch(days){
+		case 7:
+			id.roles.remove("812012075114561536","almeno 7 giorni online");
+			id.add.roles("812013606308675616","7 giorni online");
+	}
+}
 
 function aggiornaTempoOnline(nuovoTempo,newDays,id){
 		var sql= `Update utente set tempoOnline=SEC_TO_TIME('${nuovoTempo}'),daysOnline=('${newDays}') where idutente='${id}'`;
