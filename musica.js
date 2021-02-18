@@ -287,7 +287,7 @@ async function playpl(message){
 		queue.set(message.guild.id, queueContruct);
 	}
 	const messaggioAggiuntaCoda = new Discord.MessageEmbed();
-	messaggioAggiuntaCoda.setTitle(language.songPlAddQueue);
+	messaggioAggiuntaCoda.setTitle(language.songPlAddQueue+risult.length);
 	messaggioAggiuntaCoda.setDescription("[ @"+message.member.user.username+" ]");
 	for (let index = 0; index < risult.length; index++) {
 		const element = risult[index];
