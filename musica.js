@@ -287,11 +287,11 @@ async function playpl(message){
 		musica.queue.set(message.guild.id, queueContruct);
 	}
 	for (let index = 0; index < risult.length; index++) {
-		const element = risult[index].url;
+		const element = risult[index];
 		var songInfo;
 
 		try{
-			songInfo = await ytdl.getInfo(element.song);			//ottiene informazioni della canzone passata come argomento
+			songInfo = await ytdl.getInfo(element.url);			//ottiene informazioni della canzone passata come argomento
 		}
 		catch(err){
 			throw new Error(language.errorLoadingSongInfo);
