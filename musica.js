@@ -13,8 +13,8 @@ spdl.setCredentials(process.env.spotifyClientID, process.env.spotifySecretID);
 const queue = new Map();
 exports.queue = queue;
 
-async function play (message){
-	var serverQueue = queue.get(message.guild.id);
+async function select(message){
+	
 	var args = message.content.split(" ")[1];	//input argomento 
 	var songInfo;
 	var song;
@@ -80,7 +80,14 @@ async function play (message){
 			where: "youtube"
 		};
 	}
-		
+	return song;
+}
+
+async function play (message){
+	var serverQueue = queue.get(message.guild.id);
+
+	var song=select(message);
+
 	const voiceChannel = message.member.voice.channel;	//connessione al canale vocale
   	if (!voiceChannel){									//se l'utente non è in un canale genera eccezione
 		return message.reply(language.voiceChannelNotFound);
