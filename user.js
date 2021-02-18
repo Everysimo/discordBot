@@ -62,7 +62,7 @@ function aggiornaSaldo(nuovoSaldo,id){
 exports.aggiornaSaldo = aggiornaSaldo;
 
 function aggiornaRuolo(user,days){
-	const message = new MessageEmbed();
+	const message = new Discord.MessageEmbed();
 	message.setTitle("Hai livellato al grado successivo")
 	switch(days){
 		case 7:
