@@ -275,7 +275,7 @@ async function playpl(message){
 	var args = message.content.split(" ")[1];	
 	var playlist=await ytpl(args);
 	var risult=playlist.items;
-	if (!this.queue.has(message.guild.id)) {					//se la coda delle canzoni è vuota
+	if (!queue.has(message.guild.id)) {					//se la coda delle canzoni è vuota
 		const queueContruct = {
 			textChannel: message.channel,
 			voiceChannel: message.member.voice.channel,
@@ -284,7 +284,7 @@ async function playpl(message){
 			volume: 10,
 			playing: true,
 		};
-		this.queue.set(message.guild.id, queueContruct);
+		queue.set(message.guild.id, queueContruct);
 	}
 	for (let index = 0; index < risult.length; index++) {
 		const element = risult[index];
@@ -303,7 +303,7 @@ async function playpl(message){
 			username: message.member.user.username,
 			where: "youtube"
 		};
-		this.queue.get(message.guild.id).songs.push(song);
+		queue.get(message.guild.id).songs.push(song);
 		const messaggioAggiuntaCoda = new Discord.MessageEmbed();
 		messaggioAggiuntaCoda.setTitle(language.songAddQueue);
 		messaggioAggiuntaCoda.setDescription("[ @"+message.member.user.username+" ]");
@@ -314,11 +314,11 @@ async function playpl(message){
 	}
 	try {
 		var connection = await message.member.voice.channel.join();	//connessione al canale vocale dell'utente che invia il messaggio
-		this.queue.get(message.guild.id).connection = connection;			
+		queue.get(message.guild.id).connection = connection;			
 		this.start(message.guild, musica.queue.get(message.guild.id).songs[0]);	//starata la prima canzone in coda
 	} catch (err) {
 		console.log(err.stack);
-		this.queue.delete(message.guild.id);
+		queue.delete(message.guild.id);
 		message.reply(language.errorJoinVoiceChannel);
 	}
 }
