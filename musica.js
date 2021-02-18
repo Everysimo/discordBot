@@ -272,13 +272,9 @@ exports.playRadio = function playRadio(message){
 
 
 async function playpl(message){
-	var risult=new Array();
 	var args = message.content.split(" ")[1];	
 	var playlist=await ytpl(args);
-	do {
-		risult.push(playlist.url);
-		playlist=await ytpl.continueReq(playlist.continuation);
-	} while (!playlist);
+	var risult=playlist.items;
 	if (!musica.queue.has(message.guild.id)) {					//se la coda delle canzoni è vuota
 		const queueContruct = {
 			textChannel: message.channel,
@@ -291,7 +287,7 @@ async function playpl(message){
 		musica.queue.set(message.guild.id, queueContruct);
 	}
 	for (let index = 0; index < risult.length; index++) {
-		const element = risult[index];
+		const element = risult[index].url;
 		var songInfo;
 
 		try{
@@ -305,6 +301,7 @@ async function playpl(message){
 			url: songInfo.videoDetails.video_url,
 			isLive: songInfo.videoDetails.isLiveContent,
 			username: message.member.user.username,
+			where: "youtube"
 		};
 		musica.queue.get(message.guild.id).songs.push(song);
 		const messaggioAggiuntaCoda = new Discord.MessageEmbed();
