@@ -271,7 +271,7 @@ exports.playRadio = function playRadio(message){
 }
 
 
-function playpl(message){
+async function playpl(message){
 	var risult=new array;
 	var args = message.content.split(" ")[1];	
 	var playlist=await ytpl(args);
