@@ -62,7 +62,7 @@ function aggiornaSaldo(nuovoSaldo,id){
 exports.aggiornaSaldo = aggiornaSaldo;
 
 function aggiornaRuolo(user,days){
-	const message = new MessageEmbed();
+	const message = new Discord.MessageEmbed();
 	message.setTitle("Hai livellato al grado successivo")
 	switch(days){
 		case 7:
@@ -95,7 +95,7 @@ function aggiornaRuolo(user,days){
 			break;
 	}
 	const channel=bot.client.channels.cache.get(config.promotionChannel);
-	channel.reply(message);
+	channel.send(message);
 }
 
 function aggiornaTempoOnline(nuovoTempo,newDays,id){
