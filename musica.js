@@ -186,7 +186,7 @@ exports.showQueue= function(message){
 			const element = serverQueue.songs[index];
 			const messageQueue = new Discord.MessageEmbed();
 			messageQueue.setTitle(language.songInQueue);
-			messageQueue.setDescription("[ <@"+element.username+"> ]");
+			messageQueue.setDescription("["+`<@${element.username}>`+"]");
 			messageQueue.addFields({
 				name: element.title,value: element.url}
 			);
