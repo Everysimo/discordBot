@@ -151,10 +151,6 @@ start = async function (guild, song) {
 			console.error(error.name + error.message);
 			const messaggioRiproduzione = new Discord.MessageEmbed();
 				messaggioRiproduzione.setTitle(language.errorSongNotAvaible);
-				messaggioRiproduzione.setDescription("["+`<@${song.username}>`+"]");
-				messaggioRiproduzione.addFields({
-				name: song.title,value:" "+song.viewsurl}
-				);
 				serverQueue.textChannel.send(messaggioRiproduzione);
 			serverQueue.songs.shift();
 			start(guild, serverQueue.songs[0]);});
@@ -168,10 +164,6 @@ start = async function (guild, song) {
 				console.error(error.name + error.message);
 				const messaggioRiproduzione = new Discord.MessageEmbed();
 				messaggioRiproduzione.setTitle(language.errorSongNotAvaible);
-				messaggioRiproduzione.setDescription("["+`<@${song.username}>`+"]");
-				messaggioRiproduzione.addFields({
-				name: song.title,value:" "+song.viewsurl}
-				);
 				serverQueue.textChannel.send(messaggioRiproduzione);
 				serverQueue.songs.shift();
 				start(guild, serverQueue.songs[0]);});
@@ -183,10 +175,7 @@ start = async function (guild, song) {
 				console.error(error.name + error.message);
 				const messaggioRiproduzione = new Discord.MessageEmbed();
 				messaggioRiproduzione.setTitle(language.errorSongNotAvaible);
-				messaggioRiproduzione.setDescription("["+`<@${song.username}>`+"]");
-				messaggioRiproduzione.addFields({
-				name: song.title,value:" "+song.viewsurl}
-				);
+				
 				serverQueue.textChannel.send(messaggioRiproduzione);
 				serverQueue.songs.shift();
 				start(guild, serverQueue.songs[0]);});
