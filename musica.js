@@ -280,7 +280,7 @@ async function playpl(message){
 			textChannel: message.channel,
 			voiceChannel: message.member.voice.channel,
 			connection: null,
-			songs: new Array(),
+			songs: [],
 			volume: 10,
 			playing: true,
 		};
