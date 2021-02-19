@@ -124,7 +124,7 @@ async function play (message){
 
 		const messaggioAggiuntaCoda = new Discord.MessageEmbed();
 		messaggioAggiuntaCoda.setTitle(language.songAddQueue);
-		messaggioAggiuntaCoda.setDescription("[ @"+message.member.user.username+" ]");
+		messaggioAggiuntaCoda.setDescription("["+`<@${message.member.user.id}>`+"]");
 		messaggioAggiuntaCoda.addFields({
 		name: song.title,value:" "+song.viewsurl}
 		);
