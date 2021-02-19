@@ -16,6 +16,7 @@
         "mysql": "^2.18.1",
         "soundcloud-downloader": "^0.2.4",
         "spdl-core": "^1.1.1",
+        "trello": "^0.10.0",
         "ytpl": "^2.0.5",
         "ytdl-core": "^4.4.5",
         "ytsr": "^3.2.4"
