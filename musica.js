@@ -273,7 +273,7 @@ exports.playRadio = function playRadio(message){
 
 async function playpl(message){
 	var args = message.content.split(" ")[1];	
-	var playlist=await ytpl(args);
+	var playlist=await ytpl(args,{limit:-1});
 	var risult=playlist.items;
 	if (!queue.has(message.guild.id)) {					//se la coda delle canzoni è vuota
 		const queueContruct = {
