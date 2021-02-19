@@ -310,14 +310,16 @@ async function playpl(message){
 			where: "youtube"
 		};
 		queue.get(message.guild.id).songs.push(song);
-	}
-	try {
-		var connection = await message.member.voice.channel.join();	//connessione al canale vocale dell'utente che invia il messaggio
-		queue.get(message.guild.id).connection = connection;			
-		this.start(message.guild, queue.get(message.guild.id).songs[0]);	//starata la prima canzone in coda
-	} catch (err) {
-		console.log(err.stack);
-		queue.delete(message.guild.id);
-		message.reply(language.errorJoinVoiceChannel);
+		if (index===1) {
+			try {
+				var connection = await message.member.voice.channel.join();	//connessione al canale vocale dell'utente che invia il messaggio
+				queue.get(message.guild.id).connection = connection;			
+				this.start(message.guild, queue.get(message.guild.id).songs[0]);	//starata la prima canzone in coda
+			} catch (err) {
+				console.log(err.stack);
+				queue.delete(message.guild.id);
+				message.reply(language.errorJoinVoiceChannel);
+			}
+		}
 	}
 }
