@@ -30,7 +30,7 @@ async function play (message){
 			title: songInfo.title+" by "+songInfo.user.username,
 			url: args,
 			viewsurl:args,
-			username: message.member.user.username,
+			username: message.member.user.id,
 			where: "soundcloud"
 		};
 	}
@@ -167,7 +167,7 @@ start = async function (guild, song) {
 
 	const messaggioRiproduzione = new Discord.MessageEmbed();
 	messaggioRiproduzione.setTitle(language.startPlay);
-	messaggioRiproduzione.setDescription("["+`<@${message.member.user.id}>`+"]");
+	messaggioRiproduzione.setDescription("["+`<@${song.username}>`+"]");
 	messaggioRiproduzione.addFields({
 		name: song.title,value:" "+song.viewsurl}
 		);
@@ -186,7 +186,7 @@ exports.showQueue= function(message){
 			const element = serverQueue.songs[index];
 			const messageQueue = new Discord.MessageEmbed();
 			messageQueue.setTitle(language.songInQueue);
-			messageQueue.setDescription("[ @"+element.username+" ]");
+			messageQueue.setDescription("[ <@"+element.username+"> ]");
 			messageQueue.addFields({
 				name: element.title,value: element.url}
 			);
