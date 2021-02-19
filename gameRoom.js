@@ -102,21 +102,21 @@ exports.slot = function (message){
 					if(!jackpot){
 						user.aggiornaSaldo(saldo+(importo*moltiplicatore),id);
 						risultato.addFields(
-							{ name: `<@${message.member.user.id}>` +" "+ language.win, value: importo*moltiplicatore+' '+config.coinName },
+							{ name: `<@${message.member.user.id}>` +" "+ language.win, value: importo*moltiplicatore+' '+config.coinName+` <@${message.member.user.id}>` },
 						);
 						risultato.setColor("#00ff37");
 					}
 					else{
 						user.aggiornaSaldo(saldo+(importo*moltiplicatore),id);
 						risultato.addFields(
-							{ name: `<@${message.member.user.id}>` +" "+ language.winJackpot, value: importo*moltiplicatore+' '+config.coinName },
+							{ name: `<@${message.member.user.id}>` +" "+ language.winJackpot, value: importo*moltiplicatore+' '+config.coinName+` <@${message.member.user.id}>` },
 						);
 						risultato.setColor("#00ff37");
 					}
 				}else{
 					user.aggiornaSaldo(saldo-importo,id);
 					risultato.addFields(
-						{ name: `<@${message.member.user.id}>` +" "+ language.lose, value: importo+' '+config.coinName },
+						{ name: `<@${message.member.user.id}>` +" "+ language.lose, value: importo+' '+config.coinName+` <@${message.member.user.id}>` },
 					);
 					risultato.setColor("#f50505");
 				}
