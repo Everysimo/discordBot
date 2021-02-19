@@ -1,6 +1,7 @@
 {
     "errorJoinVoiceChannel":"\u274C errore nell'entrare nella chat vocale \u274C",
     "errorLoadingSongInfo":"errore nel caricamento dell informazioni della canzone",
+    "errorSongNotAvaible":"elemento non disponibile nella tua regione",
     "msgNoResultFound":"nessun risultato trovato",
     "msgVolumeSetted":"volume settato a: ",
     "notSong":"\u274C nessuna canzone in coda \u274C",

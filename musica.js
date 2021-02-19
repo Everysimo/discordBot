@@ -148,7 +148,14 @@ start = async function (guild, song) {
 			serverQueue.songs.shift();
 			start(guild, serverQueue.songs[0]);
 		}).on("error", error => {
-			console.error(error.stack);
+			console.error(error.name + error.message);
+			const messaggioRiproduzione = new Discord.MessageEmbed();
+				messaggioRiproduzione.setTitle(language.errorSongNotAvaible);
+				messaggioRiproduzione.setDescription("["+`<@${song.username}>`+"]");
+				messaggioRiproduzione.addFields({
+				name: song.title,value:" "+song.viewsurl}
+				);
+				serverQueue.textChannel.send(messaggioRiproduzione);
 			serverQueue.songs.shift();
 			start(guild, serverQueue.songs[0]);});
 	}
@@ -158,7 +165,14 @@ start = async function (guild, song) {
 				serverQueue.songs.shift();
 				start(guild, serverQueue.songs[0]);
 			}).on("error", error => {
-				console.error(error.stack);
+				console.error(error.name + error.message);
+				const messaggioRiproduzione = new Discord.MessageEmbed();
+				messaggioRiproduzione.setTitle(language.errorSongNotAvaible);
+				messaggioRiproduzione.setDescription("["+`<@${song.username}>`+"]");
+				messaggioRiproduzione.addFields({
+				name: song.title,value:" "+song.viewsurl}
+				);
+				serverQueue.textChannel.send(messaggioRiproduzione);
 				serverQueue.songs.shift();
 				start(guild, serverQueue.songs[0]);});
 		}else{
@@ -166,7 +180,14 @@ start = async function (guild, song) {
 				serverQueue.songs.shift();
 				start(guild, serverQueue.songs[0]);
 			}).on("error", error => {
-				console.error(error.stack);
+				console.error(error.name + error.message);
+				const messaggioRiproduzione = new Discord.MessageEmbed();
+				messaggioRiproduzione.setTitle(language.errorSongNotAvaible);
+				messaggioRiproduzione.setDescription("["+`<@${song.username}>`+"]");
+				messaggioRiproduzione.addFields({
+				name: song.title,value:" "+song.viewsurl}
+				);
+				serverQueue.textChannel.send(messaggioRiproduzione);
 				serverQueue.songs.shift();
 				start(guild, serverQueue.songs[0]);});
 		}
