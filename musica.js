@@ -167,7 +167,7 @@ start = async function (guild, song) {
 
 	const messaggioRiproduzione = new Discord.MessageEmbed();
 	messaggioRiproduzione.setTitle(language.startPlay);
-	messaggioRiproduzione.setDescription("[ @"+song.username+" ]");
+	messaggioRiproduzione.setDescription("["+`<@${message.member.user.id}>`+"]");
 	messaggioRiproduzione.addFields({
 		name: song.title,value:" "+song.viewsurl}
 		);
@@ -288,7 +288,7 @@ async function playpl(message){
 	}
 	const messaggioAggiuntaCoda = new Discord.MessageEmbed();
 	messaggioAggiuntaCoda.setTitle(language.songPlAddQueue+risult.length);
-	messaggioAggiuntaCoda.setDescription("[ @"+message.member.user.username+" ]");
+	messaggioAggiuntaCoda.setDescription("["+`<@${message.member.user.id}>`+"]");
 	message.reply(messaggioAggiuntaCoda);
 	
 	for (let index = 0; index < risult.length; index++) {

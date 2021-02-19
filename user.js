@@ -63,7 +63,7 @@ exports.aggiornaSaldo = aggiornaSaldo;
 
 function aggiornaRuolo(user,days){
 	const message = new Discord.MessageEmbed();
-	message.setTitle(`<@${user.id}>`+"Hai livellato al grado successivo")
+	message.setTitle("Hai livellato al grado successivo")
 	switch(days){
 		case 7:
 			try{
@@ -73,7 +73,7 @@ function aggiornaRuolo(user,days){
 			}
 			try {
 				user.roles.add("812013606308675616","7 giorni online");
-				message.setDescription("Dopo 7 giorni online,Sei diventato ufficialmete una Recluta del server");
+				message.setDescription(`<@${user.id}>`+" Dopo 7 giorni online,Sei diventato ufficialmete una Recluta del server");
 			}catch(err){
 				console.log("errore nell'aggingere il nuovo ruolo");
 			}
@@ -87,7 +87,7 @@ function aggiornaRuolo(user,days){
 			}
 			try {
 				user.roles.add("812022805926379550","28 giorni online");
-				message.setDescription("Dopo 28 giorni online,Sei diventato ufficialmete un Membro Onorario del server");
+				message.setDescription(`<@${user.id}>`+"Dopo 28 giorni online,Sei diventato ufficialmete un Membro Onorario del server");
 			}
 			catch(err){
 				console.log("errore nell'aggingere il nuovo ruolo");
