@@ -299,7 +299,7 @@ async function playpl(message){
 			songInfo = await ytdl.getInfo(element.url);			//ottiene informazioni della canzone passata come argomento
 		}
 		catch(err){
-			throw new Error(language.errorLoadingSongInfo);
+			continue;
 		}
 		var song = {
 			title: songInfo.videoDetails.title,
