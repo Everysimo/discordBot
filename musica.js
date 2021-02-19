@@ -147,19 +147,28 @@ start = async function (guild, song) {
 		dispatcher = serverQueue.connection.play(stream).on("finish", () => {
 			serverQueue.songs.shift();
 			start(guild, serverQueue.songs[0]);
-		}).on("error", error => console.error(error.stack));
+		}).on("error", error => {
+			console.error(error.stack);
+			serverQueue.songs.shift();
+			start(guild, serverQueue.songs[0]);});
 	}
 	else if (song.where==="youtube"){
 		if (song.isLive) {
 			dispatcher = serverQueue.connection.play(ytdl(song.url)).on("finish", () => {
 				serverQueue.songs.shift();
 				start(guild, serverQueue.songs[0]);
-			}).on("error", error => console.error(error.stack));
+			}).on("error", error => {
+				console.error(error.stack);
+				serverQueue.songs.shift();
+				start(guild, serverQueue.songs[0]);});
 		}else{
 			dispatcher = serverQueue.connection.play(ytdl(song.url,{filter: "audioonly"})).on("finish", () => {
 				serverQueue.songs.shift();
 				start(guild, serverQueue.songs[0]);
-			}).on("error", error => console.error(error.stack));
+			}).on("error", error => {
+				console.error(error.stack);
+				serverQueue.songs.shift();
+				start(guild, serverQueue.songs[0]);});
 		}
 	}
 	
