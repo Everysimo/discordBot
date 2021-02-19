@@ -63,36 +63,92 @@ exports.aggiornaSaldo = aggiornaSaldo;
 
 function aggiornaRuolo(user,days){
 	const message = new Discord.MessageEmbed();
-	message.setTitle("Hai livellato al grado successivo")
+	message.setTitle(language.msgNextLvlRole)
 	switch(days){
 		case 7:
 			try{
-				user.roles.remove("812012075114561536","almeno 7 giorni online");
+				user.roles.remove("812012075114561536","7 days online");
 			}catch(err){
-				console.log("ruolo not found");
+				console.log(language.errorUserNotFound);
 			}
 			try {
-				user.roles.add("812013606308675616","7 giorni online");
-				message.setDescription(`<@${user.id}>`+" Dopo 7 giorni online,Sei diventato ufficialmete una Recluta del server");
+				user.roles.add("812013606308675616","7 days online");
+				message.setDescription(`<@${user.id}>`+language.msgMemberLvl1);
 			}catch(err){
-				console.log("errore nell'aggingere il nuovo ruolo");
+				console.log(language.errorAddingRole);
+			}
+			break;
+		case 14:
+			try{
+				user.roles.remove("812013606308675616","14 days online");
+			}catch(err){
+				console.log(language.errorUserNotFound);
+			}
+			try {
+				user.roles.add("812466129879957554","14 days online");
+				message.setDescription(`<@${user.id}>`+language.msgMemberLvl2);
+			}catch(err){
+				console.log(language.errorAddingRole);
+			}
+			break;
+		case 21:
+			try{
+				user.roles.remove("812466129879957554","21 days online");
+			}catch(err){
+				console.log(language.errorUserNotFound);
+			}
+			try {
+				user.roles.add("812022805926379550","21 days online");
+				message.setDescription(`<@${user.id}>`+language.msgMemberLvl3);
+			}catch(err){
+				console.log(language.errorAddingRole);
 			}
 			break;
 		case 28:
 			try{
-				user.roles.remove("812013606308675616","almeno 28 giorni online");
+				user.roles.remove("812022805926379550","28 days online");
 			}
 			catch(err){
-				console.log("ruolo not found");
+				console.log(language.errorUserNotFound);
 			}
 			try {
-				user.roles.add("812022805926379550","28 giorni online");
-				message.setDescription(`<@${user.id}>`+"Dopo 28 giorni online,Sei diventato ufficialmete un Membro Onorario del server");
+				user.roles.add("812466220162351165","28 days online");
+				message.setDescription(`<@${user.id}>`+language.msgMemberLvl4);
 			}
 			catch(err){
-				console.log("errore nell'aggingere il nuovo ruolo");
+				console.log(language.errorAddingRole);
 			}
 			break;
+		case 54:
+				try{
+					user.roles.remove("812466220162351165","54 days online");
+				}
+				catch(err){
+					console.log(language.errorUserNotFound);
+				}
+				try {
+					user.roles.add("812466432243531818","54 days online");
+					message.setDescription(`<@${user.id}>`+language.msgMemberLvl5);
+				}
+				catch(err){
+					console.log(language.errorAddingRole);
+				}
+				break;
+			case 100:
+					try{
+						user.roles.remove("812466432243531818","100 days online");
+					}
+					catch(err){
+						console.log(language.errorUserNotFound);
+					}
+					try {
+						user.roles.add("812466592641449994","100 days online");
+						message.setDescription(`<@${user.id}>`+language.msgMemberLvl6);
+					}
+					catch(err){
+						console.log(language.errorAddingRole);
+					}
+					break;
 	}
 	const channel=bot.client.channels.cache.get(config.promotionChannel);
 	channel.send(message);
@@ -170,7 +226,7 @@ function printTime(message){
 	if(!message.member.user.bot){
 		const id=message.member.user.id;
 		getTempoOnline(id,function(tempoOnline,daysOnline){
-			message.reply(language.msgGetTime+daysOnline+" days and "+tempoOnline);
+			message.reply(language.msgGetTime+daysOnline+language.daysAnd+tempoOnline);
 		});
 	}
 }
