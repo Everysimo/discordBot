@@ -61,7 +61,7 @@ async function play (message){
 					url: songInfo.videoDetails.video_url,
 					viewsurl:songInfo.videoDetails.video_url,
 					isLive: songInfo.videoDetails.isLiveContent,
-					username: message.member.user.username,
+					username: message.member.user.id,
 					where: "youtube"
 				};	
 			}else{
@@ -78,7 +78,7 @@ async function play (message){
 					title: songInfo.title+" by "+songInfo.artist,
 					url: video.items.shift().url,
 					viewsurl:args,
-					username: message.member.user.username,
+					username: message.member.user.id,
 					where: "youtube"
 				};
 			}
@@ -306,7 +306,7 @@ async function playpl(message){
 			url: songInfo.videoDetails.video_url,
 			viewsurl:songInfo.videoDetails.video_url,
 			isLive: songInfo.videoDetails.isLiveContent,
-			username: message.member.user.username,
+			username: message.member.user.id,
 			where: "youtube"
 		};
 		queue.get(message.guild.id).songs.push(song);
