@@ -42,7 +42,7 @@ function applyAddTime(user){
 		if(tempoOnline>=86400){
 			daysOnline++;
 			tempoOnline-=86400;
-			if(daysOnline===7||daysOnline===14||daysOnline===21||daysOnline===28||daysOnline===54||daysOnline===100){
+			if(daysOnline==7||daysOnline==14||daysOnline==21||daysOnline==28||daysOnline==54||daysOnline==100){
 				aggiornaRuolo(user,daysOnline);
 			}
 			
