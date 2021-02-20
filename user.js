@@ -37,7 +37,7 @@ exports.addTime = addTime;
 
 function applyAddTime(user){
 	
-	getTempoOnlineSeconds(user,function(tempoOnline,daysOnline){
+	getTempoOnlineSeconds(user.id,function(tempoOnline,daysOnline){
 		tempoOnline+=1;
 		if(tempoOnline>=86400){
 			daysOnline++;
