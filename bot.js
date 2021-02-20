@@ -9,6 +9,7 @@ const musica=require("./musica.js")
 const playlist=require("./playlist.js")
 const command=require("./command.json")
 const user = require('./user.js');
+const trello=require("./trello.js")
 db.dbConnect();
 exports.client=client;
 
@@ -173,6 +174,7 @@ comandi.set(command.showqueue,musica.showQueue);
 comandi.set(command.signin,user.signIn);
 comandi.set(command.slot,gameRoom.slot);
 comandi.set(command.stop,musica.stop);
+comandi.set("suggestion",trello.addSuggestion);
 
 
 //gestore ricezione messaggi
