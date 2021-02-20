@@ -37,7 +37,7 @@ exports.addTime = addTime;
 
 function applyAddTime(user){
 	
-	getTempoOnlineSeconds(user.id,function(tempoOnline,daysOnline){
+	getTempoOnlineSeconds(user,function(tempoOnline,daysOnline){
 		tempoOnline+=1;
 		if(tempoOnline>=86400){
 			daysOnline++;
@@ -289,7 +289,7 @@ function signIn(message){
 				}
 			});
 
-			aggiornaRuolo(id,0);
+			aggiornaRuolo(message.member.user,0);
 			
 			if(err){
 				console.log(language.errorDataBaseConnectionFailed,err);
