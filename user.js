@@ -65,6 +65,14 @@ function aggiornaRuolo(user,days){
 	const message = new Discord.MessageEmbed();
 	message.setTitle(language.msgNextLvlRole)
 	switch(days){
+		case 0:
+			try {
+				user.roles.add("812012075114561536","Welcome");
+				message.setDescription(`<@${user.id}>`+language.msgMemberLvl0);
+			}catch(err){
+				console.log(language.errorAddingRole);
+			}
+			break;
 		case 7:
 			try{
 				user.roles.remove("812012075114561536","7 days online");
@@ -274,6 +282,7 @@ function signIn(message){
 
 					console.log(language.dbMsgUserCorrectlySigned);
 					message.channel.send(messaggioConferma);
+					aggiornaRuolo(id,0);
 				}
 			});
 			
