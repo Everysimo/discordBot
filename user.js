@@ -66,11 +66,11 @@ exports.aggiornaSaldo = aggiornaSaldo;
 
 function aggiornaRuolo(user,days){
 	const message = new Discord.MessageEmbed();
-	message.setTitle(language.msgNextLvlRole)
 	switch(days){
-		case 0:
+		case 1:
 			try {
 				user.roles.add("812012075114561536","Welcome");
+				message.setTitle(language.msgDescWelcomeSignIn);
 				message.setDescription(`<@${user.id}>`+language.msgMemberLvl0);
 			}catch(err){
 				console.log(language.errorAddingRole);
@@ -84,6 +84,7 @@ function aggiornaRuolo(user,days){
 			}
 			try {
 				user.roles.add("812013606308675616","7 days online");
+				message.setTitle(language.msgNextLvlRole);
 				message.setDescription(`<@${user.id}>`+language.msgMemberLvl1);
 			}catch(err){
 				console.log(language.errorAddingRole);
@@ -97,6 +98,7 @@ function aggiornaRuolo(user,days){
 			}
 			try {
 				user.roles.add("812466129879957554","14 days online");
+				message.setTitle(language.msgNextLvlRole);
 				message.setDescription(`<@${user.id}>`+language.msgMemberLvl2);
 			}catch(err){
 				console.log(language.errorAddingRole);
@@ -110,6 +112,7 @@ function aggiornaRuolo(user,days){
 			}
 			try {
 				user.roles.add("812022805926379550","21 days online");
+				message.setTitle(language.msgNextLvlRole);
 				message.setDescription(`<@${user.id}>`+language.msgMemberLvl3);
 			}catch(err){
 				console.log(language.errorAddingRole);
@@ -124,6 +127,7 @@ function aggiornaRuolo(user,days){
 			}
 			try {
 				user.roles.add("812466220162351165","28 days online");
+				message.setTitle(language.msgNextLvlRole);
 				message.setDescription(`<@${user.id}>`+language.msgMemberLvl4);
 			}
 			catch(err){
@@ -139,13 +143,14 @@ function aggiornaRuolo(user,days){
 				}
 				try {
 					user.roles.add("812466432243531818","54 days online");
+					message.setTitle(language.msgNextLvlRole);
 					message.setDescription(`<@${user.id}>`+language.msgMemberLvl5);
 				}
 				catch(err){
 					console.log(language.errorAddingRole);
 				}
 				break;
-			case 100:
+		case 100:
 					try{
 						user.roles.remove("812466432243531818","100 days online");
 					}
@@ -154,6 +159,7 @@ function aggiornaRuolo(user,days){
 					}
 					try {
 						user.roles.add("812466592641449994","100 days online");
+						message.setTitle(language.msgNextLvlRole);
 						message.setDescription(`<@${user.id}>`+language.msgMemberLvl6);
 					}
 					catch(err){
@@ -289,7 +295,7 @@ function signIn(message){
 				}
 			});
 
-			aggiornaRuolo(message.member.user,0);
+			aggiornaRuolo(message.member.user,1);
 			
 			if(err){
 				console.log(language.errorDataBaseConnectionFailed,err);
