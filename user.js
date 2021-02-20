@@ -42,7 +42,10 @@ function applyAddTime(user){
 		if(tempoOnline>=86400){
 			daysOnline++;
 			tempoOnline-=86400;
-			aggiornaRuolo(user,daysOnline);
+			if(daysOnline===7||daysOnline===14||daysOnline===21||daysOnline===28||daysOnline===54||daysOnline===100){
+				aggiornaRuolo(user,daysOnline);
+			}
+			
 		}
 
 		aggiornaTempoOnline(tempoOnline,daysOnline,user.id);
@@ -282,9 +285,11 @@ function signIn(message){
 
 					console.log(language.dbMsgUserCorrectlySigned);
 					message.channel.send(messaggioConferma);
-					aggiornaRuolo(id,0);
+					
 				}
 			});
+
+			aggiornaRuolo(id,0);
 			
 			if(err){
 				console.log(language.errorDataBaseConnectionFailed,err);
