@@ -70,7 +70,7 @@ function aggiornaRuolo(user,days){
 		case 1:
 			try {
 				user.roles.add("812012075114561536","Welcome");
-				message.setTitle(language.msgDescWelcomeSignIn);
+				message.setTitle(language.msgWelcomeRole);
 				message.setDescription(`<@${user.id}>`+language.msgMemberLvl0);
 			}catch(err){
 				console.log(language.errorAddingRole);
