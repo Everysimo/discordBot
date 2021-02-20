@@ -135,37 +135,37 @@ function aggiornaRuolo(user,days){
 			}
 			break;
 		case 54:
-				try{
-					user.roles.remove("812466220162351165","54 days online");
-				}
-				catch(err){
-					console.log(language.errorUserNotFound);
-				}
-				try {
-					user.roles.add("812466432243531818","54 days online");
-					message.setTitle(language.msgNextLvlRole);
-					message.setDescription(`<@${user.id}>`+language.msgMemberLvl5);
-				}
-				catch(err){
-					console.log(language.errorAddingRole);
-				}
+			try{
+				user.roles.remove("812466220162351165","54 days online");
+			}
+			catch(err){
+				console.log(language.errorUserNotFound);
+			}
+			try {
+				user.roles.add("812466432243531818","54 days online");
+				message.setTitle(language.msgNextLvlRole);
+				message.setDescription(`<@${user.id}>`+language.msgMemberLvl5);
+			}
+			catch(err){
+				console.log(language.errorAddingRole);
+			}
 				break;
 		case 100:
-					try{
-						user.roles.remove("812466432243531818","100 days online");
-					}
-					catch(err){
-						console.log(language.errorUserNotFound);
-					}
-					try {
-						user.roles.add("812466592641449994","100 days online");
-						message.setTitle(language.msgNextLvlRole);
-						message.setDescription(`<@${user.id}>`+language.msgMemberLvl6);
-					}
-					catch(err){
-						console.log(language.errorAddingRole);
-					}
-					break;
+			try{
+				user.roles.remove("812466432243531818","100 days online");
+			}
+			catch(err){
+				console.log(language.errorUserNotFound);
+			}
+			try {
+				user.roles.add("812466592641449994","100 days online");
+				message.setTitle(language.msgNextLvlRole);
+				message.setDescription(`<@${user.id}>`+language.msgMemberLvl6);
+			}
+			catch(err){
+				console.log(language.errorAddingRole);
+			}
+			break;
 	}
 	const channel=bot.client.channels.cache.get(config.promotionChannel);
 	channel.send(message);
