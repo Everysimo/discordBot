@@ -23,5 +23,6 @@
     "signin":"signin",
     "slot":"slot",
     "stop":"stop",
-    "tempoOnline":"time"
+    "tempoOnline":"time",
+    "suggestion":"suggestion"
 }

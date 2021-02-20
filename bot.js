@@ -174,7 +174,7 @@ comandi.set(command.showqueue,musica.showQueue);
 comandi.set(command.signin,user.signIn);
 comandi.set(command.slot,gameRoom.slot);
 comandi.set(command.stop,musica.stop);
-comandi.set("suggestion",trello.addSuggestion);
+comandi.set(command.suggestion,trello.addSuggestion);
 
 
 //gestore ricezione messaggi
