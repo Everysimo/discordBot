@@ -226,3 +226,7 @@ client.on('guildMemberAdd', member => {
 		});
 	}
 });
+
+client.on('guildCreate',guild=>{
+	//TODO codificare le cose da fare quando il bot entra in un nuovo server
+})
