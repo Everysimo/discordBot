@@ -357,7 +357,7 @@ exports.ottieniBiglietti = function (risultato) {
 }
 exports.inserServerInfo = function (id,serverInfo) {
 	dbpool.getConnection((err, db) => {
-		var sql= `Insert Into server (idserver,comandibotid,gameroomid,lotteryid,levelupid,totmemberid,onlinememberid,role1id,role2id,role3id,role4id,role5id,role6id,role7id) Values ('${id}','${serverInfo.command1}',${serverInfo.gameroom},${serverInfo.lottery},${serverInfo.level},${serverInfo.totalMember},${serverInfo.totalOnline},${serverInfo.iron},${serverInfo.bronze},${serverInfo.silver},${serverInfo.golden},${serverInfo.obsidian},${serverInfo.diamond},${serverInfo.emerald})`;
+		var sql= `Insert Into server (idserver,comandibotid,gameroomid,lotteryid,levelupid,totmemberid,onlinememberid,role1id,role2id,role3id,role4id,role5id,role6id,role7id) Values ('${id}','${serverInfo.command1}','${serverInfo.gameroom}','${serverInfo.lottery}','${serverInfo.level}','${serverInfo.totalMember}','${serverInfo.totalOnline}','${serverInfo.iron}','${serverInfo.bronze}','${serverInfo.silver}','${serverInfo.golden}','${serverInfo.obsidian}','${serverInfo.diamond}','${serverInfo.emerald})`;
 		db.query(sql, function (err) {
 			db.release();
 			
