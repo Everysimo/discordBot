@@ -254,6 +254,7 @@ function setServer(message){
 	serverInfo.id=guild.id;
 	guild.channels.create("🤖comandi-bot🤖",{type:"text"}).then(channel=>{
 		serverInfo.command=channel.id;
+		console.log("canale: "+channel)
 	});
 	guild.channels.create("🎰gameroom🎰",{type:"text"}).then(channel=>{
 		serverInfo.gameroom=channel.id;
@@ -268,6 +269,7 @@ function setServer(message){
 		guild.channels.create("👥 total member 👥",{type:"voice"}).then(channel=>{
 			channel.setParent(category);
 			serverInfo.totalMember=channel.id;
+			console.log("canale in categoria: "+channel)
 		})
 		guild.channels.create("🗣 total online 🗣",{type:"voice"}).then(channel=>{
 			channel.setParent(category);
@@ -276,6 +278,7 @@ function setServer(message){
 	});
 	guild.roles.create({data:{color:"#a19d94",name:"IRON MEMBER",hoist:true}}).then(role=>{
 		serverInfo.iron=role.id;
+		console.log("role:"+channel)
 	});
 	guild.roles.create({data:{color:"#cd7f32",name:"BRONZE MEMBER",hoist:true}}).then(role=>{
 		serverInfo.bronze=role.id;
