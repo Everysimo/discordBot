@@ -10,6 +10,7 @@ const playlist=require("./playlist.js")
 const command=require("./command.json")
 const user = require('./user.js');
 const trello=require("./trello.js")
+const server=require("./server.js")
 db.dbConnect();
 exports.client=client;
 
