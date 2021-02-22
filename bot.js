@@ -256,11 +256,11 @@ client.on('guildCreate',guild=>{
 			channel.setParent(category);
 		})
 	});
-	guild.roles.create({data:{color:"#a19d94",name:"IRON MEMBER"}})
-	guild.roles.create({data:{color:"#cd7f32",name:"BRONZE MEMBER"}})
-	guild.roles.create({data:{color:"#7b99b7",name:"SILVER MEMBER"}})
-	guild.roles.create({data:{color:"#FFD700",name:"GOLDEN MEMBER"}})
-	guild.roles.create({data:{color:"#92008f",name:"OBSIDIAN MEMBER"}})
-	guild.roles.create({data:{color:"#00c7c7",name:"DIAMOND MEMBER"}})
-	guild.roles.create({data:{color:"#50c878",name:"EMERALD MEMBER"}})
+	guild.roles.create({data:{color:"#a19d94",name:"IRON MEMBER",hoist:true}})
+	guild.roles.create({data:{color:"#cd7f32",name:"BRONZE MEMBER",hoist:true}})
+	guild.roles.create({data:{color:"#7b99b7",name:"SILVER MEMBER",hoist:true}})
+	guild.roles.create({data:{color:"#FFD700",name:"GOLDEN MEMBER",hoist:true}})
+	guild.roles.create({data:{color:"#92008f",name:"OBSIDIAN MEMBER",hoist:true}})
+	guild.roles.create({data:{color:"#00c7c7",name:"DIAMOND MEMBER",hoist:true}})
+	guild.roles.create({data:{color:"#50c878",name:"EMERALD MEMBER",hoist:true}})
 })
