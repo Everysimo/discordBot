@@ -15,4 +15,5 @@ class Server{
         this.diamond=diamond;
         this.emerald=emerald;
     }
+    constructor(){};
 }
