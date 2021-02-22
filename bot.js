@@ -250,19 +250,19 @@ client.on('guildCreate',guild=>{
 function setServer(message){
 	const guild = message.member.guild;
 	var serverInfo={
-		command1,
-		gameroom,
-		lottery,
-		level,
-		totalMember,
-		totalOnline,
-		iron,
-		bronze,
-		silver,
-		golden,
-		obsidian,
-		diamond,
-		emerald
+		command1:"",
+		gameroom:"",
+		lottery:"",
+		level:"",
+		totalMember:"",
+		totalOnline:"",
+		iron:"",
+		bronze:"",
+		silver:"",
+		golden:"",
+		obsidian:"",
+		diamond:"",
+		emerald:""
 	}
 	guild.channels.create("🤖comandi-bot🤖",{type:"text"}).then(channel=>{
 		serverInfo.command1=channel.id;
