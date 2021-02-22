@@ -251,7 +251,7 @@ client.on('guildCreate',guild=>{
 
 function setServer(message){
 	const guild = message.member.guild;
-	dbOperation.addServerId(guild.id);
+	db.addServerId(guild.id);
 	applySetServer(guild); 
 }
 
