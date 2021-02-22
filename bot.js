@@ -249,23 +249,10 @@ client.on('guildCreate',guild=>{
 
 function setServer(message){
 	const guild = message.member.guild;
-	var serverInfo={
-		command1:"",
-		gameroom:"",
-		lottery:"",
-		level:"",
-		totalMember:"",
-		totalOnline:"",
-		iron:"",
-		bronze:"",
-		silver:"",
-		golden:"",
-		obsidian:"",
-		diamond:"",
-		emerald:""
-	}
+	var serverInfo=new Server();
+	serverInfo.id=guild.id;
 	guild.channels.create("🤖comandi-bot🤖",{type:"text"}).then(channel=>{
-		serverInfo.command1=channel.id;
+		serverInfo.command=channel.id;
 	});
 	guild.channels.create("🎰gameroom🎰",{type:"text"}).then(channel=>{
 		serverInfo.gameroom=channel.id;
@@ -307,5 +294,5 @@ function setServer(message){
 	guild.roles.create({data:{color:"#50c878",name:"EMERALD MEMBER",hoist:true}}).then(role=>{
 		serverInfo.emerald=role.id;
 	});
-	db.inserServerInfo(guild.id,serverInfo);
+	db.inserServerInfo(serverInfo);
 }
