@@ -1,5 +1,5 @@
 class Server{
-    constructor(id,command,gameroom,lottery,level,totalMember,totalOnline,iron,bronze,silver,golden,obsidian,diamond,emerald){
+    constructor(){
         this.id = id;
         this.command = command;
         this.gameroom= gameroom;
@@ -15,5 +15,4 @@ class Server{
         this.diamond=diamond;
         this.emerald=emerald;
     }
-    constructor(){};
 }
