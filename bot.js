@@ -244,4 +244,23 @@ client.on('guildMemberAdd', member => {
 
 client.on('guildCreate',guild=>{
 	//TODO codificare le cose da fare quando il bot entra in un nuovo server
+	guild.channels.create("🤖comandi-bot🤖",{type:"text"});
+	guild.channels.create("🎰gameroom🎰",{type:"text"});
+	guild.channels.create("🎫lottery🎫",{type:"text"});
+	guild.channels.create("🥇levelUp🥇",{type:"text"});
+	guild.channels.create("📊 Server Stats 📊",{type:"category"}).then(category=>{
+		guild.channels.create("👥 total member 👥",{type:"voice"}).then(channel=>{
+			channel.setParent(category);
+		})
+		guild.channels.create("🗣 total online 🗣",{type:"voice"}).then(channel=>{
+			channel.setParent(category);
+		})
+	});
+	guild.roles.create({data:{color:"#a19d94",name:"IRON MEMBER"}})
+	guild.roles.create({data:{color:"#cd7f32",name:"BRONZE MEMBER"}})
+	guild.roles.create({data:{color:"#C0C0C0",name:"SILVER MEMBER"}})
+	guild.roles.create({data:{color:"#FFD700",name:"GOLDEN MEMBER"}})
+	guild.roles.create({data:{color:"#e5e4e2",name:"PLATINUM MEMBER"}})
+	guild.roles.create({data:{color:"#b9f2ff",name:"DIAMOND MEMBER"}})
+	guild.roles.create({data:{color:"#50c878",name:"EMERALD MEMBER"}})
 })
