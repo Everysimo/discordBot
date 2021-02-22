@@ -33,6 +33,11 @@
     "errorDataBaseConnectionFailed":"\u274C Errore durante la connessione al DataBase \u274C",
 
     "voiceChannelNotFound":"\u274C non sei in nessuna chat vocale \u274C",
-    "voiceChannelNotPermission":"\u274C non ho i permessi in quel canale vocale \u274C"
-
+    "voiceChannelNotPermission":"\u274C non ho i permessi in quel canale vocale \u274C",
+    "msgWelcomeSignIn":"Sei diventato ufficialmente una testa dell'Hydra",
+    "msgDescWelcomeSignIn":"Come Benvenuto ti regaliamo 1000 coin da poter spendere allo !shop o scommetterli, per maggiori info !help",
+    "msgAlreadySignedIn":"Ti sei già iscritto una volta",
+    "msgDescAlreadySignIn":"So che volevi un altro Bonus, ma per altri coin devi sudarteli",
+    "titleMsgWelcomeSignIn":"Benvenuto ",
+    "titleMsgAlreadySignedIn":"Furbacchione "
 }
