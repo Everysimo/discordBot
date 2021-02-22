@@ -245,17 +245,11 @@ client.on('guildMemberAdd', member => {
 
 client.on('guildCreate',guild=>{
 	//TODO codificare le cose da fare quando il bot entra in un nuovo server
-	addServerId(guild.id);
 	applySetServer(guild);
 });
 
-function setServer(message){
-	const guild = message.member.guild;
-	db.addServerId(guild.id);
-	applySetServer(guild); 
-}
-
 function applySetServer(guild){
+	const guild = message.member.guild;
 	var serverInfo={
 		command1,
 		gameroom,
@@ -314,4 +308,5 @@ function applySetServer(guild){
 	guild.roles.create({data:{color:"#50c878",name:"EMERALD MEMBER",hoist:true}}).then(role=>{
 		serverInfo.emerald=role.id;
 	});
+	db.inserServerInfo(guild.id,serverInfo);
 }

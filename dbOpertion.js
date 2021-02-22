@@ -355,24 +355,23 @@ exports.ottieniBiglietti = function (risultato) {
 		}
 	});
 }
-
-exports.addServerId = function(id){
+exports.inserServerInfo = function (id,serverInfo) {
 	dbpool.getConnection((err, db) => {
-		var sql= `INSERT INTO server (idserver) VALUES ('${id}')`;
-		
+		var sql= `Insert Into server (idserver,comandibotid,gameroomid,lotteryid,levelupid,totmemberid,onlinememberid,role1id,role2id,role3id,role4id,role5id,role6id,role7id) Values ('${id}','${serverInfo.command1}',${serverInfo.gameroom},${serverInfo.lottery},${serverInfo.level},${serverInfo.totalMember},${serverInfo.totalOnline},${serverInfo.iron},${serverInfo.bronze},${serverInfo.silver},${serverInfo.golden},${serverInfo.obsidian},${serverInfo.diamond},${serverInfo.emerald})`;
 		db.query(sql, function (err) {
 			db.release();
+			
 			if(err){
-				if(err.code.match('ER_DUP_ENTRY')){			
-					console.log("server già presente");
+				if(err.code.match('ER_DUP_ENTRY')){
+					console.log(language.ticketAlreadyInDb);
+				}
+				else{
+					console.log(language.errorAddingTicket);
 					return
 				}
-			}	
-			else{
-				console.log("server aggiunto con successo");
+			}else{
 			}
 		});
-
 		if(err){
 			console.log(language.errorDataBaseConnectionFailed,err);
 			return
