@@ -199,7 +199,7 @@ client.on("message", message => {
 });
 
 client.on('guildMemberAdd', member => {
-	const channel=bot.client.channels.cache.get(config.promotionChannel);
+	const channel=member.client.channels.cache.get(804669088688242768);
 	if(!member.user.bot){
 		dbpool.getConnection((err, db) => {
 			const nickname=member.user.username;
