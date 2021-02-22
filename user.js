@@ -170,6 +170,7 @@ function aggiornaRuolo(user,days){
 	const channel=bot.client.channels.cache.get(config.promotionChannel);
 	channel.send(message);
 }
+exports.aggiornaRuolo = aggiornaRuolo;
 
 function aggiornaTempoOnline(nuovoTempo,newDays,id){
 		var sql= `Update utente set tempoOnline=SEC_TO_TIME('${nuovoTempo}'),daysOnline=('${newDays}') where idutente='${id}'`;
