@@ -167,6 +167,7 @@ comandi.set(command.radio,musica.playRadio);
 comandi.set(command.rmsongpl,playlist.removeSongFromPL);
 comandi.set(command.roulette,gameRoom.roulette);
 comandi.set(command.setvolume,musica.setvolume);
+comandi.set(command.setserver,setServer);
 comandi.set(command.shop,shop);
 comandi.set(command.showpl,playlist.printPL);
 comandi.set(command.showradio,musica.showRadio);
@@ -242,8 +243,7 @@ client.on('guildMemberAdd', member => {
 	}
 });
 
-client.on('guildCreate',guild=>{
-	//TODO codificare le cose da fare quando il bot entra in un nuovo server
+function setServer(){
 	guild.channels.create("🤖comandi-bot🤖",{type:"text"});
 	guild.channels.create("🎰gameroom🎰",{type:"text"});
 	guild.channels.create("🎫lottery🎫",{type:"text"});
@@ -263,4 +263,4 @@ client.on('guildCreate',guild=>{
 	guild.roles.create({data:{color:"#92008f",name:"OBSIDIAN MEMBER",hoist:true}})
 	guild.roles.create({data:{color:"#00c7c7",name:"DIAMOND MEMBER",hoist:true}})
 	guild.roles.create({data:{color:"#50c878",name:"EMERALD MEMBER",hoist:true}})
-})
+}
