@@ -258,9 +258,9 @@ client.on('guildCreate',guild=>{
 	});
 	guild.roles.create({data:{color:"#a19d94",name:"IRON MEMBER"}})
 	guild.roles.create({data:{color:"#cd7f32",name:"BRONZE MEMBER"}})
-	guild.roles.create({data:{color:"#C0C0C0",name:"SILVER MEMBER"}})
+	guild.roles.create({data:{color:"#aaa9ad",name:"SILVER MEMBER"}})
 	guild.roles.create({data:{color:"#FFD700",name:"GOLDEN MEMBER"}})
-	guild.roles.create({data:{color:"#e5e4e2",name:"PLATINUM MEMBER"}})
-	guild.roles.create({data:{color:"#b9f2ff",name:"DIAMOND MEMBER"}})
+	guild.roles.create({data:{color:"#92008f",name:"OBSIDIAN MEMBER"}})
+	guild.roles.create({data:{color:"#00c7c7",name:"DIAMOND MEMBER"}})
 	guild.roles.create({data:{color:"#50c878",name:"EMERALD MEMBER"}})
 })
