@@ -1,4 +1,4 @@
-export class Server {
+exports.Server=class {
     constructor(){
         this.id = id;
         this.command = command;
