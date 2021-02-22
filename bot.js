@@ -230,7 +230,7 @@ client.on('guildMemberAdd', member => {
 					)
 					channel.send(messaggioConferma)
 					console.log(language.dbMsgUserCorrectlySigned);
-					user.aggiornaRuolo(member.user,1);
+					user.aggiornaRuolo(member,1);
 				}
 			});
 			

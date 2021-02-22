@@ -292,7 +292,7 @@ function signIn(message){
 
 					console.log(language.dbMsgUserCorrectlySigned);
 					message.channel.send(messaggioConferma);
-					aggiornaRuolo(message.member.user,1);
+					aggiornaRuolo(message.member,1);
 				}
 			});
 
