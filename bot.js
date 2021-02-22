@@ -243,8 +243,19 @@ client.on('guildMemberAdd', member => {
 	}
 });
 
+client.on('guildCreate',guild=>{
+	//TODO codificare le cose da fare quando il bot entra in un nuovo server
+	addServerId(guild.id);
+	applySetServer(guild);
+});
+
 function setServer(message){
-	const guild = message.member.guild; 
+	const guild = message.member.guild;
+	addServerId(guild.id);
+	applySetServer(guild); 
+}
+
+function applySetServer(guild){
 	guild.channels.create("🤖comandi-bot🤖",{type:"text"});
 	guild.channels.create("🎰gameroom🎰",{type:"text"});
 	guild.channels.create("🎫lottery🎫",{type:"text"});

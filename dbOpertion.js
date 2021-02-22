@@ -355,3 +355,27 @@ exports.ottieniBiglietti = function (risultato) {
 		}
 	});
 }
+
+exports.addServerId = function(id){
+	dbpool.getConnection((err, db) => {
+		var sql= `INSERT INTO server (idserver) VALUES ('${id}')`;
+		
+		db.query(sql, function (err) {
+			db.release();
+			if(err){
+				if(err.code.match('ER_DUP_ENTRY')){			
+					console.log("server già presente");
+					return
+				}
+			}	
+			else{
+				console.log("server aggiunto con successo");
+			}
+		});
+
+		if(err){
+			console.log(language.errorDataBaseConnectionFailed,err);
+			return
+		}
+	});
+}
