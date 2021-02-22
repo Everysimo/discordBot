@@ -9,6 +9,7 @@ const musica=require("./musica.js")
 const playlist=require("./playlist.js")
 const command=require("./command.json")
 const user = require('./user.js');
+const trello=require("./trello.js")
 db.dbConnect();
 exports.client=client;
 
@@ -173,6 +174,7 @@ comandi.set(command.showqueue,musica.showQueue);
 comandi.set(command.signin,user.signIn);
 comandi.set(command.slot,gameRoom.slot);
 comandi.set(command.stop,musica.stop);
+comandi.set(command.suggestion,trello.addSuggestion);
 
 
 //gestore ricezione messaggi
@@ -213,6 +215,7 @@ client.on('guildMemberAdd', member => {
 				}	
 				else{
 					console.log(language.dbMsgUserCorrectlySigned);
+					aggiornaRuolo(member.user,1);
 				}
 			});
 			
@@ -223,3 +226,7 @@ client.on('guildMemberAdd', member => {
 		});
 	}
 });
+
+client.on('guildCreate',guild=>{
+	//TODO codificare le cose da fare quando il bot entra in un nuovo server
+})
