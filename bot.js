@@ -215,7 +215,7 @@ client.on('guildMemberAdd', member => {
 				}	
 				else{
 					console.log(language.dbMsgUserCorrectlySigned);
-					aggiornaRuolo(member.user,1);
+					user.aggiornaRuolo(member.user,1);
 				}
 			});
 			
