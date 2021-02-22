@@ -250,7 +250,7 @@ client.on('guildCreate',guild=>{
 
 function setServer(message){
 	const guild = message.member.guild;
-	var serverInfo=new Server();
+	var serverInfo=new server.Server();
 	serverInfo.id=guild.id;
 	guild.channels.create("🤖comandi-bot🤖",{type:"text"}).then(channel=>{
 		serverInfo.command=channel.id;
