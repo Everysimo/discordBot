@@ -244,6 +244,7 @@ client.on('guildMemberAdd', member => {
 });
 
 function setServer(){
+	const guild = client.guilds.cache.get(config.IdServer); 
 	guild.channels.create("🤖comandi-bot🤖",{type:"text"});
 	guild.channels.create("🎰gameroom🎰",{type:"text"});
 	guild.channels.create("🎫lottery🎫",{type:"text"});
