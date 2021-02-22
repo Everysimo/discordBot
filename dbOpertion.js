@@ -366,10 +366,9 @@ exports.inserServerInfo = function (id,serverInfo) {
 					console.log(language.ticketAlreadyInDb);
 				}
 				else{
-					console.log(language.errorAddingTicket);
+					console.log(language.errorAddingTicket,err);
 					return
 				}
-			}else{
 			}
 		});
 		if(err){
