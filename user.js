@@ -73,7 +73,7 @@ function aggiornaRuolo(user,days){
 				message.setTitle(language.msgWelcomeRole);
 				message.setDescription(`<@${user.id}>`+language.msgMemberLvl0);
 			}catch(err){
-				console.log(language.errorAddingRole);
+				console.log(language.errorAddingRole,err);
 			}
 			break;
 		case 7:
