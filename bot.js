@@ -234,9 +234,11 @@ async function setServer(message){
 function applyinsert(guild,serverInfo){
 	var serverInfo=new server.Server();
 	serverInfo.id=guild.id;
-	if(!db.addServerId(serverInfo.id)){
-		return null;
-	}
+	db.addServerId(serverInfo.id,result=>{
+		if (!result) {
+			return;
+		}
+	})
 
 	guild.channels.create("🤖comandi-bot🤖",{type:"text"}).then(channel=>{
 		console.log(channel.id+"\n");

@@ -382,7 +382,7 @@ exports.inserServerInfo = function (serverInfo) {
 	});
 }
 
-exports.addServerId = function(id){
+exports.addServerId = function(id,result){
 	dbpool.getConnection((err, db) => {
 		var sql= `INSERT INTO server (idserver) VALUES ('${id}')`;
 		
@@ -391,11 +391,12 @@ exports.addServerId = function(id){
 			if(err){
 				if(err.code.match('ER_DUP_ENTRY')){			
 					console.log("server già presente");
-					return false;
+					return result(false);
 				}
 			}	
 			else{
 				console.log("server aggiunto con successo");
+				return result(true);
 			}
 		});
 
