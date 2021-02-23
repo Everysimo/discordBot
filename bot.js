@@ -270,6 +270,7 @@ function setServer(message){
 			serverInfo.totalMember=channel;
 		})
 		guild.channels.create("🗣 total online 🗣",{type:"voice"}).then(channel=>{
+			channel.setParent(category);
 			serverInfo.totalOnline=channel;
 		})
 	});
