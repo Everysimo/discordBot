@@ -173,11 +173,11 @@ exports.Server=class Server{
         return this._emerald;
     }
 }
-var serves=new Array();
-exports.serves=serves;
+var servers=new Array();
+exports.servers=servers;
 async function countTotalMember(){
-    for (let index = 0; index < serves.length; index++) {
-        const element = serves[index];
+    for (let index = 0; index < servers.length; index++) {
+        const element = servers[index];
         if (element instanceof Server) {
             countMember(element.id, element.totalMember);
         }
@@ -197,8 +197,8 @@ async function countMember(guildId,IdMemberChannel){
 	
 }
 async function countTotalUserOnline(){
-    for (let index = 0; index < serves.length; index++) {
-        const element = serves[index];
+    for (let index = 0; index < servers.length; index++) {
+        const element = servers[index];
         if (element instanceof Server) {
             countUserOnline(element.id, element.totalOnline);
         }
