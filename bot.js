@@ -172,7 +172,8 @@ client.on("message", message => {
 });
 
 client.on('guildMemberAdd', member => {
-	const channel=client.channels.cache.get("804669088688242768");
+	
+	const channel=server.serves.filter(ch=>ch.id===member.guild.id)
 	if(!member.user.bot){
 		dbpool.getConnection((err, db) => {
 			const nickname=member.user.username;
