@@ -17,6 +17,7 @@ exports.client=client;
 //quando il nuovo cliente è pronto esegue log
 client.once('ready', () => {
 	console.log('Ready!');
+	server.getAllServer();
 
 	client.user.setStatus("Online");
 

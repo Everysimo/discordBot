@@ -225,3 +225,4 @@ function getAllServer() {
         })
     )
 }
+exports.getAllServer = getAllServer;
