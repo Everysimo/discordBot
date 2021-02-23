@@ -316,5 +316,5 @@ function applyinsert(message){
 		console.log(role.id+"\n");
 		serverInfo.emerald=role.id;
 	});
-	return serverInfo;
+	return serverInfo.promise;
 }
