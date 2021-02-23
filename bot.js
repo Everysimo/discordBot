@@ -276,11 +276,11 @@ function applyinsert(message){
 				guild.channels.create("📊 Server Stats 📊",{type:"category"}).then(category=>{
 					guild.channels.create("👥 total member 👥",{type:"voice"}).then(channel4=>{
 						console.log(channel4.id+"\n");
-						channel.setParent(category);
+						channel4.setParent(category);
 						serverInfo.totalMember=channel4.id;
 						guild.channels.create("🗣 total online 🗣",{type:"voice"}).then(channel5=>{
 							console.log(channel5.id+"\n");
-							channel.setParent(category);
+							channel5.setParent(category);
 							serverInfo.totalOnline=channel5.id;
 							guild.roles.create({data:{color:"#a19d94",name:"IRON MEMBER",hoist:true}}).then(role=>{
 								console.log(role.id+"\n");
