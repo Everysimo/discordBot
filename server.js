@@ -221,9 +221,9 @@ async function countUserOnline(guildId,IdMemberChannelOnline){
 }
 
 function getAllServer() {
-    db.getAllServerDb(result=>
+    db.getAllServerDb(result=>{
+        servers=[];
         result.forEach(element=>{
-            servers=[];
             srv=new Server();
             srv.id=element.idserver;
             srv.command=element.comandibotid;
@@ -240,7 +240,7 @@ function getAllServer() {
             srv.diamond=element.role6id;
             srv.emerald=element.role7id;
             servers.push(srv);
-        })
-    )
+        })    
+    })
 }
 exports.getAllServer = getAllServer;
