@@ -362,7 +362,7 @@ exports.inserServerInfo = function (serverInfo) {
 		var sql= `Update server `+
 	`SET comandibotid='${serverInfo.command}',gameroomid='${serverInfo.gameroom}',lotteryid='${serverInfo.lottery}',levelupid='${serverInfo.level}',totmemberid='${serverInfo.totalMember}',onlinememberid='${serverInfo.totalOnline}',role1id='${serverInfo.iron}',role2id='${serverInfo.bronze}',role3id='${serverInfo.silver}' ,`+
 	`role4id='${serverInfo.golden}',role5id='${serverInfo.obsidian}',role6id='${serverInfo.diamond}',role7id='${serverInfo.emerald}' `+
-	`WHERE idserver ='${serverInfo.idserver}' `
+	`WHERE idserver ='${serverInfo.id}' `
 		db.query(sql, function (err) {
 			db.release();
 			if(err){
