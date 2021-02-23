@@ -250,7 +250,8 @@ client.on('guildCreate',guild=>{
 
 async function setServer(message){
 	const guild = message.member.guild;
-	var serverInfo=new server.Server("","","","","","","","","","","","","","");
+	//var serverInfo=new server.Server("","","","","","","","","","","","","","");
+	var serverInfo=new server.Server();
 	serverInfo.id=guild.id;
 	serverInfo.command=await guild.channels.create("🤖comandi-bot🤖",{type:"text"}).id;
 	guild.channels.create("🎰gameroom🎰",{type:"text"}).then(channel=>{
