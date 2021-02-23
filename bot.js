@@ -253,56 +253,60 @@ async function setServer(message){
 	//var serverInfo=new server.Server("","","","","","","","","","","","","","");
 	var serverInfo=new server.Server();
 	serverInfo.id=guild.id;
-	serverInfo.command=await guild.channels.create("🤖comandi-bot🤖",{type:"text"}).id;
-	guild.channels.create("🎰gameroom🎰",{type:"text"}).then(channel=>{
+
+	await guild.channels.create("🤖comandi-bot🤖",{type:"text"}).then(channel=>{
+		console.log(channel.id+"\n");
+		serverInfo.command=channel.id;
+	});
+	await guild.channels.create("🎰gameroom🎰",{type:"text"}).then(channel=>{
 		console.log(channel.id+"\n");
 		serverInfo.gameroom=channel.id;
 	});
-	guild.channels.create("🎫lottery🎫",{type:"text"}).then(channel=>{
+	await guild.channels.create("🎫lottery🎫",{type:"text"}).then(channel=>{
 		console.log(channel.id+"\n");
 		serverInfo.lottery=channel.id;
 	});
-	guild.channels.create("🥇levelUp🥇",{type:"text"}).then(channel=>{
+	await guild.channels.create("🥇levelUp🥇",{type:"text"}).then(channel=>{
 		console.log(channel.id+"\n");
 		serverInfo.level=channel.id;
 	});
-	guild.channels.create("📊 Server Stats 📊",{type:"category"}).then(category=>{
-		guild.channels.create("👥 total member 👥",{type:"voice"}).then(channel=>{
+	await guild.channels.create("📊 Server Stats 📊",{type:"category"}).then(category=>{
+		await guild.channels.create("👥 total member 👥",{type:"voice"}).then(channel=>{
 			console.log(channel.id+"\n");
 			channel.setParent(category);
 			serverInfo.totalMember=channel.id;
 		})
-		guild.channels.create("🗣 total online 🗣",{type:"voice"}).then(channel=>{
+		await guild.channels.create("🗣 total online 🗣",{type:"voice"}).then(channel=>{
 			console.log(channel.id+"\n");
 			channel.setParent(category);
 			serverInfo.totalOnline=channel.id;
 		})
 	});
-	guild.roles.create({data:{color:"#a19d94",name:"IRON MEMBER",hoist:true}}).then(role=>{
+	await guild.roles.create({data:{color:"#a19d94",name:"IRON MEMBER",hoist:true}}).then(role=>{
 		console.log(role.id+"\n");
 		serverInfo.iron=role.id;
 	});
-	guild.roles.create({data:{color:"#cd7f32",name:"BRONZE MEMBER",hoist:true}}).then(role=>{
+	await guild.roles.create({data:{color:"#cd7f32",name:"BRONZE MEMBER",hoist:true}}).then(role=>{
 		console.log(role.id+"\n");
 		serverInfo.bronze=role.id;
 	});
-	guild.roles.create({data:{color:"#7b99b7",name:"SILVER MEMBER",hoist:true}}).then(role=>{
+	await guild.roles.create({data:{color:"#7b99b7",name:"SILVER MEMBER",hoist:true}}).then(role=>{
 		console.log(role.id+"\n");
 		serverInfo.silver=role.id;
 	});
-	guild.roles.create({data:{color:"#FFD700",name:"GOLDEN MEMBER",hoist:true}}).then(role=>{
+	await guild.roles.create({data:{color:"#FFD700",name:"GOLDEN MEMBER",hoist:true}}).then(role=>{
 		console.log(role.id+"\n");
 		serverInfo.golden=role.id;
 	});
-	guild.roles.create({data:{color:"#92008f",name:"OBSIDIAN MEMBER",hoist:true}}).then(role=>{
+	await guild.roles.create({data:{color:"#92008f",name:"OBSIDIAN MEMBER",hoist:true}}).then(role=>{
 		console.log(role.id+"\n");
 		serverInfo.obsidian=role.id;
 	});
-	guild.roles.create({data:{color:"#00c7c7",name:"DIAMOND MEMBER",hoist:true}}).then(role=>{
+	await guild.roles.create({data:{color:"#00c7c7",name:"DIAMOND MEMBER",hoist:true}}).then(role=>{
 		console.log(role.id+"\n");
 		serverInfo.diamond=role.id;
 	});
-	guild.roles.create({data:{color:"#50c878",name:"EMERALD MEMBER",hoist:true}}).then(role=>{
+	await guild.roles.create({data:{color:"#50c878",name:"EMERALD MEMBER",hoist:true}}).then(role=>{
 		console.log(role.id+"\n");
 		serverInfo.emerald=role.id;
 	});
