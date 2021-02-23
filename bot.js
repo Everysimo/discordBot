@@ -231,8 +231,7 @@ async function setServer(message){
 	});
 }
 
-function applyinsert(message){
-	const guild = message.member.guild;
+function applyinsert(guild,serverInfo){
 	var serverInfo=new server.Server();
 	serverInfo.id=guild.id;
 	if(!db.addServerId(serverInfo.id)){
