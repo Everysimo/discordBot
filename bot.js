@@ -253,6 +253,7 @@ function setServer(message){
 	var serverInfo=[]
 	serverInfo.push(guild.id);
 	guild.channels.create("🤖comandi-bot🤖",{type:"text"}).then(channel=>{
+		console.log(channel)
 		serverInfo.push(channel.id)
 	});
 	guild.channels.create("🎰gameroom🎰",{type:"text"}).then(channel=>{
