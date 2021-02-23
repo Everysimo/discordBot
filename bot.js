@@ -174,7 +174,7 @@ client.on("message", message => {
 
 client.on('guildMemberAdd', member => {
 	
-	const channel=server.serves.filter(ch=>ch.id===member.guild.id)
+	const channel=server.servers.filter(ch=>ch.id===member.guild.id)
 	if(!member.user.bot){
 		dbpool.getConnection((err, db) => {
 			const nickname=member.user.username;
