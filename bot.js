@@ -22,9 +22,9 @@ client.once('ready', () => {
 
 	client.user.setActivity(language.botActivity,{type:"LISTENING"});
 
-	setInterval(countUserOnline,10000);
+	setInterval(server.countTotalUserOnline,10000);
 
-	setInterval(countMember,20000);
+	setInterval(server.countTotalUserOnline,20000);
 
 	setInterval(gameRoom.calcolaVincita, config.lottery);
 
@@ -37,37 +37,8 @@ client.once('ready', () => {
 //Command Prefix 
 const p=config.prefixCommand;
 
-async function countMember(){
-	
-	const guild = client.guilds.cache.get(config.IdServer);
-	const memberCount = guild.memberCount;
-	const channel=guild.channels.cache.get(config.IdMemberChannel);
-	try{
-		channel.setName("\uD83D\uDC65 total member "+memberCount.toString()+" \uD83D\uDC65");
-	}
-	catch(err){
-		console.log("errore durante l'aggiornamento del canale tot member",err);
-	}
-	
-}
-async function countUserOnline(){
-	
-	const guild = client.guilds.cache.get(config.IdServer);
-	var onlineMember=guild.members.cache.filter(member=>member.presence.status==="online").size
-	const channel=guild.channels.cache.get(config.IdMemberChannelOnline);
-	try{
-		channel.setName("\uD83D\uDDE3\uFE0F total online "+onlineMember.toString() + " \uD83D\uDDE3\uFE0F");
-	}
-	catch(err){
-		console.log("errore durante l'aggiornamento del canale tot online",err);
-	}
-	
-}
-
 //login nel server tramite token
 client.login(process.env.tokenBotDiscord);
-
-
 
 //il bot join nel canale vocale del mittente del messaggio
 async function join(message){
@@ -258,11 +229,6 @@ async function setServer(message){
 	});
 }
 
-<<<<<<< Updated upstream
-function applyinsert(guild,info){
-	var serverInfo=new server.Server();
-	serverInfo.id=guild.id;
-=======
 function applyinsert(message){
 	const guild = message.member.guild;
 	var serverInfo=new server.Server();
@@ -271,7 +237,6 @@ function applyinsert(message){
 		return null;
 	}
 
->>>>>>> Stashed changes
 	guild.channels.create("🤖comandi-bot🤖",{type:"text"}).then(channel=>{
 		console.log(channel.id+"\n");
 		serverInfo.command=channel.id;

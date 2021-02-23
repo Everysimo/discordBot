@@ -1,5 +1,6 @@
-exports.Server=class Server{
+const user=require("./user.js")
 
+exports.Server=class Server{
     constructor(){
         this._id = "";
         this._command = "";
@@ -170,4 +171,48 @@ exports.Server=class Server{
     get emerald(){
         return this._emerald;
     }
+}
+var serves=new Array();
+exports.serves=serves;
+async function countTotalMember(){
+    for (let index = 0; index < serves.length; index++) {
+        const element = serves[index];
+        if (element instanceof Server) {
+            countMember(element.id, element.totalMember);
+        }
+    }
+}
+exports.countTotalMember = countTotalMember;
+async function countMember(guildId,IdMemberChannel){
+	const guild = client.guilds.cache.get(guildId);
+	const memberCount = guild.memberCount;
+	const channel=guild.channels.cache.get(IdMemberChannel);
+	try{
+		channel.setName("\uD83D\uDC65 total member "+memberCount.toString()+" \uD83D\uDC65");
+	}
+	catch(err){
+		console.log("errore durante l'aggiornamento del canale tot member",err);
+	}
+	
+}
+async function countTotalUserOnline(){
+    for (let index = 0; index < serves.length; index++) {
+        const element = serves[index];
+        if (element instanceof Server) {
+            countUserOnline(element.id, element.totalOnline);
+        }
+    }
+}
+exports.countTotalUserOnline= countTotalUserOnline;
+async function countUserOnline(guildId,IdMemberChannelOnline){
+	
+	const guild = client.guilds.cache.get(guildId);
+	var onlineMember=guild.members.cache.filter(member=>member.presence.status==="online").size
+	const channel=guild.channels.cache.get(IdMemberChannelOnline);
+	try{
+		channel.setName("\uD83D\uDDE3\uFE0F total online "+onlineMember.toString() + " \uD83D\uDDE3\uFE0F");
+	}
+	catch(err){
+		console.log("errore durante l'aggiornamento del canale tot online",err);
+	}
 }
