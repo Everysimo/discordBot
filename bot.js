@@ -248,7 +248,7 @@ client.on('guildCreate',guild=>{
 	//TODO codificare le cose da fare quando il bot entra in un nuovo server
 });
 
-function setServer(message){
+async function setServer(message){
 	const guild = message.member.guild;
 	var serverInfo=new server.Server();
 	serverInfo.id=guild.id;
