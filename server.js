@@ -1,7 +1,7 @@
 const db=require("./dbOpertion.js");
 const user=require("./user.js")
 
-exports.Server=class Server{
+class Server{
     constructor(){
         this._id = "";
         this._command = "";
@@ -173,6 +173,7 @@ exports.Server=class Server{
         return this._emerald;
     }
 }
+exports.Server=Server;
 var servers=new Array();
 exports.servers=servers;
 async function countTotalMember(){
