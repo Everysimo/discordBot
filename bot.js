@@ -295,5 +295,6 @@ function setServer(message){
 	guild.roles.create({data:{color:"#50c878",name:"EMERALD MEMBER",hoist:true}}).then(role=>{
 		serverInfo.push(role.id)
 	});
+	console.log(serverInfo);
 	db.inserServerInfo(serverInfo);
 }
