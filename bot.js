@@ -296,5 +296,5 @@ function setServer(message){
 		serverInfo.push(role.id)
 	});
 	console.log(serverInfo);
-	db.inserServerInfo(serverInfo);
+	//db.inserServerInfo(serverInfo);
 }
