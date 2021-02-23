@@ -23,9 +23,9 @@ client.once('ready', () => {
 
 	client.user.setActivity(language.botActivity,{type:"LISTENING"});
 
-	setInterval(server.countTotalUserOnline,10000);
+	setInterval(server.countTotalUserOnline,30000);
 
-	setInterval(server.countTotalMember,20000);
+	setInterval(server.countTotalMember,180000);
 
 	setInterval(gameRoom.calcolaVincita, config.lottery);
 
