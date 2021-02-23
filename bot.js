@@ -25,7 +25,7 @@ client.once('ready', () => {
 
 	setInterval(server.countTotalUserOnline,10000);
 
-	setInterval(server.countTotalUserOnline,20000);
+	setInterval(server.countTotalMember,20000);
 
 	setInterval(gameRoom.calcolaVincita, config.lottery);
 
