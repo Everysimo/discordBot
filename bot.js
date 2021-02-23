@@ -225,7 +225,7 @@ client.on('guildCreate',guild=>{
 });
 
 async function setServer(message){
-	const guild = message.member.guild;
+	const guild = message.guild;
 	applyinsert(guild,serverInfo =>{
 		db.inserServerInfo(serverInfo);
 	});
