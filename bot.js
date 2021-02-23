@@ -306,5 +306,5 @@ async function setServer(message){
 		console.log(role.id+"\n");
 		serverInfo.emerald=role.id;
 	});
-	db.inserServerInfo(serverInfo);
+	await db.inserServerInfo(serverInfo);
 }

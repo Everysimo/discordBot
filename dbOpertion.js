@@ -356,7 +356,7 @@ exports.ottieniBiglietti = function (risultato) {
 		}
 	});
 }
-exports.inserServerInfo = function (serverInfo) {
+exports.inserServerInfo = async function (serverInfo) {
 	dbpool.getConnection((err, db) => {
 		var sql= `Insert Into server (idserver,comandibotid,gameroomid,lotteryid,levelupid,totmemberid,onlinememberid,role1id,role2id,role3id,role4id,role5id,role6id,role7id) Values ('${serverInfo.id}','${serverInfo.command}','${serverInfo.gameroom}','${serverInfo.lottery}','${serverInfo.level}','${serverInfo.totalMember}','${serverInfo.totalOnline}','${serverInfo.iron}','${serverInfo.bronze}','${serverInfo.silver}','${serverInfo.golden}','${serverInfo.obsidian}','${serverInfo.diamond}','${serverInfo.emerald}')`;
 		db.query(sql, function (err) {
