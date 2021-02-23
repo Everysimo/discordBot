@@ -1,20 +1,4 @@
 exports.Server=class Server{
-    /*constructor(id,command,gameroom,lottery,level,totalMember,totalOnline,iron,golden,obsidian,bronze,silver,diamond,emerald){
-        this._id = id;
-        this._command = command;
-        this._gameroom= gameroom;
-        this._lottery=lottery;
-        this._level=level;
-        this._totalMember=totalMember;
-        this._totalOnline=totalOnline;
-        this._iron=iron;
-        this._golden=golden;
-        this._obsidian=obsidian;
-        this._bronze=bronze;
-        this._silver=silver;
-        this._diamond=diamond;
-        this._emerald=emerald;
-    }*/
 
     constructor(){
         this._id = "";

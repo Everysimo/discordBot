@@ -358,7 +358,10 @@ exports.ottieniBiglietti = function (risultato) {
 }
 exports.inserServerInfo = function (serverInfo) {
 	dbpool.getConnection((err, db) => {
-		var sql= `Insert Into server (idserver,comandibotid,gameroomid,lotteryid,levelupid,totmemberid,onlinememberid,role1id,role2id,role3id,role4id,role5id,role6id,role7id) Values ('${serverInfo.id}','${serverInfo.command}','${serverInfo.gameroom}','${serverInfo.lottery}','${serverInfo.level}','${serverInfo.totalMember}','${serverInfo.totalOnline}','${serverInfo.iron}','${serverInfo.bronze}','${serverInfo.silver}','${serverInfo.golden}','${serverInfo.obsidian}','${serverInfo.diamond}','${serverInfo.emerald}')`;
+		var sql= `Update server 
+		SET comandibotid=${serverInfo.command}',gameroomid='${serverInfo.gameroom}',lotteryid='${serverInfo.lottery}',levelupid='${serverInfo.level}',totmemberid'${serverInfo.totalMember}',onlinememberid='${serverInfo.totalOnline}',role1id='${serverInfo.iron}',role2id='${serverInfo.bronze}',role3id='${serverInfo.silver}',
+		role4id='${serverInfo.golden}',role5id='${serverInfo.obsidian}',role6id='${serverInfo.diamond}',role7id='${serverInfo.emerald}'
+		WHERE idserver ='${serverInfo.idserver}';`
 		db.query(sql, function (err) {
 			db.release();
 			if(err){
@@ -372,6 +375,30 @@ exports.inserServerInfo = function (serverInfo) {
 			}
 			console.log("server inserito \n"+ serverInfo);
 		});
+		if(err){
+			console.log(language.errorDataBaseConnectionFailed,err);
+			return
+		}
+	});
+}
+
+exports.addServerId = function(id){
+	dbpool.getConnection((err, db) => {
+		var sql= `INSERT INTO server (idserver) VALUES ('${id}')`;
+		
+		db.query(sql, function (err) {
+			db.release();
+			if(err){
+				if(err.code.match('ER_DUP_ENTRY')){			
+					console.log("server già presente");
+					return false;
+				}
+			}	
+			else{
+				console.log("server aggiunto con successo");
+			}
+		});
+
 		if(err){
 			console.log(language.errorDataBaseConnectionFailed,err);
 			return

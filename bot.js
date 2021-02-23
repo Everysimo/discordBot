@@ -258,9 +258,20 @@ async function setServer(message){
 	});
 }
 
+<<<<<<< Updated upstream
 function applyinsert(guild,info){
 	var serverInfo=new server.Server();
 	serverInfo.id=guild.id;
+=======
+function applyinsert(message){
+	const guild = message.member.guild;
+	var serverInfo=new server.Server();
+	serverInfo.id=guild.id;
+	if(!db.addServerId(serverInfo.id)){
+		return null;
+	}
+
+>>>>>>> Stashed changes
 	guild.channels.create("🤖comandi-bot🤖",{type:"text"}).then(channel=>{
 		console.log(channel.id+"\n");
 		serverInfo.command=channel.id;
