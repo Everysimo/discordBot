@@ -246,20 +246,21 @@ client.on('guildMemberAdd', member => {
 
 client.on('guildCreate',guild=>{
 	//TODO codificare le cose da fare quando il bot entra in un nuovo server
+	applyinsert(guild,serverInfo =>{
+		db.inserServerInfo(serverInfo);
+	});
 });
 
 async function setServer(message){
-	applyinsert(message,serverInfo =>{
+	const guild = message.member.guild;
+	applyinsert(guild,serverInfo =>{
 		db.inserServerInfo(serverInfo);
 	});
 }
 
-function applyinsert(message,info){
-	const guild = message.member.guild;
-	//var serverInfo=new server.Server("","","","","","","","","","","","","","");
+function applyinsert(guild,info){
 	var serverInfo=new server.Server();
 	serverInfo.id=guild.id;
-
 	guild.channels.create("🤖comandi-bot🤖",{type:"text"}).then(channel=>{
 		console.log(channel.id+"\n");
 		serverInfo.command=channel.id;
