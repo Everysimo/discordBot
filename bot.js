@@ -253,48 +253,47 @@ function setServer(message){
 	var serverInfo=new server.Server();
 	serverInfo.id=guild.id;
 	guild.channels.create("🤖comandi-bot🤖",{type:"text"}).then(channel=>{
-		serverInfo.command=channel;
+		serverInfo.command=channel.toString;
 	});
 	guild.channels.create("🎰gameroom🎰",{type:"text"}).then(channel=>{
-		serverInfo.gameroom=channel;
+		serverInfo.gameroom=channel.toString;
 	});
 	guild.channels.create("🎫lottery🎫",{type:"text"}).then(channel=>{
-		serverInfo.lottery=channel;
+		serverInfo.lottery=channel.toString;
 	});
 	guild.channels.create("🥇levelUp🥇",{type:"text"}).then(channel=>{
-		serverInfo.level=channel;
+		serverInfo.level=channel.toString;
 	});
 	guild.channels.create("📊 Server Stats 📊",{type:"category"}).then(category=>{
 		guild.channels.create("👥 total member 👥",{type:"voice"}).then(channel=>{
 			channel.setParent(category);
-			serverInfo.totalMember=channel;
+			serverInfo.totalMember=channel.toString;
 		})
 		guild.channels.create("🗣 total online 🗣",{type:"voice"}).then(channel=>{
 			channel.setParent(category);
-			serverInfo.totalOnline=channel;
+			serverInfo.totalOnline=channel.toString;
 		})
 	});
 	guild.roles.create({data:{color:"#a19d94",name:"IRON MEMBER",hoist:true}}).then(role=>{
-		serverInfo.iron=role.id;
-		console.log("role:"+role)
+		serverInfo.iron=role.toString;
 	});
 	guild.roles.create({data:{color:"#cd7f32",name:"BRONZE MEMBER",hoist:true}}).then(role=>{
-		serverInfo.bronze=role.id;
+		serverInfo.bronze=role.toString;
 	});
 	guild.roles.create({data:{color:"#7b99b7",name:"SILVER MEMBER",hoist:true}}).then(role=>{
-		serverInfo.silver=role.id;
+		serverInfo.silver=role.toString;
 	});
 	guild.roles.create({data:{color:"#FFD700",name:"GOLDEN MEMBER",hoist:true}}).then(role=>{
-		serverInfo.golden=role.id;
+		serverInfo.golden=role.toString;
 	});
 	guild.roles.create({data:{color:"#92008f",name:"OBSIDIAN MEMBER",hoist:true}}).then(role=>{
-		serverInfo.obsidian=role.id;
+		serverInfo.obsidian=role.toString;
 	});
 	guild.roles.create({data:{color:"#00c7c7",name:"DIAMOND MEMBER",hoist:true}}).then(role=>{
-		serverInfo.diamond=role.id;
+		serverInfo.diamond=role.toString;
 	});
 	guild.roles.create({data:{color:"#50c878",name:"EMERALD MEMBER",hoist:true}}).then(role=>{
-		serverInfo.emerald=role.id;
+		serverInfo.emerald=role.toString;
 	});
 	db.inserServerInfo(serverInfo);
 }
