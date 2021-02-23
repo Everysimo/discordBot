@@ -1,4 +1,4 @@
-exports.Server=new class Server{
+exports.Server=class Server{
     constructor(id,command,gameroom,lottery,level,totalMember,totalOnline,iron,golden,obsidian,bronze,silver,diamond,emerald){
         this.id = id;
         this.command = command;
