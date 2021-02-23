@@ -17,173 +17,173 @@ exports.Server=class Server{
     }*/
 
     constructor(){
-        this.id = "";
-        this.command = "";
-        this.gameroom= "";
-        this.lottery="";
-        this.level="";
-        this.totalMember="";
-        this.totalOnline="";
-        this.iron="";
-        this.golden="";
-        this.obsidian="";
-        this.bronze="";
-        this.silver="";
-        this.diamond="";
-        this.emerald="";
+        this._id = "";
+        this._command = "";
+        this._gameroom= "";
+        this._lottery="";
+        this._level="";
+        this._totalMember="";
+        this._totalOnline="";
+        this._iron="";
+        this._golden="";
+        this._obsidian="";
+        this._bronze="";
+        this._silver="";
+        this._diamond="";
+        this._emerald="";
     }
     
     /**
      * @param {string} val
      */
     set id (val) {
-        this.id = val;
+        this._id = val;
     }
 
     get id(){
-        return this.id;
+        return this._id;
     }
 
     /**
      * @param {string} val
      */
     set command (val) {
-        this.command = val;
+        this._command = val;
     }
 
     get command(){
-        return this.command;
+        return this._command;
     }
 
     /**
      * @param {string} val
      */
     set gameroom (val) {
-        this.gameroom = val;
+        this._gameroom = val;
     }
 
     get gameroom(){
-        return this.gameroom;
+        return this._gameroom;
     }
 
     /**
      * @param {string} val
      */
     set lottery (val) {
-        this.lottery = val;
+        this._lottery = val;
     }
     
     get lottery(){
-        return this.lottery;
+        return this._lottery;
     }
 
     /**
      * @param {string} val
      */
     set level (val) {
-        this.level = val;
+        this._level = val;
     }
 
     get level(){
-        return this.level;
+        return this._level;
     }
 
     /**
      * @param {string} val
      */
     set totalMember (val) {
-        this.totalMember = val;
+        this._totalMember = val;
     }
 
     get totalMember(){
-        return this.totalMember;
+        return this._totalMember;
     }
 
     /**
      * @param {string} val
      */
     set totalOnline (val) {
-        this.totalOnline = val;
+        this._totalOnline = val;
     }
 
     get totalOnline(){
-        return this.totalOnline;
+        return this._totalOnline;
     }
 
     /**
      * @param {string} val
      */
     set iron (val) {
-        this.iron = val;
+        this._iron = val;
     }
 
     get iron(){
-        return this.iron;
+        return this._iron;
     }
 
     /**
      * @param {string} val
      */
     set golden (val) {
-        this.golden = val;
+        this._golden = val;
     }
 
     get golden(){
-        return this.golden;
+        return this._golden;
     }
 
     /**
      * @param {string} val
      */
     set obsidian (val) {
-        this.obsidian = val;
+        this._obsidian = val;
     }
 
     get obsidian(){
-        return this.obsidian;
+        return this._obsidian;
     }
 
     /**
      * @param {string} val
      */
     set bronze (val) {
-        this.bronze = val;
+        this._bronze = val;
     }
 
     get bronze(){
-        return this.bronze;
+        return this._bronze;
     }
 
     /**
      * @param {string} val
      */
     set silver (val) {
-        this.silver = val;
+        this._silver = val;
     }
 
     get silver(){
-        return this.silver;
+        return this._silver;
     }
 
      /**
      * @param {string} val
      */
     set diamond (val) {
-        this.diamond = val;
+        this._diamond = val;
     }
 
     get diamond(){
-        return this.diamond;
+        return this._diamond;
     }
 
      /**
      * @param {string} val
      */
     set emerald (val) {
-        this.emerald = val;
+        this._emerald = val;
     }
 
     get emerald(){
-        return this.emerald;
+        return this._emerald;
     }
 }
