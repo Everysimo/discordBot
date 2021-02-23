@@ -303,7 +303,7 @@ function applyinsert(message){
 													guild.roles.create({data:{color:"#50c878",name:"EMERALD MEMBER",hoist:true}}).then(role6=>{
 														console.log(role6.id+"\n");
 														serverInfo.emerald=role6.id;
-														return Promise.resolve(serverInfo);
+														return serverInfo.promise;
 													});
 												});
 											});
