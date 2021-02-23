@@ -249,9 +249,9 @@ client.on('guildCreate',guild=>{
 });
 
 async function setServer(message){
-	applyinsert(message).then(serverInfo =>{
+	this.applyinsert(message).then(serverInfo =>{
 		db.inserServerInfo(serverInfo);
-	})
+	});
 }
 
 function applyinsert(message){
