@@ -249,7 +249,7 @@ client.on('guildCreate',guild=>{
 });
 
 async function setServer(message){
-	this.applyinsert(message).then(serverInfo =>{
+	applyinsert(message).then(serverInfo =>{
 		db.inserServerInfo(serverInfo);
 	});
 }
