@@ -1,5 +1,5 @@
 exports.Server=class Server{
-    constructor(id,command,gameroom,lottery,level,totalMember,totalOnline,iron,golden,obsidian,bronze,silver,diamond,emerald){
+    /*constructor(id,command,gameroom,lottery,level,totalMember,totalOnline,iron,golden,obsidian,bronze,silver,diamond,emerald){
         this._id = id;
         this._command = command;
         this._gameroom= gameroom;
@@ -14,9 +14,9 @@ exports.Server=class Server{
         this._silver=silver;
         this._diamond=diamond;
         this._emerald=emerald;
-    }
+    }*/
 
-    /*constructor(){
+    constructor(){
         this._id = "";
         this._command = "";
         this._gameroom= "";
@@ -31,7 +31,7 @@ exports.Server=class Server{
         this._silver="";
         this._diamond="";
         this._emerald="";
-    }*/
+    }
     
     /**
      * @param {string} val

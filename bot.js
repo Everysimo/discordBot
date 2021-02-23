@@ -256,11 +256,11 @@ async function setServer(message){
 	serverInfo.command=await guild.channels.create("🤖comandi-bot🤖",{type:"text"}).id;
 	guild.channels.create("🎰gameroom🎰",{type:"text"}).then(channel=>{
 		console.log(channel.id+"\n");
-		serverInfo.gameroom(channel.id);
+		serverInfo.gameroom=channel.id;
 	});
 	guild.channels.create("🎫lottery🎫",{type:"text"}).then(channel=>{
 		console.log(channel.id+"\n");
-		serverInfo.lottery(channel.id);
+		serverInfo.lottery=channel.id;
 	});
 	guild.channels.create("🥇levelUp🥇",{type:"text"}).then(channel=>{
 		console.log(channel.id+"\n");
