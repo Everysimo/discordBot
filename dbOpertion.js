@@ -2,6 +2,7 @@ const mysql = require('mysql');
 const config = require('./config.json');
 const language =require('./language/'+config.language+'/dbOpertion.json');
 const gameRoom=require("./gameRoom.js")
+const server=require("./server.js")
 exports.dbConnect = function () {
     //creazione pool di connessione al DataBase
     const dbpool = mysql.createPool({
