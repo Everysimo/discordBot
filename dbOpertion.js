@@ -405,3 +405,29 @@ exports.addServerId = function(id){
 		}
 	});
 }
+
+exports.addServerId = function (risultato) {
+	dbpool.getConnection((err, db) => {
+	var sql= `SELECT * FROM server`;
+		
+		db.query(sql, function (err,result) {
+			db.release();
+			if(err){
+				console.log(language.errorReadingTicket,err);
+				return
+			}
+			else{
+				return risultato(result);
+			}
+		});
+		if(err){
+			console.log(language.errorDataBaseConnectionFailed,err);
+			return
+		}
+
+	if(err){
+		console.log(language.errorDataBaseConnectionFailed,err);
+		return
+	}
+	});
+}
