@@ -374,6 +374,7 @@ exports.inserServerInfo = function (serverInfo) {
 					return
 				}
 			}
+			server.getAllServer();
 			console.log("server inserito \n"+ serverInfo);
 		});
 		if(err){
