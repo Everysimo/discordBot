@@ -406,7 +406,7 @@ exports.addServerId = function(id){
 	});
 }
 
-exports.addServerId = function (risultato) {
+exports.getAllServer = function (risultato) {
 	dbpool.getConnection((err, db) => {
 	var sql= `SELECT * FROM server`;
 		
