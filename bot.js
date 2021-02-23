@@ -276,7 +276,7 @@ function setServer(message){
 	});
 	guild.roles.create({data:{color:"#a19d94",name:"IRON MEMBER",hoist:true}}).then(role=>{
 		serverInfo.iron=role.id;
-		console.log("role:"+channel)
+		console.log("role:"+role)
 	});
 	guild.roles.create({data:{color:"#cd7f32",name:"BRONZE MEMBER",hoist:true}}).then(role=>{
 		serverInfo.bronze=role.id;
