@@ -357,6 +357,7 @@ exports.ottieniBiglietti = function (risultato) {
 	});
 }
 exports.inserServerInfo = function (serverInfo) {
+	console.log("id server "+serverInfo.id);
 	dbpool.getConnection((err, db) => {
 		var sql= `Update server `+
 	`SET comandibotid='${serverInfo.command}',gameroomid='${serverInfo.gameroom}',lotteryid='${serverInfo.lottery}',levelupid='${serverInfo.level}',totmemberid='${serverInfo.totalMember}',onlinememberid='${serverInfo.totalOnline}',role1id='${serverInfo.iron}',role2id='${serverInfo.bronze}',role3id='${serverInfo.silver}' ,`+

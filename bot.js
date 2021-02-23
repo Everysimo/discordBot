@@ -240,6 +240,7 @@ function applyinsert(guild,info){
 		}
 	})
 
+	console.log("id server "+serverInfo.id);
 	guild.channels.create("🤖comandi-bot🤖",{type:"text"}).then(channel=>{
 		console.log(channel.id+"\n");
 		serverInfo.command=channel.id;
