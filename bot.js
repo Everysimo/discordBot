@@ -314,5 +314,5 @@ async function setServer(message){
 }
 
 function applyinsert(serverInfo){
-	await db.inserServerInfo(serverInfo);
+	db.inserServerInfo(serverInfo);
 }
