@@ -361,7 +361,6 @@ exports.inserServerInfo = function (serverInfo) {
 		var sql= `Insert Into server (idserver,comandibotid,gameroomid,lotteryid,levelupid,totmemberid,onlinememberid,role1id,role2id,role3id,role4id,role5id,role6id,role7id) Values ('${serverInfo.id}','${serverInfo.command}','${serverInfo.gameroom}','${serverInfo.lottery}','${serverInfo.level}','${serverInfo.totalMember}','${serverInfo.totalOnline}','${serverInfo.iron}','${serverInfo.bronze}','${serverInfo.silver}','${serverInfo.golden}','${serverInfo.obsidian}','${serverInfo.diamond}','${serverInfo.emerald}')`;
 		db.query(sql, function (err) {
 			db.release();
-			
 			if(err){
 				if(err.code.match('ER_DUP_ENTRY')){
 					console.log(language.ticketAlreadyInDb);
@@ -371,6 +370,7 @@ exports.inserServerInfo = function (serverInfo) {
 					return
 				}
 			}
+			console.log("server inserito \n"+ serverInfo);
 		});
 		if(err){
 			console.log(language.errorDataBaseConnectionFailed,err);
