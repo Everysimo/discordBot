@@ -253,27 +253,24 @@ function setServer(message){
 	var serverInfo=new server.Server();
 	serverInfo.id=guild.id;
 	guild.channels.create("🤖comandi-bot🤖",{type:"text"}).then(channel=>{
-		serverInfo.command=channel.id;
-		console.log("canale: "+channel)
+		serverInfo.command=channel;
 	});
 	guild.channels.create("🎰gameroom🎰",{type:"text"}).then(channel=>{
-		serverInfo.gameroom=channel.id;
+		serverInfo.gameroom=channel;
 	});
 	guild.channels.create("🎫lottery🎫",{type:"text"}).then(channel=>{
-		serverInfo.lottery=channel.id;
+		serverInfo.lottery=channel;
 	});
 	guild.channels.create("🥇levelUp🥇",{type:"text"}).then(channel=>{
-		serverInfo.level=channel.id;
+		serverInfo.level=channel;
 	});
 	guild.channels.create("📊 Server Stats 📊",{type:"category"}).then(category=>{
 		guild.channels.create("👥 total member 👥",{type:"voice"}).then(channel=>{
 			channel.setParent(category);
-			serverInfo.totalMember=channel.id;
-			console.log("canale in categoria: "+channel)
+			serverInfo.totalMember=channel;
 		})
 		guild.channels.create("🗣 total online 🗣",{type:"voice"}).then(channel=>{
-			channel.setParent(category);
-			serverInfo.totalOnline=channel.id;
+			serverInfo.totalOnline=channel;
 		})
 	});
 	guild.roles.create({data:{color:"#a19d94",name:"IRON MEMBER",hoist:true}}).then(role=>{
