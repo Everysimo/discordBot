@@ -222,7 +222,22 @@ async function countUserOnline(guildId,IdMemberChannelOnline){
 function getAllServer() {
     db.getAllServerDb(result=>
         result.forEach(element=>{
-            servers.push(element);
+            srv=new Server();
+            srv.id=element.idserver;
+            srv.command=element.comandibotid;
+            srv.gameroom=element.gameroomid;
+            srv.lottery=element.lotteryid;
+            srv.level=element.levelupid;
+            srv.totalMember=element.totmemberid;
+            srv.totalOnline=element.onlinememberid;
+            srv.iron=element.role1id;
+            srv.bronze=element.role2id;
+            srv.silver=element.role3id;
+            srv.golden=element.role4id;
+            srv.obsidian=element.role5id;
+            srv.diamond=element.role6id;
+            srv.emerald=element.role7id;
+            servers.push(srv);
         })
     )
 }
