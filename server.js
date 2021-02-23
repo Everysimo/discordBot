@@ -1,3 +1,4 @@
+const db=require("./dbOpertion.js");
 const user=require("./user.js")
 
 exports.Server=class Server{
@@ -215,4 +216,12 @@ async function countUserOnline(guildId,IdMemberChannelOnline){
 	catch(err){
 		console.log("errore durante l'aggiornamento del canale tot online",err);
 	}
+}
+
+function getAllServer() {
+    db.getAllServerDb(result=>
+        result.forEach(element=>{
+            serves.push(element);
+        })
+    )
 }
