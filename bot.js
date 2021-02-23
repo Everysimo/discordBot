@@ -249,12 +249,12 @@ client.on('guildCreate',guild=>{
 });
 
 async function setServer(message){
-	applyinsert(message).then(serverInfo =>{
+	applyinsert(message,serverInfo =>{
 		db.inserServerInfo(serverInfo);
 	});
 }
 
-function applyinsert(message){
+function applyinsert(message,info){
 	const guild = message.member.guild;
 	//var serverInfo=new server.Server("","","","","","","","","","","","","","");
 	var serverInfo=new server.Server();
@@ -303,7 +303,7 @@ function applyinsert(message){
 													guild.roles.create({data:{color:"#50c878",name:"EMERALD MEMBER",hoist:true}}).then(role6=>{
 														console.log(role6.id+"\n");
 														serverInfo.emerald=role6.id;
-														return serverInfo.promise;
+														return info(serverInfo)
 													});
 												});
 											});
