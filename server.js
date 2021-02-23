@@ -1,5 +1,6 @@
 const db=require("./dbOpertion.js");
-const user=require("./user.js")
+const user=require("./user.js");
+const bot = require('./bot');
 
 class Server{
     constructor(){
@@ -186,7 +187,7 @@ async function countTotalMember(){
 }
 exports.countTotalMember = countTotalMember;
 async function countMember(guildId,IdMemberChannel){
-	const guild = client.guilds.cache.get(guildId);
+	const guild = bot.client.guilds.cache.get(guildId);
 	const memberCount = guild.memberCount;
 	const channel=guild.channels.cache.get(IdMemberChannel);
 	try{
@@ -208,7 +209,7 @@ async function countTotalUserOnline(){
 exports.countTotalUserOnline= countTotalUserOnline;
 async function countUserOnline(guildId,IdMemberChannelOnline){
 	
-	const guild = client.guilds.cache.get(guildId);
+	const guild = bot.client.guilds.cache.get(guildId);
 	var onlineMember=guild.members.cache.filter(member=>member.presence.status==="online").size
 	const channel=guild.channels.cache.get(IdMemberChannelOnline);
 	try{
