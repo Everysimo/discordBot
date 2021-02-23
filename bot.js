@@ -249,6 +249,12 @@ client.on('guildCreate',guild=>{
 });
 
 async function setServer(message){
+	applyinsert(message).then(serverInfo =>{
+		db.inserServerInfo(serverInfo);
+	})
+}
+
+function applyinsert(message){
 	const guild = message.member.guild;
 	//var serverInfo=new server.Server("","","","","","","","","","","","","","");
 	var serverInfo=new server.Server();
@@ -310,9 +316,5 @@ async function setServer(message){
 		console.log(role.id+"\n");
 		serverInfo.emerald=role.id;
 	});
-	applyinsert(serverInfo);
-}
-
-function applyinsert(serverInfo){
-	db.inserServerInfo(serverInfo);
+	return serverInfo;
 }
