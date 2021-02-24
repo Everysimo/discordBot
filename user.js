@@ -29,16 +29,16 @@ async function addTime(){
 		const element = guild[i];
 		const activeMember= await element.members.cache.filter(member=>member.voice.channel!==null).array();
 		for (let index = 0; index < activeMember.length; index++) {
-			applyAddTime(activeMember[index])
+			applyAddTime(activeMember[index],element.id)
 		}
 	}
 	
 }
 exports.addTime = addTime;
 
-function applyAddTime(user){
+function applyAddTime(user,server){
 	
-	getTempoOnlineSeconds(user.id,function(tempoOnline,daysOnline){
+	getTempoOnlineSeconds(user.id,server,function(tempoOnline,daysOnline){
 		tempoOnline+=1;
 		if(tempoOnline>=86400){
 			daysOnline++;
@@ -49,7 +49,7 @@ function applyAddTime(user){
 			
 		}
 
-		aggiornaTempoOnline(tempoOnline,daysOnline,user.id);
+		aggiornaTempoOnline(tempoOnline,daysOnline,user.id,server);
 	});
 }
 
@@ -173,8 +173,8 @@ function aggiornaRuolo(user,days){
 }
 exports.aggiornaRuolo = aggiornaRuolo;
 
-function aggiornaTempoOnline(nuovoTempo,newDays,id){
-		var sql= `Update utente set tempoOnline=SEC_TO_TIME('${nuovoTempo}'),daysOnline=('${newDays}') where idutente='${id}'`;
+function aggiornaTempoOnline(nuovoTempo,newDays,id,server){
+		var sql= `Update server_account set tempoOnline=SEC_TO_TIME('${nuovoTempo}'),daysOnline=('${newDays}') where idutente='${id}' AND server='${server}`;
 		dbpool.query(sql, function (err) {
 			if(err){
 				console.log(language.errorUpdateOnlineTime,err);
@@ -183,8 +183,8 @@ function aggiornaTempoOnline(nuovoTempo,newDays,id){
 		});
 }
 
-function getTempoOnline (id,tempoOnline) {
-		var sql= `SELECT tempoOnline,daysOnline FROM utente where idutente='${id}'`;	
+function getTempoOnline (id,server,tempoOnline) {
+		var sql= `SELECT tempoOnline,daysOnline FROM server_account where utente='${id} AND server='${server}'`;	
 		dbpool.query(sql, function (err,result) {
 			if(err){
 				console.log(language.errorGetOnlineTime,err);
@@ -199,8 +199,8 @@ function getTempoOnline (id,tempoOnline) {
 }
 exports.getTempoOnline = getTempoOnline;
 
-function getTempoOnlineSeconds (id,tempoOnline) {
-		var sql= `SELECT TIME_TO_SEC(tempoOnline) as time,daysOnline FROM utente where idutente='${id} '`;	
+function getTempoOnlineSeconds (id,server,tempoOnline,server) {
+		var sql= `SELECT TIME_TO_SEC(tempoOnline) as time,daysOnline FROM server_account where idutente='${id} AND server='${server}'`;	
 		dbpool.query(sql, function (err,result) {
 			if(err){
 				console.log(language.errorGetOnlineTime,err);
