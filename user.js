@@ -199,7 +199,7 @@ function getTempoOnline (id,server,tempoOnline) {
 }
 exports.getTempoOnline = getTempoOnline;
 
-function getTempoOnlineSeconds (id,server,tempoOnline,server) {
+function getTempoOnlineSeconds (id,server,tempoOnline) {
 		var sql= `SELECT TIME_TO_SEC(tempoOnline) as time,daysOnline FROM server_account where idutente='${id} AND server='${server}'`;	
 		dbpool.query(sql, function (err,result) {
 			if(err){
