@@ -155,7 +155,7 @@ comandi.set("lingua",name);
 function name(message) {
 	var guild=message.guild
 	console.log(guild.id+": "+guild.preferredLocale);
-	message.reply(guild.preferredLocale);
+	console.log(message.author.language+": "+message.author.locale);
 }
 
 
