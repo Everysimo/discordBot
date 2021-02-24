@@ -321,7 +321,7 @@ function insertServerAccount(utente,server,channel,member){
 			}	
 			else{
 				const messaggioConferma = new Discord.MessageEmbed();
-				messaggioConferma.setTitle(language.titleMsgWelcomeSignIn+` <@${utente}>`);
+				messaggioConferma.setDescription(language.titleMsgWelcomeSignIn+` <@${utente}>`);
 				messaggioConferma.addFields(
 					{ name: language.msgWelcomeSignIn,
 					 value: language.msgDescWelcomeSignIn, inline:true},
