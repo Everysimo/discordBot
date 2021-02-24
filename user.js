@@ -296,7 +296,7 @@ function insertUtente(id,nickname,result){
 	});
 }
 
-function insertServerAccount(utente,Server){
+function insertServerAccount(utente,server){
 	dbpool.getConnection((err, db) => {
 		var sql= `INSERT INTO server_account (utente, server) VALUES ('${utente}','${server}')`;
 		
