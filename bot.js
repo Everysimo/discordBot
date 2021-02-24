@@ -150,13 +150,6 @@ comandi.set(command.signin,user.signIn);
 comandi.set(command.slot,gameRoom.slot);
 comandi.set(command.stop,musica.stop);
 comandi.set(command.suggestion,trello.addSuggestion);
-comandi.set("lingua",name);
-
-function name(message) {
-	var guild=message.guild
-	console.log(guild);
-}
-
 
 //gestore ricezione messaggi
 client.on("message", message => {
