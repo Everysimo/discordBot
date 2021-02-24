@@ -19,9 +19,6 @@ exports.client=client;
 client.once('ready', () => {
 	console.log('Ready!');
 
-	console.log(language1.langPack['it'].get('hello'));
-	console.log(language1.langPack['en'].get('hello'));
-
 	server.getAllServer();
 
 	client.user.setStatus("Online");
