@@ -270,7 +270,7 @@ function signIn(message){
 }
 exports.signIn = signIn;
 
-function insertUtente(id,nickname,result){
+function insertUtente(id,nickname){
 	dbpool.getConnection((err, db) => {
 		var sql= `INSERT INTO utente (idutente, nickname) VALUES ('${id}','${nickname}')`;
 		
@@ -306,7 +306,7 @@ function insertServerAccount(utente,server){
 				if(err.code.match('ER_DUP_ENTRY')){
 
 					const messaggioRifiuto = new Discord.MessageEmbed();
-					messaggioRifiuto.setTitle(language.titleMsgAlreadySignedIn + nickname);
+					messaggioRifiuto.setDescription(language.titleMsgAlreadySignedIn+` <@${utente}>`);
 					messaggioRifiuto.addFields(
 						{ name: language.msgAlreadySignedIn,
 						 value: language.msgDescAlreadySignIn, inline:true},
@@ -319,7 +319,7 @@ function insertServerAccount(utente,server){
 			}	
 			else{
 				const messaggioConferma = new Discord.MessageEmbed();
-				messaggioConferma.setTitle(language.titleMsgWelcomeSignIn + nickname);
+				messaggioConferma.setTitle(language.titleMsgWelcomeSignIn+` <@${utente}>`);
 				messaggioConferma.addFields(
 					{ name: language.msgWelcomeSignIn,
 					 value: language.msgDescWelcomeSignIn, inline:true},
