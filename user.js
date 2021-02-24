@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const config = require('./config.json');
 const language =require('./language/'+config.language+'/user.json');
 const bot = require('./bot');
+const { servers } = require('./server');
 
 async function addCoin(){ 
 	const guild = bot.client.guilds.cache.array();
@@ -28,16 +29,16 @@ async function addTime(){
 		const element = guild[i];
 		const activeMember= await element.members.cache.filter(member=>member.voice.channel!==null).array();
 		for (let index = 0; index < activeMember.length; index++) {
-			applyAddTime(activeMember[index])
+			applyAddTime(activeMember[index],element.id)
 		}
 	}
 	
 }
 exports.addTime = addTime;
 
-function applyAddTime(user){
+function applyAddTime(user,server){
 	
-	getTempoOnlineSeconds(user.id,function(tempoOnline,daysOnline){
+	getTempoOnlineSeconds(user.id,server,function(tempoOnline,daysOnline){
 		tempoOnline+=1;
 		if(tempoOnline>=86400){
 			daysOnline++;
@@ -48,7 +49,7 @@ function applyAddTime(user){
 			
 		}
 
-		aggiornaTempoOnline(tempoOnline,daysOnline,user.id);
+		aggiornaTempoOnline(tempoOnline,daysOnline,user.id,server);
 	});
 }
 
@@ -172,8 +173,8 @@ function aggiornaRuolo(user,days){
 }
 exports.aggiornaRuolo = aggiornaRuolo;
 
-function aggiornaTempoOnline(nuovoTempo,newDays,id){
-		var sql= `Update utente set tempoOnline=SEC_TO_TIME('${nuovoTempo}'),daysOnline=('${newDays}') where idutente='${id}'`;
+function aggiornaTempoOnline(nuovoTempo,newDays,id,server){
+		var sql= `Update server_account set tempoOnline=SEC_TO_TIME('${nuovoTempo}'),daysOnline=('${newDays}') where idutente='${id}' AND server='${server}`;
 		dbpool.query(sql, function (err) {
 			if(err){
 				console.log(language.errorUpdateOnlineTime,err);
@@ -182,8 +183,8 @@ function aggiornaTempoOnline(nuovoTempo,newDays,id){
 		});
 }
 
-function getTempoOnline (id,tempoOnline) {
-		var sql= `SELECT tempoOnline,daysOnline FROM utente where idutente='${id}'`;	
+function getTempoOnline (id,server,tempoOnline) {
+		var sql= `SELECT tempoOnline,daysOnline FROM server_account where utente='${id} AND server='${server}'`;	
 		dbpool.query(sql, function (err,result) {
 			if(err){
 				console.log(language.errorGetOnlineTime,err);
@@ -198,8 +199,8 @@ function getTempoOnline (id,tempoOnline) {
 }
 exports.getTempoOnline = getTempoOnline;
 
-function getTempoOnlineSeconds (id,tempoOnline) {
-		var sql= `SELECT TIME_TO_SEC(tempoOnline) as time,daysOnline FROM utente where idutente='${id} '`;	
+function getTempoOnlineSeconds (id,server,tempoOnline,server) {
+		var sql= `SELECT TIME_TO_SEC(tempoOnline) as time,daysOnline FROM server_account where idutente='${id} AND server='${server}'`;	
 		dbpool.query(sql, function (err,result) {
 			if(err){
 				console.log(language.errorGetOnlineTime,err);
@@ -260,51 +261,84 @@ exports.printTime = printTime;
 
 function signIn(message){
 	if(!message.member.user.bot){
-		dbpool.getConnection((err, db) => {
 			const nickname=message.member.user.username;
 			const id=message.member.user.id;
-			var sql= `INSERT INTO utente (idutente, nickname) VALUES ('${id}','${nickname}')`;
-			
-			db.query(sql, function (err) {
-				db.release();
-				if(err){
-					if(err.code.match('ER_DUP_ENTRY')){
-
-						const messaggioRifiuto = new Discord.MessageEmbed();
-						messaggioRifiuto.setTitle(language.titleMsgAlreadySignedIn + nickname);
-						messaggioRifiuto.addFields(
-							{ name: language.msgAlreadySignedIn,
-							 value: language.msgDescAlreadySignIn, inline:true},
-						)
-					
-						console.log(language.dbMsgUserAlreadySigned);
-						message.channel.send(messaggioRifiuto);
-						return
-					}
-				}	
-				else{
-					const messaggioConferma = new Discord.MessageEmbed();
-					messaggioConferma.setTitle(language.titleMsgWelcomeSignIn + nickname);
-					messaggioConferma.addFields(
-						{ name: language.msgWelcomeSignIn,
-						 value: language.msgDescWelcomeSignIn, inline:true},
-					)
-
-					console.log(language.dbMsgUserCorrectlySigned);
-					message.channel.send(messaggioConferma);
-					aggiornaRuolo(message.member,1);
-				}
-			});
-
-			
-			if(err){
-				console.log(language.errorDataBaseConnectionFailed,err);
-				return
-			}
-		});
+			const server=message.guild.id;
+			insertUtente(id,nickname);
+			insertServerAccount(id,server);
 	}
 }
 exports.signIn = signIn;
+
+function insertUtente(id,nickname,result){
+	dbpool.getConnection((err, db) => {
+		var sql= `INSERT INTO utente (idutente, nickname) VALUES ('${id}','${nickname}')`;
+		
+		db.query(sql, function (err) {
+			db.release();
+			if(err){
+				if(err.code.match('ER_DUP_ENTRY')){
+					console.log("utente già presente nel database");
+					return
+				}
+			}	
+			else{
+				console.log("nuovo utente aggiunto al database");
+				return
+			}
+		});
+
+		
+		if(err){
+			console.log(language.errorDataBaseConnectionFailed,err);
+			return
+		}
+	});
+}
+
+function insertServerAccount(utente,Server){
+	dbpool.getConnection((err, db) => {
+		var sql= `INSERT INTO server_account (utente, server) VALUES ('${utente}','${server}')`;
+		
+		db.query(sql, function (err) {
+			db.release();
+			if(err){
+				if(err.code.match('ER_DUP_ENTRY')){
+
+					const messaggioRifiuto = new Discord.MessageEmbed();
+					messaggioRifiuto.setTitle(language.titleMsgAlreadySignedIn + nickname);
+					messaggioRifiuto.addFields(
+						{ name: language.msgAlreadySignedIn,
+						 value: language.msgDescAlreadySignIn, inline:true},
+					)
+				
+					console.log(language.dbMsgUserAlreadySigned);
+					message.channel.send(messaggioRifiuto);
+					return
+				}
+			}	
+			else{
+				const messaggioConferma = new Discord.MessageEmbed();
+				messaggioConferma.setTitle(language.titleMsgWelcomeSignIn + nickname);
+				messaggioConferma.addFields(
+					{ name: language.msgWelcomeSignIn,
+					 value: language.msgDescWelcomeSignIn, inline:true},
+				)
+
+				console.log(language.dbMsgUserCorrectlySigned);
+				message.channel.send(messaggioConferma);
+				aggiornaRuolo(message.member,1);
+				return 
+			}
+		});
+
+		
+		if(err){
+			console.log(language.errorDataBaseConnectionFailed,err);
+			return
+		}
+	});
+}
 function verificaSaldo(importo,saldo){
 	if(importo <= saldo){
 		return true;
