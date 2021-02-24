@@ -11,12 +11,16 @@ const command=require("./command.json")
 const user = require('./user.js');
 const trello=require("./trello.js")
 const server=require("./server.js")
+const language=require("./language")
 db.dbConnect();
 exports.client=client;
 
 //quando il nuovo cliente è pronto esegue log
 client.once('ready', () => {
 	console.log('Ready!');
+
+	console.log(language.langPack['it'].get('hello'));
+	console.log(language.langPack['en'].get('hello'));
 
 	server.getAllServer();
 
