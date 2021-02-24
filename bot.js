@@ -32,7 +32,12 @@ client.once('ready', () => {
 	setInterval(user.addCoin, config.addCoin);
 
 	setInterval(user.addTime, 1000);
-
+	//test
+	for (let index = 0; index < server.servers.length; index++) {
+		const element = server.servers[index];
+		var guild=client.guilds.cache.get(element.id);
+		console.log("element.id"+guild.preferredLocale);
+	}
 });
 
 //Command Prefix 
