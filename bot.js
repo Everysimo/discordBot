@@ -17,6 +17,7 @@ exports.client=client;
 //quando il nuovo cliente è pronto esegue log
 client.once('ready', () => {
 	console.log('Ready!');
+
 	server.getAllServer();
 
 	client.user.setStatus("Online");
@@ -32,12 +33,7 @@ client.once('ready', () => {
 	setInterval(user.addCoin, config.addCoin);
 
 	setInterval(user.addTime, 1000);
-	//test
-	for (let index = 0; index < server.servers.length; index++) {
-		const element = server.servers[index];
-		var guild=client.guilds.cache.get(element.id);
-		console.log("element.id"+guild.preferredLocale);
-	}
+
 });
 
 //Command Prefix 
@@ -154,6 +150,14 @@ comandi.set(command.signin,user.signIn);
 comandi.set(command.slot,gameRoom.slot);
 comandi.set(command.stop,musica.stop);
 comandi.set(command.suggestion,trello.addSuggestion);
+comandi.set("lingua",name);
+function name(message) {
+	for (let index = 0; index < server.servers.length; index++) {
+		const element = server.servers[index];
+		var guild=client.guilds.cache.get(element.id);
+		console.log("element.id: "+guild.preferredLocale);
+	}
+}
 
 
 //gestore ricezione messaggi
