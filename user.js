@@ -174,7 +174,7 @@ function aggiornaRuolo(user,days){
 exports.aggiornaRuolo = aggiornaRuolo;
 
 function aggiornaTempoOnline(nuovoTempo,newDays,id,server){
-		var sql= `Update server_account set tempoOnline=SEC_TO_TIME('${nuovoTempo}'),daysOnline=('${newDays}') where utente='${id}' AND server='${server}`;
+		var sql= `Update server_account set tempoOnline=SEC_TO_TIME('${nuovoTempo}'),daysOnline=('${newDays}') where utente='${id}' AND server='${server}'`;
 		dbpool.query(sql, function (err) {
 			if(err){
 				console.log(language.errorUpdateOnlineTime,err);
