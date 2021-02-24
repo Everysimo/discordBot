@@ -151,12 +151,10 @@ comandi.set(command.slot,gameRoom.slot);
 comandi.set(command.stop,musica.stop);
 comandi.set(command.suggestion,trello.addSuggestion);
 comandi.set("lingua",name);
+
 function name(message) {
-	for (let index = 0; index < server.servers.length; index++) {
-		const element = server.servers[index];
-		var guild=client.guilds.cache.get(element.id);
-		console.log("element.id: "+guild.preferredLocale);
-	}
+	var guild=message.guild
+	console.log(guild.id+": "+guild.preferredLocale);
 }
 
 
