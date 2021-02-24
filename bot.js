@@ -177,44 +177,12 @@ client.on('guildMemberAdd', member => {
 	
 	const channel=server.servers.filter(ch=>ch.id===member.guild.id)
 	if(!member.user.bot){
-		dbpool.getConnection((err, db) => {
-			const nickname=member.user.username;
-			const id=member.user.id;
-			var sql= `INSERT INTO utente (idutente, nickname) VALUES ('${id}','${nickname}')`;
-			
-			db.query(sql, function (err) {
-				db.release();
-				if(err){
-					if(err.code.match('ER_DUP_ENTRY')){
-						const messaggioRifiuto = new Discord.MessageEmbed();
-						messaggioRifiuto.setTitle(language.titleMsgAlreadySignedIn + nickname);
-						messaggioRifiuto.addFields(
-							{ name: language.msgAlreadySignedIn,
-							 value: language.msgDescAlreadySignIn, inline:true},
-						)
-						console.log(language.dbMsgUserAlreadySigned);
-						channel.send(messaggioRifiuto)
-						return
-					}
-				}	
-				else{
-					const messaggioConferma = new Discord.MessageEmbed();
-					messaggioConferma.setTitle(language.titleMsgWelcomeSignIn + nickname);
-					messaggioConferma.addFields(
-						{ name: language.msgWelcomeSignIn,
-						 value: language.msgDescWelcomeSignIn, inline:true},
-					)
-					channel.send(messaggioConferma)
-					console.log(language.dbMsgUserCorrectlySigned);
-					user.aggiornaRuolo(member,1);
-				}
-			});
-			
-			if(err){
-				console.log(language.errorDataBaseConnectionFailed,err);
-				return
-			}
-		});
+		const nickname=member.user.username;
+		const id=member.user.id;
+		const server=member.guild.id;
+		
+		insertUtente(id,nickname);
+		insertServerAccount(id,server,channel);
 	}
 });
 

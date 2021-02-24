@@ -264,8 +264,9 @@ function signIn(message){
 			const nickname=message.member.user.username;
 			const id=message.member.user.id;
 			const server=message.guild.id;
+			const channel=message.channel;
 			insertUtente(id,nickname);
-			insertServerAccount(id,server);
+			insertServerAccount(id,server,channel);
 	}
 }
 exports.signIn = signIn;
@@ -296,7 +297,7 @@ function insertUtente(id,nickname){
 	});
 }
 
-function insertServerAccount(utente,server){
+function insertServerAccount(utente,server,channel){
 	dbpool.getConnection((err, db) => {
 		var sql= `INSERT INTO server_account (utente, server) VALUES ('${utente}','${server}')`;
 		
@@ -313,7 +314,7 @@ function insertServerAccount(utente,server){
 					)
 				
 					console.log(language.dbMsgUserAlreadySigned);
-					message.channel.send(messaggioRifiuto);
+					channel.send(messaggioRifiuto);
 					return
 				}
 			}	
@@ -326,7 +327,7 @@ function insertServerAccount(utente,server){
 				)
 
 				console.log(language.dbMsgUserCorrectlySigned);
-				message.channel.send(messaggioConferma);
+				channel.send(messaggioConferma);
 				aggiornaRuolo(message.member,1);
 				return 
 			}
