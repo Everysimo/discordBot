@@ -329,7 +329,7 @@ function insertServerAccount(utente,server,channel,member){
 
 				console.log(language.dbMsgUserCorrectlySigned);
 				channel.send(messaggioConferma);
-				aggiornaRuolo(member,1);
+				//aggiornaRuolo(member,1);
 				return 
 			}
 		});
