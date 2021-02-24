@@ -184,7 +184,7 @@ function aggiornaTempoOnline(nuovoTempo,newDays,id,server){
 }
 
 function getTempoOnline (id,server,tempoOnline) {
-		var sql= `SELECT tempoOnline,daysOnline FROM server_account where utente='${id} AND server='${server}'`;	
+		var sql= `SELECT tempoOnline,daysOnline FROM server_account where utente='${id}' AND server='${server}'`;	
 		dbpool.query(sql, function (err,result) {
 			if(err){
 				console.log(language.errorGetOnlineTime,err);
@@ -200,7 +200,7 @@ function getTempoOnline (id,server,tempoOnline) {
 exports.getTempoOnline = getTempoOnline;
 
 function getTempoOnlineSeconds (id,server,tempoOnline) {
-		var sql= `SELECT TIME_TO_SEC(tempoOnline) as time,daysOnline FROM server_account where utente='${id} AND server='${server}'`;	
+		var sql= `SELECT TIME_TO_SEC(tempoOnline) as time,daysOnline FROM server_account where utente='${id}' AND server='${server}'`;	
 		dbpool.query(sql, function (err,result) {
 			if(err){
 				console.log(language.errorGetOnlineTime,err);
