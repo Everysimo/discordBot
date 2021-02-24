@@ -182,7 +182,7 @@ client.on('guildMemberAdd', member => {
 		const server=member.guild.id;
 		
 		insertUtente(id,nickname);
-		insertServerAccount(id,server,channel);
+		insertServerAccount(id,server,channel,member);
 	}
 });
 
