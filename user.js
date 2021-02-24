@@ -244,7 +244,7 @@ exports.printSaldo = printSaldo;
 function printTime(message){
 	if(!message.member.user.bot){
 		const id=message.member.user.id;
-		getTempoOnline(id,function(tempoOnline,daysOnline){
+		getTempoOnline(id,message.guild.id,function(tempoOnline,daysOnline){
 			message.reply(language.msgGetTime+daysOnline+language.daysAnd+tempoOnline);
 		});
 	}
