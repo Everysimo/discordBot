@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const config = require('./config.json');
 const language =require('./language/'+config.language+'/user.json');
 const bot = require('./bot');
+const { servers } = require('./server');
 
 async function addCoin(){ 
 	const guild = bot.client.guilds.cache.array();
@@ -260,51 +261,84 @@ exports.printTime = printTime;
 
 function signIn(message){
 	if(!message.member.user.bot){
-		dbpool.getConnection((err, db) => {
 			const nickname=message.member.user.username;
 			const id=message.member.user.id;
-			var sql= `INSERT INTO utente (idutente, nickname) VALUES ('${id}','${nickname}')`;
-			
-			db.query(sql, function (err) {
-				db.release();
-				if(err){
-					if(err.code.match('ER_DUP_ENTRY')){
-
-						const messaggioRifiuto = new Discord.MessageEmbed();
-						messaggioRifiuto.setTitle(language.titleMsgAlreadySignedIn + nickname);
-						messaggioRifiuto.addFields(
-							{ name: language.msgAlreadySignedIn,
-							 value: language.msgDescAlreadySignIn, inline:true},
-						)
-					
-						console.log(language.dbMsgUserAlreadySigned);
-						message.channel.send(messaggioRifiuto);
-						return
-					}
-				}	
-				else{
-					const messaggioConferma = new Discord.MessageEmbed();
-					messaggioConferma.setTitle(language.titleMsgWelcomeSignIn + nickname);
-					messaggioConferma.addFields(
-						{ name: language.msgWelcomeSignIn,
-						 value: language.msgDescWelcomeSignIn, inline:true},
-					)
-
-					console.log(language.dbMsgUserCorrectlySigned);
-					message.channel.send(messaggioConferma);
-					aggiornaRuolo(message.member,1);
-				}
-			});
-
-			
-			if(err){
-				console.log(language.errorDataBaseConnectionFailed,err);
-				return
-			}
-		});
+			const server=message.guild.id;
+			insertUtente(id,nickname);
+			insertServerAccount(id,server);
 	}
 }
 exports.signIn = signIn;
+
+function insertUtente(id,nickname,result){
+	dbpool.getConnection((err, db) => {
+		var sql= `INSERT INTO utente (idutente, nickname) VALUES ('${id}','${nickname}')`;
+		
+		db.query(sql, function (err) {
+			db.release();
+			if(err){
+				if(err.code.match('ER_DUP_ENTRY')){
+					console.log("utente già presente nel database");
+					return
+				}
+			}	
+			else{
+				console.log("nuovo utente aggiunto al database");
+				return
+			}
+		});
+
+		
+		if(err){
+			console.log(language.errorDataBaseConnectionFailed,err);
+			return
+		}
+	});
+}
+
+function insertServerAccount(utente,Server){
+	dbpool.getConnection((err, db) => {
+		var sql= `INSERT INTO server_account (utente, server) VALUES ('${utente}','${server}')`;
+		
+		db.query(sql, function (err) {
+			db.release();
+			if(err){
+				if(err.code.match('ER_DUP_ENTRY')){
+
+					const messaggioRifiuto = new Discord.MessageEmbed();
+					messaggioRifiuto.setTitle(language.titleMsgAlreadySignedIn + nickname);
+					messaggioRifiuto.addFields(
+						{ name: language.msgAlreadySignedIn,
+						 value: language.msgDescAlreadySignIn, inline:true},
+					)
+				
+					console.log(language.dbMsgUserAlreadySigned);
+					message.channel.send(messaggioRifiuto);
+					return
+				}
+			}	
+			else{
+				const messaggioConferma = new Discord.MessageEmbed();
+				messaggioConferma.setTitle(language.titleMsgWelcomeSignIn + nickname);
+				messaggioConferma.addFields(
+					{ name: language.msgWelcomeSignIn,
+					 value: language.msgDescWelcomeSignIn, inline:true},
+				)
+
+				console.log(language.dbMsgUserCorrectlySigned);
+				message.channel.send(messaggioConferma);
+				aggiornaRuolo(message.member,1);
+				return 
+			}
+		});
+
+		
+		if(err){
+			console.log(language.errorDataBaseConnectionFailed,err);
+			return
+		}
+	});
+}
 function verificaSaldo(importo,saldo){
 	if(importo <= saldo){
 		return true;
