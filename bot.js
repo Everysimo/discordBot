@@ -11,7 +11,7 @@ const command=require("./command.json")
 const user = require('./user.js');
 const trello=require("./trello.js")
 const server=require("./server.js")
-const language=require("./language")
+const language=require("./language.js")
 db.dbConnect();
 exports.client=client;
 
