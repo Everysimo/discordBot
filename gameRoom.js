@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const config = require('./config.json');
-const language =require('./language/'+config.language+'/gameRoom.json');
+const language=require("./language.js")
 const db=require("./dbOpertion.js");
 const bot = require('./bot');
 const user = require('./user.js');
@@ -27,41 +27,41 @@ exports.coinflip = function (message){
 						risultato.setImage("https://upload.wikimedia.org/wikipedia/it/0/06/1_%E2%82%AC_2007.jpg");
 						break;
 				}
-				if(m===language.head||m===language.h){
+				if(m===language.langPack.ita.get("head")||m===language.langPack.ita.get("h")){
 					if (testa) {
 						win=true;
 					}else{
 						win=false;
 					}
-				}else if(m===language.tail||m===language.t){
+				}else if(m===language.langPack.ita.get("tail")||m===language.langPack.ita.get("t")){
 					if (testa) {
 						win=false;
 					}else{
 						win=true;
 					}
 				}else{
-					message.reply(language.notSelect);
+					message.reply(language.langPack.ita.get("notSelect"));
 					return;
 				}
 				if (win) {
 					user.aggiornaSaldo(saldo+(importo),id);
 					risultato.addFields(
-						{ name: language.win, value: importo*2+' '+config.coinName },
+						{ name: language.langPack.ita.get("win"), value: importo*2+' '+config.coinName },
 					);
 					risultato.setColor("#00ff37");
 				}else{
 					user.aggiornaSaldo(saldo-importo,id);
 					risultato.addFields(
-						{ name: language.lose, value: importo+' '+config.coinName },
+						{ name: language.langPack.ita.get("lose"), value: importo+' '+config.coinName },
 					);
 					risultato.setColor("#f50505");
 				}
 				message.channel.send(risultato);
 			}else{
-				message.reply(language.msgNotEnoughCoin);
+				message.reply(language.langPack.ita.get("msgNotEnoughCoin"));
 			}
 		}else{
-			message.reply(language.errorAmountNotValid);
+			message.reply(language.langPack.ita.get("errorAmountNotValid"));
 		}
 	});
 
@@ -102,30 +102,30 @@ exports.slot = function (message){
 					if(!jackpot){
 						user.aggiornaSaldo(saldo+(importo*moltiplicatore),id);
 						risultato.addFields(
-							{ name: language.win, value: importo*moltiplicatore+' '+config.coinName+` <@${message.member.user.id}>` },
+							{ name: language.langPack.ita.get("win"), value: importo*moltiplicatore+' '+config.coinName+` <@${message.member.user.id}>` },
 						);
 						risultato.setColor("#00ff37");
 					}
 					else{
 						user.aggiornaSaldo(saldo+(importo*moltiplicatore),id);
 						risultato.addFields(
-							{ name: language.winJackpot, value: importo*moltiplicatore+' '+config.coinName+` <@${message.member.user.id}>` },
+							{ name: language.langPack.ita.get("winJackpot"), value: importo*moltiplicatore+' '+config.coinName+` <@${message.member.user.id}>` },
 						);
 						risultato.setColor("#00ff37");
 					}
 				}else{
 					user.aggiornaSaldo(saldo-importo,id);
 					risultato.addFields(
-						{ name: language.lose, value: importo+' '+config.coinName+` <@${message.member.user.id}>` },
+						{ name: language.langPack.ita.get("lose"), value: importo+' '+config.coinName+` <@${message.member.user.id}>` },
 					);
 					risultato.setColor("#f50505");
 				}
 				message.channel.send(risultato);
 			}else{
-				message.reply(language.msgNotEnoughCoin);
+				message.reply(language.langPack.ita.get("msgNotEnoughCoin"));
 			}
 		}else{
-			message.reply(language.errorAmountNotValid);
+			message.reply(language.langPack.ita.get("errorAmountNotValid"));
 		}
 	});	
 }
@@ -149,35 +149,35 @@ exports.roulette = function (message){
 				const resultNumeber = Math.floor(Math.random() * 36);
 				if(numeriRossi.includes(resultNumeber)){
 					gioco.addFields(
-						{ name: language.luckyNumber, value: resultNumeber +language.red},
+						{ name: language.langPack.ita.get("luckyNumber"), value: resultNumeber +language.langPack.ita.get("red")},
 					);
 				}
 				if(numeriNeri.includes(resultNumeber)){
 					gioco.addFields(
-						{ name: language.luckyNumber, value: resultNumeber + language.black },
+						{ name: language.langPack.ita.get("luckyNumber"), value: resultNumeber + language.langPack.ita.get("black") },
 					);
 				}
 				if(resultNumeber===0){
 					gioco.addFields(
-						{ name: language.luckyNumber, value: resultNumeber + language.green},
+						{ name: language.langPack.ita.get("luckyNumber"), value: resultNumeber + language.langPack.ita.get("green")},
 					);
 				}
 
 				message.channel.send(gioco);
 				
 				//giocata colore rosso
-				if(giocata === language.red ||giocata === language.r){
+				if(giocata === language.langPack.ita.get("red") ||giocata === language.langPack.ita.get("r")){
 					if(numeriRossi.includes(resultNumeber)){
 						user.aggiornaSaldo(saldo+(importo*3),id);
 						risultato.addFields(
-							{ name: language.win, value: importo*3+' '+config.coinName },
+							{ name: language.langPack.ita.get("win"), value: importo*3+' '+config.coinName },
 						);
 						risultato.setColor("#00ff37");
 					}
 					else{
 						user.aggiornaSaldo(saldo-importo,id);
 					risultato.addFields(
-						{ name: language.lose, value: importo+' '+config.coinName },
+						{ name: language.langPack.ita.get("lose"), value: importo+' '+config.coinName },
 					);
 					risultato.setColor("#f50505");
 				}
@@ -186,18 +186,18 @@ exports.roulette = function (message){
 				}
 
 				//giocata colore nero
-				if(giocata === language.black||giocata === language.b){
+				if(giocata === language.langPack.ita.get("black")||giocata === language.langPack.ita.get("b")){
 					if(numeriNeri.includes(resultNumeber)){
 						user.aggiornaSaldo(saldo+(importo*3),id);
 						risultato.addFields(
-							{ name: language.win, value: importo*3+' '+config.coinName },
+							{ name: language.langPack.ita.get("win"), value: importo*3+' '+config.coinName },
 						);
 						risultato.setColor("#00ff37");
 					}
 						else{
 							user.aggiornaSaldo(saldo-importo,id);
 							risultato.addFields(
-							{ name: language.lose, value: importo+' '+config.coinName },
+							{ name: language.langPack.ita.get("lose"), value: importo+' '+config.coinName },
 						);
 						risultato.setColor("#f50505");
 					}
@@ -206,18 +206,18 @@ exports.roulette = function (message){
 				}
 
 				//giocata pari
-				if(giocata === language.odd ||giocata === language.o){
+				if(giocata === language.langPack.ita.get("odd") ||giocata === language.langPack.ita.get("o")){
 					if(resultNumeber%2==0 && resultNumeber !=0){
 						user.aggiornaSaldo(saldo+(importo*3),id);
 						risultato.addFields(
-							{ name: language.win, value: importo*3+' '+config.coinName },
+							{ name: language.langPack.ita.get("win"), value: importo*3+' '+config.coinName },
 						);
 						risultato.setColor("#00ff37");
 					}
 						else{
 							user.aggiornaSaldo(saldo-importo,id);
 							risultato.addFields(
-							{ name: language.lose, value: importo+' '+config.coinName },
+							{ name: language.langPack.ita.get("lose"), value: importo+' '+config.coinName },
 						);
 						risultato.setColor("#f50505");
 					}
@@ -226,18 +226,18 @@ exports.roulette = function (message){
 				}
 
 				//giocata dispari
-				if(giocata === language.even ||giocata === language.e){
+				if(giocata === language.langPack.ita.get("even") ||giocata === language.langPack.ita.get("e")){
 					if(resultNumeber%2!=0 && resultNumeber !=0){
 						user.aggiornaSaldo(saldo+(importo*3),id);
 						risultato.addFields(
-							{ name: language.win, value: importo*3+' '+config.coinName },
+							{ name: language.langPack.ita.get("win"), value: importo*3+' '+config.coinName },
 						);
 						risultato.setColor("#00ff37");
 					}
 						else{
 							user.aggiornaSaldo(saldo-importo,id);
 							risultato.addFields(
-							{ name: language.lose, value: importo+' '+config.coinName },
+							{ name: language.langPack.ita.get("lose"), value: importo+' '+config.coinName },
 						);
 						risultato.setColor("#f50505");
 					}
@@ -255,7 +255,7 @@ exports.roulette = function (message){
 							if(resultNumeber===0){
 								user.aggiornaSaldo(saldo+(importo*49),id);
 								risultato.addFields(
-									{ name: language.win, value: importo*40+' '+config.coinName },
+									{ name: language.langPack.ita.get("win"), value: importo*40+' '+config.coinName },
 								);
 								risultato.setColor("#00ff37");
 							}
@@ -263,16 +263,16 @@ exports.roulette = function (message){
 							else{
 								user.aggiornaSaldo(saldo+(importo*35),id);
 								risultato.addFields(
-								{ name: language.win, value: importo*35+' '+config.coinName },
+								{ name: language.langPack.ita.get("win"), value: importo*35+' '+config.coinName },
 								);
-								risultato.setColor("#00ff37");ù
+								risultato.setColor("#00ff37");
 							}
 						}
 					//se NUMERO NO UGUALE PERDITA
 					else{
 						user.aggiornaSaldo(saldo-importo,id);
 						risultato.addFields(
-						{ name: language.lose, value: importo+' '+config.coinName },
+						{ name: language.langPack.ita.get("lose"), value: importo+' '+config.coinName },
 					);
 					risultato.setColor("#f50505");
 					}
@@ -280,12 +280,12 @@ exports.roulette = function (message){
 					return
 				}
 				else{
-					message.reply(language.errorPlayed);
+					message.reply(language.langPack.ita.get("errorPlayed"));
 					return
 				}
 			}
 		}else{
-			message.reply(language.errorAmountNotValid);
+			message.reply(language.langPack.ita.get("errorAmountNotValid"));
 		}
 	});
 	}
@@ -313,10 +313,10 @@ exports.buyBiglietto = function(message){
 		var numeri= estrai(6,90);
 		db.creaBiglietto(id,numeri);
 		user.aggiornaSaldo(saldo-config.lotteryTicket,id);
-		message.reply(language.msgYourNumbers+numeri.toString());
+		message.reply(language.langPack.ita.get("msgYourNumbers")+numeri.toString());
 	}
 	else{
-		message.reply(language.msgNotEnoughCoin);
+		message.reply(language.langPack.ita.get("msgNotEnoughCoin"));
 	}
 });
 }
@@ -376,7 +376,7 @@ exports.calcolaVincita=function() {
 function stampanumeriVincenti(numeriVincenti){
 	const resultWinningNumbers = new Discord.MessageEmbed();
 
-	resultWinningNumbers.setTitle(language.winningNumbers);
+	resultWinningNumbers.setTitle(language.langPack.ita.get("winningNumbers"));
 	resultWinningNumbers.addFields(
 		{ name: "numeri vincenti", value: numeriVincenti, inline:true},
 	);
@@ -399,7 +399,7 @@ function stampaVincita(id,vincita){
 	const user = bot.client.users.cache.get(id);
 	resultWin.setTitle(language.winnigNumbers);
 	resultWin.addFields(
-		{ name: language.win +" "+ vincita,value: user.username, inline:true},
+		{ name: language.langPack.ita.get("win") +" "+ vincita,value: user.username, inline:true},
 	);
 	const channel=bot.client.channels.cache.get(config.lotteryChannel);
 	channel.send(resultWin);

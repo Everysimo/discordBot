@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const config = require('./config.json');
-const language =require('./language/'+config.language+'/playlist.json');
+const language=require("./language.js")
 const db=require("./dbOpertion.js");
 const ytdl = require('ytdl-core');
 const musica=require("./musica.js");
@@ -12,11 +12,11 @@ exports.createPlaylist = function (message) {
         const id=message.member.user.id;
         try{
 			db.createPlayListDB(id, nomePl);
-			message.reply(language.msgCreatingPlSuccess);
+			message.reply(language.langPack.ita.get("msgCreatingPlSuccess"));
 		}
 		catch(err){
-			console.log(language.msgCreatingPlFail+"\n",err);
-			message.reply(language.msgCreatingPlFail);
+			console.log(language.langPack.ita.get("msgCreatingPlFail")+"\n",err);
+			message.reply(language.langPack.ita.get("msgCreatingPlFail"));
 		}
         
     }
@@ -34,18 +34,18 @@ exports.addSongToPL = async function (message) {
 			}
 			args=titolo.items.shift();
 			if (!args) {
-				message.reply(language.noResulFound);
+				message.reply(language.langPack.ita.get("noResulFound"));
 				return;
 			}
 			songUrl=args.url;
 		}
 		try{
 			db.addSong(id,songUrl,nomePl);
-			message.reply(language.msgAddSongSuccess);
+			message.reply(language.langPack.ita.get("msgAddSongSuccess"));
 		}
 		catch(err){
-			console.log(language.msgAddSongFail+"\n",err);
-			message.reply(language.msgAddSongFail);
+			console.log(language.langPack.ita.get("msgAddSongFail")+"\n",err);
+			message.reply(language.langPack.ita.get("msgAddSongFail"));
 		}
         
     }
@@ -58,11 +58,11 @@ exports.removeSongFromPL = function (message) {
         const id=message.member.user.id;
 		try{
         	db.removeSongFromPlBD(id,songUrl,nomePl);
-			message.reply(language.msgRemoveSongSuccess);
+			message.reply(language.langPack.ita.get("msgRemoveSongSuccess"));
 		}
 		catch(err){
-			console.log(language.msgRemoveSongFail+"\n",err);
-			message.reply(language.msgRemoveSongFail);
+			console.log(language.langPack.ita.get("msgRemoveSongFail")+"\n",err);
+			message.reply(language.langPack.ita.get("msgRemoveSongFail"));
 		}
     }
 }
@@ -93,7 +93,7 @@ exports.printPL = function (message) {
 		            songInfo = await ytdl.getInfo(element.song);			//ottiene informazioni della canzone passata come argomento
 	            }
 	            catch(err){
-		            throw new Error(language.errorLoadingSongInfo);
+		            throw new Error(language.langPack.ita.get("errorLoadingSongInfo"));
 	            }
 	            var song = {
     	            title: songInfo.videoDetails.title,
@@ -139,7 +139,7 @@ exports.playPL= function (message) {
 					songInfo = await ytdl.getInfo(element.song);			//ottiene informazioni della canzone passata come argomento
 				}
 				catch(err){
-					throw new Error(language.errorLoadingSongInfo);
+					throw new Error(language.langPack.ita.get("errorLoadingSongInfo"));
 				}
 				var song = {
     				title: songInfo.videoDetails.title,
@@ -151,7 +151,7 @@ exports.playPL= function (message) {
 				};
 				musica.queue.get(message.guild.id).songs.push(song);
 				const messaggioAggiuntaCoda = new Discord.MessageEmbed();
-				messaggioAggiuntaCoda.setTitle(language.songAddQueue);
+				messaggioAggiuntaCoda.setTitle(language.langPack.ita.get("songAddQueue"));
 				messaggioAggiuntaCoda.setDescription("[ @"+message.member.user.username+" ]");
 				messaggioAggiuntaCoda.addFields({
 					name: song.title,value:" "+song.url}
@@ -166,7 +166,7 @@ exports.playPL= function (message) {
 		} catch (err) {
 			console.log(err.stack);
 			musica.queue.delete(message.guild.id);
-			message.reply(language.errorJoinVoiceChannel);
+			message.reply(language.langPack.ita.get("errorJoinVoiceChannel"));
 		}
     });
 }
@@ -183,10 +183,10 @@ exports.buyPL=function (message){
 			
 				db.addnPL(nPl,id);
 				user.aggiornaSaldo(saldo-config.coinPL*nPl,id);
-				message.reply(language.msgBuyPlSuccess);
+				message.reply(language.langPack.ita.get("msgBuyPlSuccess"));
 			}
 			else{
-				message.reply(language.notEnoughCoin);
+				message.reply(language.langPack.ita.get("notEnoughCoin"));
 			}
 		});
 	}
@@ -204,10 +204,10 @@ exports.buySongs=function (message){
 			const nomePl=message.content.split(" ")[1];
 			db.addnSong(nPl,id,nomePl);
 			user.aggiornaSaldo(saldo-config.coinSong*nPl,id);
-			message.reply(language.msgBuySongsSuccess);
+			message.reply(language.langPack.ita.get("msgBuySongsSuccess"));
 			}
 			else{
-				message.reply(language.notEnoughCoin);
+				message.reply(language.langPack.ita.get("notEnoughCoin"));
 			}
 		});
 		

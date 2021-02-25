@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const { validateURL } = require('ytdl-core');
 const client = new Discord.Client();
 const config = require('./config.json');
-const language =require('./language/'+config.language+'/bot.json');
 const db=require("./dbOpertion.js");
 const gameRoom=require("./gameRoom.js")
 const musica=require("./musica.js")
@@ -11,7 +10,7 @@ const command=require("./command.json")
 const user = require('./user.js');
 const trello=require("./trello.js")
 const server=require("./server.js")
-const language1=require("./language.js")
+const language=require("./language.js")
 db.dbConnect();
 exports.client=client;
 
@@ -75,35 +74,35 @@ function help(message){
 	resultBotCommands.setTitle('HydraBot');
 	resultBotCommands.setDescription('Bot Commands');
 	resultBotCommands.addFields(
-		{ name: p+command.coin, value: language1.langPack.ita.get("descCoin"), inline:true},
-		{ name: p+command.coinflip+' *X* *value*', value: language.descCoinFlip, inline:true},
-		{ name: p+command.help, value: language.descHelp, inline:true},
-		{ name: p+command.join, value: language.descJoin, inline:true},
-		{ name: p+command.roulette+' *X* *value*', value: language.descRoulette, inline:true},
-		{ name: p+command.shop, value: language.descShop, inline:true},
-		{ name: p+command.signin, value: language.descSignIn, inline:true},
-		{ name: p+command.slot+' *value*', value: language.descSlot, inline:true},
-		{ name: p+command.tempoOnline, value: language.descTime, inline:true},
+		{ name: p+command.coin, value: language.langPack.ita.get("descCoin"), inline:true},
+		{ name: p+command.coinflip+' *X* *value*', value: language.langPack.ita.get("descCoinFlip"), inline:true},
+		{ name: p+command.help, value: language.langPack.ita.get("descHelp"), inline:true},
+		{ name: p+command.join, value: language.langPack.ita.get("descJoin"), inline:true},
+		{ name: p+command.roulette+' *X* *value*', value: language.langPack.ita.get("descRoulette"), inline:true},
+		{ name: p+command.shop, value: language.langPack.ita.get("descShop"), inline:true},
+		{ name: p+command.signin, value: language.langPack.ita.get("descSignIn"), inline:true},
+		{ name: p+command.slot+' *value*', value: language.langPack.ita.get("descSlot"), inline:true},
+		{ name: p+command.tempoOnline, value: language.langPack.ita.get("descTime"), inline:true},
 	);
 
 	resultMusicCommands.setTitle('Music Commands');
 	resultMusicCommands.addFields(
-		{ name: p+command.next, value: language.descNext, inline:true},
-		{ name: p+command.play+' *url/titolo*', value: language.descPlay,inline:true},
-		{ name: p+command.radio+' *number*', value: language.descRadio,inline:true},
-		{ name: p+command.setvolume+' *x*', value: language.descSetVolume, inline:true},
-		{ name: p+command.showradio, value: language.descShowRadio, inline:true},
-		{ name: p+command.showqueue, value: language.descShowQueue, inline:true},
-		{ name: p+command.stop, value: language.descStop, inline:true},
+		{ name: p+command.next, value: language.langPack.ita.get("descNext"), inline:true},
+		{ name: p+command.play+' *url/titolo*', value: language.langPack.ita.get("descPlay"),inline:true},
+		{ name: p+command.radio+' *number*', value: language.langPack.ita.get("descRadio"),inline:true},
+		{ name: p+command.setvolume+' *x*', value: language.langPack.ita.get("descSetVolume"), inline:true},
+		{ name: p+command.showradio, value: language.langPack.ita.get("descShowRadio"), inline:true},
+		{ name: p+command.showqueue, value: language.langPack.ita.get("descShowQueue"), inline:true},
+		{ name: p+command.stop, value: language.langPack.ita.get("descStop"), inline:true},
 	);
 
 	resultPlayListCommands.setTitle('PlayList Commands');
 	resultPlayListCommands.addFields(
-		{ name: p+command.addsongpl+' *namePl* *Url*', value: language.descAddSongPl,inline:true},
-		{ name: p+command.makepl+' *namePl*', value: language.descMakePl,inline:true},
-		{ name: p+command.playpl+' *namePl* *Optional:song number*', value: language.descPlayPl,inline:true},
-		{ name: p+command.showpl+' *namePl*', value: language.descShowPl,inline:true},
-		{ name: p+command.rmsongpl+' *namePl* *Url*', value: language.descRmSongPl,inline:true},
+		{ name: p+command.addsongpl+' *namePl* *Url*', value: language.langPack.ita.get("descAddSongPl"),inline:true},
+		{ name: p+command.makepl+' *namePl*', value: language.langPack.ita.get("descMakePl"),inline:true},
+		{ name: p+command.playpl+' *namePl* *Optional:song number*', value: language.langPack.ita.get("descPlayPl"),inline:true},
+		{ name: p+command.showpl+' *namePl*', value: language.langPack.ita.get("descShowPl"),inline:true},
+		{ name: p+command.rmsongpl+' *namePl* *Url*', value: language.langPack.ita.get("descRmSongPl"),inline:true},
 	);
 
 	message.channel.send(resultBotCommands);
@@ -116,8 +115,8 @@ function shop(message){
 
 	resultShopCommands.setTitle('Shop');
 	resultShopCommands.addFields(
-		{ name: p+command.buypl, value: language.descBuyPl,inline:true},
-		{ name: p+command.buysongs+' *namePl*', value: language.descBuySong,inline:true},
+		{ name: p+command.buypl, value: language.langPack.ita.get("descBuyPl"),inline:true},
+		{ name: p+command.buysongs+' *namePl*', value: language.langPack.ita.get("descBuySong"),inline:true},
 	);
 
 	message.channel.send(resultShopCommands);
@@ -168,7 +167,7 @@ client.on("message", message => {
 		}
 		//se il comando non è nella mappa dei messaggi
 		else{
-			message.reply(language.commandNotFound);
+			message.reply(language.langPack.ita.get("commandNotFound"));
 		}
 	}
 });

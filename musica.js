@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const config = require('./config.json');
 const ytdl = require('ytdl-core');
-const language =require('./language/'+config.language+'/musica.json');
+const language=require("./language.js")
 const ytsr=require('ytsr');
 const command=require("./command.json")
 const radio=require("./radio.json")
@@ -24,7 +24,7 @@ async function play (message){
 			songInfo=await scdl.getInfo(args);
 		}
 		catch(err){
-			throw new Error(language.errorLoadingSongInfo);
+			throw new Error(language.langPack.ita.get("errorLoadingSongInfo"));
 		}
 		song = {
 			title: songInfo.title+" by "+songInfo.user.username,
@@ -45,7 +45,7 @@ async function play (message){
 				var titolo=await ytsr(element,{limit:1});
 				args=titolo.items.shift();
 				if (!args) {
-					message.reply(language.msgNoResultFound);
+					message.reply(language.langPack.ita.get("msgNoResultFound"));
 					return;
 				}
 				args=args.url;
@@ -53,7 +53,7 @@ async function play (message){
 					songInfo = await ytdl.getInfo(args);			//ottiene informazioni della canzone passata come argomento
 				}
 				catch(err){
-					throw new Error(language.errorLoadingSongInfo);
+					throw new Error(language.langPack.ita.get("errorLoadingSongInfo"));
 				}
 			
 				song = {
@@ -72,7 +72,7 @@ async function play (message){
 	
 				}
 				catch(err){
-					throw new Error(language.errorLoadingSongInfo);
+					throw new Error(language.langPack.ita.get("errorLoadingSongInfo"));
 				}
 				song = {
 					title: songInfo.title+" by "+songInfo.artist,
@@ -89,12 +89,12 @@ async function play (message){
 		
 	const voiceChannel = message.member.voice.channel;	//connessione al canale vocale
   	if (!voiceChannel){									//se l'utente non è in un canale genera eccezione
-		return message.reply(language.voiceChannelNotFound);
+		return message.reply(language.langPack.ita.get("voiceChannelNotFound"));
 	}
 
 	const permissions = voiceChannel.permissionsFor(message.client.user);	//verifica permessi utente che richiama il messggio
   	if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
-    	return message.reply(language.voiceChannelNotPermission);
+    	return message.reply(language.langPack.ita.get("voiceChannelNotPermission"));
 	}
 
 	if (!serverQueue) {					//se la coda delle canzoni è vuota
@@ -115,7 +115,7 @@ async function play (message){
 		} catch (err) {
 			console.log(err.stack);
 			queue.delete(message.guild.id);
-			return message.reply(language.errorJoinVoiceChannel);
+			return message.reply(language.langPack.ita.get("errorJoinVoiceChannel"));
 		}
 	}
 	else{	//se la coda delle canzoni non è vuota aggiunge la canzone alla coda
@@ -123,7 +123,7 @@ async function play (message){
 		serverQueue.songs.push(song);
 
 		const messaggioAggiuntaCoda = new Discord.MessageEmbed();
-		messaggioAggiuntaCoda.setTitle(language.songAddQueue);
+		messaggioAggiuntaCoda.setTitle(language.langPack.ita.get("songAddQueue"));
 		messaggioAggiuntaCoda.setDescription("["+`<@${message.member.user.id}>`+"]");
 		messaggioAggiuntaCoda.addFields({
 		name: song.title,value:" "+song.viewsurl}
@@ -150,7 +150,7 @@ start = async function (guild, song) {
 		}).on("error", error => {
 			console.error(error.name + error.message);
 			const messaggioRiproduzione = new Discord.MessageEmbed();
-				messaggioRiproduzione.setTitle(language.errorSongNotAvaible);
+				messaggioRiproduzione.setTitle(language.langPack.ita.get("errorSongNotAvaible"));
 				serverQueue.textChannel.send(messaggioRiproduzione);
 			serverQueue.songs.shift();
 			start(guild, serverQueue.songs[0]);});
@@ -163,7 +163,7 @@ start = async function (guild, song) {
 			}).on("error", error => {
 				console.error(error.name + error.message);
 				const messaggioRiproduzione = new Discord.MessageEmbed();
-				messaggioRiproduzione.setTitle(language.errorSongNotAvaible);
+				messaggioRiproduzione.setTitle(language.langPack.ita.get("errorSongNotAvaible"));
 				serverQueue.textChannel.send(messaggioRiproduzione);
 				serverQueue.songs.shift();
 				start(guild, serverQueue.songs[0]);});
@@ -174,7 +174,7 @@ start = async function (guild, song) {
 			}).on("error", error => {
 				console.error(error.name + error.message);
 				const messaggioRiproduzione = new Discord.MessageEmbed();
-				messaggioRiproduzione.setTitle(language.errorSongNotAvaible);
+				messaggioRiproduzione.setTitle(language.langPack.ita.get("errorSongNotAvaible"));
 				
 				serverQueue.textChannel.send(messaggioRiproduzione);
 				serverQueue.songs.shift();
@@ -185,7 +185,7 @@ start = async function (guild, song) {
 	dispatcher.setVolume(serverQueue.volume / 100);
 
 	const messaggioRiproduzione = new Discord.MessageEmbed();
-	messaggioRiproduzione.setTitle(language.startPlay);
+	messaggioRiproduzione.setTitle(language.langPack.ita.get("startPlay"));
 	messaggioRiproduzione.setDescription("["+`<@${song.username}>`+"]");
 	messaggioRiproduzione.addFields({
 		name: song.title,value:" "+song.viewsurl}
@@ -204,7 +204,7 @@ exports.showQueue= function(message){
 		for (let index = 0; index < serverQueue.songs.length; index++) {
 			const element = serverQueue.songs[index];
 			const messageQueue = new Discord.MessageEmbed();
-			messageQueue.setTitle(language.songInQueue);
+			messageQueue.setTitle(language.langPack.ita.get("songInQueue"));
 			messageQueue.setDescription("["+`<@${element.username}>`+"]");
 			messageQueue.addFields({
 				name: element.title,value: element.url}
@@ -220,9 +220,9 @@ exports.showQueue= function(message){
 exports.skip = function (message) {
 	var serverQueue = queue.get(message.guild.id);
 	if (!message.member.voice.channel)
-		return message.reply(language.voiceChannelNotFound);
+		return message.reply(language.langPack.ita.get("voiceChannelNotFound"));
 	if (!serverQueue)
-		return message.reply(language.notSong);
+		return message.reply(language.langPack.ita.get("notSong"));
 	serverQueue.connection.dispatcher.end();
 }
 
@@ -230,9 +230,9 @@ exports.skip = function (message) {
 exports.stop = function (message) {
 	var serverQueue = queue.get(message.guild.id);
 	if (!message.member.voice.channel)
-	  	return message.reply(language.voiceChannelNotFound);
+	  	return message.reply(language.langPack.ita.get("voiceChannelNotFound"));
 	if (!serverQueue)
-		return message.reply(language.notSong);
+		return message.reply(language.langPack.ita.get("notSong"));
 	serverQueue.songs = [];
 	serverQueue.connection.dispatcher.end();
 }
@@ -241,9 +241,9 @@ exports.setvolume = function (message){
 	var serverQueue = queue.get(message.guild.id);
 	const q = message.content.split(" ")[1];
 	if (!message.member.voice.channel)
-		return message.reply(language.voiceChannelNotFound);
+		return message.reply(language.langPack.ita.get("voiceChannelNotFound"));
 	if (!serverQueue)
-		return message.reply(language.notSong);
+		return message.reply(language.langPack.ita.get("notSong"));
 	var volume=parseInt(q);
 	if(volume>100){
 		volume=100;
@@ -254,7 +254,7 @@ exports.setvolume = function (message){
 		serverQueue.volume=volume;
 	}
 	serverQueue.connection.dispatcher.setVolume(serverQueue.volume / 100);
-	message.channel.send(language.msgVolumeSetted+volume);
+	message.channel.send(language.langPack.ita.get("msgVolumeSetted")+volume);
 }
 
 //show le radio disponibili
@@ -281,9 +281,9 @@ exports.playRadio = function playRadio(message){
 		message.content="play "+radio.radio[q].researche;
 		play(message);
 	}else{
-		resultErrorPlayRadio.setTitle(language.radioNotFound);
+		resultErrorPlayRadio.setTitle(language.langPack.ita.get("radioNotFound"));
 		resultErrorPlayRadio.addFields(
-			{ name: language.radio+radioNumber+language.notExists,inline:true},
+			{ name: language.langPack.ita.get("radio")+radioNumber+language.langPack.ita.get("notExists"),inline:true},
 		);
 		message.reply(resultErrorPlayRadio);
 	}
@@ -306,7 +306,7 @@ async function playpl(message){
 		queue.set(message.guild.id, queueContruct);
 	}
 	const messaggioAggiuntaCoda = new Discord.MessageEmbed();
-	messaggioAggiuntaCoda.setTitle(language.songPlAddQueue+risult.length);
+	messaggioAggiuntaCoda.setTitle(language.langPack.ita.get("songPlAddQueue")+risult.length);
 	messaggioAggiuntaCoda.setDescription("["+`<@${message.member.user.id}>`+"]");
 	message.reply(messaggioAggiuntaCoda);
 	
@@ -337,7 +337,7 @@ async function playpl(message){
 			} catch (err) {
 				console.log(err.stack);
 				queue.delete(message.guild.id);
-				message.reply(language.errorJoinVoiceChannel);
+				message.reply(language.langPack.ita.get("errorJoinVoiceChannel"));
 			}
 		}
 	}

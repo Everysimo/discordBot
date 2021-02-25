@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 const config = require('./config.json');
-const language =require('./language/'+config.language+'/dbOpertion.json');
+const language=require("./language.js")
 const gameRoom=require("./gameRoom.js")
 const server=require("./server.js")
 exports.dbConnect = function () {
@@ -21,9 +21,9 @@ exports.dbConnect = function () {
     dbpool.getConnection(function(err){
 	    if (err) {
 	    	console.log(err.stack);
-	    	throw new Error(language.errorDataBaseConnectionFailed);
+	    	throw new Error(language.langPack.ita.get("errorDataBaseConnectionFailed"));
 	    }
-	    console.log(language.dbConnected);
+	    console.log(language.langPack.ita.get("dbConnected"));
     });
 }
 
@@ -38,17 +38,17 @@ exports.createPlayListDB = function (id, nome){
 					
 					if(err){
 						if(err.code.match('ER_DUP_ENTRY')){
-							console.log(language.playlistAlreadyExists);
+							console.log(language.langPack.ita.get("playlistAlreadyExists"));
 						}
 						else{
-							console.log(language.errorCreatingPlayList);
+							console.log(language.langPack.ita.get("errorCreatingPlayList"));
 							return
 						}
 					}
 					
 				});
 				if(err){
-					console.log(language.errorDataBaseConnectionFailed,err);
+					console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
 					return
 				}
 			});
@@ -63,12 +63,12 @@ exports.removeSongFromPlBD = function (id, url, nomePlaylist){
 		db.query(sql, function (err) {
 			db.release();
 			if(err){
-				console.log(language.errorDeletingSongFromPl);
+				console.log(language.langPack.ita.get("errorDeletingSongFromPl"));
 				return
 			}
 		});
 		if(err){
-			console.log(language.errorDataBaseConnectionFailed,err);
+			console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
 			return
 		}
 	});
@@ -86,18 +86,18 @@ exports.addSong = function (id, url, nomePlaylist){
 							db.query(sql, function (err) {
 								if(err){
 									if(err.code.match('ER_DUP_ENTRY')){
-										console.log(language.songAlreadyInDb);
+										console.log(language.langPack.ita.get("songAlreadyInDb"));
 										return
 									}
 									else{
-										console.log(language.errorAddingSongToPl);
+										console.log(language.langPack.ita.get("errorAddingSongToPl"));
 										return
 									}
 								}
 							});
 						}
 						else{
-							console.log(language.errorAddingSongToPl);
+							console.log(language.langPack.ita.get("errorAddingSongToPl"));
 							return
 						}
 						
@@ -109,17 +109,17 @@ exports.addSong = function (id, url, nomePlaylist){
 		
 					if(err){
 						if(err.code.match('ER_DUP_ENTRY')){
-							console.log(language.songAlreadyInPl);
+							console.log(language.langPack.ita.get("songAlreadyInPl"));
 							return
 						}
 						else{
-							console.log(language.errorAddingSongToPl);
+							console.log(language.langPack.ita.get("errorAddingSongToPl"));
 							return
 						}
 					}
 				});
 				if(err){
-					console.log(language.errorDataBaseConnectionFailed,err);
+					console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
 					return
 				}
 			});
@@ -132,7 +132,7 @@ exports.leggiPL = function (id,nomePlaylist,risultato){
 		db.query(sql, function (err,result) {
 			db.release();
 			if(err){
-				console.log(language.errorReadingPl);
+				console.log(language.langPack.ita.get("errorReadingPl"));
 				return
 			}
 			else{
@@ -141,7 +141,7 @@ exports.leggiPL = function (id,nomePlaylist,risultato){
 		});
 		
 		if(err){
-			console.log(language.errorDataBaseConnectionFailed,err);
+			console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
 			return
 		}
 	});
@@ -153,7 +153,7 @@ exports.getPLNames= function(id,risultato){
 		db.query(sql, function (err,result) {
 			db.release();
 			if(err){
-				console.log(language.errorReadingPl);
+				console.log(language.langPack.ita.get("errorReadingPl"));
 				return
 			}
 			else{
@@ -162,7 +162,7 @@ exports.getPLNames= function(id,risultato){
 		});
 		
 		if(err){
-			console.log(language.errorDataBaseConnectionFailed,err);
+			console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
 			return
 		}
 	});
@@ -174,7 +174,7 @@ function controlloNPL(id,risultato) {
 		db.query(sql, function (err,result) {
 			db.release();
 			if(err){
-				console.log(language.errorReadingUser,err);
+				console.log(language.langPack.ita.get("errorReadingUser"),err);
 				return
 			}
 			else{
@@ -183,7 +183,7 @@ function controlloNPL(id,risultato) {
 					db.query(sql, function (err,result1) {
 						db.release();
 						if(err){
-							console.log(language.errorReadingPl,err);
+							console.log(language.langPack.ita.get("errorReadingPl"),err);
 							return
 						}
 						else{
@@ -192,14 +192,14 @@ function controlloNPL(id,risultato) {
 					});
 					
 					if(err){
-						console.log(language.errorDataBaseConnectionFailed,err);
+						console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
 						return
 					}
 				});
 			}
 		});
 		if(err){
-			console.log(language.errorDataBaseConnectionFailed,err);
+			console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
 			return
 		}
 	});
@@ -211,7 +211,7 @@ function controlloNSong(id,nomePlaylist,risultato) {
 		db.query(sql, function (err,result) {
 			db.release();
 			if(err){
-				console.log(language.errorReadingPl,err);
+				console.log(language.langPack.ita.get("errorReadingPl"),err);
 				return
 			}
 			else{
@@ -220,7 +220,7 @@ function controlloNSong(id,nomePlaylist,risultato) {
 					db.query(sql, function (err,result1) {
 						db.release();
 						if(err){
-							console.log(language.errorReadingPlContent,err);
+							console.log(language.langPack.ita.get("errorReadingPlContent"),err);
 							return
 						}
 						else{
@@ -229,7 +229,7 @@ function controlloNSong(id,nomePlaylist,risultato) {
 					});
 					
 					if(err){
-						console.log(language.errorDataBaseConnectionFailed,err);
+						console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
 						return
 					}
 				});
@@ -237,7 +237,7 @@ function controlloNSong(id,nomePlaylist,risultato) {
 		});
 		
 		if(err){
-			console.log(language.errorDataBaseConnectionFailed,err);
+			console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
 			return
 		}
 	});
@@ -249,7 +249,7 @@ exports.addnPL=function(n,id){
 				db.query(sql, function (err,result) {
 					db.release();
 					if(err){
-						console.log(language.errorReadingUser,err);
+						console.log(language.langPack.ita.get("errorReadingUser"),err);
 						return
 					}
 					else{
@@ -259,20 +259,20 @@ exports.addnPL=function(n,id){
 							db.query(sql, function (err) {
 								db.release();
 								if(err){
-									console.log(language.errorUpdateMaxPlaylist,err);
+									console.log(language.langPack.ita.get("errorUpdateMaxPlaylist"),err);
 									return
 								}else{
 								}
 							});
 							if(err){
-								console.log(language.errorDataBaseConnectionFailed,err);
+								console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
 								return
 							}
 						});
 					}
 				});
 				if(err){
-					console.log(language.errorDataBaseConnectionFailed,err);
+					console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
 					return
 				}
 			});
@@ -284,7 +284,7 @@ exports.addnSong=function(n,id,nomePlaylist){
 				db.query(sql, function (err,result) {
 					db.release();
 					if(err){
-						console.log(language.errorReadingPl,err);
+						console.log(language.langPack.ita.get("errorReadingPl"),err);
 						return
 					}
 					else{
@@ -294,19 +294,19 @@ exports.addnSong=function(n,id,nomePlaylist){
 							db.query(sql, function (err) {
 								db.release();
 								if(err){
-									console.log(language.errorUpdateMaxSongsPl,err);
+									console.log(language.langPack.ita.get("errorUpdateMaxSongsPl"),err);
 									return
 								}
 							});
 							if(err){
-								console.log(language.errorDataBaseConnectionFailed,err);
+								console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
 								return
 							}
 						});
 					}
 				});
 				if(err){
-					console.log(language.errorDataBaseConnectionFailed,err);
+					console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
 					return
 				}
 			});
@@ -321,17 +321,17 @@ exports.creaBiglietto = function (id,numeri) {
 					
 					if(err){
 						if(err.code.match('ER_DUP_ENTRY')){
-							console.log(language.ticketAlreadyInDb);
+							console.log(language.langPack.ita.get("ticketAlreadyInDb"));
 						}
 						else{
-							console.log(language.errorAddingTicket);
+							console.log(language.langPack.ita.get("errorAddingTicket"));
 							return
 						}
 					}else{
 					}
 				});
 				if(err){
-					console.log(language.errorDataBaseConnectionFailed,err);
+					console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
 					return
 				}
 			});
@@ -343,7 +343,7 @@ exports.ottieniBiglietti = function (risultato) {
 		db.query(sql, function (err,result) {
 			db.release();
 			if(err){
-				console.log(language.errorReadingTicket,err);
+				console.log(language.langPack.ita.get("errorReadingTicket"),err);
 				return
 			}
 			else{
@@ -351,7 +351,7 @@ exports.ottieniBiglietti = function (risultato) {
 			}
 		});
 		if(err){
-			console.log(language.errorDataBaseConnectionFailed,err);
+			console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
 			return
 		}
 	});
@@ -367,10 +367,10 @@ exports.inserServerInfo = function (serverInfo) {
 			db.release();
 			if(err){
 				if(err.code.match('ER_DUP_ENTRY')){
-					console.log(language.ticketAlreadyInDb);
+					console.log(language.langPack.ita.get("ticketAlreadyInDb"));
 				}
 				else{
-					console.log(language.errorAddingTicket,err);
+					console.log(language.langPack.ita.get("errorAddingTicket"),err);
 					return
 				}
 			}
@@ -378,7 +378,7 @@ exports.inserServerInfo = function (serverInfo) {
 			console.log("server inserito \n"+ serverInfo);
 		});
 		if(err){
-			console.log(language.errorDataBaseConnectionFailed,err);
+			console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
 			return
 		}
 	});
@@ -403,7 +403,7 @@ exports.addServerId = function(id,result){
 		});
 
 		if(err){
-			console.log(language.errorDataBaseConnectionFailed,err);
+			console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
 			return
 		}
 	});
@@ -416,7 +416,7 @@ exports.getAllServerDb = function (risultato) {
 		db.query(sql, function (err,result) {
 			db.release();
 			if(err){
-				console.log(language.errorReadingTicket,err);
+				console.log(language.langPack.ita.get("errorReadingTicket"),err);
 				return
 			}
 			else{
@@ -424,12 +424,12 @@ exports.getAllServerDb = function (risultato) {
 			}
 		});
 		if(err){
-			console.log(language.errorDataBaseConnectionFailed,err);
+			console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
 			return
 		}
 
 	if(err){
-		console.log(language.errorDataBaseConnectionFailed,err);
+		console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
 		return
 	}
 	});

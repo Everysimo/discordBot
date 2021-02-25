@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const config = require('./config.json');
-const language =require('./language/'+config.language+'/user.json');
+const language=require("./language.js")
 const bot = require('./bot');
 const { servers } = require('./server');
 
@@ -58,7 +58,7 @@ function aggiornaSaldo(nuovoSaldo,id){
 		var sql= `Update utente set saldo='${nuovoSaldo}' where idutente='${id}'`;
 		dbpool.query(sql, function (err) {
 			if(err){
-				console.log(language.errorUpdateCoin,err);
+				console.log(language.langPack.ita.get("errorUpdateCoin"),err);
 				return
 			}
 		});
@@ -71,52 +71,52 @@ function aggiornaRuolo(user,days){
 		case 1:
 			try {
 				user.roles.add("812012075114561536","Welcome");
-				message.setTitle(language.msgWelcomeRole);
-				message.setDescription(`<@${user.id}>`+language.msgMemberLvl0);
+				message.setTitle(language.langPack.ita.get("msgWelcomeRole"));
+				message.setDescription(`<@${user.id}>`+language.langPack.ita.get("msgMemberLvl0"));
 			}catch(err){
-				console.log(language.errorAddingRole,err);
+				console.log(language.langPack.ita.get("errorAddingRole"),err);
 			}
 			break;
 		case 7:
 			try{
 				user.roles.remove("812012075114561536","7 days online");
 			}catch(err){
-				console.log(language.errorUserNotFound);
+				console.log(language.langPack.ita.get("errorUserNotFound"));
 			}
 			try {
 				user.roles.add("812013606308675616","7 days online");
-				message.setTitle(language.msgNextLvlRole);
-				message.setDescription(`<@${user.id}>`+language.msgMemberLvl1);
+				message.setTitle(language.langPack.ita.get("msgNextLvlRole"));
+				message.setDescription(`<@${user.id}>`+language.langPack.ita.get("msgMemberLvl1"));
 			}catch(err){
-				console.log(language.errorAddingRole);
+				console.log(language.langPack.ita.get("errorAddingRole"));
 			}
 			break;
 		case 14:
 			try{
 				user.roles.remove("812013606308675616","14 days online");
 			}catch(err){
-				console.log(language.errorUserNotFound);
+				console.log(language.langPack.ita.get("errorUserNotFound"));
 			}
 			try {
 				user.roles.add("812466129879957554","14 days online");
-				message.setTitle(language.msgNextLvlRole);
-				message.setDescription(`<@${user.id}>`+language.msgMemberLvl2);
+				message.setTitle(language.langPack.ita.get("msgNextLvlRole"));
+				message.setDescription(`<@${user.id}>`+language.langPack.ita.get("msgMemberLvl2"));
 			}catch(err){
-				console.log(language.errorAddingRole);
+				console.log(language.langPack.ita.get("errorAddingRole"));
 			}
 			break;
 		case 21:
 			try{
 				user.roles.remove("812466129879957554","21 days online");
 			}catch(err){
-				console.log(language.errorUserNotFound);
+				console.log(language.langPack.ita.get("errorUserNotFound"));
 			}
 			try {
 				user.roles.add("812022805926379550","21 days online");
-				message.setTitle(language.msgNextLvlRole);
-				message.setDescription(`<@${user.id}>`+language.msgMemberLvl3);
+				message.setTitle(language.langPack.ita.get("msgNextLvlRole"));
+				message.setDescription(`<@${user.id}>`+language.langPack.ita.get("msgMemberLvl3"));
 			}catch(err){
-				console.log(language.errorAddingRole);
+				console.log(language.langPack.ita.get("errorAddingRole"));
 			}
 			break;
 		case 28:
@@ -124,15 +124,15 @@ function aggiornaRuolo(user,days){
 				user.roles.remove("812022805926379550","28 days online");
 			}
 			catch(err){
-				console.log(language.errorUserNotFound);
+				console.log(language.langPack.ita.get("errorUserNotFound"));
 			}
 			try {
 				user.roles.add("812466220162351165","28 days online");
-				message.setTitle(language.msgNextLvlRole);
-				message.setDescription(`<@${user.id}>`+language.msgMemberLvl4);
+				message.setTitle(language.langPack.ita.get("msgNextLvlRole"));
+				message.setDescription(`<@${user.id}>`+language.langPack.ita.get("msgMemberLvl4"));
 			}
 			catch(err){
-				console.log(language.errorAddingRole);
+				console.log(language.langPack.ita.get("errorAddingRole"));
 			}
 			break;
 		case 54:
@@ -140,15 +140,15 @@ function aggiornaRuolo(user,days){
 				user.roles.remove("812466220162351165","54 days online");
 			}
 			catch(err){
-				console.log(language.errorUserNotFound);
+				console.log(language.langPack.ita.get("errorUserNotFound"));
 			}
 			try {
 				user.roles.add("812466432243531818","54 days online");
-				message.setTitle(language.msgNextLvlRole);
-				message.setDescription(`<@${user.id}>`+language.msgMemberLvl5);
+				message.setTitle(language.langPack.ita.get("msgNextLvlRole"));
+				message.setDescription(`<@${user.id}>`+language.langPack.ita.get("msgMemberLvl5"));
 			}
 			catch(err){
-				console.log(language.errorAddingRole);
+				console.log(language.langPack.ita.get("errorAddingRole"));
 			}
 				break;
 		case 100:
@@ -156,15 +156,15 @@ function aggiornaRuolo(user,days){
 				user.roles.remove("812466432243531818","100 days online");
 			}
 			catch(err){
-				console.log(language.errorUserNotFound);
+				console.log(language.langPack.ita.get("errorUserNotFound"));
 			}
 			try {
 				user.roles.add("812466592641449994","100 days online");
-				message.setTitle(language.msgNextLvlRole);
-				message.setDescription(`<@${user.id}>`+language.msgMemberLvl6);
+				message.setTitle(language.langPack.ita.get("msgNextLvlRole"));
+				message.setDescription(`<@${user.id}>`+language.langPack.ita.get("msgMemberLvl6"));
 			}
 			catch(err){
-				console.log(language.errorAddingRole);
+				console.log(language.langPack.ita.get("errorAddingRole"));
 			}
 			break;
 	}
@@ -177,7 +177,7 @@ function aggiornaTempoOnline(nuovoTempo,newDays,id,server){
 		var sql= `Update server_account set tempoOnline=SEC_TO_TIME('${nuovoTempo}'),daysOnline=('${newDays}') where utente='${id}' AND server='${server}'`;
 		dbpool.query(sql, function (err) {
 			if(err){
-				console.log(language.errorUpdateOnlineTime,err);
+				console.log(language.langPack.ita.get("errorUpdateOnlineTime"),err);
 				return
 			}
 		});
@@ -187,7 +187,7 @@ function getTempoOnline (id,server,tempoOnline) {
 		var sql= `SELECT tempoOnline,daysOnline FROM server_account where utente='${id}' AND server='${server}'`;	
 		dbpool.query(sql, function (err,result) {
 			if(err){
-				console.log(language.errorGetOnlineTime,err);
+				console.log(language.langPack.ita.get("errorGetOnlineTime"),err);
 				return
 			}
 			else{
@@ -203,7 +203,7 @@ function getTempoOnlineSeconds (id,server,tempoOnline) {
 		var sql= `SELECT TIME_TO_SEC(tempoOnline) as time,daysOnline FROM server_account where utente='${id}' AND server='${server}'`;	
 		dbpool.query(sql, function (err,result) {
 			if(err){
-				console.log(language.errorGetOnlineTime,err);
+				console.log(language.langPack.ita.get("errorGetOnlineTime"),err);
 				return
 			}
 			else{
@@ -219,7 +219,7 @@ function getSaldoGiocatore (id,saldo) {
 		var sql= `SELECT saldo FROM utente where idutente='${id}'`;	
 		dbpool.query(sql, function (err,result) {
 			if(err){
-				console.log(language.errorGetCoin,err);
+				console.log(language.langPack.ita.get("errorGetCoin"),err);
 				return
 			}
 			else{
@@ -235,7 +235,7 @@ function printSaldo(message){
 	if(!message.member.user.bot){
 		const id=message.member.user.id;
 		getSaldoGiocatore(id,function(saldo){
-			message.reply(language.msgGetCoin+saldo+" "+config.coinName);
+			message.reply(language.langPack.ita.get("msgGetCoin")+saldo+" "+config.coinName);
 		});
 	}
 }
@@ -245,7 +245,7 @@ function printTime(message){
 	if(!message.member.user.bot){
 		const id=message.member.user.id;
 		getTempoOnline(id,message.guild.id,function(tempoOnline,daysOnline){
-			message.reply(language.msgGetTime+daysOnline+language.daysAnd+tempoOnline);
+			message.reply(language.langPack.ita.get("msgGetTime")+daysOnline+language.langPack.ita.get("daysAnd")+tempoOnline);
 		});
 	}
 }
@@ -292,7 +292,7 @@ function insertUtente(id,nickname){
 
 		
 		if(err){
-			console.log(language.errorDataBaseConnectionFailed,err);
+			console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
 			return
 		}
 	});
@@ -308,26 +308,26 @@ function insertServerAccount(utente,server,channel,member){
 				if(err.code.match('ER_DUP_ENTRY')){
 
 					const messaggioRifiuto = new Discord.MessageEmbed();
-					messaggioRifiuto.setDescription(language.titleMsgAlreadySignedIn+` <@${utente}>`);
+					messaggioRifiuto.setDescription(language.langPack.ita.get("titleMsgAlreadySignedIn")+` <@${utente}>`);
 					messaggioRifiuto.addFields(
-						{ name: language.msgAlreadySignedIn,
-						 value: language.msgDescAlreadySignIn, inline:true},
+						{ name: language.langPack.ita.get("msgAlreadySignedIn"),
+						 value: language.langPack.ita.get("msgDescAlreadySignIn"), inline:true},
 					)
 				
-					console.log(language.dbMsgUserAlreadySigned);
+					console.log(language.langPack.ita.get("dbMsgUserAlreadySigned"));
 					channel.send(messaggioRifiuto);
 					return
 				}
 			}	
 			else{
 				const messaggioConferma = new Discord.MessageEmbed();
-				messaggioConferma.setDescription(language.titleMsgWelcomeSignIn+` <@${utente}>`);
+				messaggioConferma.setDescription(language.langPack.ita.get("titleMsgWelcomeSignIn")+` <@${utente}>`);
 				messaggioConferma.addFields(
-					{ name: language.msgWelcomeSignIn,
-					 value: language.msgDescWelcomeSignIn, inline:true},
+					{ name: language.langPack.ita.get("msgWelcomeSignIn"),
+					 value: language.langPack.ita.get("msgDescWelcomeSignIn"), inline:true},
 				)
 
-				console.log(language.dbMsgUserCorrectlySigned);
+				console.log(language.langPack.ita.get("dbMsgUserCorrectlySigned"));
 				channel.send(messaggioConferma);
 				//aggiornaRuolo(member,1);
 				return 
@@ -336,7 +336,7 @@ function insertServerAccount(utente,server,channel,member){
 
 		
 		if(err){
-			console.log(language.errorDataBaseConnectionFailed,err);
+			console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
 			return
 		}
 	});
@@ -355,7 +355,7 @@ function getUsersSignedIn(users){
 	var sql= `SELECT idutente FROM utente`;	
 		dbpool.query(sql, function (err,result) {
 			if(err){
-				console.log(language.errorGetCoin,err);
+				console.log(language.langPack.ita.get("errorGetCoin"),err);
 				return
 			}
 			else{
