@@ -23,6 +23,7 @@ fs.readdir("./language",(err, data) => {
                     langPack[element]=new langPackage();
                     langPack[element].importJSON(data2.toString())
                 });
+                break;
             }
         });
     }
