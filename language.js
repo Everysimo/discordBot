@@ -21,7 +21,8 @@ fs.readdir("./language",(err, data) => {
                     if (err2) {
                         throw err2;
                     }
-                    langPack[element].importJSON(data2.toString())
+                    langPack[element].importJSON(JSON.parse(data2));
+                    break;
                 });
             }
         });
