@@ -75,7 +75,7 @@ function help(message){
 	resultBotCommands.setTitle('HydraBot');
 	resultBotCommands.setDescription('Bot Commands');
 	resultBotCommands.addFields(
-		{ name: p+command.coin, value: language1.langPack.ita.get(descCoin), inline:true},
+		{ name: p+command.coin, value: language1.langPack.ita.get("descCoin"), inline:true},
 		{ name: p+command.coinflip+' *X* *value*', value: language.descCoinFlip, inline:true},
 		{ name: p+command.help, value: language.descHelp, inline:true},
 		{ name: p+command.join, value: language.descJoin, inline:true},
