@@ -22,7 +22,6 @@ fs.readdir("./language",(err, data) => {
                         throw err2;
                     }
                     langPack[element].importJSON(JSON.parse(data2));
-                    break;
                 });
             }
         });
