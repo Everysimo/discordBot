@@ -15,7 +15,6 @@ fs.readdir("./language",(err, data) => {
             }
             langPack[element]=new langPackage();
             langPack[element].importJSON(fs.readFileSync("./language/"+element+"/"+data1[0]).toString());
-            console.log(langPack)
         });
     }
 })
