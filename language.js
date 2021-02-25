@@ -15,8 +15,9 @@ fs.readdir("./language",(err, data) => {
                 throw err1;
             }
             langPack[element]=new langPackage();
-            for (let index = 0; index < data1.length; index++) {
-                const element1 = data1[index];
+            /*for (let index = 0; index < data1.length; index++) {
+                const element1 = data1[index];*/
+                const element1 = data1[0];
                 fs.readFileSync("./language/"+element+"/"+element1,(err2, data2) => {
                     if (err2) {
                         throw err2;
