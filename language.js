@@ -18,7 +18,7 @@ fs.readdir("./language",(err, data) => {
             /*for (let index = 0; index < data1.length; index++) {
                 const element1 = data1[index];*/
                 const element1 = data1[0];
-                 langPack[element].importJSON(fs.readFileSync("./language/"+element+"/"+element1).toString);
+                 langPack[element].importJSON(fs.readFileSync("./language/"+element+"/"+element1).toString());
             //}
         });
     }
