@@ -22,7 +22,7 @@ fs.readdir("./language",(err, data) => {
                     if (err2) {
                         throw err2;
                     }
-                    langPack[element].importJSON(JSON.stringify(JSON.parse(data2)));
+                    langPack[element].importJSON(data2.toSring());
                 });
             //}
         });
