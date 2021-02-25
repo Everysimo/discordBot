@@ -5,7 +5,7 @@
     "descAddSongPl":"aggiunge una canzone alla playlist",
     "descBuyPl":"compra uno slot aggiuntivo per creare una nuova playlist",
     "descBuySong":"compra 3 slots aggiuntivi per aggiungere canzoni ad una playlist",
-    "descCoin":"Restituisce il tuo saldo corrente",
+    "descCoin":["Restituisce il tuo saldo corrente"],
     "descCoinFlip":"prova a vincere dei coin con un lancio di moneta X: (testa,t) (croce,c)",
     "descHelp":"lista dei comandi",
     "descJoin":"Il BOT entra nel tuo attuale canale vocale",
