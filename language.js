@@ -17,11 +17,11 @@ fs.readdir("./language",(err, data) => {
             langPack[element]=new langPackage();
             for (let index = 0; index < data1.length; index++) {
                 const element1 = data1[index];
-                fs.readFile("./language/"+element+"/"+element1,(err2, data2) => {
+                fs.readFileSync("./language/"+element+"/"+element1,(err2, data2) => {
                     if (err2) {
                         throw err2;
                     }
-                    langPack[element].importJSON(JSON.parse(data2));
+                    langPack[element].importJSON(JSON.stringify(JSON.parse(data2)));
                 });
             }
         });
