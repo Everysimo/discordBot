@@ -70,7 +70,7 @@ function aggiornaRuolo(user,days,serverId){
 	switch(days){
 		case 1:
 			try {
-				const roleId = servers.filter(id===serverId);
+				const roleId = servers.filter(idServerCheck(this,serverId));
 				user.roles.add(roleId,"Welcome");
 				message.setTitle(language.langPack.ita.get("msgWelcomeRole"));
 				message.setDescription(`<@${user.id}>`+language.langPack.ita.get("msgMemberLvl0"));
@@ -173,6 +173,15 @@ function aggiornaRuolo(user,days,serverId){
 	channel.send(message);
 }
 exports.aggiornaRuolo = aggiornaRuolo;
+
+function idServerCheck(item,id){
+	if(item.id===id) {
+		return true;
+	}
+	else{
+		return false;
+	}
+}
 
 function aggiornaTempoOnline(nuovoTempo,newDays,id,server){
 		var sql= `Update server_account set tempoOnline=SEC_TO_TIME('${nuovoTempo}'),daysOnline=('${newDays}') where utente='${id}' AND server='${server}'`;
