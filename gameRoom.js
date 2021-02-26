@@ -4,6 +4,7 @@ const language=require("./language.js")
 const db=require("./dbOpertion.js");
 const bot = require('./bot');
 const user = require('./user.js');
+const srv = require('./server');
 
 //lancio moneta testa o croce
 exports.coinflip = function (message){
@@ -380,8 +381,10 @@ function stampanumeriVincenti(numeriVincenti){
 	resultWinningNumbers.addFields(
 		{ name: "numeri vincenti", value: numeriVincenti, inline:true},
 	);
-	const channel=bot.client.channels.cache.get(config.lotteryChannel);
-	channel.send(resultWinningNumbers);
+	for(let index=0;index<srv.servers.length;index++){
+		const channel=bot.client.channels.cache.get(srv.servers[index].lottery);
+		channel.send(resultWinningNumbers);
+	}
 	//TO-DO inviare messaggio
 }
 
@@ -401,7 +404,10 @@ function stampaVincita(id,vincita){
 	resultWin.addFields(
 		{ name: language.langPack.ita.get("win") +" "+ vincita,value: user.username, inline:true},
 	);
-	const channel=bot.client.channels.cache.get(config.lotteryChannel);
-	channel.send(resultWin);
+
+	for(let index=0;index<srv.servers.length;index++){
+		const channel=bot.client.channels.cache.get(srv.servers[index].lottery);
+		channel.send(resultWin);
+	}
 	//TO-DO inviare messaggio
 }
