@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const config = require('./config.json');
 const language=require("./language.js")
 const bot = require('./bot');
-var { servers } = require('./server');
+const srv = require('./server');
 
 async function addCoin(){ 
 	const guild = bot.client.guilds.cache.array();
@@ -67,7 +67,7 @@ exports.aggiornaSaldo = aggiornaSaldo;
 
 function aggiornaRuolo(user,days,serverId){
 	const message = new Discord.MessageEmbed();
-	const ser = servers.find(server => 
+	const ser = srv.servers.find(server => 
 		server.id === serverId
 	);
 	console.log(ser.id);
