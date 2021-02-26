@@ -70,7 +70,7 @@ function aggiornaRuolo(user,days,serverId){
 	const ser = await servers.find(server => {
 		return server.id == serverId;
 	});
-	console.log(ser);
+	console.log("il server è "+ser.id);
 	switch(days){
 		case 1:
 			try {
