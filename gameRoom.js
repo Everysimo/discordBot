@@ -399,10 +399,10 @@ function stampaVincita(id,vincita){
 	}
 
 	const resultWin = new Discord.MessageEmbed();
-	const user = bot.client.users.cache.get(id);
+	const user1 = bot.client.users.cache.get(id);
 	resultWin.setTitle(language.winnigNumbers);
 	resultWin.addFields(
-		{ name: language.langPack.ita.get("win") +" "+ vincita,value: user.username, inline:true},
+		{ name: language.langPack.ita.get("win") +" "+ vincita,value: user1.username, inline:true},
 	);
 
 	for(let index=0;index<srv.servers.length;index++){
