@@ -346,7 +346,7 @@ function valutaVincita(element,numeriVincente){
 }
 
 exports.calcolaVincita=function() {
-	var numeriVincente=estrai(6,90);
+	var numeriVincente=[12,25,28,43,54,79]//estrai(6,90);
 	stampanumeriVincenti(numeriVincente);
 	var vincitore=new Array();
 	var vincitoreCon5=new Array();
@@ -401,10 +401,10 @@ function stampaVincita(id,vincita){
 	}
 
 	const resultWin = new Discord.MessageEmbed();
-	const user = bot.client.users.cache.get(id);
+	const user1 = bot.client.users.cache.get(id);
 	resultWin.setTitle(language.winnigNumbers);
 	resultWin.addFields(
-		{ name: language.langPack.ita.get("win") +" "+ vincita,value: user.username, inline:true},
+		{ name: language.langPack.ita.get("win") +" "+ vincita,value: user1.username, inline:true},
 	);
 
 	for(let index=0;index<srv.servers.length;index++){

@@ -5,7 +5,7 @@
     "coinSong":1000,
     "multiplier":9,
     "multiplierJackpot":50,
-    "lottery":1209600000,
+    "lottery":5000,
     "lotteryTicket":500,
     "addCoin":300000,
     "coinForTime":100,
