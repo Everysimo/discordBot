@@ -439,14 +439,14 @@ exports.deleateAllTicket = function () {
 	dbpool.getConnection((err, db) => {
 	var sql= `DELETE FROM bigliettolotteria`;
 		
-		db.query(sql, function (err,result) {
+		db.query(sql, function (err) {
 			db.release();
 			if(err){
 				console.log(language.langPack.ita.get("errorReadingTicket"),err);
 				return
 			}
 			else{
-				return risultato(result);
+				return
 			}
 		});
 		if(err){
