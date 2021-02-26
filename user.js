@@ -67,7 +67,7 @@ exports.aggiornaSaldo = aggiornaSaldo;
 
 function aggiornaRuolo(user,days,serverId){
 	const message = new Discord.MessageEmbed();
-	const ser = await servers.find(server => {
+	const ser = servers.find(server => {
 		return server.id == serverId;
 	});
 	console.log("il server è "+ser.id);
