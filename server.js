@@ -240,7 +240,8 @@ function getAllServer() {
             srv.diamond=element.role6id;
             srv.emerald=element.role7id;
             servers.push(srv);
-        })    
+        }) 
+        console.log("ho finito di caricare i server")   
     })
 }
 exports.getAllServer = getAllServer;

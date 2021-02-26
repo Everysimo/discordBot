@@ -19,6 +19,7 @@ client.once('ready', () => {
 	console.log('Ready!');
 
 	server.getAllServer();
+	console.log(server.servers);
 
 	client.user.setStatus("Online");
 
