@@ -372,7 +372,10 @@ exports.calcolaVincita=function() {
 			const element = vincitoreCon5[index];
 			stampaVincita(element,vincitaSingolacon5);
 		}
+
+		db.deleateAllTicket();
 	});
+
 }
 function stampanumeriVincenti(numeriVincenti){
 	const resultWinningNumbers = new Discord.MessageEmbed();
