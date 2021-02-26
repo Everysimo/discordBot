@@ -51,7 +51,7 @@ async function join(message){
 	else{
 		const permissions = voiceChannel.permissionsFor(message.client.user);	//verifica permessi utente che richiama il messggio
   		if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
-    		return message.reply(language.voiceChannelNotPermission);
+    		return message.reply(language.langPack.ita.get("voiceChannelNotPermission"));
 		}
 		else{
 			try{
@@ -59,7 +59,7 @@ async function join(message){
 			}
 			catch(err){
 				console.log(err.stack);
-				return message.reply(language.errorJoinVoiceChannel);
+				return message.reply(language.langPack.ita.get("errorJoinVoiceChannel"));
 			}
 		}
 	}
