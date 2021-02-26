@@ -44,7 +44,7 @@ function applyAddTime(user,server){
 			daysOnline++;
 			tempoOnline-=86400;
 			if(daysOnline==7||daysOnline==14||daysOnline==21||daysOnline==28||daysOnline==54||daysOnline==100){
-				aggiornaRuolo(user,daysOnline);
+				aggiornaRuolo(user,daysOnline,server);
 			}
 			
 		}
@@ -65,11 +65,12 @@ function aggiornaSaldo(nuovoSaldo,id){
 }
 exports.aggiornaSaldo = aggiornaSaldo;
 
-function aggiornaRuolo(user,days){
+function aggiornaRuolo(user,days,serverId){
 	const message = new Discord.MessageEmbed();
 	switch(days){
 		case 1:
 			try {
+				const roleId = servers.filter(id===serverId);
 				user.roles.add("812012075114561536","Welcome");
 				message.setTitle(language.langPack.ita.get("msgWelcomeRole"));
 				message.setDescription(`<@${user.id}>`+language.langPack.ita.get("msgMemberLvl0"));
