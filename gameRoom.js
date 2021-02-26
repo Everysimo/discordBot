@@ -346,7 +346,7 @@ function valutaVincita(element,numeriVincente){
 }
 
 exports.calcolaVincita=function() {
-	var numeriVincente=[12,25,28,43,54,79]//estrai(6,90);
+	var numeriVincente=estrai(6,90);
 	stampanumeriVincenti(numeriVincente);
 	var vincitore=new Array();
 	var vincitoreCon5=new Array();
