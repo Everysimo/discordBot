@@ -67,11 +67,11 @@ exports.aggiornaSaldo = aggiornaSaldo;
 
 function aggiornaRuolo(user,days,serverId){
 	const message = new Discord.MessageEmbed();
+	const ser = servers.indexOf(serverId);
 	switch(days){
 		case 1:
 			try {
-				const roleId = servers.filter(idServerCheck(this,serverId));
-				user.roles.add(roleId,"Welcome");
+				user.roles.add(ser.iron,"Welcome");
 				message.setTitle(language.langPack.ita.get("msgWelcomeRole"));
 				message.setDescription(`<@${user.id}>`+language.langPack.ita.get("msgMemberLvl0"));
 			}catch(err){
