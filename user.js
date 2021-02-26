@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const config = require('./config.json');
 const language=require("./language.js")
 const bot = require('./bot');
-const { servers } = require('./server');
+var { servers } = require('./server');
 
 async function addCoin(){ 
 	const guild = bot.client.guilds.cache.array();
