@@ -241,7 +241,7 @@ function getAllServer() {
             srv.emerald=element.role7id;
             servers.push(srv);
         }) 
-        console.log("ho finito di caricare i server")   
+        console.log(servers)   
     })
 }
 exports.getAllServer = getAllServer;
