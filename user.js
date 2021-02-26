@@ -71,7 +71,7 @@ function aggiornaRuolo(user,days,serverId){
 		case 1:
 			try {
 				const roleId = servers.filter(id===serverId);
-				user.roles.add("812012075114561536","Welcome");
+				user.roles.add(roleId,"Welcome");
 				message.setTitle(language.langPack.ita.get("msgWelcomeRole"));
 				message.setDescription(`<@${user.id}>`+language.langPack.ita.get("msgMemberLvl0"));
 			}catch(err){
