@@ -241,7 +241,6 @@ function getAllServer() {
             srv.emerald=element.role7id;
             servers.push(srv);
         }) 
-        console.log(servers)   
     })
 }
 exports.getAllServer = getAllServer;

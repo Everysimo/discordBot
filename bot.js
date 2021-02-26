@@ -19,11 +19,9 @@ server.getAllServer();
 client.once('ready', () => {
 	console.log('Ready!');
 
-	console.log(server.servers);
-
 	client.user.setStatus("Online");
 
-	client.user.setActivity(language.botActivity,{type:"LISTENING"});
+	client.user.setActivity(language.langPack.ita.get("botActivity"),{type:"LISTENING"});
 
 	setInterval(server.countTotalUserOnline,60000);
 
@@ -47,7 +45,7 @@ client.login(process.env.tokenBotDiscord);
 async function join(message){
 	const voiceChannel = message.member.voice.channel;	//memorizza il canale vocale del mittente del messaggio
 	if (!voiceChannel){
-		return message.reply(language.voiceChannelNotFound);
+		return message.reply(language.langPack.ita.get("voiceChannelNotFound"));
 	}
 	else{
 		const permissions = voiceChannel.permissionsFor(message.client.user);	//verifica permessi utente che richiama il messggio
