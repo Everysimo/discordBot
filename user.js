@@ -177,15 +177,6 @@ function aggiornaRuolo(user,days,serverId){
 }
 exports.aggiornaRuolo = aggiornaRuolo;
 
-function idServerCheck(item,id){
-	if(item.id===id) {
-		return true;
-	}
-	else{
-		return false;
-	}
-}
-
 function aggiornaTempoOnline(nuovoTempo,newDays,id,server){
 		var sql= `Update server_account set tempoOnline=SEC_TO_TIME('${nuovoTempo}'),daysOnline=('${newDays}') where utente='${id}' AND server='${server}'`;
 		dbpool.query(sql, function (err) {
@@ -342,7 +333,7 @@ function insertServerAccount(utente,server,channel,member){
 
 				console.log(language.langPack.ita.get("dbMsgUserCorrectlySigned"));
 				channel.send(messaggioConferma);
-				aggiornaRuolo(member,1);
+				aggiornaRuolo(member,1,server);
 				return 
 			}
 		});
