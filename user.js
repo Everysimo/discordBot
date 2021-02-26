@@ -84,12 +84,12 @@ function aggiornaRuolo(user,days,serverId){
 			break;
 		case 7:
 			try{
-				user.roles.remove("812012075114561536","7 days online");
+				user.roles.remove(ser.iron,"7 days online");
 			}catch(err){
 				console.log(language.langPack.ita.get("errorUserNotFound"));
 			}
 			try {
-				user.roles.add("812013606308675616","7 days online");
+				user.roles.add(ser.bronze,"7 days online");
 				message.setTitle(language.langPack.ita.get("msgNextLvlRole"));
 				message.setDescription(`<@${user.id}>`+language.langPack.ita.get("msgMemberLvl1"));
 			}catch(err){
@@ -98,12 +98,12 @@ function aggiornaRuolo(user,days,serverId){
 			break;
 		case 14:
 			try{
-				user.roles.remove("812013606308675616","14 days online");
+				user.roles.remove(ser.bronze,"14 days online");
 			}catch(err){
 				console.log(language.langPack.ita.get("errorUserNotFound"));
 			}
 			try {
-				user.roles.add("812466129879957554","14 days online");
+				user.roles.add(ser.silver,"14 days online");
 				message.setTitle(language.langPack.ita.get("msgNextLvlRole"));
 				message.setDescription(`<@${user.id}>`+language.langPack.ita.get("msgMemberLvl2"));
 			}catch(err){
@@ -112,12 +112,12 @@ function aggiornaRuolo(user,days,serverId){
 			break;
 		case 21:
 			try{
-				user.roles.remove("812466129879957554","21 days online");
+				user.roles.remove(ser.silver,"21 days online");
 			}catch(err){
 				console.log(language.langPack.ita.get("errorUserNotFound"));
 			}
 			try {
-				user.roles.add("812022805926379550","21 days online");
+				user.roles.add(ser.golden,"21 days online");
 				message.setTitle(language.langPack.ita.get("msgNextLvlRole"));
 				message.setDescription(`<@${user.id}>`+language.langPack.ita.get("msgMemberLvl3"));
 			}catch(err){
@@ -126,13 +126,13 @@ function aggiornaRuolo(user,days,serverId){
 			break;
 		case 28:
 			try{
-				user.roles.remove("812022805926379550","28 days online");
+				user.roles.remove(ser.golden,"28 days online");
 			}
 			catch(err){
 				console.log(language.langPack.ita.get("errorUserNotFound"));
 			}
 			try {
-				user.roles.add("812466220162351165","28 days online");
+				user.roles.add(ser.obsidian,"28 days online");
 				message.setTitle(language.langPack.ita.get("msgNextLvlRole"));
 				message.setDescription(`<@${user.id}>`+language.langPack.ita.get("msgMemberLvl4"));
 			}
@@ -142,13 +142,13 @@ function aggiornaRuolo(user,days,serverId){
 			break;
 		case 54:
 			try{
-				user.roles.remove("812466220162351165","54 days online");
+				user.roles.remove(ser.obsidian,"54 days online");
 			}
 			catch(err){
 				console.log(language.langPack.ita.get("errorUserNotFound"));
 			}
 			try {
-				user.roles.add("812466432243531818","54 days online");
+				user.roles.add(ser.diamond,"54 days online");
 				message.setTitle(language.langPack.ita.get("msgNextLvlRole"));
 				message.setDescription(`<@${user.id}>`+language.langPack.ita.get("msgMemberLvl5"));
 			}
@@ -158,13 +158,13 @@ function aggiornaRuolo(user,days,serverId){
 				break;
 		case 100:
 			try{
-				user.roles.remove("812466432243531818","100 days online");
+				user.roles.remove(ser.diamond,"100 days online");
 			}
 			catch(err){
 				console.log(language.langPack.ita.get("errorUserNotFound"));
 			}
 			try {
-				user.roles.add("812466592641449994","100 days online");
+				user.roles.add(ser.emerald,"100 days online");
 				message.setTitle(language.langPack.ita.get("msgNextLvlRole"));
 				message.setDescription(`<@${user.id}>`+language.langPack.ita.get("msgMemberLvl6"));
 			}
@@ -173,7 +173,7 @@ function aggiornaRuolo(user,days,serverId){
 			}
 			break;
 	}
-	const channel=bot.client.channels.cache.get(config.promotionChannel);
+	const channel=bot.client.channels.cache.get(ser.level);
 	channel.send(message);
 }
 exports.aggiornaRuolo = aggiornaRuolo;
