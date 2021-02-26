@@ -222,6 +222,7 @@ async function countUserOnline(guildId,IdMemberChannelOnline){
 
 function getAllServer() {
     db.getAllServerDb(result=>{
+        servers.length = 0;
         result.forEach(element=>{
             srv=new Server();
             srv.id=element.idserver;
