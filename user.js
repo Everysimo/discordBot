@@ -330,7 +330,7 @@ function insertServerAccount(utente,server,channel,member){
 
 				console.log(language.langPack.ita.get("dbMsgUserCorrectlySigned"));
 				channel.send(messaggioConferma);
-				//aggiornaRuolo(member,1);
+				aggiornaRuolo(member,1);
 				return 
 			}
 		});
