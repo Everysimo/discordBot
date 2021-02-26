@@ -13,12 +13,12 @@ const server=require("./server.js")
 const language=require("./language.js")
 db.dbConnect();
 exports.client=client;
+server.getAllServer();
 
 //quando il nuovo cliente è pronto esegue log
 client.once('ready', () => {
 	console.log('Ready!');
 
-	server.getAllServer();
 	console.log(server.servers);
 
 	client.user.setStatus("Online");
