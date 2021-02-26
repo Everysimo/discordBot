@@ -434,3 +434,29 @@ exports.getAllServerDb = function (risultato) {
 	}
 	});
 }
+
+exports.deleateAllTicket = function () {
+	dbpool.getConnection((err, db) => {
+	var sql= `DELETE FROM bigliettolotteria`;
+		
+		db.query(sql, function (err,result) {
+			db.release();
+			if(err){
+				console.log(language.langPack.ita.get("errorReadingTicket"),err);
+				return
+			}
+			else{
+				return risultato(result);
+			}
+		});
+		if(err){
+			console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
+			return
+		}
+
+	if(err){
+		console.log(language.langPack.ita.get("errorDataBaseConnectionFailed"),err);
+		return
+	}
+	});
+}

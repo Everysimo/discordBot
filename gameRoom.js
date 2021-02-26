@@ -373,6 +373,8 @@ exports.calcolaVincita=function() {
 			stampaVincita(element,vincitaSingolacon5);
 		}
 	});
+
+	db.deleateAllTicket();
 }
 function stampanumeriVincenti(numeriVincenti){
 	const resultWinningNumbers = new Discord.MessageEmbed();
