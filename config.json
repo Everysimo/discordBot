@@ -1,18 +1,12 @@
 {
     "prefixCommand": "$",
-    "language":"ita",
     "coinName":"soldini",
     "coinPL":10000,
     "coinSong":1000,
-    "IdServer":"341919077008146432",
-    "IdMemberChannel":"808838637374406684",
-    "IdMemberChannelOnline":"809844264875851827",
     "multiplier":9,
     "multiplierJackpot":50,
     "lottery":1209600000,
     "lotteryTicket":500,
-    "lotteryChannel":"809133390171340832",
-    "promotionChannel":"812025744921985035",
     "addCoin":300000,
     "coinForTime":100,
     "slotItem":[
