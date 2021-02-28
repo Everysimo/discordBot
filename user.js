@@ -377,10 +377,16 @@ function getUsersSignedIn(users){
 exports.getUsersSignedIn = getUsersSignedIn;
 
 function sendCoin(message){
-	id_sender=message.member.id;
-	receivers=message.mentions.members.array();
-	console.log(recivers);
-	money=parseInt(message.content.split(" ")[message.content.split(" ").length-1]);
+	var id_sender=message.member.id;
+	var receivers=new Array();
+	receivers=receivers.concat(message.mentions.members.array());
+	receiversRole=message.mentions.roles.array()
+	for (let index = 0; index < array.length; index++) {
+		const element = array[index].members;
+		receivers=receivers.concat(element);
+	}
+	console.log(receivers);
+	var money=parseInt(message.content.split(" ")[message.content.split(" ").length-1]);
 	console.log(money);
 
 	for(let index=0;index<receivers.length;index++){
