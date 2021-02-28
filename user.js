@@ -381,8 +381,8 @@ function sendCoin(message){
 	var receivers=new Array();
 	receivers=receivers.concat(message.mentions.members.array());
 	receiversRole=message.mentions.roles.array()
-	for (let index = 0; index < array.length; index++) {
-		const element = array[index].members;
+	for (let index = 0; index < receiversRole.length; index++) {
+		const element = receiversRole[index].members;
 		receivers=receivers.concat(element);
 	}
 	console.log(receivers);
