@@ -404,6 +404,7 @@ function sendCoin(message){
 			applyAddCoin(id_receiver,money);
 		}
 		catch{
+			applyAddCoin(id_sender,money);
 			message.reply("saldo non inviato");
 			return
 		}
