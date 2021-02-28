@@ -378,7 +378,7 @@ exports.getUsersSignedIn = getUsersSignedIn;
 
 function sendCoin(message){
 	id_sender=message.member.id;
-	recivers=message.mentions.users.array();
+	recivers=message.mentions.members.array();
 	console.log(recivers);
 	money=parseInt(message.content.split(" ")[message.content.split(" ").length-1]);
 	console.log(money);
