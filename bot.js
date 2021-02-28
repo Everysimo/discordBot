@@ -139,6 +139,7 @@ comandi.set(command.playpl,playlist.playPL);
 comandi.set(command.radio,musica.playRadio);
 comandi.set(command.rmsongpl,playlist.removeSongFromPL);
 comandi.set(command.roulette,gameRoom.roulette);
+comandi.set(command.sendcoin.user.sendCoin)
 comandi.set(command.setvolume,musica.setvolume);
 comandi.set(command.setserver,setServer);
 comandi.set(command.shop,shop);

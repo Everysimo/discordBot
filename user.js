@@ -11,15 +11,21 @@ async function addCoin(){
 		const activeMember= await element.members.cache.filter(member=>member.voice.channel!==null).array();
 		for (let index = 0; index < activeMember.length; index++) {
 			var id = activeMember[index].id;
-			applyAddCoin(id)
+			applyAddCoin(id,config.coinForTime)
 		}
 	}
 }
 exports.addCoin = addCoin;
 
-function applyAddCoin(id){
+function applyAddCoin(id,coin){
 	getSaldoGiocatore(id,saldo=>{
-		aggiornaSaldo(saldo+(config.coinForTime),id);
+		aggiornaSaldo(saldo+coin,id);
+	});
+}
+
+function applyRemoveCoin(id,coin){
+	getSaldoGiocatore(id,saldo=>{
+		aggiornaSaldo(saldo-coin,id);
 	});
 }
 
@@ -369,3 +375,28 @@ function getUsersSignedIn(users){
 		});
 }
 exports.getUsersSignedIn = getUsersSignedIn;
+
+function sendCoin(message){
+	id_sender=message.member.id;
+	id_reciever=message.content.split(" ")[1];
+	money=message.content.split(" ")[2];
+
+	try{
+		applyRemoveCoin(id_sender,money);
+	}
+	catch{
+		message.reply("saldo non inviato");
+		return
+	}
+
+	try{
+		applyAddCoin(id_reciever,money);
+	}
+	catch{
+		message.reply("saldo non inviato");
+		return
+	}
+
+	message.reply("saldo inviato");
+}
+exports.sendCoin = sendCoin;
