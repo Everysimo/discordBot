@@ -19,13 +19,13 @@ exports.addCoin = addCoin;
 
 function applyAddCoin(id,coin){
 	getSaldoGiocatore(id,saldo=>{
-		aggiornaSaldo(saldo+coin,id);
+		aggiornaSaldo(saldo+(coin),id);
 	});
 }
 
 function applyRemoveCoin(id,coin){
 	getSaldoGiocatore(id,saldo=>{
-		aggiornaSaldo(saldo-coin,id);
+		aggiornaSaldo(saldo-(coin),id);
 	});
 }
 
