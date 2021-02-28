@@ -378,24 +378,26 @@ exports.getUsersSignedIn = getUsersSignedIn;
 
 function sendCoin(message){
 	id_sender=message.member.id;
-	id_reciever=message.content.split(" ")[1];
-	console.log(id_reciever);
+	recivers=message.mention.users.array();
 	money=parseInt(message.content.split(" ")[2]);
 
-	try{
-		applyRemoveCoin(id_sender,money);
-	}
-	catch{
-		message.reply("saldo non inviato");
-		return
-	}
-
-	try{
-		applyAddCoin(id_reciever,money);
-	}
-	catch{
-		message.reply("saldo non inviato");
-		return
+	for(let index=0;index<recivers.length;index++){
+		id_reciever=recivers[index].id;
+		try{
+			applyRemoveCoin(id_sender,money);
+		}
+		catch{
+			message.reply("saldo non inviato");
+			return
+		}
+	
+		try{
+			applyAddCoin(id_reciever,money);
+		}
+		catch{
+			message.reply("saldo non inviato");
+			return
+		}
 	}
 
 	message.reply("saldo inviato");
