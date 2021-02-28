@@ -380,7 +380,7 @@ function sendCoin(message){
 	id_sender=message.member.id;
 	recivers=message.mentions.users.array();
 	console.log(recivers);
-	money=parseInt(message.content.split(" ").length-1);
+	money=parseInt(message.content.split(" ")[message.content.split(" ").length-1]);
 	console.log(money);
 
 	for(let index=0;index<recivers.length;index++){
