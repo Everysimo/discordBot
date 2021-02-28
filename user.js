@@ -382,7 +382,7 @@ function sendCoin(message){
 	receivers=receivers.concat(message.mentions.members.array());
 	receiversRole=message.mentions.roles.array()
 	for (let index = 0; index < receiversRole.length; index++) {
-		const element = receiversRole[index].members;
+		const element = receiversRole[index].members.array();
 		receivers=receivers.concat(element);
 	}
 	console.log(receivers);
