@@ -44,6 +44,7 @@ client.login(process.env.tokenBotDiscord);
 //il bot join nel canale vocale del mittente del messaggio
 async function join(message){
 	const voiceChannel = message.member.voice.channel;	//memorizza il canale vocale del mittente del messaggio
+	message.channel.send("$signin");
 	if (!voiceChannel){
 		return message.reply(language.langPack.ita.get("voiceChannelNotFound"));
 	}
