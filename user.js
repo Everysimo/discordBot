@@ -385,7 +385,7 @@ function sendCoin(message){
 
 	for(let index=0;index<recivers.length;index++){
 		id_reciever=recivers[index].id;
-		console.log(id_reciver);
+		console.log(id_reciever);
 		try{
 			applyRemoveCoin(id_sender,money);
 		}
