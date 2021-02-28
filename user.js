@@ -379,7 +379,7 @@ exports.getUsersSignedIn = getUsersSignedIn;
 function sendCoin(message){
 	id_sender=message.member.id;
 	id_reciever=message.content.split(" ")[1];
-	money=message.content.split(" ")[2];
+	money=parseInt(message.content.split(" ")[2]);
 
 	try{
 		applyRemoveCoin(id_sender,money);
