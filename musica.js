@@ -37,7 +37,7 @@ async function play (message){
 	else if (!spdl.validateURL(args)){
 		
 		if (!ytpl.validateID(args)){
-			if(!ytdl.validateURL(args)){
+			if(ytdl.validateURL(args)){
 				var element;
 				for (let index = 1; index < message.content.split(" ").length; index++) {
 					element=element+ " " + message.content.split(" ")[index];
