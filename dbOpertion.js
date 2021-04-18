@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+
 const config = require('./config.json');
 const language =require('./language/'+config.language+'/dbOpertion.json');
 const gameRoom=require("./gameRoom.js")
