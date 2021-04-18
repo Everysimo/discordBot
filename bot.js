@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+
 const { validateURL } = require('ytdl-core');
 const client = new Discord.Client();
 const config = require('./config.json');
