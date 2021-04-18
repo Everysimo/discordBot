@@ -37,7 +37,7 @@ async function play (message){
 	else if (!spdl.validateURL(args)){
 		
 		if (!ytpl.validateID(args)){
-			if(ytdl.validateURL(args)){
+			if(!ytdl.validateURL(args)){
 				var element;
 				for (let index = 1; index < message.content.split(" ").length; index++) {
 					element=element+ " " + message.content.split(" ")[index];
@@ -66,25 +66,41 @@ async function play (message){
 				};	
 			}else{
 				try{
-					songInfo=await spdl.getInfo(args);
-					var video = await ytsr(`${songInfo.title} ${songInfo.artist}`,{limit:1});
-					if (!video) video = await ytsr(`${songInfo.title}`,{limit:1});
-	
+					songInfo = await ytdl.getInfo(args);			//ottiene informazioni della canzone passata come argomento
 				}
 				catch(err){
 					throw new Error(language.langPack.ita.get("errorLoadingSongInfo"));
 				}
+			
 				song = {
-					title: songInfo.title+" by "+songInfo.artist,
-					url: video.items.shift().url,
-					viewsurl:args,
+					title: songInfo.videoDetails.title,
+					url: songInfo.videoDetails.video_url,
+					viewsurl:songInfo.videoDetails.video_url,
+					isLive: songInfo.videoDetails.isLiveContent,
 					username: message.member.user.id,
 					where: "youtube"
-				};
+				};	
 			}
 		}else{
 			playpl(message);
 		}
+	}else{
+		try{
+			songInfo=await spdl.getInfo(args);
+			var video = await ytsr(`${songInfo.title} ${songInfo.artist}`,{limit:1});
+			if (!video) video = await ytsr(`${songInfo.title}`,{limit:1});
+
+		}
+		catch(err){
+			throw new Error(language.langPack.ita.get("errorLoadingSongInfo"));
+		}
+		song = {
+			title: songInfo.title+" by "+songInfo.artist,
+			url: video.items.shift().url,
+			viewsurl:args,
+			username: message.member.user.id,
+			where: "youtube"
+		};
 	}
 		
 	const voiceChannel = message.member.voice.channel;	//connessione al canale vocale
